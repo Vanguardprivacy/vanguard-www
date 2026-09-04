@@ -5253,6 +5253,17 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     setTimeout(show, 4000);
   }catch(e){}
 })();
+
+// ===== تسجيل الخدمة العاملة (Service Worker) — الشرط الأساسي لتثبيت التطبيق =====
+(function(){
+  try{
+    if('serviceWorker' in navigator && location.protocol.indexOf('file') === -1){
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('sw.js').catch(function(){});
+      });
+    }
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
