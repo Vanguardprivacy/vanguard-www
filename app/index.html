@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#05070B">
 <meta name="apple-touch-fullscreen" content="yes">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%2305070B'/%3E%3Cpath d='M256 72 L408 130 V256 C408 338 344 404 256 440 C168 404 104 338 104 256 V130 Z' fill='none' stroke='%2300E6FF' stroke-width='28' stroke-linejoin='round'/%3E%3Cpath d='M200 258 L242 300 L322 218' fill='none' stroke='%2300F5B0' stroke-width='30' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Vanguard%20Privacy%22%2C%22short_name%22%3A%22Vanguard%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2305070B%22%2C%22theme_color%22%3A%22%2300E6FF%22%2C%22dir%22%3A%22rtl%22%2C%22lang%22%3A%22ar%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3C/svg%3E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg+xml%22%7D%5D%7D">
+<link rel="manifest" href="manifest.webmanifest">
 <title>Vanguard Privacy — فانغارد للخصوصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5063,6 +5063,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
           '<div class="vg-lic-shield">🛡️</div>'+
           '<h2>Vanguard Privacy</h2>'+
           '<p>هذا النظام مرخّص ومحمي. أدخل مفتاح الترخيص الخاص بك للفتح.<br>لم تحصل على مفتاح بعد؟ تواصل مع البائع أثناء الشراء.</p>'+
+          '<button class="vg-lic-btn" id="vg-lic-install" type="button">📲 تثبيت على هذا الجهاز</button>'+
           '<input class="vg-lic-input" id="vg-lic-key" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">'+
           '<div id="vg-lic-msg"></div>'+
           '<button class="vg-lic-btn" id="vg-lic-btn">فتح النظام</button>'+
@@ -5073,6 +5074,16 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
       var msgEl = el.querySelector('#vg-lic-msg');
       var btn = el.querySelector('#vg-lic-btn');
       function setMsg(t, cls){ msgEl.textContent = t; msgEl.className = cls||''; }
+      var installBtn = el.querySelector('#vg-lic-install');
+      if(installBtn){
+        var deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt = e; });
+        installBtn.addEventListener('click', function(){
+          if(deferredPrompt){ deferredPrompt.prompt(); return; }
+          var tip = window.confirm('للتثبيت كتطبيق: من قائمة المتصفح (⋮) اختر «إضافة إلى الشاشة الرئيسية». تابع الآن؟');
+          if(tip){ try{ window.scrollTo(0,0); }catch(e){} }
+        });
+      }
       btn.addEventListener('click', function(){ btn.disabled = true; setMsg('جارٍ التحقق...'); onActivate(keyIn.value).finally(function(){ btn.disabled = false; }); });
       keyIn.addEventListener('keydown', function(e){ if(e.key==='Enter') btn.click(); });
       setTimeout(function(){ keyIn.focus(); }, 100);
