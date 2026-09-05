@@ -7,13 +7,12 @@
 
 ## روابط النشر الحالية (مؤقتة)
 
-- صفحة الهبوط: `https://hadysayed.github.io/vanguard-www/`
-- التطبيق: `https://hadysayed.github.io/vanguard-www/app/`
+- صفحة الهبوط: `https://vanguardprivacy.github.io/vanguard-www/`
+- التطبيق: `https://vanguardprivacy.github.io/vanguard-www/app/`
 
-> ⚠️ **الرابط الحالي مؤقت** — المكوّن `hadysayed` هو اسم المالك الشخصي (محدودية GitHub المجاني).
+> المنظمة الرسمية على GitHub: **Vanguardprivacy** (بدون اسم شخصي).
 > عند الاستعداد للانطلاق تجارياً يُشتَرى **نطاق خاص** (مثل `vanguardprivacy.app`) ويُربط بهذه الصفحة
-> عبر `CNAME` (ملف `CNAME` في جذر المستودع يحوي اسم النطاق) + سجل DNS `CNAME -> hadysayed.github.io`،
-> فلا يظهر الاسم الشخصي في الرابط إطلاقاً.
+> عبر `CNAME` (ملف `CNAME` في جذر المستودع يحوي اسم النطاق) + سجل DNS `CNAME -> vanguardprivacy.github.io`.
 
 ## البنية
 
