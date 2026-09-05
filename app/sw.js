@@ -1,9 +1,9 @@
-const CACHE = 'vguard-v1';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
+const CACHE = 'vguard-v2';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', function(e){
   e.waitUntil(
-    caches.open(CACHE).then(function(c){ return c.addAll(ASSETS); }).then(function(){ return self.skipWaiting(); })
+    caches.open(CACHE).then(function(c){ return c.addAll(SHELL); }).then(function(){ return self.skipWaiting(); })
   );
 });
 
@@ -16,19 +16,31 @@ self.addEventListener('activate', function(e){
 });
 
 self.addEventListener('fetch', function(e){
-  e.respondWith(
-    caches.match(e.request).then(function(r){
-      return r || fetch(e.request).then(function(res){
-        try{
-          if(e.request.url.indexOf(self.location.origin) === 0){
-            var copy = res.clone();
-            caches.open(CACHE).then(function(c){ c.put(e.request, copy); });
-          }
-        }catch(err){}
+  if(e.request.url.indexOf(self.location.origin) !== 0) return;
+  if(e.request.mode === 'navigate' || e.request.destination === 'document'){
+    e.respondWith(
+      fetch(e.request).then(function(res){
+        if(res && res.ok){
+          var copy = res.clone();
+          caches.open(CACHE).then(function(c){ c.put('./index.html', copy); });
+        }
         return res;
       }).catch(function(){
-        return caches.match('./index.html');
+        return caches.match(e.request).then(function(r){ return r || caches.match('./index.html'); });
+      })
+    );
+    return;
+  }
+  e.respondWith(
+    caches.match(e.request).then(function(cached){
+      var fresh = fetch(e.request).then(function(res){
+        if(res && res.ok){
+          var copy = res.clone();
+          caches.open(CACHE).then(function(c){ c.put(e.request, copy); });
+        }
+        return res;
       });
+      return cached || fresh;
     })
   );
 });
