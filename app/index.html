@@ -942,6 +942,7 @@
   /* ===================== RESPONSIVE / MOBILE OVERRIDES ===================== */
   /* Keep the 6-pillar navigation reachable and tidy on phones */
   @media (max-width:860px){
+    html,body{overflow-x:clip;}
     .tabs-center{justify-content:flex-start; max-width:100%; overflow:hidden;}
     .pillar-nav{width:100%; max-width:100vw; gap:14px;}
     .pillar-grp{width:100%; max-width:100%; align-items:stretch;}
@@ -952,8 +953,8 @@
       scrollbar-width:none; border-radius:16px;
     }
     .pillar-grp nav.tabs::-webkit-scrollbar{display:none;}
-    nav.tabs button{flex:0 0 auto; padding:10px 15px; font-size:13px;}
-    .tabs-pillar::before,.tabs-pillar::after{flex-basis:36px; max-width:36px;}
+    nav.tabs button{flex:0 0 auto; min-height:44px; padding:11px 15px; font-size:13px; border-radius:12px;}
+    .tabs-pillar::before,.tabs-pillar::after{flex-basis:32px; max-width:32px;}
     .tabs-pillar{font-size:9px; letter-spacing:2px; gap:8px;}
     .tabs-pillar .tpillar-lbl{font-size:11px;}
     .tabs-pillar .tpillar-en{font-size:8px; letter-spacing:1px;}
@@ -961,19 +962,31 @@
   }
 
   @media (max-width:720px){
-    .brand-hero{padding:10px 0 16px;}
-    .logo-stage{width:74px; height:74px; margin-bottom:12px;}
-    .logo-stage::before{inset:-14px;}
-    .wm-en{font-size:20px; letter-spacing:1px;}
-    .wm-ar{font-size:12px; margin-top:4px;}
-    .wm-tag{font-size:9px; margin-top:7px; letter-spacing:3px;}
-    .hero-copy{margin:14px auto 0; width:100%;}
-    .hero-copy h1{font-size:20px;}
+    html,body{overflow-x:clip;}
+    html{-webkit-text-size-adjust:100%;}
+    .status-chip{font-size:10px; padding:5px 11px;}
+    .util-row{padding-top:6px;}
+    .brand-hero{padding:6px 0 12px;}
+    .logo-stage{width:62px; height:62px; margin-bottom:10px;}
+    .logo-stage::before{inset:-10px;}
+    .wm-en{font-size:18px; letter-spacing:1px;}
+    .wm-ar{font-size:11.5px; margin-top:3px;}
+    .wm-tag{font-size:8.5px; margin-top:6px; letter-spacing:3px;}
+    .hero-copy{margin:10px auto 0; width:100%;}
+    .hero-copy h1{font-size:19px; line-height:1.5; margin-bottom:8px;}
     .hero-copy p{font-size:13px;}
-    header.top{padding:20px 0 0;}
-    .circuit-trace{opacity:0.35; transform:scale(0.7); transform-origin:top center;}
-    main{padding:28px 0 70px;}
-    .card{padding:22px 18px;}
+    .pillar-nav{margin-top:16px; gap:12px;}
+    nav.tabs{margin-top:16px; padding:4px;}
+    header.top{padding:14px 0 0;}
+    .circuit-trace{opacity:0.25; transform:scale(0.6); transform-origin:top center;}
+    main{padding:16px 0 60px;}
+    .card{padding:18px 16px; border-radius:16px;}
+    .btn{padding:14px 22px; min-height:46px;}
+    .btn.small{min-height:42px;}
+    .choice-btn{padding:13px 14px; min-height:46px;}
+    nav.tabs button{min-height:42px; padding:10px 14px;}
+    .mode-tab{padding:11px 16px; min-height:44px;}
+    .mode-tabs{gap:8px; margin-bottom:18px;}
   }
   @media (max-width:400px){
     .logo-stage{width:62px; height:62px;}
@@ -1034,30 +1047,36 @@
   .vg-lic-btn:disabled{opacity:0.6; cursor:not-allowed;}
   .vg-lic-foot{margin-top:16px; font-size:11px; color:var(--ink-mute);}
 
-  /* ===================== CENTRAL NOTICES (إشعار مركزي) ===================== */
+  /* ===================== CENTRAL NOTICES (إشعار مركزي — كرت عائم أنيق) ===================== */
   #vg-notice-bar{
-    position:relative; z-index:9000; display:none;
-    align-items:flex-start; gap:12px;
-    padding:14px 40px 14px 18px;
+    position:sticky; top:10px; z-index:9000; display:none;
+    margin:10px auto 0; width:calc(100% - 20px); max-width:720px;
+    border-radius:16px; border:1px solid var(--line);
+    background:rgba(13,20,28,0.86);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 10px 32px rgba(0,0,0,0.45);
     font-size:13px; line-height:1.55;
-    border-bottom:1px solid var(--line);
+    padding:12px 14px;
+    text-align:right;
   }
-  #vg-notice-bar.on{display:flex;}
-  #vg-notice-bar .vg-notice-ico{font-size:18px; line-height:1.3; flex:0 0 auto;}
+  #vg-notice-bar.on{display:flex; align-items:center; gap:10px;}
+  #vg-notice-bar .vg-notice-ico{font-size:19px; flex:0 0 auto;}
   #vg-notice-bar .vg-notice-body{flex:1 1 auto; min-width:0;}
   #vg-notice-bar .vg-notice-title{font-weight:700; margin-bottom:2px;}
   #vg-notice-bar .vg-notice-body p{margin:0; color:var(--ink-dim); font-size:12.5px;}
   #vg-notice-bar a{color:var(--cyan); text-decoration:underline;}
   #vg-notice-bar .vg-notice-x{
-    position:absolute; top:10px; left:12px; background:none; border:none; cursor:pointer;
-    color:var(--ink-mute); font-size:16px; line-height:1; padding:4px;
+    flex:0 0 auto; width:32px; height:32px; border-radius:50%; padding:0;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(0,230,255,0.08); border:1px solid var(--line); cursor:pointer;
+    color:var(--ink-dim); font-size:13px; line-height:1;
   }
-  #vg-notice-bar .vg-notice-x:hover{color:var(--ink);}
-  #vg-notice-bar.type-info{background:linear-gradient(90deg, rgba(0,230,255,0.10), rgba(0,230,255,0.02));}
+  #vg-notice-bar .vg-notice-x:hover{color:var(--ink); background:rgba(0,230,255,0.16);}
+  #vg-notice-bar.type-info{background:linear-gradient(90deg, rgba(0,230,255,0.12), rgba(13,20,28,0.9)); border-inline-start:3px solid var(--cyan);}
   #vg-notice-bar.type-info .vg-notice-title{color:var(--cyan);}
-  #vg-notice-bar.type-update{background:linear-gradient(90deg, rgba(76,141,255,0.16), rgba(76,141,255,0.03)); border-bottom-color:#2b4f86;}
+  #vg-notice-bar.type-update{background:linear-gradient(90deg, rgba(76,141,255,0.18), rgba(13,20,28,0.9)); border-inline-start:3px solid #4C8DFF;}
   #vg-notice-bar.type-update .vg-notice-title{color:#7FB3FF;}
-  #vg-notice-bar.type-urgent{background:linear-gradient(90deg, rgba(255,124,74,0.16), rgba(255,124,74,0.03)); border-bottom-color:#8a4a22;}
+  #vg-notice-bar.type-urgent{background:linear-gradient(90deg, rgba(255,124,74,0.18), rgba(13,20,28,0.9)); border-inline-start:3px solid #FF7C4A;}
   #vg-notice-bar.type-urgent .vg-notice-title{color:#FFB07A;}
 
   @media (hover: none), (pointer: coarse){
