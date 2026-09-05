@@ -88,6 +88,25 @@
   .feat h3{font-size:16.5px; margin-bottom:8px;}
   .feat p{font-size:13.5px; color:var(--dim);}
 
+  /* Feature categories */
+  .show{display:flex; gap:24px; flex-wrap:wrap; align-items:center; background:linear-gradient(135deg,rgba(0,230,255,.10),rgba(0,230,255,.02) 55%); border:1px solid rgba(0,230,255,.35); border-radius:22px; padding:30px; margin-bottom:36px;}
+  .show .big-ico{width:82px;height:82px;border-radius:20px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;}
+  .show .te{flex:1; min-width:230px;}
+  .show h3{font-size:21px; font-weight:900; margin-bottom:6px;}
+  .show p{color:var(--dim); font-size:14px; margin:0;}
+  .show .cnt{flex-shrink:0; text-align:center;}
+  .show .cnt b{font-size:34px; font-weight:900; color:var(--ok); line-height:1;}
+  .show .cnt span{display:block; font-size:11.5px; color:var(--dim); margin-top:4px;}
+  .cat{margin-bottom:38px;}
+  .cat-head{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
+  .cat-head .big{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.25);display:flex;align-items:center;justify-content:center;font-size:19px;}
+  .cat-head h3{font-size:18px; font-weight:900;}
+  .cat-head span{font-size:12px; color:var(--dim);}
+  .cat-head::after{content:""; flex:1; height:1px; background:var(--line);}
+  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  @media(max-width:900px){ .cat-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:540px){ .cat-grid{grid-template-columns:1fr;} }
+
   /* Trust banner */
   .trustband{background:linear-gradient(90deg,rgba(0,230,255,.06),rgba(76,141,255,.06)); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .trust-items{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:36px 0;}
@@ -170,14 +189,55 @@
   <div class="wrap">
     <div class="sec-tag">المزايا</div>
     <h2 class="sec-h">منظومة حماية كاملة في تطبيق واحد</h2>
-    <p class="sec-sub">ست أدوات قوية تعمل كلها محليًا على جهازك، بلا إنترنت وبلا وسطاء — أنت من يملك بياناتك حصريًا.</p>
-    <div class="grid">
-      <div class="feat"><div class="fi">🔑</div><h3>فحص كلمات المرور</h3><p>يكشف الكلمات الضعيفة والمكررة والمُخترَقة، ويقترح بدائل فائقة القوة محليًا.</p></div>
-      <div class="feat"><div class="fi">👁️</div><h3>كشف أدوات التتبع</h3><p>يستعرض المتفاعلات والتتبع الخفي والكوكيز، مع قائمة تميّز كاملة وخطوات إخفاء محترفة.</p></div>
-      <div class="feat"><div class="fi">🗄️</div><h3>خزنة كلمات السر</h3><p>تخزين مشفّر لكلمات السر والملفات بكلمة مرور رئيسية، بمعيار تشفير حقيقي على جهازك.</p></div>
-      <div class="feat"><div class="fi">📶</div><h3>فحص الشبكة والـVPN</h3><p>يتحقق من تسريب شبكة الواي-فاي واتصالك المشفر وأداء خادم الـVPN الموصى به.</p></div>
-      <div class="feat"><div class="fi">🖨️</div><h3>خريطة البصمة الرقمية</h3><p>يعرض توقيع جهازك الفريد وخط التتبع، ويُظهر ما يراه المواقع عنك بدقة.</p></div>
-      <div class="feat"><div class="fi">🚀</div><h3>مستودع الحماية الشامل</h3><p>أداة تحسين الأداء والخصوصية الشاملة: تنظيف ذاكرة، تعزيز إعدادات، ونتيجة حماية فورية.</p></div>
+    <p class="sec-sub">خمس عشرة أداة حماية احترافية تعمل كلها محليًا على جهازك — بلا إنترنت، بلا خوادم، بلا وسيط.</p>
+
+    <div class="show">
+      <div class="big-ico">🏆</div>
+      <div class="te">
+        <h3>القائمة الشاملة — لوحة القيادة الواحدة</h3>
+        <p>كل أدوات النظام في واجهة موحّدة ذكية: فحص شامل، تقييم أمني، وإدارة كاملة من مكان واحد. تفتح كل حمايتك بنقرة واحدة وترى نتيجة أمانك فورًا.</p>
+      </div>
+      <div class="cnt"><b>15</b><span>أداة احترافية</span></div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-head"><div class="big">🛡️</div><h3>الأمان الشامل</h3><span>نظرة كاملة على حمايتك من القمة</span></div>
+      <div class="cat-grid">
+        <div class="feat"><div class="fi">⚖️</div><h3>التقييم الأمني</h3><p>يقيّم مستوى حمايتك العام فورًا، ويعطيك نتيجة واضحة وخطة تقوية مرتبة لكل نقطة ضعف.</p></div>
+        <div class="feat"><div class="fi">🕵️</div><h3>رادار الفحص الاستخباراتي</h3><p>مسح متقدّم عن التهديدات الخفية والبرمجيات الخبيثة وأي نشاط مشبوه قبل أن يستهدفك.</p></div>
+        <div class="feat"><div class="fi">👨‍👩‍👧</div><h3>فحص الأمان العائلي</h3><p>يقيّم وينبّه على أجهزة أفراد عائلتك، فيبقى الجميع داخل الحصن الرقمي نفسه.</p></div>
+        <div class="feat"><div class="fi">🧠</div><h3>التقييم المستمر</h3><p>يتابع تغيّر مستوى الحماية لديك مع كل تحديث وتغيير، ويقترح التحسين التالي تلقائيًا.</p></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-head"><div class="big">🔑</div><h3>كلمات السر والحسابات</h3><span>أقوى حارس لأسرار دخولك</span></div>
+      <div class="cat-grid">
+        <div class="feat"><div class="fi">🔐</div><h3>مركز كلمة السر</h3><p>مركزك الموحّد لإنشاء وإدارة كل كلمات مرورك، بتوليد فائق القوة وفحص فوري لقوتها.</p></div>
+        <div class="feat"><div class="fi">🗄️</div><h3>خزنة كلمات السر</h3><p>تخزين مشفّر كامل لكلمات مرورك بكلمة مرور رئيسية — لا أحد غيرك يقرأها أبدًا.</p></div>
+        <div class="feat"><div class="fi">📡</div><h3>كاشف التسريبات</h3><p>ينبّهك فورًا إذا ظهرت بياناتك في أي تسريب معروف على الإنترنت، قبل أن تتفاقم المشكلة.</p></div>
+        <div class="feat"><div class="fi">♻️</div><h3>استرجاع الحسابات</h3><p>دليل احترافي خطوة بخطوة لاستعادة أي حساب مخترق أو مفقود، وإعادة السيطرة بسرعة.</p></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-head"><div class="big">🚫</div><h3>درع الاحتيال والتصيّد</h3><span>اكتشف الخداع قبل أن تقع فيه</span></div>
+      <div class="cat-grid">
+        <div class="feat"><div class="fi">🔗</div><h3>ماسح الروابط</h3><p>يفحص أي رابط قبل الضغط عليه ويبيّن إن كان تصيّديًا أو ضارًا — محليًا وبلا خوادم.</p></div>
+        <div class="feat"><div class="fi">🌐</div><h3>ماسح المواقع</h3><p>يحلّل أي موقع ويكشف نواياه وأدوات تتبعه وسجلّه قبل أن تتعامل معه.</p></div>
+        <div class="feat"><div class="fi">🛡️</div><h3>درع الخداع والابتزاز</h3><p>حماية مستمرة من صفحات الاحتيال ومحاولات الخداع والابتزاز التي تستهدف المستخدمين العرب خاصة.</p></div>
+        <div class="feat"><div class="fi">🧲</div><h3>كاشف التصيّد</h3><p>يتعرّف على قوالب التصيّد المتداولة والعناوين المزوّرة ويحذّرك قبل إدخال بياناتك.</p></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-head"><div class="big">🌫️</div><h3>الخصوصية والشبكة</h3><span>أخفِ وجودك الرقمي وأمّن اتصالك</span></div>
+      <div class="cat-grid">
+        <div class="feat"><div class="fi">👁️</div><h3>درع التتبع والبصمة</h3><p>يُسكت أدوات تتبع المتصفح، ويُقلّص بصمتك الرقمية إلى أدنى حد يراه المواقع عنك.</p></div>
+        <div class="feat"><div class="fi">⚙️</div><h3>رادار الأذونات</h3><p>يراقب أذونات التطبيقات ويكشف من يصل إلى ماذا على جهازك، مع توصيات للتقليص.</p></div>
+        <div class="feat"><div class="fi">📶</div><h3>مدرب الواي فاي العام</h3><p>يحذّرك عند الاتصال بشبكات عامة مكشوفة ويدرّبك على استخدامها بأمان تام.</p></div>
+        <div class="feat"><div class="fi">📦</div><h3>خزنة الملفات</h3><p>قفل مشفّر بمعيار تشفير حقيقي لملفاتك الحساسة — محمية حتى داخل نفس الجهاز.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -201,7 +261,7 @@
         لا يمكن لأحد آخر استخدام مفتاحك على جهاز مختلف — هذا يضمن لك الحماية، ويحمينا من إعادة البيع غير المرخصة.
       </p>
       <ul class="check-list">
-        <li>نسخة كاملة بكل الأدوات السبع، محدّثة طوال حياتك</li>
+        <li>نسخة كاملة بكل الأدوات الخمس عشرة، محدّثة طوال حياتك</li>
         <li>لا إعلانات مزعجة نهائيًا</li>
         <li>لا اشتراكات شهرية ولا رسوم خفية</li>
         <li>دعم مباشر عبر الواتساب عند أي سؤال</li>
