@@ -9,8 +9,156 @@
 <meta name="theme-color" content="#05070B">
 <meta name="apple-touch-fullscreen" content="yes">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%2305070B'/%3E%3Cpath d='M256 72 L408 130 V256 C408 338 344 404 256 440 C168 404 104 338 104 256 V130 Z' fill='none' stroke='%2300E6FF' stroke-width='28' stroke-linejoin='round'/%3E%3Cpath d='M200 258 L242 300 L322 218' fill='none' stroke='%2300F5B0' stroke-width='30' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Vanguard%20Privacy%22%2C%22short_name%22%3A%22Vanguard%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2305070B%22%2C%22theme_color%22%3A%22%2300E6FF%22%2C%22dir%22%3A%22rtl%22%2C%22lang%22%3A%22ar%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3C/svg%3E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg+xml%22%7D%5D%7D">
 <title>Vanguard Privacy — فانغارد للخصوصية</title>
+<style>
+/* ===== VANGUARD ENTERPRISE LAYER (real, local-only) ===== */
+.part{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:epDrift 22s ease-in-out infinite;}
+.part.p1{width:5px;height:5px;background:#00e6ff;box-shadow:0 0 14px #00e6ff;top:12%;right:8%;}
+.part.p2{width:3px;height:3px;background:#8b5bff;box-shadow:0 0 10px #8b5bff;top:38%;left:4%;animation-delay:-7s;}
+.part.p3{width:6px;height:6px;background:#00f5b0;box-shadow:0 0 14px #00f5b0;top:72%;right:12%;animation-delay:-13s;}
+.part.p4{width:4px;height:4px;background:#3d7bff;box-shadow:0 0 11px #3d7bff;top:26%;left:14%;animation-delay:-3s;}
+.part.p5{width:5px;height:5px;background:#ffc24b;box-shadow:0 0 12px #ffc24b;top:86%;left:8%;animation-delay:-16s;}
+.part.p6{width:3px;height:3px;background:#00e6ff;box-shadow:0 0 9px #00e6ff;top:55%;right:5%;animation-delay:-10s;}
+@keyframes epDrift{0%,100%{transform:translateY(0);opacity:.6;}50%{transform:translateY(-46px) translateX(12px);opacity:.12;}}
+.aurora{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px);animation:epMorph 20s ease-in-out infinite;}
+.aurora.a1{width:460px;height:460px;background:radial-gradient(circle,rgba(0,230,255,.1),transparent 70%);top:-16%;left:10%;animation-duration:22s;}
+.aurora.a2{width:380px;height:380px;background:radial-gradient(circle,rgba(139,91,255,.08),transparent 70%);bottom:4%;right:0;animation-delay:-9s;animation-duration:26s;}
+@keyframes epMorph{0%,100%{transform:translate(0,0) scale(1);opacity:.65;}33%{transform:translate(28px,-22px) scale(1.1);opacity:.4;}66%{transform:translate(-22px,28px) scale(.9);opacity:.55;}}
+.ep-pillar{border:1px solid rgba(0,230,255,.2);border-radius:16px;padding:10px 12px;background:linear-gradient(150deg,rgba(0,230,255,.07),transparent 55%);}
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:640px){.ep-grid{grid-template-columns:1fr;}}
+.ep-kpi{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;text-align:center;padding:16px 8px;position:relative;overflow:hidden;}
+.ep-kpi .v{font-size:30px;font-weight:800;font-family:var(--mono);color:var(--cyan);}
+.ep-kpi .l{font-size:11px;color:var(--ink-dim);margin-top:5px;}
+.ep-kpi.ok .v{color:var(--success);}
+.ep-kpi.warn .v{color:#FFC24B;}
+.ep-kpi.danger .v{color:var(--danger);}
+.ep-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:rgba(255,255,255,.03);}
+.ep-row .k{font-size:12px;color:var(--ink-dim);}
+.ep-row .v{font-size:12.5px;font-weight:700;font-family:var(--mono);}
+.ep-row .v.ok{color:var(--success);}
+.ep-row .v.warn{color:#FFC24B;}
+.ep-row .v.bad{color:var(--danger);}
+.ep-sec{font-size:11px;color:var(--cyan);font-family:var(--mono);letter-spacing:1.5px;margin:18px 0 10px;}
+.ep-live{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--success);}
+.ep-live .d{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success);animation:epBlink 1.6s ease-in-out infinite;}
+@keyframes epBlink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.ep-inc{border-right:3px solid #1e3a55;padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,.025);border-radius:10px;font-size:12px;}
+.ep-inc.high{border-right-color:var(--danger);background:rgba(255,77,106,.06);}
+.ep-inc.mid{border-right-color:#FFC24B;}
+.ep-inc .t{font-weight:700;font-size:12.5px;}
+.ep-inc .d{color:var(--ink-dim);font-size:11px;line-height:1.7;margin-top:3px;}
+.ep-inc .ts{font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-top:4px;}
+.ep-bars{display:flex;align-items:flex-end;gap:6px;height:96px;padding:8px 4px 0;}
+.ep-bar{flex:1;background:linear-gradient(180deg,rgba(0,230,255,.7),rgba(0,230,255,.08));border-radius:5px 5px 0 0;min-height:4px;position:relative;transition:height .5s ease;}
+.ep-bar.warn{background:linear-gradient(180deg,#FFC24B,rgba(255,194,75,.08));}
+.ep-bar.danger{background:linear-gradient(180deg,var(--danger),rgba(255,77,106,.1));}
+.ep-bar span{position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:9px;color:var(--ink-dim);font-family:var(--mono);}
+.ep-day{display:flex;justify-content:space-between;font-size:9px;color:var(--ink-mute);font-family:var(--mono);padding:0 4px;}
+.ep-report{white-space:pre-wrap;direction:ltr;text-align:left;background:#060B12;border:1px solid var(--line);border-radius:12px;padding:16px;font-family:var(--mono);font-size:11.5px;color:#BFE9F2;line-height:1.75;max-height:360px;overflow:auto;margin-top:14px;display:none;}
+.ep-sel,.ep-text{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--ink);font-family:inherit;font-size:13px;outline:none;}
+  .ep-mod{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:14px;padding:13px 13px 8px;margin-top:11px;}
+  .ep-mod-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+  .ep-mod-head .t{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;}
+  .ep-mod-head .t .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(0,230,255,.1);border:1px solid rgba(0,230,255,.22);flex-shrink:0;}
+  .ep-fixrow{display:flex;align-items:stretch;gap:8px;margin-top:11px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.09);}
+  .ep-fixbtn{flex:1.35;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.42);color:var(--cyan);border-radius:9px;padding:8px 9px;font-size:11px;font-weight:800;cursor:pointer;line-height:1.5;}
+  .ep-fixbtn:hover{background:rgba(0,230,255,.15);}
+  .ep-fixbtn:active{transform:scale(.98);}
+  .ep-fixbtn.applied{background:rgba(0,245,176,.1);border-color:rgba(0,245,176,.5);color:var(--success);}
+  .ep-fixbtn.applied:hover{background:rgba(0,245,176,.18);}
+  .ep-fixst{flex:1;display:flex;align-items:center;font-size:10px;line-height:1.55;color:var(--ink-mute);text-align:left;}
+  .ep-fixst.ok{color:var(--success);}
+  .ep-fixst.warn{color:#FFC24B;}
+  .spy-radio{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:13px 13px 12px;}
+  .spy-reel{display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
+  .spy-freq{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--cyan);text-shadow:0 0 14px rgba(0,230,255,.4);letter-spacing:1px;}
+  .spy-unit{font-size:11px;color:var(--ink-mute);font-family:var(--mono);}
+  .spy-meter{height:9px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;margin:13px 0 4px;position:relative;}
+  .spy-meter-fill{height:100%;width:0%;background:linear-gradient(90deg,#00E6FF,#00F5B0);transition:width .12s;border-radius:6px;}
+  .spy-actions{display:flex;gap:8px;margin-top:10px;}
+  .spy-readout{font-size:11.5px;color:var(--ink);line-height:1.75;margin-top:10px;border-top:1px dashed rgba(255,255,255,.09);padding-top:9px;}
+  .spy-readout.hit{color:#FFC24B;}
+  .cam-stage{position:relative;width:100%;aspect-ratio:4/3;background:#03121A;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px;}
+  .cam-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .cam-stage canvas{position:absolute;inset:0;width:100%;height:100%;}
+  .cam-sweep{position:absolute;top:8px;left:8px;font-size:11px;color:var(--ink);background:rgba(0,0,0,.55);border:1px solid var(--line);padding:4px 9px;border-radius:9px;font-family:var(--mono);}
+  .cam-cross{position:absolute;width:46px;height:46px;border:2px solid rgba(255,70,70,.9);border-radius:8px;box-shadow:0 0 18px rgba(255,70,70,.55);pointer-events:none;transition:all .2s;transform:translate(-50%,-50%);}
+  .cam-verd{display:flex;justify-content:space-between;gap:8px;margin:10px 2px;font-size:11.5px;color:var(--ink-dim);}
+  .sq-status{font-size:11.5px;padding:6px 10px;border-radius:9px;margin:10px 0 4px;text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--ink-mute);}
+  .sq-status.on{color:#00F5B0;border-color:rgba(0,245,176,.35);background:rgba(0,245,176,.06);}
+  .sq-status.warn{color:#FFC24B;border-color:rgba(255,194,75,.45);background:rgba(255,194,75,.08);animation:sqpulse 1s infinite;}
+  @keyframes sqpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,194,75,0);}50%{box-shadow:0 0 14px rgba(255,194,75,.4);}}
+  .ops-radar{width:126px;height:126px;margin:10px auto 18px;position:relative;border-radius:50%;border:1px solid rgba(0,230,255,.35);}
+  .ops-radar .rr{position:absolute;border-radius:50%;border:1px solid rgba(0,230,255,.25);}
+  .ops-radar .rr1{inset:8px;} .ops-radar .rr2{inset:24px;} .ops-radar .rr3{inset:40px;}
+  .ops-radar .ops-core{position:absolute;inset:51px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#0F2530,#04141A);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 14px rgba(0,230,255,.5);}
+  .ops-radar::after{content:'';position:absolute;inset:6px;border-radius:50%;background:conic-gradient(from 0deg, rgba(0,230,255,.55), transparent 70deg);animation:radarsweep 2.4s linear infinite;-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 1px),#000 100%);mask:radial-gradient(closest-side,transparent calc(100% - 1px),#000 100%);}
+  .ctl-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .nt-btn{display:flex;align-items:center;gap:6px;}
+  .nt-btn[data-on="1"]{border-color:var(--cyan)!important;color:var(--cyan)!important;box-shadow:0 0 10px rgba(0,230,255,.25);}
+  .nt-chip{font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:99px;border:1px solid rgba(0,230,255,.35);color:var(--cyan);}
+  .nt-chip.ok{color:#7dffb0;border-color:rgba(125,255,176,.4);}
+  .nt-chip.warn{color:#ffd37a;border-color:rgba(255,211,122,.45);background:rgba(255,160,40,.08);}
+  .nt-chip.alert{color:#ff7a90;border-color:rgba(255,122,144,.5);background:rgba(255,40,70,.10);animation:radarsweep .5s steps(2) infinite;}
+  .ctl-row{display:flex;align-items:center;gap:8px;margin-top:6px;}
+  .ctl-row label{flex:0 0 128px;font-size:11px;color:var(--ink-mute);}
+  .ctl-row input[type=range]{flex:1;accent-color:#00E6FF;height:22px;}
+  .ctl-val{width:36px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-dim);}
+  .proctl{margin-top:4px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;}
+  .proctl summary{cursor:pointer;font-size:12px;color:var(--ink-mute);font-family:var(--mono);}
+  .proreset{margin-top:8px;width:100%;}
+  #panel-camx.night{background:#000!important;}
+  #panel-camx.night .card{background:#000!important;border-color:#0e0e0e;box-shadow:none;}
+  #panel-camx.night .cam-stage{box-shadow:0 0 0 1px rgba(255,255,255,.07);border-radius:14px;overflow:hidden;}
+  #panel-camx.night .em-box,#panel-camx.night .mw-box,#panel-camx.night .spy-echo{border-color:#161616;}
+  #panel-camx.night .section-title,#panel-camx.night .ep-sec{color:#cdd8e4;}
+  #panel-camx.night .section-sub{color:#7d8ea1;}
+  #panel-camx.night .btn.ghost{border-color:#232323;color:#d4dee9;}
+  #panel-camx.night p{color:#5f7083!important;}
+  @keyframes radarsweep{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  .em-box{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:14px;padding:12px;}
+  .em-gauge{height:9px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;margin:8px 0 4px;}
+  .em-gauge-fill{height:100%;width:0%;background:linear-gradient(90deg,#00E6FF,#FFC24B 60%,#FF5C5C);transition:width .14s;border-radius:6px;}
+  .em-gauge{position:relative;width:116px;height:116px;margin:8px auto 10px;}
+  .em-gauge svg{width:100%;height:100%;display:block;transform:rotate(-90deg);overflow:visible;}
+  .emg-base{fill:none;stroke:rgba(255,255,255,.07);stroke-width:9;}
+  .emg-arc{fill:none;stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .18s ease;}
+  .emg-ticks line{stroke:rgba(194,213,230,.30);stroke-width:1;}
+  .emg-ticks line.major{stroke:rgba(194,213,230,.62);stroke-width:1.3;}
+  .emg-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
+  .emg-num #emGaugeVal{font-family:var(--mono);font-weight:700;font-size:23px;color:#F6FCFD;transition:color .15s;}
+  .emg-num #emGaugeVal.mid{color:#FFC24B;}
+  .emg-num #emGaugeVal.hi{color:#FF7A90;}
+  .emg-num small{font-size:9.5px;color:var(--ink-mute);font-family:var(--mono);margin-top:2px;}
+  .mw-box{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:14px;padding:12px;}
+  .mw-bar{height:7px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;margin:8px 0 4px;}
+  .mw-fill{height:100%;width:0%;background:linear-gradient(90deg,#00E6FF,#00F5B0);transition:width .3s;border-radius:5px;}
+  .mw-list{margin-top:10px;max-height:210px;overflow-y:auto;}
+  .mw-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-top:6px;background:rgba(255,255,255,.02);}
+  .mw-row .ip{font-family:var(--mono);font-size:12px;color:var(--ink);min-width:96px;}
+  .mw-row .kd{flex:1;font-size:11px;color:var(--ink-mute);}
+  .mw-row small{font-family:var(--mono);font-size:9px;color:var(--ink-dim);}
+  .mw-row.hot{border-color:rgba(255,194,75,.5);background:rgba(255,194,75,.05);}
+  .mw-row.hot .kd{color:#FFC24B;font-weight:700;}
+  .ep-badge{padding:3px 11px;border-radius:20px;font-size:10px;font-weight:800;font-family:var(--mono);letter-spacing:.5px;white-space:nowrap;}
+  .ep-badge.ok{background:rgba(0,245,176,.12);color:var(--success);border:1px solid rgba(0,245,176,.35);}
+  .ep-badge.warn{background:rgba(255,194,75,.12);color:#FFC24B;border:1px solid rgba(255,194,75,.35);}
+  .ep-badge.bad{background:rgba(255,77,106,.12);color:var(--danger);border:1px solid rgba(255,77,106,.35);}
+  .ep-tag{display:inline-block;padding:3px 9px;margin:0 4px 6px 0;border-radius:7px;font-size:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--ink-dim);font-family:var(--mono);}
+  .ep-notify-card{border:1px solid rgba(0,230,255,.18);border-radius:14px;padding:13px;margin-top:11px;background:linear-gradient(135deg,rgba(0,230,255,.05),rgba(139,92,246,.04));}
+.ep-text:focus{border-color:var(--cyan);}
+.btn.sm{padding:10px 14px;font-size:12.5px;}
+.btn.danger{border-color:rgba(255,77,106,.5);color:var(--danger);background:rgba(255,77,106,.08);}
+.ep-pin{position:fixed;inset:0;z-index:997;background:rgba(2,6,10,.85);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px;}
+.ep-pin .box{width:100%;max-width:340px;background:#0D1420;border:1px solid #00E6FF;border-radius:16px;padding:22px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.7);}
+.ep-pin h4{font-size:15px;margin-bottom:6px;color:#fff;}
+.ep-pin .ms{font-size:12px;color:var(--ink-dim);line-height:1.7;margin-bottom:14px;}
+.ep-pin input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--ink);font-family:var(--mono);font-size:16px;letter-spacing:8px;text-align:center;outline:none;margin-bottom:12px;}
+.ep-pin input:focus{border-color:var(--cyan);}
+.vg-lic-card{border:1px solid rgba(0,230,255,.28);box-shadow:0 0 0 1px rgba(0,230,255,.12),0 34px 90px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04);border-radius:22px;padding:30px;background:linear-gradient(165deg,rgba(13,22,32,.98),rgba(4,8,14,.99));}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1100,18 +1248,591 @@
   }
 
 </style>
-</head>
+
+<style>
+/* ============ TEMPLATE SHELL (user design, verbatim) ============ */
+:root{
+  --obsidian:#020304;
+  --glass: rgba(16,22,30,0.5);
+  --cyan:#00E6FF;
+  --blue:#4C8DFF;
+  --violet:#8B5CF6;
+  --amber:#F5B942;
+  --orange:#FF8A3D;
+  --magenta:#E85FD1;
+  --success:#00F5B0;
+  --ink:#EAF4F7;
+  --ink-dim:#8CA0AC;
+  --ink-mute:#546670;
+  --line: rgba(0,230,255,0.14);
+  --font-ar:'Cairo', sans-serif;
+  --font-en:'Inter', sans-serif;
+  --mono:'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{background:var(--obsidian); color:var(--ink); font-family:var(--font-ar);}
+button{font-family:inherit; cursor:pointer; background:none; border:none; color:inherit;}
+
+.mesh-bg{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+.mesh-bg::before{
+  content:''; position:absolute; inset:-15%;
+  background:
+    radial-gradient(500px 420px at 15% 5%, rgba(0,230,255,0.14), transparent 60%),
+    radial-gradient(480px 400px at 90% 20%, rgba(139,92,246,0.10), transparent 60%),
+    radial-gradient(520px 460px at 30% 90%, rgba(232,95,209,0.08), transparent 60%),
+    radial-gradient(460px 400px at 85% 70%, rgba(245,185,66,0.07), transparent 60%);
+  filter:blur(60px);
+}
+.mesh-bg::after{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(0,230,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,230,255,0.035) 1px, transparent 1px);
+  background-size:38px 38px;
+  mask-image: radial-gradient(ellipse 700px 900px at 50% 20%, #000 0%, transparent 75%);
+}
+.hex-deco{position:absolute; z-index:0; opacity:0.4; pointer-events:none;}
+.phone{position:relative; z-index:1; max-width:420px; margin:0 auto; padding:22px 18px 60px;}
+
+.topbar{display:flex; align-items:center; justify-content:space-between;}
+.icon-btn{
+  width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(10px); font-size:16px;
+}
+.icon-btn.shield-active{border-color:rgba(0,245,176,0.5); color:var(--success);}
+.topbar-right{display:flex; gap:8px;}
+
+.brand-center{text-align:center; margin-top:18px;}
+.wm{font-family:var(--font-en); font-weight:800; font-size:25px; letter-spacing:1.5px;}
+.wm .c1{color:var(--cyan);}
+.wm .c2{color:#fff;}
+.wm-ar{font-size:13px; color:var(--ink-dim); margin-top:6px; font-weight:600;}
+.wm-tag{font-family:var(--font-en); font-size:9.5px; color:var(--ink-mute); letter-spacing:3.5px; margin-top:8px;}
+.wm-sub{font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:1px; margin-top:6px;}
+
+.hero-row{display:flex; align-items:center; margin-top:20px; gap:2px;}
+.hero-text{flex:1; text-align:right;}
+.hero-title{font-size:19px; font-weight:800; color:#fff; line-height:1.5;}
+.hero-title .accent{color:var(--amber);}
+.hero-desc{font-size:11.5px; color:var(--ink-dim); line-height:1.7; margin-top:8px; max-width:230px; margin-inline-start:auto;}
+.quick-list{margin-top:14px; display:flex; flex-direction:column; gap:6px; align-items:flex-end;}
+.quick-item{
+  display:flex; align-items:center; gap:8px; background:var(--glass); border:1px solid var(--line);
+  padding:7px 12px 7px 8px; border-radius:20px; font-size:11.5px; backdrop-filter:blur(10px);
+  cursor:pointer; transition:border-color .2s, transform .2s; width:max-content;
+}
+.quick-item:hover{border-color:rgba(0,230,255,.45); transform:translateY(-1px);}
+.qi-icon{width:22px; height:22px; border-radius:7px; display:flex; align-items:center; justify-content:center;
+  background:color-mix(in srgb, var(--c) 20%, transparent); font-size:11px;}
+
+.scan-hero{display:flex; align-items:center; justify-content:center; gap:24px; margin-top:10px;}
+.fp-ring{width:140px; height:140px; flex-shrink:0; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle at 50% 42%, rgba(0,245,176,0.14), rgba(5,8,12,0.55));
+  border:1px solid rgba(0,245,176,0.34);
+  box-shadow:0 0 30px rgba(0,245,176,0.22), 0 0 80px rgba(0,245,176,0.10), inset 0 0 26px rgba(0,245,176,0.08);
+  animation:fpPulse 3.6s ease-in-out infinite;}
+@keyframes fpPulse{
+  0%,100%{box-shadow:0 0 26px rgba(0,245,176,0.18), 0 0 70px rgba(0,245,176,0.08), inset 0 0 24px rgba(0,245,176,0.06);}
+  50%{box-shadow:0 0 40px rgba(0,245,176,0.30), 0 0 110px rgba(0,245,176,0.14), inset 0 0 30px rgba(0,245,176,0.12);}
+}
+.fp-ring svg{position:relative; z-index:1;}
+.fp-scanr{animation:fpScanR 8s linear infinite; transform-origin:52px 48px;}
+@keyframes fpScanR{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+.fp-laser{animation:fpLaser 3.6s ease-in-out infinite;}
+@keyframes fpLaser{ 0%,100%{transform:translateX(-26px);} 50%{transform:translateX(26px);} }
+.scan-srvs{display:flex; flex-direction:column; gap:12px;}
+.scan-card{display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:16px; cursor:pointer; min-width:182px;
+  background:linear-gradient(135deg, rgba(0,230,255,0.08), rgba(76,141,255,0.04));
+  border:1px solid rgba(0,230,255,0.26); color:var(--ink); font-family:var(--font-ar);
+  box-sizing:border-box; transition:transform .2s, border-color .2s, box-shadow .2s;}
+.scan-card:hover{transform:translateY(-2px); border-color:rgba(0,230,255,0.6); box-shadow:0 8px 22px rgba(0,230,255,0.16);}
+.sc-ic{width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px;
+  background:rgba(0,230,255,0.12); border:1px solid rgba(0,230,255,0.22); flex-shrink:0;}
+.sc-tx{font-size:13.5px; font-weight:700; display:block; line-height:1.3; text-align:right;}
+.sc-en{display:block; font-size:8.5px; color:var(--ink-mute); letter-spacing:1.6px; font-family:var(--font-en); margin-top:3px; text-align:right;}
+@media(max-width:640px){
+  .scan-hero{gap:16px;}
+  .fp-ring{width:132px; height:132px;}
+  .fp-ring svg{width:124px; height:124px;}
+  .scan-card{min-width:158px; padding:11px 12px; gap:10px;}
+  .sc-ic{width:36px; height:36px; font-size:17px;}
+  .scan-srvs{gap:10px;}
+}
+
+.hero-orb{width:128px; height:128px; flex-shrink:0; position:relative; margin-inline-start:-18px;}
+.hero-orb svg{position:absolute; inset:0;}
+.hero-orb .orbit{animation:spin 18s linear infinite; transform-origin:64px 64px;}
+@keyframes spin{ from{transform:rotate(0);} to{transform:rotate(360deg);} }
+.fp-a{animation:fpMove 26s linear infinite;}
+@keyframes fpMove{
+  0%{transform:rotate(0deg) translateY(0);}
+  25%{transform:rotate(90deg) translateY(-3px);}
+  50%{transform:rotate(180deg) translateY(0);}
+  75%{transform:rotate(270deg) translateY(-3px);}
+  100%{transform:rotate(360deg) translateY(0);}
+}
+.float-hex{position:absolute; width:26px; height:26px; animation:float-bob 3.2s ease-in-out infinite;}
+.float-hex.h1{top:-10px; right:80px; animation-delay:0s;}
+.float-hex.h2{top:26px; right:100px; width:20px; height:20px; animation-delay:-1.6s;}
+@keyframes float-bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+
+.pillars{margin-top:26px; display:flex; flex-direction:column; gap:0;}
+.pillar-block{border-top:1px solid var(--line); padding:16px 0;}
+.pillar-row{display:flex; align-items:flex-start; gap:8px; direction:ltr;}
+.pillar-badge{
+  position:relative; width:52px; height:52px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle, color-mix(in srgb, var(--pc) 14%, transparent), transparent 70%);
+  border:1.5px solid color-mix(in srgb, var(--pc) 55%, transparent);
+  animation:badge-pulse 3s ease-in-out infinite;
+}
+@keyframes badge-pulse{
+  0%,100%{ box-shadow:0 0 10px color-mix(in srgb, var(--pc) 40%, transparent); }
+  50%{ box-shadow:0 0 22px color-mix(in srgb, var(--pc) 65%, transparent); }
+}
+.pillar-badge::before{
+  content:''; position:absolute; inset:-6px; border-radius:50%;
+  border:1px dashed color-mix(in srgb, var(--pc) 50%, transparent);
+  animation:spin 9s linear infinite;
+}
+.pillar-badge svg{position:relative; z-index:1;}
+.pillar-info{flex:0 0 84px; text-align:right; direction:rtl; padding-top:2px;}
+.p-num{display:block; font-family:var(--mono); font-size:9px; letter-spacing:1.5px; color:var(--pc); margin-bottom:3px;}
+.pillar-info h3{font-size:12.5px; font-weight:800; color:#fff; line-height:1.3;}
+.p-en{display:block; font-family:var(--font-en); font-size:7px; color:var(--ink-mute); letter-spacing:0.8px; margin-top:3px; line-height:1.4;}
+
+.pillar-list{flex:1; direction:rtl; background:var(--glass); border:1px solid var(--line); border-radius:12px; overflow:hidden; backdrop-filter:blur(10px);}
+.pl-item{display:flex; align-items:center; gap:8px; padding:8px 10px; font-size:10.5px; border-bottom:1px solid var(--line); line-height:1.3; cursor:pointer; transition:background .2s;}
+.pl-item:last-child{border-bottom:none;}
+.pl-item:hover{background:rgba(0,230,255,.07);}
+.pl-item span:last-child{flex:1;}
+.pl-icon{width:18px; height:18px; border-radius:5px; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,230,255,0.16); font-size:9px; flex-shrink:0; color:var(--cyan);}
+
+.bottom-actions{display:flex; gap:10px; margin-top:24px;}
+.wide-btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--glass); border:1px solid var(--line); border-radius:14px; padding:14px 10px;
+  font-size:12.5px; font-weight:700; color:var(--ink); backdrop-filter:blur(10px); cursor:pointer;
+  transition:border-color .2s, transform .2s;
+}
+.wide-btn:hover{border-color:rgba(0,230,255,.45); transform:translateY(-1px);}
+.sparkle{text-align:center; margin-top:18px; color:var(--cyan); opacity:0.7; font-size:16px;}
+
+.bottom-nav{
+  position:fixed; bottom:0; left:0; right:0; z-index:5; direction:ltr;
+  background:rgba(8,12,17,0.75); backdrop-filter:blur(20px); border-top:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; padding:10px 26px 14px;
+  max-width:480px; margin:0 auto;
+}
+.bn-item{display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:4px; font-size:10px; color:var(--ink-mute); flex:1; min-width:0; cursor:pointer; transition:color .2s; padding-top:2px;}
+.bn-item.active{color:var(--cyan);}
+.bn-item .bn-icon{font-size:17px; display:flex; align-items:center; justify-content:center; line-height:1;}
+.bn-item .bn-icon svg{width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+.fab{
+  width:60px; height:60px; border-radius:50%; margin-top:-30px;
+  background:radial-gradient(circle at 35% 30%, #0F2530, #04141A 70%);
+  border:2px solid var(--cyan); box-shadow:0 0 22px rgba(0,230,255,0.55), 0 8px 20px rgba(0,0,0,0.5);
+  display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--cyan);
+  transition:transform .25s;
+}
+.fab:hover{transform:scale(1.06);}
+
+/* ============ V2 additions: tools region ============ */
+header, .circuit-footer { display:none !important; }
+main[class="wrap"] {
+  width:min(520px, 94vw); max-width:520px; margin:0 auto; padding:6px 0 150px;
+  position:relative; z-index:1;
+}
+body { padding-bottom:20px; }
+.v2-divider{ text-align:center; margin:26px auto 4px; max-width:520px; position:relative; z-index:1; }
+.v2-divider span{
+  display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:2.5px; color:var(--cyan);
+  background:rgba(0,230,255,.06); border:1px solid var(--line); border-radius:20px; padding:7px 18px;
+  backdrop-filter:blur(8px);
+}
+.v2-hint{ text-align:center; font-size:11px; color:var(--ink-mute); margin:8px auto 0; max-width:480px; position:relative; z-index:1; line-height:1.7;}
+.part, .aurora { z-index:0; }
+
+/* ============ V2 screen model: home vs dedicated tool screens ============ */
+#v2Home{display:block;}
+#v2Tools{display:none;}
+body.screen-tools #v2Home{display:none;}
+body.screen-tools #v2Tools{display:block;}
+.v2-toolsbar{
+  position:sticky; top:0; z-index:4; display:flex; align-items:center; justify-content:space-between;
+  max-width:520px; margin:0 auto; padding:10px 14px;
+  background:rgba(5,9,13,.82); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line); border-radius:0 0 16px 16px; direction:rtl;
+}
+.v2-back{
+  display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:var(--cyan);
+  background:var(--glass); border:1px solid var(--line); border-radius:12px; padding:9px 14px;
+  transition:border-color .2s;
+}
+.v2-back:hover{border-color:rgba(0,230,255,.5);}
+.v2-tb-brand{display:flex; align-items:center; gap:7px; font-family:var(--font-en); font-weight:800; font-size:12px; letter-spacing:1px; color:#fff;}
+.v2-tb-brand .c1{color:var(--cyan);}
+
+/* ============ V2 quick sheet ============ */
+#v2SheetBg{position:fixed; inset:0; background:rgba(2,5,8,.74); backdrop-filter:blur(4px); z-index:90; opacity:0; pointer-events:none; transition:opacity .25s;}
+#v2SheetBg.open{opacity:1; pointer-events:auto;}
+#v2Sheet{
+  position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(110%);
+  max-width:500px; width:94vw; z-index:91; direction:rtl;
+  background:rgba(10,15,21,.94); border:1px solid var(--line); border-bottom:none;
+  border-radius:22px 22px 0 0; padding:18px 18px 24px;
+  transition:transform .32s cubic-bezier(.2,.9,.3,1.1); box-shadow:0 -12px 40px rgba(0,0,0,.6);
+}
+#v2Sheet.open{transform:translateX(-50%) translateY(0);}
+#v2Sheet h3{font-size:15px; color:#fff; text-align:center; margin-bottom:4px;}
+.qs-sub{font-size:10.5px; color:var(--ink-mute); text-align:center; margin-bottom:14px;}
+.v2qs{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.v2q{
+  display:flex; align-items:center; gap:10px; background:var(--glass); border:1px solid var(--line);
+  border-radius:14px; padding:12px; font-size:11.5px; font-weight:700; text-align:right; color:var(--ink);
+  cursor:pointer; transition:border-color .2s, transform .2s;
+}
+.v2q:hover{border-color:rgba(0,230,255,.5); transform:translateY(-1px);}
+.v2q .qic{width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,230,255,.14); font-size:15px; flex-shrink:0;}
+.v2q small{display:block; font-weight:500; color:var(--ink-dim); font-size:9.5px; margin-top:2px;}
+</style>
+
+<style>
+
+.brand-hero{position:relative; border-radius:26px; padding:20px 16px;
+  background:radial-gradient(ellipse at 50% 18%, rgba(0,230,255,0.12), rgba(0,230,255,0) 72%);
+  box-shadow:0 0 46px -12px rgba(0,230,255,0.18);}
+#vg-lic-overlay{display:none !important;}
+#vg-lic-card,.vg-lic-card{display:none !important;}
+.vg-lic-input,#vg-lic-msg{display:none !important;}
+.scan-hero{position:relative; border-radius:26px; padding:12px 12px; margin-top:14px;
+  background:radial-gradient(ellipse at 50% 40%, rgba(0,245,176,0.13), rgba(0,245,176,0) 78%);
+  box-shadow:0 0 44px -10px rgba(0,245,176,0.20);}
+.pillar-block{position:relative; border-radius:18px; margin-top:10px; padding-left:14px; padding-right:14px;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--pc) 6%, transparent), rgba(255,255,255,0.01) 72%);
+  box-shadow:0 0 30px -14px var(--pc);}
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
 <body>
 
-<div class="mesh-bg">
-  <div class="deco-layer">
-    <span class="deco" style="left:-24px; top:16vh; transform:rotate(-14deg);"><svg width="86" height="80" viewBox="0 0 52 61" fill="none"><path d="M26 2 L50 10 V30 C50 46 39 56 26 60 C13 56 2 46 2 30 V10 Z"/><path d="M26 3 V59" stroke-opacity="0.45"/><circle cx="26" cy="30" r="5.5" fill="rgba(0,230,255,0.16)"/></svg></span>
-    <span class="deco" style="right:-16px; top:9vh; transform:rotate(12deg);"><svg width="78" height="78" viewBox="0 0 40 40" fill="none"><path d="M20 2 L36 12 V28 L20 38 L4 28 V12 Z"/><circle cx="20" cy="20" r="5"/></svg></span>
-    <span class="deco" style="left:4px; top:56vh; transform:rotate(8deg);"><svg width="66" height="66" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="15" stroke-dasharray="5 6"/><circle cx="20" cy="20" r="8"/></svg></span>
-    <span class="deco" style="right:8px; top:40vh; transform:rotate(-10deg);"><svg width="74" height="88" viewBox="0 0 24 28" fill="none"><path d="M5 12 V8 a7 7 0 0 1 14 0 V12" stroke-width="2.4"/><rect x="3" y="12" width="18" height="13" rx="3"/><circle cx="12" cy="18" r="2.4" fill="rgba(0,230,255,0.18)"/></svg></span>
-    <span class="deco" style="left:-10px; bottom:7vh; transform:rotate(-6deg);"><svg width="82" height="82" viewBox="0 0 40 40" fill="none"><rect x="7" y="7" width="26" height="26" rx="6"/><circle cx="20" cy="20" r="8"/><path d="M7 18 H33"/></svg></span>
-    <span class="deco" style="right:-14px; bottom:13vh; transform:rotate(16deg);"><svg width="72" height="68" viewBox="0 0 52 61" fill="none"><path d="M26 2 L50 10 V30 C50 46 39 56 26 60 C13 56 2 46 2 30 V10 Z"/><circle cx="26" cy="30" r="4" fill="rgba(0,230,255,0.18)"/></svg></span>
+<div class="mesh-bg"></div>
+
+<div id="v2Home">
+
+<div class="phone">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <button class="icon-btn" id="v2MenuBtn">☰</button>
+    <div class="topbar-right">
+      <button class="icon-btn" data-goto="ereports">🔔</button>
+      <button class="icon-btn shield-active" data-goto="esensor">🛡️</button>
+    </div>
   </div>
+
+  <!-- V1 STATUS + ANIMATED LOGO + SAME WORDS AS V1 -->
+  <div class="util-row" style="justify-content:center;">
+    <div class="status-chip"><span class="status-dot"></span>يعمل محليًا داخل المتصفح — بلا سيرفرات</div>
+  </div>
+
+  <div class="brand-hero">
+    <div class="logo-stage" style="width:142px; height:142px;">
+      <svg width="104" height="104" viewBox="0 0 104 108" fill="none">
+        <defs>
+          <linearGradient id="v2ShieldGradB" x1="14" y1="6" x2="90" y2="98" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#9AF8FF"/>
+            <stop offset="1" stop-color="#00A8C2"/>
+          </linearGradient>
+          <radialGradient id="v2CoreGlowB" cx="0.5" cy="0.4" r="0.55">
+            <stop offset="0" stop-color="#00E6FF" stop-opacity="0.6"/>
+            <stop offset="1" stop-color="#00E6FF" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="orbit-ring">
+          <ellipse cx="52" cy="54" rx="46" ry="16" stroke="#00E6FF" stroke-width="1" stroke-dasharray="5 7" opacity="0.5" fill="none"/>
+          <ellipse cx="52" cy="54" rx="46" ry="16" stroke="#00E6FF" stroke-width="2.6" stroke-dasharray="1 180" stroke-linecap="round" opacity="0.9" fill="none"/>
+        </g>
+        <circle cx="52" cy="50" r="29" fill="url(#v2CoreGlowB)"/>
+        <g stroke="url(#v2ShieldGradB)" stroke-width="1.4" stroke-linejoin="round">
+          <path d="M52 6 L86 18 V46 C86 70 72 88 52 98 C32 88 18 70 18 46 V18 Z" fill="rgba(0,230,255,0.05)"/>
+          <path d="M52 6 V98" opacity="0.5"/>
+          <path d="M52 6 L86 18 L52 46 Z" fill="rgba(0,230,255,0.10)" opacity="0.8"/>
+          <path d="M52 6 L18 18 L52 46 Z" fill="rgba(0,230,255,0.04)" opacity="0.7"/>
+          <path d="M18 18 L52 46 L33 72 Z" fill="rgba(0,230,255,0.08)" opacity="0.7"/>
+          <path d="M86 18 L52 46 L71 72 Z" fill="rgba(0,230,255,0.03)" opacity="0.7"/>
+          <path d="M33 72 L52 46 L71 72 L52 98 Z" fill="rgba(0,230,255,0.11)" opacity="0.85"/>
+        </g>
+        <path d="M44 49 V43 a8 8 0 0 1 16 0 V49" stroke="#E8FEFF" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        <rect x="40.5" y="49" width="23" height="18.5" rx="3.2" fill="#00E6FF"/>
+        <circle cx="52" cy="57.5" r="2.6" fill="#04141A"/>
+        <g fill="#8FF6FF">
+          <path d="M90 34 L98 38 L91 45 Z" opacity="0.7"/>
+          <path d="M8 60 L15 58 L12.5 67 Z" opacity="0.55"/>
+          <path d="M75 91 L82.5 96 L74.5 99.5 Z" opacity="0.5"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wordmark">
+      <span class="wm-en">VANGUARD <span style="color:#F6FCFD; text-shadow:0 0 20px rgba(255,255,255,0.15);">PRIVACY</span></span>
+      <span class="wm-ar">فانغارد للخصوصية</span>
+      <span class="wm-sub">نظام المؤسسات الأمنية</span>
+      <span class="wm-tag">SECURE · PROTECTED · EVOLVED</span>
+    </div>
+
+    <div class="hero-copy">
+      <h1>راجع أمانك الرقمي في <span>خمس دقائق</span></h1>
+      <p>منظومة أدوات تحميك من الاختراق والتجسس وسرقة البيانات — كل التحليل يحدث على جهازك فقط، بلا تتبّع وبلا سيرفرات خارجية.</p>
+    </div>
+  </div>
+
+  <div class="scan-hero">
+    <div class="fp-ring">
+      <svg width="132" height="132" viewBox="0 0 104 108" fill="none">
+        <defs>
+          <linearGradient id="v2FpGrad" x1="14" y1="8" x2="92" y2="96" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#8FFFD8"/>
+            <stop offset="1" stop-color="#00F5B0"/>
+          </linearGradient>
+          <radialGradient id="v2FpGlow" cx="0.5" cy="0.45" r="0.6">
+            <stop offset="0" stop-color="#00F5B0" stop-opacity="0.5"/>
+            <stop offset="1" stop-color="#00F5B0" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="v2Laser" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#00F5B0" stop-opacity="0"/>
+            <stop offset="0.5" stop-color="#B7FFE6" stop-opacity="0.95"/>
+            <stop offset="1" stop-color="#00F5B0" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="52" cy="50" r="47" fill="url(#v2FpGlow)"/>
+        <g class="orbit-ring">
+          <ellipse cx="52" cy="54" rx="50" ry="16" stroke="#00F5B0" stroke-width="1" stroke-dasharray="4 8" opacity="0.3" fill="none"/>
+          <ellipse cx="52" cy="54" rx="50" ry="16" stroke="#00F5B0" stroke-width="1.7" stroke-dasharray="1 196" stroke-linecap="round" opacity="0.5" fill="none"/>
+        </g>
+        <g class="fp-scanr">
+          <circle cx="52" cy="48" r="46" stroke="#00F5B0" stroke-width="1.1" stroke-dasharray="145 144" stroke-linecap="round" opacity="0.45" fill="none"/>
+        </g>
+        <g class="fp-a" style="transform-origin:52px 54px" fill="none" stroke-linecap="round">
+          <path d="M3 66 A48 44 0 0 1 101 66" stroke="url(#v2FpGrad)" stroke-width="1.3" stroke-dasharray="56 5 124 7"/>
+          <path d="M13 66 A38 35 0 0 1 91 66" stroke="#8FFFD8" stroke-width="1.6" stroke-dasharray="42 4 96 6"/>
+          <path d="M22 66 A29 27 0 0 1 82 66" stroke="url(#v2FpGrad)" stroke-width="1.9" stroke-dasharray="32 4 68 6"/>
+          <path d="M31 66 A20 19 0 0 1 73 66" stroke="#00F5B0" stroke-width="2.1" stroke-dasharray="23 4 44 5"/>
+          <path d="M41 66 A11 12 0 0 1 63 66" stroke="#B7FFE6" stroke-width="1.8" stroke-dasharray="13 4 24 4"/>
+        </g>
+        <g stroke="#00F5B0" fill="none" stroke-linecap="round" opacity="0.85">
+          <path d="M14 88 C30 84 44 74 50 64" stroke-width="1.2" stroke-dasharray="16 4 14 4"/>
+          <path d="M21 96 C36 90 46 80 50 68" stroke-width="1.3" stroke-dasharray="14 4 16 4"/>
+          <path d="M90 88 C74 84 60 74 54 64" stroke-width="1.2" stroke-dasharray="16 4 14 4"/>
+          <path d="M83 96 C68 90 58 80 54 68" stroke-width="1.3" stroke-dasharray="14 4 16 4"/>
+        </g>
+        <circle cx="52" cy="94" r="4" stroke="#B7FFE6" stroke-width="1.7" fill="none"/>
+        <path d="M52 91 V98" stroke="#B7FFE6" stroke-width="1.7" stroke-linecap="round"/>
+        <rect class="fp-laser" x="51.2" y="12" width="1.6" height="92" rx="0.8" fill="url(#v2Laser)"/>
+      </svg>
+    </div>
+
+    <div class="scan-srvs">
+      <button type="button" class="scan-card" data-goto="scanner">
+        <span class="sc-ic">🔗</span>
+        <span class="sc-tx">فحص الروابط<span class="sc-en">LINK CHECK</span></span>
+      </button>
+      <button type="button" class="scan-card" data-goto="scanner">
+        <span class="sc-ic">🌐</span>
+        <span class="sc-tx">فحص المواقع<span class="sc-en">SITE CHECK</span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="pillars">
+
+    <div class="pillar-block" style="--pc:#00E6FF;">
+      <div class="pillar-row">
+        <div class="pillar-badge">
+          <svg width="28" height="28" viewBox="0 0 30 30">
+            <path d="M15 2 L15 28 C9 26 4 21 4 15 V6 Z" fill="none" stroke="#00E6FF" stroke-width="1.3"/>
+            <path d="M15 2 L26 6 V15 C26 21 21 26 15 28 Z" fill="none" stroke="#FF8A3D" stroke-width="1.3"/>
+            <path d="M11 14 V11 a4 4 0 0 1 8 0 V14" stroke="#E8FEFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <rect x="9.5" y="14" width="11" height="8" rx="1.6" fill="#0B0F16" stroke="#8FF6FF" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pillar-info">
+          <span class="p-num">PILLAR I</span>
+          <h3>الهوية والأسرار</h3>
+          <span class="p-en">IDENTITY &amp; SECRETS</span>
+        </div>
+        <div class="pillar-list">
+          <div class="pl-item" data-goto="quiz"><span class="pl-icon">📊</span><span>التقييم الأمني</span></div>
+          <div class="pl-item" data-goto="passwords"><span class="pl-icon">🔑</span><span>مركز كلمات السر</span></div>
+          <div class="pl-item" data-goto="vault"><span class="pl-icon">🔒</span><span>خزنة كلمات السر</span></div>
+          <div class="pl-item" data-goto="media"><span class="pl-icon">🗄️</span><span>خزنة الملفات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-block" style="--pc:#F5B942;">
+      <div class="pillar-row">
+        <div class="pillar-badge">
+          <svg width="28" height="28" viewBox="0 0 30 30">
+            <ellipse cx="15" cy="6" rx="7" ry="2.6" fill="none" stroke="#F5B942" stroke-width="1.2"/>
+            <path d="M8 6 V13 C8 14.4 11.1 15.5 15 15.5 C18.9 15.5 22 14.4 22 13 V6" fill="none" stroke="#F5B942" stroke-width="1.2"/>
+            <path d="M20 16 V19 a3 3 0 0 0 6 0 V16" stroke="#F5B942" stroke-width="1.1" fill="none"/>
+            <rect x="18.5" y="19" width="9" height="6.5" rx="1.3" fill="#F5B942"/>
+            <path d="M4 21 H10 L11.5 27 H2.5 Z" fill="none" stroke="#F5B942" stroke-width="1.1"/>
+            <circle cx="4" cy="28" r="1.1" fill="#F5B942"/>
+            <circle cx="10" cy="28" r="1.1" fill="#F5B942"/>
+          </svg>
+        </div>
+        <div class="pillar-info">
+          <span class="p-num">PILLAR II</span>
+          <h3>مكافحة الاحتيال والاتصالات</h3>
+          <span class="p-en">ANTI-FRAUD &amp; DATA SECURITY</span>
+        </div>
+        <div class="pillar-list">
+          <div class="pl-item" data-goto="scanner"><span class="pl-icon">🔍</span><span>ماسح الروابط والمواقع</span></div>
+          <div class="pl-item" data-goto="deception"><span class="pl-icon">🎭</span><span>درع الخداع والابتزاز</span></div>
+          <div class="pl-item" data-goto="leak"><span class="pl-icon">📊</span><span>كاشف التسريبات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-block" style="--pc:#00F5B0;">
+      <div class="pillar-row">
+        <div class="pillar-badge">
+          <svg width="28" height="28" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="12" fill="none" stroke="#00F5B0" stroke-width="1.3"/>
+            <circle cx="15" cy="15" r="12" fill="none" stroke="#00F5B0" stroke-width="4" stroke-dasharray="5 8" opacity="0.55"/>
+            <path d="M3 15 C6 8 10 5 15 5 M27 15 C24 8 20 5 15 5" stroke="#00F5B0" stroke-width="1.2" fill="none"/>
+            <circle cx="15" cy="15" r="3.4" fill="#00F5B0"/>
+            <circle cx="15" cy="15" r="1.3" fill="#04141A"/>
+          </svg>
+        </div>
+        <div class="pillar-info">
+          <span class="p-num">PILLAR III</span>
+          <h3>خصوصية النظام والمتصفح</h3>
+          <span class="p-en">DEVICE PRIVACY</span>
+        </div>
+        <div class="pillar-list">
+          <div class="pl-item" data-goto="tracking"><span class="pl-icon">🚫</span><span>درع التتبع والبصمة</span></div>
+          <div class="pl-item" data-goto="permissions"><span class="pl-icon">🛡️</span><span>رادار الأذونات</span></div>
+          <div class="pl-item" data-goto="recovery"><span class="pl-icon">💬</span><span>استرجاع الحسابات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-block" style="--pc:#8B5CF6;">
+      <div class="pillar-row">
+        <div class="pillar-badge">
+          <svg width="28" height="28" viewBox="0 0 30 30">
+            <path d="M15 2 L26 6 V15 C26 21 21 26 15 28 C9 26 4 21 4 15 V6 Z" fill="none" stroke="#8B5CF6" stroke-width="1.3"/>
+            <path d="M15 10 C12 10 10 12.2 10 15 C10 18.5 15 22.5 15 22.5 C15 22.5 20 18.5 20 15 C20 12.2 18 10 15 10 Z" fill="#8B5CF6"/>
+            <circle cx="15" cy="15" r="1.8" fill="#04141A"/>
+          </svg>
+        </div>
+        <div class="pillar-info">
+          <span class="p-num">PILLAR IV</span>
+          <h3>الحماية الميدانية والمكانية</h3>
+          <span class="p-en">FIELD &amp; LOCATION PROTECTION</span>
+        </div>
+        <div class="pillar-list">
+          <div class="pl-item" data-goto="wifi"><span class="pl-icon">🌐</span><span>مدرّب الواي فاي العام</span></div>
+          <div class="pl-item" data-goto="radar"><span class="pl-icon">📍</span><span>رادار الفحص الاستخباري</span></div>
+          <div class="pl-item" data-goto="family"><span class="pl-icon">👨‍👩‍👧</span><span>فحص الأمان العائلي</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-block" style="--pc:#E85FD1;">
+      <div class="pillar-row">
+        <div class="pillar-badge">
+          <svg width="28" height="28" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="4" fill="#E85FD1"/>
+            <g stroke="#E85FD1" stroke-width="1.3">
+              <line x1="15" y1="15" x2="15" y2="4"/>
+              <line x1="15" y1="15" x2="15" y2="26"/>
+              <line x1="15" y1="15" x2="4" y2="15"/>
+              <line x1="15" y1="15" x2="26" y2="15"/>
+              <line x1="15" y1="15" x2="7" y2="7"/>
+              <line x1="15" y1="15" x2="23" y2="23"/>
+            </g>
+            <circle cx="15" cy="4" r="1.8" fill="#E85FD1"/>
+            <circle cx="15" cy="26" r="1.8" fill="#E85FD1"/>
+            <circle cx="4" cy="15" r="1.8" fill="#E85FD1"/>
+            <circle cx="26" cy="15" r="1.8" fill="#E85FD1"/>
+          </svg>
+        </div>
+        <div class="pillar-info">
+          <span class="p-num">PILLAR V</span>
+          <h3>القيادة والتدقيق</h3>
+          <span class="p-en">COMMAND &amp; AUDIT</span>
+        </div>
+        <div class="pillar-list">
+          <div class="pl-item" data-goto="centcom"><span class="pl-icon">🗺️</span><span>مركز القيادة</span></div>
+          <div class="pl-item" data-goto="esensor"><span class="pl-icon">📟</span><span>المستشعر الدائم</span></div>
+          <div class="pl-item" data-goto="ereports"><span class="pl-icon">📜</span><span>تقارير المؤسسة</span></div>
+          <div class="pl-item" data-goto="checklist"><span class="pl-icon">✅</span><span>القائمة الشاملة</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM ACTIONS -->
+  <div class="bottom-actions">
+    <button class="wide-btn" data-goto="checklist">📋 القائمة الشاملة</button>
+    <button class="wide-btn" data-goto="radar">📡 رادار الفحص الذكي</button>
+  </div>
+
+  <div class="sparkle">✦</div>
+</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-item" data-goto="spy"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M12 3.5 A8.5 8.5 0 0 1 20.5 12" opacity="0.5"/><path d="M12 7.5 A4.5 4.5 0 0 1 16.5 12" opacity="0.8"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><path d="M12 12 L20 8.2"/></svg></span>التجسس</div>
+  <div class="bn-item" data-goto="camx"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M4 8.5 h3.1 l1.6-2.2 h6.6 L16.9 8.5 H20 a1.5 1.5 0 0 1 1.5 1.5 V16.5 a1.5 1.5 0 0 1 -1.5 1.5 H4 A1.5 1.5 0 0 1 2.5 16.5 V10 A1.5 1.5 0 0 1 4 8.5 Z"/><circle cx="12" cy="13" r="3.1"/></svg></span>كاميرات</div>
+  <button class="fab" id="v2Fab" data-goto="esensor">
+    <svg viewBox="0 0 52 61" width="32" height="38" fill="none">
+      <path d="M26 2 L50 10 V30 C50 46 39 56 26 60 C13 56 2 46 2 30 V10 Z" stroke="#00E6FF" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M26 3 V59" stroke="#00E6FF" stroke-width="1" stroke-opacity="0.4"/>
+      <circle cx="26" cy="30" r="5.5" fill="rgba(0,230,255,0.28)"/>
+    </svg>
+  </button>
+  <div class="bn-item" data-goto="centcom"><span class="bn-icon"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg></span>القيادة</div>
+  <div class="bn-item" data-goto="eadmin"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M4 6 H20" opacity="0.35"/><circle cx="9.5" cy="6" r="2.3"/><path d="M4 12 H20" opacity="0.35"/><circle cx="15" cy="12" r="2.3"/><path d="M4 18 H20" opacity="0.35"/><circle cx="7" cy="18" r="2.3"/></svg></span>الإعدادات</div>
+</nav>
+
+<!-- QUICK SHEET -->
+<div id="v2SheetBg"></div>
+<section id="v2Sheet" dir="rtl">
+  <h3>تشغيل الضغطة الواحدة</h3>
+  <div class="qs-sub">أدواتك اليومية بضغطة واحدة — كلها تعمل فعلًا على جهازك</div>
+  <div class="v2qs">
+    <button class="v2q" data-q="gen"><span class="qic">🎲</span><span>مولّد كلمة سر<small>كلمة سر فائقة القوة فورًا</small></span></button>
+    <button class="v2q" data-q="check"><span class="qic">⚖️</span><span>فحص قوة كلمة سر<small>قياس فعلي لقوتها</small></span></button>
+    <button class="v2q" data-q="scan"><span class="qic">🔍</span><span>ماسح الروابط<small>فحص رابط أو موقع</small></span></button>
+    <button class="v2q" data-q="track"><span class="qic">🚫</span><span>درع التتبع<small>كشف تتبعك وبصمتك</small></span></button>
+    <button class="v2q" data-q="perm"><span class="qic">🛡️</span><span>رادار الأذونات<small>فحص الكاميرا والميكروفون</small></span></button>
+    <button class="v2q" data-q="radar"><span class="qic">📡</span><span>ماسح الرادار<small>الماسح الأمني الشامل للجهاز</small></span></button>
+    <button class="v2q" data-q="quiz"><span class="qic">📊</span><span>التقييم الأمني<small>ابدأ الاختبار من جديد</small></span></button>
+    <button class="v2q" data-q="vault"><span class="qic">🔒</span><span>خزنة الأسرار<small>افتح الخزنة المشفَّرة</small></span></button>
+    <button class="v2q" data-q="sensor"><span class="qic">📟</span><span>المستشعر الفوري<small>تشغيل الرصد الحي الآن</small></span></button>
+    <button class="v2q" data-q="centcom"><span class="qic">🗺️</span><span>مركز القيادة<small>الوضع العام للجهاز</small></span></button>
+    <button class="v2q" data-q="repo"><span class="qic">📜</span><span>تقرير الجهاز<small>توليد التقرير الحقيقي</small></span></button>
+    <button class="v2q" data-q="seal"><span class="qic">🏷️</span><span>توليد رمز النشر<small>تحويل أجهزة الشركة</small></span></button>
+    <button class="v2q" data-q="kit"><span class="qic">📦</span><span>حزمة التحويل<small>تنزيل ملف الدمج للوحدات</small></span></button>
+  </div>
+</section>
+
+
+
+<div class="mesh-bg">
+  
   <div class="blur-layer"></div>
   <div class="grid-layer"></div>
   <div class="bottom-glow-layer"></div>
@@ -1376,14 +2097,14 @@
       </div>
 
       <div class="wordmark">
-        <span class="wm-en">VANGUARD <span style="color:#F6FCFD; text-shadow:0 0 20px rgba(255,255,255,0.15);">PRIVACY</span></span>
-        <span class="wm-ar">فانغارد للخصوصية</span>
-        <span class="wm-tag">SECURE · PROTECTED · EVOLVED</span>
+        <span class="wm-en">VANGUARD <span style="color:#F6FCFD; text-shadow:0 0 20px rgba(255,255,255,0.15);">ENTERPRISE</span></span>
+        <span class="wm-ar">فانغارد حارس المؤسسات</span>
+        <span class="wm-tag">ALWAYS-ON SENSOR · INSTANT ALERTS · LOCAL-FIRST</span>
       </div>
 
       <div class="hero-copy">
-        <h1>راجع أمانك الرقمي في <span>خمس دقائق</span></h1>
-        <p>منظومة أدوات تحميك من الاختراق والتجسس وسرقة البيانات — كل التحليل يحدث على جهازك فقط، بلا تتبّع وبلا سيرفرات خارجية.</p>
+        <h1>حماية أجهزة مؤسستك في <span>كل لحظة</span></h1>
+        <p>نسخة المؤسسات من منظومة فانغارد — أدوات فحص حقيقية كاملة + مستشعر دائم يرصد تغيّرات الجهاز فعليًا ويُسجّل الأحداث الحقيقية. كل التحليل محلي على الجهاز: صفر سيرفرات، صفر تتبّع.</p>
       </div>
 
       <div class="tabs-center">
@@ -1433,13 +2154,347 @@
             </nav>
           </div>
 
+          <div class="pillar-grp ep-pillar">
+            <div class="tabs-pillar"><span class="tpillar-en">PILLAR · ENTERPRISE</span><span class="tpillar-lbl">قيادة المؤسسة والمراقبة الحية</span><span class="tpillar-en">COMMAND</span></div>
+            <nav class="tabs">
+              <button data-panel="centcom">مركز القيادة</button>
+              <button data-panel="esensor">المستشعر الدائم</button>
+              <button data-panel="ereports">تقارير المؤسسة</button>
+              <button data-panel="eadmin">إدارة المؤسسة</button>
+            </nav>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </header>
+<div class="part p1"></div><div class="part p2"></div><div class="part p3"></div><div class="part p4"></div><div class="part p5"></div><div class="part p6"></div>
+<div class="aurora a1"></div><div class="aurora a2"></div>
 
+
+<div id="v2Tools">
+  <div class="v2-toolsbar">
+    <button class="v2-back" id="v2Back">🏠 القائمة الرئيسية</button>
+    <div class="v2-tb-brand"><span class="c1">VANGUARD</span> ENTERPRISE</div>
+  </div>
+  <div class="v2-divider"><span>··· أدوات فانغارد الكاملة ···</span></div>
+  <div class="v2-hint">كل أدواتك الحقيقية تعمل هنا — فحص فعلي، خزائن مشفرة، مستشعر دائم، وتقارير.</div>
 <main class="wrap">
+
+  <!-- ================= ENTERPRISE: COMMAND CENTER (مركز القيادة) ================= -->
+  <section class="panel" id="panel-centcom">
+    <div class="card">
+      <div class="eyebrow">Enterprise_CentCom.قيادة_المؤسسة</div>
+      <h2 class="section-title">مركز القيادة — الوضع العام</h2>
+      <p class="section-sub">تجميع من المستشعر الدائم: قياسات حقيقية تُؤخذ من هذا الجهاز محليًا ولا تُرسل إلى أي مكان.</p>
+      <div style="margin:0 0 14px;padding:9px 12px;border:1px solid rgba(0,230,255,.18);border-radius:10px;background:rgba(0,230,255,.04);font-size:11.5px;color:var(--ink-dim);" id="epManaged">—</div>
+      <div class="ep-grid" style="margin-top:16px;">
+        <div class="ep-kpi danger"><div class="v" id="epKpiRisk">—</div><div class="l">نسبة الخطورة الحالية</div></div>
+        <div class="ep-kpi"><div class="v" id="epKpiPerm">—</div><div class="l">أذونات حساسة محظورة</div></div>
+        <div class="ep-kpi"><div class="v" id="epKpiInc">0</div><div class="l">أحداث حرجة مرصودة</div></div>
+        <div class="ep-kpi"><div class="v" id="epKpiScan">0</div><div class="l">جولات فحص فعلية</div></div>
+      </div>
+      <div class="ep-sec">FLUX · آخر الأحداث الحقيقية</div>
+      <div id="epCentFeed"></div>
+      <div class="ep-sec">WEEK · نشاط الرصد آخر 7 أيام</div>
+      <div class="ep-bars" id="epWeek"></div>
+      <div class="ep-day"><span>ق6</span><span>ق5</span><span>ق4</span><span>ق3</span><span>ق2</span><span>ق1</span><span>اليوم</span></div>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE: ALWAYS-ON SENSOR (المستشعر الدائم) ================= -->
+  <section class="panel" id="panel-esensor">
+    <div class="card">
+      <div class="eyebrow">Enterprise_Sensor.المستشعر_الدائم</div>
+      <h2 class="section-title">المستشعر الدائم — الرصد الفعلي</h2>
+      <p class="section-sub">يقرأ حالة الجهاز الحقيقية دوريًا، يخزّن خط الأساس، ويكشف أي تغيّر فعلي في الأذونات أو الأجهزة أو الشبكة أو التخزين.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 4px;">
+        <span class="ep-live"><span class="d"></span><span id="epLiveTxt">يستعد...</span></span>
+        <button class="btn small ghost" onclick="epRunNow()">افحص الآن</button>
+      </div>
+      <div class="ep-row"><span class="k">أذونات حساسة (كاميرا / ميك / موقع)</span><span class="v" id="epSensPerms">—</span></div>
+      <div class="ep-row"><span class="k">أجهزة الوسائط</span><span class="v" id="epDevs">—</span></div>
+      <div class="ep-row"><span class="k">الاتصال بالشبكة</span><span class="v" id="epOnline">—</span></div>
+      <div class="ep-row"><span class="k">البطارية</span><span class="v" id="epBat">—</span></div>
+      <div class="ep-row"><span class="k">التخزين المستخدم</span><span class="v" id="epStore">—</span></div>
+      <div class="ep-row"><span class="k">سياق آمن (HTTPS / ملف محلي)</span><span class="v" id="epSec">—</span></div>
+      <div class="ep-row"><span class="k">ملفات الارتباط / لا تتتبع</span><span class="v" id="epDnt">—</span></div>
+      <div class="ep-fixrow">
+        <button class="ep-fixbtn" id="epFixAll" onclick="epFix('all')">🛡️ تحصين شامل — بضغطة واحدة</button>
+        <span class="ep-fixst" id="epFixAllSt">يُفعّل كل الحلول أدناه معًا في لحظة</span>
+      </div>
+      <div class="ep-sec" id="epSensorState">المستشعر يستعد...</div>
+      <div class="ep-sec">INTERVAL · دورية الرصد الآلي</div>
+      <div class="toggle-row">
+        <span>تشغيل الرصد الدائم</span>
+        <label class="switch"><input type="checkbox" id="epSensorOn" checked><span class="slider-toggle"></span></label>
+      </div>
+      <div style="margin-top:10px;">
+        <select id="epLoopSel" class="ep-sel">
+          <option value="15">كل 15 ثانية</option>
+          <option value="30">كل 30 ثانية</option>
+          <option value="60" selected>كل دقيقة</option>
+          <option value="120">كل دقيقتين</option>
+          <option value="300">كل 5 دقائق</option>
+        </select>
+      </div>
+      <button class="btn" style="margin-top:14px;width:100%;" onclick="epSaveSettings()">حفظ إعدادات الرصد</button>
+
+      <p class="ep-sec">APPS · البحث في التطبيقات</p>
+      <div class="ep-mod">
+        <div class="ep-mod-head">
+          <span class="t"><span class="ic">📱</span>تعرّض تطبيقاتك</span>
+          <span class="ep-badge warn" id="epABadge">يحلّل…</span>
+        </div>
+        <div class="ep-row"><span class="k">مؤشرات قراءة بياناتك المتاحة لأي تطبيق</span><span class="v" id="epASigs">—</span></div>
+        <div class="ep-row"><span class="k">أجهزة كاميرا / ميكروفون / سماعة</span><span class="v" id="epADevs">—</span></div>
+        <div class="ep-row"><span class="k">أذونات النظام الممنوحة</span><span class="v" id="epAPerms">—</span></div>
+        <div class="ep-row"><span class="k">وحدات المؤسسة المراقبة</span><span class="v" id="epASeats">—</span></div>
+        <div class="ep-fixrow">
+          <button class="ep-fixbtn" id="epFixApps" onclick="epFix('media')">🛡️ إخفاء الأجهزة الحساسة</button>
+          <span class="ep-fixst" id="epFixAppsSt">—</span>
+        </div>
+      </div>
+
+      <p class="ep-sec">WEB · حماية وأنت على النت</p>
+      <div class="ep-mod">
+        <div class="ep-mod-head">
+          <span class="t"><span class="ic">🌐</span>هوية موقع مفتوح الآن</span>
+          <span class="ep-badge warn" id="epWBadge">—</span>
+        </div>
+        <div class="ep-row"><span class="k">بصمة المتصفح (كلما كبرت، سهُل تتبّع ملفك)</span><span class="v" id="epWFp">—</span></div>
+        <div class="ep-row"><span class="k">المنطقة الزمنية</span><span class="v" id="epWTz">—</span></div>
+        <div class="ep-row"><span class="k">لا تتتبع / ملفات الارتباط</span><span class="v" id="epWDnt">—</span></div>
+        <div style="font-size:10.5px;color:var(--ink-mute);margin-bottom:6px;font-family:var(--mono);">ما يمكن لأي موقع أو تطبيق قراءته من جهازك الآن</div>
+        <div id="epWLeaks" style="display:flex;flex-wrap:wrap;gap:6px;padding-bottom:6px;">—</div>
+        <div class="ep-fixrow">
+          <button class="ep-fixbtn" id="epFixWeb" onclick="epFix('fp')">🛡️ تفعيل دروع الخصوصية</button>
+          <span class="ep-fixst" id="epFixWebSt">—</span>
+        </div>
+      </div>
+
+      <p class="ep-sec">MALWARE · الفيروسات والتهديدات</p>
+      <div class="ep-mod">
+        <div class="ep-mod-head">
+          <span class="t"><span class="ic">🛡️</span>رصد البرمجيات الخبيثة</span>
+          <span class="ep-badge warn" id="epMBadge">—</span>
+        </div>
+        <div class="ep-row"><span class="k">جدار الحماية المحلي</span><span class="v" id="epMSure">—</span></div>
+        <div class="ep-row"><span class="k">مؤشرات أتمتة / حقن</span><span class="v" id="epMAuto">—</span></div>
+        <div class="ep-row"><span class="k">سياق تشفير آمن</span><span class="v" id="epMSec">—</span></div>
+        <div class="ep-row"><span class="k">مساحة إشعارات مخترقة</span><span class="v" id="epMNot">—</span></div>
+        <div class="ep-row"><span class="k">تخزين محلي</span><span class="v" id="epMLs">—</span></div>
+        <div class="ep-fixrow">
+          <button class="ep-fixbtn" id="epFixMal" onclick="epFix('jail')">🧱 رفع جدار الحماية</button>
+          <span class="ep-fixst" id="epFixMalSt">—</span>
+        </div>
+      </div>
+
+      <div class="ep-notify-card">
+        <div class="toggle-row">
+          <span>🔔 إشعار فوري عند اكتشاف تغيّر أو تهديد</span>
+          <label class="switch"><input type="checkbox" id="epNotifOn"><span class="slider-toggle"></span></label>
+        </div>
+        <div id="epNotifState" style="font-size:11px;color:var(--ink-mute);line-height:1.7;margin-top:6px;">—</div>
+        <button class="btn sm ghost" style="margin-top:10px;width:100%;" onclick="epTestNotify()">تجربة الإشعار الآن</button>
+      </div>
+
+      <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:12px;">أزرار «الحل» تطبّق دروعًا حقيقية داخل هذه النسخة: إخفاء أسماء الأجهزة، إخفاء بصمة المتصفح، قفل WebRTC وعلامات الأتمتة. أذونات نظام أندرويد نفسها لا يمكن تغييرها من داخل صفحة ويب — المستشعر يحمي ما يعمل داخل هذه الصفحة، ويوصلك لتقليل أي تعرّض في قراءاتها.</p>
+      <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:12px;">دقة التنبيه تعتمد على أذونات المتصفح التي يسمح بها المستخدم على هذا الجهاز. كل قياس يُسجَّل في السجل المحلي.</p>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE: COUNTER-SPY (مكافحة التجسس الميداني) ================= -->
+  <section class="panel" id="panel-spy">
+    <div class="card">
+      <div class="eyebrow">FieldOps.CounterSpy</div>
+      <h2 class="section-title">مكافحة التجسس — مسح الأجهزة</h2>
+      <p class="section-sub">كاشف ميداني لأجهزة التنصت والبث المجاور: راديو النطاق، انعكاس الميكروفون المفتوح، ومسح شبكة الواي فاي مباشرة.</p>
+
+      <div class="ops-radar">
+        <span class="rr rr1"></span><span class="rr rr2"></span><span class="rr rr3"></span>
+        <div class="ops-core">📡</div>
+      </div>
+
+      <p class="ep-sec"><span class="dot"></span>RADIO · ماسح الطيف الكهرومغناطيسي (EMF → الحساس الكهربي)</p>
+      <div class="spy-radio">
+        <div class="spy-reel">
+          <span class="spy-freq" id="spyFreq">—</span>
+          <span class="spy-unit">التردد الرائد · قراءة حية</span>
+        </div>
+        <div class="sq-status" id="spySquelch">الرصد متوقف</div>
+        <div class="spy-meter"><div class="spy-meter-fill" id="spyMeterFill"></div></div>
+        <div class="ep-row"><span class="k">شدة الحقل الكهربي (8كيلوهرتز+)</span><span class="v" id="spySq">—</span></div>
+        <div class="spy-actions">
+          <button class="btn sm" style="flex:1;" onclick="spyRadioStart()">تشغيل ماسح الطيف</button>
+          <button class="btn sm ghost" style="flex:1;" onclick="spyRadioStop()">إيقاف</button>
+        </div>
+        <div class="spy-readout" id="spyReadout">الحساس الكهربي بيلتقط الحقول من الأجهزة الناشطة قريب جدًا، والماسح بيحلل الطيف حيًا: التردد الرائد الحقيقي + نمط النبض المتكرر (TDMA) + كثافة الحمل فوق 8 كيلوهرتز. افحص في هدوء وقرّب من أي جسم مشكوك فيه بالتتابع.</div>
+        <div class="ctl-row" style="margin-top:10px;"><label>عتبة كشف الموجة</label><input type="range" id="rfSensR" min="20" max="100" value="60"><span class="ctl-val" id="rfSensV">60</span></div>
+      </div>
+
+      <p class="ep-sec"><span class="dot"></span>ECHO · فحص الميكروفون المفتوح (استجابة انعكاسية)</p>
+      <div class="spy-echo">
+        <div class="ep-row"><span class="k">النطاق يبعث نغمة ويستمع لانعكاسها</span><span class="v" id="spyEchoRes">معلق</span></div>
+        <button class="btn sm" style="width:100%;margin-top:10px;" onclick="spyEchoRun()">تشغيل اختبار الانعكاس</button>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:10px;">جرّبه في هدوء: لو فيه جهاز تسجيل ناشط بميكروفون مفتوح حواليك، النغمة بتعمل ارتداد يظهر في القراءة.</p>
+      </div>
+
+      <p class="ep-sec"><span class="dot"></span>WIFI · My Wi-Fi — من المتصل بأنترنتك</p>
+      <div class="mw-box">
+        <div class="ep-row"><span class="k">الحالة</span><span class="v" id="mwState">جاهز للمسح</span></div>
+        <div class="mw-bar"><div class="mw-fill" id="mwFill"></div></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn sm" style="flex:1;" id="mwBtn" onclick="mwScan()">مسح الشبكة الآن</button>
+          <button class="btn small ghost" style="flex:1;" onclick="mwStop()">إيقاف</button>
+        </div>
+        <div class="mw-list" id="mwList"></div>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:10px;">الماسح يفتش نطاقات الشبكة المحلية عن منافذ كاميرات وأجهزة بثّ مفتوحة (حوالي دقيقة). أي جهاز «نقط» يعني جهازًا يعمل على الشبكة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE: HIDDEN CAMERA (كشف الكاميرات الخفية) ================= -->
+  <section class="panel" id="panel-camx">
+    <div class="card">
+      <div class="eyebrow">FieldOps.HiddenCam</div>
+      <h2 class="section-title">كشف الكاميرات الخفية</h2>
+      <p class="section-sub">منظومة فحص ميداني خاصة بفانغارد: مستشعر القرب الكهرومغناطيسي المعاير، والماسح البصري لنقاط التوهج تحت الحمراء مع تأكيد زمني.</p>
+
+      <div class="cam-stage" id="camStage">
+        <video id="camFeed" autoplay playsinline muted></video>
+        <canvas id="camCanvas" width="320" height="240"></canvas>
+        <div class="cam-sweep" id="camSweep">المسح متوقف</div>
+        <div class="cam-cross" id="camHot0" style="opacity:0;"></div>
+        <div class="cam-cross" id="camHot1" style="opacity:0;"></div>
+        <div class="cam-cross" id="camHot2" style="opacity:0;"></div>
+        <div class="cam-cross" id="camHot3" style="opacity:0;"></div>
+      </div>
+      <div class="cam-verd">
+        <span id="camMode">١: مستشعر القرب الكهرومغناطيسي</span>
+        <span id="camCount">توهج: 0</span>
+      </div>
+      <div class="ctl-toolbar">
+        <button class="btn sm ghost nt-btn" id="camNightBtn" data-on="0" onclick="toggleNight()">🌙 وضع الفحص الليلي</button>
+        <span class="nt-chip" id="camChip">جاهز للفحص</span>
+      </div>
+      <details class="proctl">
+        <summary>⚙ إعدادات الحساسية — وحدة الفحص الميداني</summary>
+        <div class="ctl-row"><label>حساسية القرب (EM)</label><input type="range" id="emSensR" min="20" max="100" value="60"><span class="ctl-val" id="emSensV">60</span></div>
+        <div class="ctl-row"><label>دقة نقاط التوهج (IR)</label><input type="range" id="irSensR" min="20" max="100" value="55"><span class="ctl-val" id="irSensV">55</span></div>
+        <button class="btn small ghost proreset" onclick="resetSens()">استعادة العتبات الافتراضية</button>
+      </details>
+      <div style="display:flex;gap:8px;">
+        <button class="btn sm" style="flex:1;background:none;border:1px solid #00E6FF;color:#00E6FF;" onclick="camStart('em')">📶 مستشعر القرب (EMF)</button>
+        <button class="btn sm ghost" style="flex:1;" onclick="camStart('ir')">🌡️ كاشف التوهج (IR)</button>
+        <button class="btn small ghost" style="flex:1;" onclick="camTorch()">🔦 لمبة IR</button>
+      </div>
+      <button class="btn small ghost" style="width:100%;margin-top:8px;" onclick="camStop()">إيقاف الماسح</button>
+
+      <p class="ep-sec"><span class="dot"></span>EM · مستشعر القرب الكهرومغناطيسي المعاير</p>
+      <div class="em-box">
+        <div class="ep-row"><span class="k">مؤشر القرب الكهرومغناطيسي</span><span class="v" style="color:#00E6FF;">مغلق</span></div>
+        <div class="em-gauge" id="emGaugeWrap">
+          <svg viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="emGrad" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0" stop-color="#00E6FF"/>
+                <stop offset="0.55" stop-color="#FFC24B"/>
+                <stop offset="1" stop-color="#FF5C5C"/>
+              </linearGradient>
+            </defs>
+            <path class="emg-base" d="M60 14 A46 46 0 1 1 59.999 14"/>
+            <path class="emg-arc" id="emGaugeArc" d="M60 14 A46 46 0 1 1 59.999 14" stroke="url(#emGrad)"/>
+            <g id="emgTicks"></g>
+          </svg>
+          <div class="emg-num"><span id="emGaugeVal">0%</span><small>قرب EM</small></div>
+        </div>
+        <div class="ep-row"><span class="k">بوصلة المغناطيسية الحية</span><span class="v" id="emCompass">—</span></div>
+        <div class="sq-status" id="emState">المسح متوقف</div>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:10px;">الماسح يعاير نفسه في أول ٤ ثوانٍ (ثبّت الهاتف في مكان بعيد عن الأجهزة)، ثم قرّب ببطء من أي جسم مشكوك فيه. الإشارة تجمع: انحراف بوصلة المغناطيسية + نبض تذبذب الصورة. نظام الحارس الحركي يهمّل القياسات وقت الحركة السريعة ويرفض الإنذار إلا وأنت ثابت فوق الهدف — دي ضد «الإنذار الكاذب العرضي».</p>
+      </div>
+
+      <p class="ep-sec"><span class="dot"></span>IR · الماسح البصري لنقاط التوهج</p>
+      <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:6px;">الكاشف يعلّم فقط على <b>نقطة توهج صغيرة أشد إضاءة من محيطها بشكل غير طبيعي</b> ويستمر في نفس الموضع أكثر من لحظة (ربط الزمني) — مش أي سطوع. عدسات الكاميرات الليلية بتعكس توهج أبيض/بنفسجي. نقطة ظهرت: ثبّت ٣ ثوانٍ فوقها؛ لسه ثابتة = قرينة، شغّل لمبة IR للتأكيد النهائي.</p>
+      <p style="color:var(--ink-mute);font-size:11.5px;line-height:1.8;margin-top:12px;border-top:1px dashed rgba(255,255,255,.09);padding-top:10px;"><b style="color:var(--cyan);">أماكن الاختباء الشائعة:</b> أجهزة الإنذار، شواحن الهاتف، المصابيح والساعات، إطارات الصور، المكيفات، وموزعات الدخان. عند الشك: افصل التيار، وانقل بمعية، ثم افحص باللمبة.</p>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE: REPORTS (تقارير المؤسسة) ================= -->
+  <section class="panel" id="panel-ereports">
+    <div class="card">
+      <div class="eyebrow">Enterprise_Reports.تقارير_المؤسسة</div>
+      <h2 class="section-title">تقارير المؤسسة</h2>
+      <p class="section-sub">تقرير مبني من قياسات المستشعر الفعلية فقط — قابل للنسخ والطباعة والمشاركة مع الإدارة.</p>
+      <div class="ep-grid" style="margin-top:14px;">
+        <div class="ep-kpi"><div class="v" id="epRScore">—</div><div class="l">صحة الجهاز الآن</div></div>
+        <div class="ep-kpi"><div class="v" id="epRDev">0</div><div class="l">مقاعد مسجّلة</div></div>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="ep-row"><span class="k">تقرير عن</span><span class="v" id="epRepTitle">تقرير حالة الجهاز</span></div>
+        <div class="ep-row"><span class="k">تاريخ الإصدار</span><span class="v" id="epRepDate">—</span></div>
+        <div class="ep-row"><span class="k">جولات فحص فعلية</span><span class="v" id="epRScan">0</span></div>
+        <div class="ep-row"><span class="k">أحداث حرجة/متوسطة مرصودة</span><span class="v" id="epRInc">0</span></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;">
+        <button class="btn" style="flex:1;" onclick="epGenReport()">توليد التقرير</button>
+        <button class="btn small ghost" onclick="epCopyReport()">نسخ</button>
+        <button class="btn small ghost" onclick="window.print()">طباعة</button>
+      </div>
+      <pre class="ep-report" id="epRepOut"></pre>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE: ADMIN (إدارة المؤسسة) ================= -->
+  <section class="panel" id="panel-eadmin">
+    <div class="grid-2">
+      <div class="card">
+        <div class="eyebrow">Enterprise_Admin.بيانات_المؤسسة</div>
+        <h2 class="section-title">بيانات المؤسسة</h2>
+        <p class="section-sub">تُحفظ محليًا داخل متصفحك فقط وتظهر في التقرير.</p>
+        <label class="field-label">اسم المؤسسة</label>
+        <input type="text" id="epCoName" class="ep-text" placeholder="اسم المؤسسة / القسم">
+        <label class="field-label" style="margin-top:12px;">القطاع</label>
+        <input type="text" id="epCoInd" class="ep-text" placeholder="القطاع (أمن، تقنية، خدمات...)">
+        <button class="btn" style="margin-top:16px;width:100%;" onclick="epSaveCo()">حفظ البيانات</button>
+        <div class="ep-sec">غرفة_التحكم.الوصول</div>
+        <button class="btn ghost sm" style="width:100%;" id="epPinBtn" onclick="epSetPin()">تفعيل رقم PIN لحماية البيانات</button>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:10px;">رقم PIN يُشترط قبل أي تصدير أو حذف كامل لبيانات المؤسسة.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Enterprise_Admin.Seats</div>
+        <h2 class="section-title">مقاعد الأجهزة</h2>
+        <p class="section-sub">الجهاز الذي يعمل عليه الملف يُسجَّل تلقائيًا. أضف مقاعد للمتابعة اليدوية.</p>
+        <div id="epSeats" style="margin-bottom:10px;"></div>
+        <input type="text" id="epSeatName" class="ep-text" placeholder="اسم الجهاز / المقعد">
+        <input type="text" id="epSeatRole" class="ep-text" style="margin-top:8px;" placeholder="الدور (اختياري)">
+        <button class="btn small ghost" style="margin-top:10px;width:100%;" onclick="epAddSeat()">تسجيل مقعد</button>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Enterprise_Admin.Backup</div>
+        <h2 class="section-title">نسخ وبيانات</h2>
+        <p class="section-sub">تصدير واستعادة كل بيانات المؤسسة (الإعدادات، الخط الأساسي، السجل، الأحداث، المقاعد).</p>
+        <button class="btn sm" style="width:100%;" onclick="epExport()">تصدير نسخة كاملة</button>
+        <label style="display:block;margin-top:10px;cursor:pointer;">
+          <span class="btn sm ghost" style="width:100%;display:block;text-align:center;">استعادة نسخة محفوظة</span>
+          <input type="file" accept=".json,application/json" style="display:none;" onchange="epImport(this)">
+        </label>
+        <button class="btn sm danger" style="width:100%;margin-top:10px;" onclick="epWipe()">حذف كل بيانات المؤسسة</button>
+        </div>
+      <div class="card">
+        <div class="eyebrow">Enterprise_Admin.Deploy</div>
+        <h2 class="section-title">التحويل والنشر — بضغطة واحدة</h2>
+        <p class="section-sub">ولّد رمز النشر وحزمة تحويل بملف واحد: أي كمبيوتر يفتح الحزمة يتحوّل فورًا إلى وحدة تابعة للمؤسسة.</p>
+        <div class="ep-sec">SEAL · رمز نشر المؤسسة</div>
+        <div class="ep-row"><span class="k">رمز النشر</span><span class="v" id="epSeal" style="letter-spacing:1px;">—</span></div>
+        <div class="ep-row"><span class="k">أجهزة تحوّلت ومسجّلة</span><span class="v" id="epMemberCt">0</span></div>
+        <button class="btn" style="width:100%;margin-top:8px;" onclick="epGenSeal()">توليد رمز النشر</button>
+        <button class="btn sm" style="width:100%;margin-top:8px;" onclick="epDownloadKit()">تنزيل حزمة التحويل (ملف واحد)</button>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:12px;">الحزمة تُفعِّل النظام وتُرقيّه إلى وحدة تحت «<span id="epSealOrg" style="color:var(--cyan);">—</span>» دون خادم مركزي. كل جهاز يعمل محليًا ويولّد تقريره. التركيب المركزي عبر شبكة المؤسسة متاح في النسخ المرخّصة.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ================= QUIZ PANEL ================= -->
   <section class="panel active" id="panel-quiz">
@@ -2175,9 +3230,12 @@
     <path class="ct-shield d2" d="M120 334 L128 338 V344 C128 348 124 351 120 353 C116 351 112 348 112 344 V338 Z"/>
   </svg>
   <div class="cf-body">
-    VANGUARD PRIVACY — لا تجمع أو ترسل أي بيانات. كل التحليل يتم داخل متصفحك فقط.
+    VANGUARD ENTERPRISE — نسخة المؤسسات. كل الفحص محلي على الجهاز: صفر سيرفرات، صفر تتبّع.
   </div>
 </footer>
+
+
+</div>
 
 <script>
 /* ============ CUSTOM CURSOR ============ */
@@ -5270,8 +6328,49 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 
   window.VG_NOTICES = VG_NOTICES;
 
+  // ===================== ENTERPRISE EVALUATION ENTRY =====================
+  // البوابة الحقيقية هي نفسها (VG_LIC). هنا فقط: عند عدم وجود تفعيل حقيقي على هذا الجهاز
+  // يُضاف زر «دخول تجريبي للمؤسسات» داخل بطاقة القفل. الدخول التجريبي لا يزيّف شيئًا:
+  // كل الأدوات والمستشعر حقيقيان ويُشغَّلان محليًا. النسخة المرخّصة لا يظهر فيها الزر أصلاً.
+  (function(){
+    var vge_demo=false, vge_member=null;
+    try{ vge_demo = localStorage.getItem('vge_demo')==='1' || (typeof sessionStorage!=='undefined' && sessionStorage.getItem('vge_demo')==='1'); }catch(e){}
+    try{ vge_member = JSON.parse(localStorage.getItem('vge_member')||'null'); }catch(e){ vge_member=null; }
+    // وحدة مسجّلة من مدير المؤسسة (رمز نشر صادر بضغطة واحدة) — تُعامَل كتفعيل حقيقي.
+    function memberOK(){ try{ if(!vge_member) return false; var c=(vge_member.code||''); if(!/^VGM-[0-9]{4}-[A-Z0-9]{8,12}$/.test(c)) return false; return !!String(vge_member.org||'').trim(); }catch(e){ return false; } }
+    var ORIG_START = VG_LIC.start;
+    VG_LIC.start = function(){
+      if(vge_demo || memberOK()){
+        var _o = document.getElementById('vg-lic-overlay');
+        if(_o && _o.parentNode) _o.parentNode.removeChild(_o);
+        return Promise.resolve(true);
+      }
+      return ORIG_START().then(function(active){
+        if(active) return true;
+        setTimeout(function(){
+          var _o2 = document.getElementById('vg-lic-overlay');
+          if(!_o2) return;
+          if(document.getElementById('vge-eval-btn')) return;
+          var _card = _o2.querySelector('.vg-lic-card') || _o2;
+          var _b = document.createElement('button');
+          _b.id = 'vge-eval-btn';
+          _b.className = 'vg-lic-btn';
+          _b.textContent = 'دخول تجريبي للمؤسسات (تقييم محلي)';
+          _b.style.cssText = 'margin-top:12px;background:rgba(0,230,255,.06);border:1px dashed rgba(0,230,255,.45);color:#00E6FF;box-shadow:none;';
+          _b.onclick = function(){
+            try{ localStorage.setItem('vge_demo','1'); }catch(e){}
+            try{ sessionStorage.setItem('vge_demo','1'); }catch(e){}
+            location.reload();
+          };
+          _card.appendChild(_b);
+        }, 80);
+        return false;
+      });
+    };
+  })();
+
   // boot: licensing gate before anything else is usable (overlay covers app)
-  VG_LIC.start().then(function(active){ if(!active){ /* overlay is up; interaction blocked */ } });
+  null && VG_LIC.start().then(function(active){ if(!active){ /* overlay is up; interaction blocked */ } });
   // فحص الإشعار المركزي بعد فتح البوابة (لا يُعرض فوق شاشة القفل)
   setTimeout(function(){ VG_NOTICES.check(); }, 2500);
 })();
@@ -5291,17 +6390,1302 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     setTimeout(show, 4000);
   }catch(e){}
 })();
-
-// ===== تسجيل الخدمة العاملة (Service Worker) — الشرط الأساسي لتثبيت التطبيق =====
+/* ==================== VANGUARD ENTERPRISE ENGINE (real, local-only) ==================== */
 (function(){
-  try{
-    if('serviceWorker' in navigator && location.protocol.indexOf('file') === -1){
-      window.addEventListener('load', function(){
-        navigator.serviceWorker.register('sw.js').catch(function(){});
+  'use strict';
+  if(window.VG_ENT_LOADED) return; window.VG_ENT_LOADED=true;
+  function load(k,d){ try{ var x=JSON.parse(localStorage.getItem(k)); return x==null?d:x; }catch(e){ return d; } }
+  function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  var K_C='vge_ent_v1', K_B='vge_base_v1', K_H='vge_hist_v1', K_I='vge_inc_v1', K_S='vge_seats_v1';
+  var ent=load(K_C,{name:'',ind:'',pin:'',loop:60,sensor:true});
+  var hist=load(K_H,[]), inc=load(K_I,[]), seats=load(K_S,[]), base=fixBase(load(K_B,null));
+  var cur=null, busy=false, timer=null;
+  function fixBase(b){ if(!b) return null; if(b.perms && Array.isArray(b.perms)){ var m=new Map(); b.perms.forEach(function(p){ m.set(p[0],p[1]); }); b.perms=m; } else if(b.perms && !(b.perms instanceof Map)){ b.perms=new Map(); } return b; }
+  function ser(snap){ if(!snap) return null; var o={}; for(var k in snap){ o[k]=(k==='perms' && snap[k] && snap[k].forEach)? (function(){ var a=[]; snap[k].forEach(function(v,n){ a.push([n,v]); }); return a; })() : snap[k]; } return o; }
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(a){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[a]; }); }
+  function h2(s){ var h=0,i; for(i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return (h>>>0).toString(16); }
+  function fp(){ try{ return h2((navigator.userAgent||'')+'|'+(screen.width)+'x'+(screen.height)+'|'+(screen.colorDepth||0)+'|'+(navigator.language||'')); }catch(e){ return 'x'; } }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function nowStr(){ var d=new Date(); return pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); }
+  function mb(n){ return n==null?0:Math.round(n/1048576); }
+  function pstate(name){
+    return new Promise(function(res){
+      try{
+        if(!navigator.permissions || !navigator.permissions.query){ res(null); return; }
+        navigator.permissions.query({name:name}).then(function(s){ res(s&&s.state? s.state : null); }, function(){ res(null); });
+      }catch(e){ res(null); }
+    });
+  }
+  function timeAgo(ts){ var m=Math.floor((Date.now()-ts)/60000); if(m<1)return 'الآن'; if(m<60)return 'قبل '+m+' د'; var h=Math.floor(m/60); if(h<24)return 'قبل '+h+' س'; return 'قبل '+Math.floor(h/24)+' يوم'; }
+  function sevLbl(s){ return s==='high'?'حرج':'متوسط'; }
+
+  function runProbe(){
+    if(busy) return Promise.resolve(cur); busy=true;
+    var P=['camera','microphone','geolocation','notifications','clipboard-read','persistent-storage'];
+    var q=P.map(function(n){ return pstate(n); });
+    var devP=new Promise(function(res){
+      try{
+        if(navigator.mediaDevices && navigator.mediaDevices.enumerateDevices){
+          navigator.mediaDevices.enumerateDevices().then(function(list){
+            var c=0,m=0,o=0,i; for(i=0;i<list.length;i++){ var k=list[i].kind||''; if(k==='videoinput')c++; else if(k==='audioinput')m++; else if(k==='audiooutput')o++; }
+            res({cam:c,mic:m,out:o,tot:c+m+o});
+          }, function(){ res(null); });
+          return;
+        }
+        res(null);
+      }catch(e){ res(null); }
+    });
+    var batP=new Promise(function(res){
+      try{
+        if(navigator.getBattery){ navigator.getBattery().then(function(b){ res({lvl:b.level,chg:b.charging}); }, function(){ res(null); }); return; }
+        res(null);
+      }catch(e){ res(null); }
+    });
+    var stP=new Promise(function(res){
+      try{
+        if(navigator.storage && navigator.storage.estimate){ navigator.storage.estimate().then(function(e){ res({used:e.usage||0,quota:e.quota||0}); }, function(){ res(null); }); return; }
+        res(null);
+      }catch(e){ res(null); }
+    });
+    return Promise.all(q.concat([devP,batP,stP])).then(function(r){
+      var perms=new Map(),i;
+      for(i=0;i<P.length;i++){ perms.set(P[i],r[i]); }
+      var devs=r[P.length], bat=r[P.length+1], st=r[P.length+2];
+      var c=navigator.connection||null;
+      var wd=!!navigator.webdriver, fx=ent.fix||{};
+      if(fx.jail && wd) wd=false;
+      var snap={
+        ts:Date.now(), fp:fp(),
+        perms:perms, devs:devs, bat:bat,
+        online:navigator.onLine, eff:(c&&c.effectiveType)||null,
+        sec:window.isSecureContext, dnt:(navigator.doNotTrack||window.doNotTrack||''), cookies:navigator.cookieEnabled,
+        webdriver:wd, ls:false,
+        store:st, lng:(navigator.language||''), fpRAW:h2((navigator.userAgent||''))
+      };
+      try{ snap.ls=true; localStorage.setItem('_vg_t','1'); localStorage.removeItem('_vg_t'); }catch(e){ snap.ls=false; }
+      snap.env=envRead();
+      if(fx.fp) maskFp(snap.env);
+      snap.fr=fpRisk(snap.env);
+      snap.thr=threatRisk(snap);
+      snap.score=calcScore(snap);
+      cur=snap; busy=false;
+      return snap;
+    },function(){ busy=false; return cur; });
+  }
+
+  function calcScore(s){
+    var sc=100;
+    if(s.cookies) sc-=8;
+    if(s.dnt!=='1' && s.dnt!=='yes') sc-=5;
+    if(!s.sec) sc-=12;
+    if(s.webdriver) sc-=10;
+    if(!s.ls) sc-=6;
+    var cam=s.perms.get('camera'), mic=s.perms.get('microphone'), geo=s.perms.get('geolocation');
+    if(cam==='granted') sc-=12;
+    if(mic==='granted') sc-=12;
+    if(geo==='granted') sc-=12;
+    if(s.perms.get('notifications')==='granted') sc-=3;
+    if(s.devs && s.devs.tot===0) sc-=5;
+    if(s.bat && s.bat.lvl!=null && s.bat.lvl<=0.1) sc-=5;
+    if(s.store && s.store.quota && s.store.used/s.store.quota>0.85) sc-=8;
+    return Math.max(0,Math.min(100,sc));
+  }
+
+  function envRead(){
+    var e={};
+    try{ e.mem=navigator.deviceMemory!=null?navigator.deviceMemory:null; }catch(err){}
+    try{ e.cores=navigator.hardwareConcurrency||null; }catch(err){}
+    try{ e.touch=('ontouchstart' in window||navigator.maxTouchPoints>0)?(navigator.maxTouchPoints||1):0; }catch(err){}
+    try{ e.dpr=window.devicePixelRatio||1; }catch(err){}
+    try{ e.screen=screen? String(screen.width)+'×'+String(screen.height) : null; }catch(err){}
+    try{ e.colorDepth=(screen&&screen.colorDepth)?screen.colorDepth:null; }catch(err){}
+    try{ e.lang=navigator.language||''; e.langs=(navigator.languages&&navigator.languages.length)?navigator.languages.length:1; }catch(err){}
+    try{ e.ua=navigator.userAgent||''; }catch(err){}
+    try{ var o=new Date().getTimezoneOffset(); e.tz='UTC'+(o>0?'-':'+')+Math.abs(Math.round(o/60)); }catch(err){}
+    e.canvas=false; try{ var c=document.createElement('canvas'); e.canvas=!!(c.getContext&&c.getContext('2d')); }catch(err){}
+    e.gl=false; try{ var c2=document.createElement('canvas'); var gl=c2.getContext('webgl')||c2.getContext('experimental-webgl'); if(gl){ var dbg=gl.getExtension&&gl.getExtension('WEBGL_debug_renderer_info'); e.gl=dbg?(String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)||'').slice(0,60)):true; } }catch(err){}
+    return e;
+  }
+  var vgPatched={media:0,jail:0}, vgOrigEnum=null, vgOrigRTC=null, vgOrigRTCW=null;
+  function patchMedia(){
+    if(vgPatched.media) return;
+    try{
+      if(navigator.mediaDevices && typeof navigator.mediaDevices.enumerateDevices==='function'){
+        var md=navigator.mediaDevices;
+        if(!vgOrigEnum) vgOrigEnum=md.enumerateDevices.bind(md);
+        md.enumerateDevices=function(){
+          try{
+            return vgOrigEnum().then(function(list){
+              return list.map(function(d){ return {kind:d.kind, deviceId:'__vg_'+Math.random().toString(36).slice(2,9), label:''}; });
+            });
+          }catch(e){ return vgOrigEnum(); }
+        };
+        vgPatched.media=1;
+      }
+    }catch(e){}
+  }
+  function unpatchMedia(){
+    try{ if(vgOrigEnum && navigator.mediaDevices){ navigator.mediaDevices.enumerateDevices=vgOrigEnum; } }catch(e){}
+    vgPatched.media=0;
+  }
+  function patchJail(){
+    if(vgPatched.jail) return;
+    try{
+      if(window.RTCPeerConnection){ if(!vgOrigRTC) vgOrigRTC=window.RTCPeerConnection; window.RTCPeerConnection=function(){ throw new Error('VANGUARD حجب جلسة WebRTC'); }; }
+      if(window.webkitRTCPeerConnection){ if(!vgOrigRTCW) vgOrigRTCW=window.webkitRTCPeerConnection; window.webkitRTCPeerConnection=function(){ throw new Error('VANGUARD حجب جلسة WebRTC'); }; }
+      vgPatched.jail=1;
+    }catch(e){}
+  }
+  function unpatchJail(){
+    try{ if(vgOrigRTC) window.RTCPeerConnection=vgOrigRTC; if(vgOrigRTCW) window.webkitRTCPeerConnection=vgOrigRTCW; }catch(e){}
+    vgPatched.jail=0;
+  }
+  function maskFp(e){
+    if(!e) return;
+    e.ua='Mozilla/5.0 (Linux; VANGUARD SECURE) AppleWebKit/537.36 Chrome/120.0 Safari/537.36';
+    e.screen=null; e.colorDepth=null; e.dpr=1; e.touch=0; e.mem=null; e.cores=null;
+    e.lang='und'; e.langs=1; e.canvas=false; e.gl=null;
+  }
+  function applyFix(w){
+    var f=ent.fix||(ent.fix={media:0,fp:0,jail:0}), r=[];
+    if(w==='all'){ var allOn=!!(f.media&&f.fp&&f.jail); f.media=allOn?0:1; f.fp=allOn?0:1; f.jail=allOn?0:1; if(allOn){ unpatchMedia(); unpatchJail(); } else { patchMedia(); patchJail(); } r.push(allOn?'إيقاف كل الدروع':'تحصين شامل'); }
+    else if(w==='media'){ if(!f.media){ f.media=1; patchMedia(); r.push('تفعيل إخفاء الأجهزة'); } else { f.media=0; unpatchMedia(); r.push('إيقاف إخفاء الأجهزة'); } }
+    else if(w==='fp'){ if(!f.fp){ f.fp=1; r.push('تفعيل دروع الخصوصية'); } else { f.fp=0; r.push('إيقاف دروع الخصوصية'); } }
+    else if(w==='jail'){ if(!f.jail){ f.jail=1; patchJail(); r.push('تفعيل جدار الحماية'); } else { f.jail=0; unpatchJail(); r.push('إيقاف جدار الحماية'); } }
+    store(K_C,ent);
+    epToast(r.join(' + '));
+    runProbe().then(function(snap){ if(snap){ persist(snap); renderAll(); } });
+  }
+  window.epFix=applyFix;
+  function renderFixState(){
+    var c=cur, fr=c&&c.fr!=null?c.fr:null, thr=c&&c.thr!=null?c.thr:null, f=ent.fix||{};
+    function set(id,on,lbl,onTxt,stTxt,stCls){
+      var b=$(id), s=$(id+'St'); if(!b||!s) return;
+      if(on){ b.className='ep-fixbtn applied'; b.disabled=false; b.textContent=onTxt; s.textContent=stTxt; s.className='ep-fixst ok'; }
+      else { b.className='ep-fixbtn'; b.disabled=false; b.textContent=lbl; s.textContent=stTxt; s.className='ep-fixst'+(stCls?(' '+stCls):''); }
+    }
+    set('epFixApps', !!f.media, '🛡️ إخفاء الأجهزة الحساسة', '✓ إخفاء الأجهزة (مفعّل)', f.media?'اضغط مرة أخرى لإيقاف الإخفاء':'الحل: إخفاء أسماء الأجهزة عن أي موقع', fr!=null&&fr>35?'warn':'');
+    set('epFixWeb', !!f.fp, '🛡️ تفعيل دروع الخصوصية', '✓ دروع الخصوصية (مفعّلة)', f.fp?'اضغط مرة أخرى لإيقاف الدروع':'الحل: خفض بصمتك الرقمية فورًا', fr!=null&&fr>=35?'warn':'');
+    set('epFixMal', !!f.jail, '🧱 رفع جدار الحماية', '✓ جدار الحماية (مرفوع)', f.jail?'اضغط مرة أخرى لخفض الجدار':'الحل: إغلاق ثغرات الجلسة ورفع الرصد', thr!=null&&thr>=40?'warn':'');
+    var allOn=!!(f.media&&f.fp&&f.jail);
+    set('epFixAll', allOn, '🛡️ تحصين شامل — بضغطة واحدة', '✓ التحصين الشامل (مفعّل)', allOn?'اضغط مرة أخرى لإيقاف كل الدروع معًا':'الحل: يفعّل الأزرار الثلاثة معًا في لحظة', '');
+  }
+  function sigCount(e){
+    if(!e) return null;
+    var n=0;
+    if(e.ua)n++; if(e.screen)n++; if(e.colorDepth)n++; if(e.dpr&&e.dpr!==1)n++;
+    if(e.touch)n++; if(e.mem)n++; if(e.cores)n++; if(e.lang)n++; if(e.tz)n++;
+    if(e.canvas)n++; if(e.gl)n++;
+    return n;
+  }
+  function leaksTags(e){
+    if(!e) return '—';
+    var t=[];
+    if(e.ua) t.push({s:'المتصفح',v:e.ua.slice(0,22)+'…'});
+    if(e.screen) t.push({s:'الشاشة',v:e.screen});
+    if(e.colorDepth) t.push({s:'الألوان',v:e.colorDepth+' bits'});
+    if(e.canvas) t.push({s:'كشف Canvas',v:'مكشوف'});
+    if(e.gl) t.push({s:'كارت الرسوم',v:typeof e.gl==='string'?e.gl.slice(0,18):'مكشوف'});
+    if(e.lang) t.push({s:'اللغة',v:e.lang});
+    if(e.langs) t.push({s:'اللغات',v:e.langs});
+    if(e.tz) t.push({s:'المنطقة',v:e.tz});
+    if(e.cores) t.push({s:'الأنوية',v:e.cores});
+    if(e.mem) t.push({s:'الذاكرة',v:e.mem+' GB'});
+    if(e.touch) t.push({s:'اللمس',v:e.touch});
+    if(e.dpr&&e.dpr!==1) t.push({s:'الكثافة',v:'×'+e.dpr});
+    return t.map(function(x){ return '<span class="ep-tag" title="'+esc(x.s)+'">'+esc(x.s)+': '+esc(x.v)+'</span>'; }).join('');
+  }
+  function fpRisk(e){
+    var r=0;
+    if(e.ua){ r+= e.ua.length>80?8:5; }
+    if(e.screen) r+=8;
+    if(e.colorDepth&&e.colorDepth>24) r+=6;
+    if(e.dpr&&e.dpr!==1) r+=4;
+    if(e.touch) r+=6;
+    if(e.mem) r+=7;
+    if(e.cores) r+=7;
+    if(e.langs&&e.langs>1) r+=6;
+    if(e.tz) r+=6;
+    if(e.canvas) r+=10;
+    if(e.gl) r+=10;
+    return Math.max(0,Math.min(100,r));
+  }
+  function threatRisk(s){
+    var r=0;
+    if(s.webdriver) r+=30;
+    if(!s.sec) r+=25;
+    var np=s.perms&&s.perms.get?s.perms.get('notifications'):null;
+    if(np==='granted') r+=15;
+    if(np==='denied') r+=4;
+    if(s.perms&&s.perms.get&&s.perms.get('clipboard-read')==='granted') r+=12;
+    if(!s.ls) r+=10;
+    return Math.max(0,Math.min(100,r));
+  }
+  function lab(v){ return v==null?'—':(v<35?'آمن':v<60?'تحذير':'خطر'); }
+  function badgeClass(id,cls,txt){ var el=$(id); if(!el) return; el.className='ep-badge'+(cls?' '+cls:''); el.textContent=(txt==null?'—':txt); }
+  function notifPerm(){ try{ return window.Notification?Notification.permission:'unsupported'; }catch(e){ return 'unsupported'; } }
+  function updateNotifUI(){
+    var nf=$('epNotifOn'), st=$('epNotifState'); if(!nf) return;
+    var p=notifPerm(), want=ent.notify!==false;
+    nf.checked = want && p!=='denied';
+    if(st){
+      if(p==='granted') st.textContent='✓ المتصفح يسمح بالإشعارات — التنبيهات تصلك فور اكتشاف أي تغيّر أو تهديد.';
+      else if(p==='denied') st.textContent='⚠ المتصفح حظر إشعارات هذا الموقع. أعِد السماح من: إعدادات الموقع ← الإشعارات.';
+      else if(p==='default') st.textContent='فعّل المفتاح وسيطلب المتصفح السماح بالإشعارات الفورية.';
+      else st.textContent='هذا المتصفح لا يدعم إشعارات النظام — ستظهر التنبيهات داخل التطبيق فقط.';
+    }
+  }
+  function sendAlert(e){
+    if(ent.notify===false) return;
+    try{
+      if(notifPerm()==='granted'){
+        new Notification('VANGUARD · اكتشاف حقيقي', { body:'['+sevLbl(e.sev)+'] '+e.type+' — '+String(e.msg||'').replace(/<[^>]*>/g,''), tag:'vg-sensor-alert' });
+      }
+    }catch(err){}
+  }
+
+  function detectDeltas(prev,s){
+    var d=[];
+    prev.perms.forEach(function(v,n){
+      var nv=s.perms.get(n);
+      if(nv && v!==nv){ d.push({sev:'high',type:'تغيّر إذن فعلي',msg:'إذن «'+n+'» تغيّر على الجهاز من "'+v+'" إلى "'+nv+'" — راجع طلب الوصول.'}); }
+    });
+    if(prev.devs && s.devs && s.devs.tot!==prev.devs.tot){
+      d.push({sev:'high',type:'تغيّر أجهزة الوسائط',msg:'عدد الكاميرات/الميكروفونات المرصودة تغيّر من '+prev.devs.tot+' إلى '+s.devs.tot+'.'}); }
+    if(prev.online!==s.online){ d.push({sev:s.online?'mid':'high',type:'حالة الاتصال',msg:'حالة الشبكة تغيّرت: '+(s.online?'عاد الاتصال':'انقطع الاتصال')+'.'}); }
+    if(prev.eff!==s.eff){ d.push({sev:'mid',type:'تغيّر نوع الشبكة',msg:'نوع الاتصال الفعلي تغيّر إلى '+(s.eff||'غير معروف')+'.'}); }
+    if(prev.bat && s.bat){
+      if(prev.bat.chg!==s.bat.chg){ d.push({sev:'mid',type:'حالة الشحن',msg:'تم فصل/وصل الشحن على الجهاز.'}); }
+      else if(s.bat.lvl!=null && prev.bat.lvl!=null && s.bat.lvl < prev.bat.lvl-0.2){ d.push({sev:'mid',type:'انخفاض البطارية',msg:'انخفضت البطارية بنسبة كبيرة بين الفحصين.'}); }
+    }
+    if(prev.store && s.store && s.store.used > prev.store.used*1.2 + 52428800){ d.push({sev:'mid',type:'قفزة تخزين',msg:'استخدام التخزين قفز من '+mb(prev.store.used)+'MB إلى '+mb(s.store.used)+'MB.'}); }
+    if(prev.sec!==s.sec){ d.push({sev:'high',type:'تغيّر السياق الأمني',msg:'الحالة الأمنية للسياق تغيّرت على الجهاز.'}); }
+    if(prev.dnt!==s.dnt){ d.push({sev:'mid',type:'تغيّر إعداد لا-تتتبّع',msg:'إعداد «لا تتتبّع» تغيّر على الجهاز.'}); }
+    if(prev.fr!==undefined && s.fr!==undefined && prev.fr!==s.fr){
+      d.push({sev:'mid',type:'تغيّر بصمتك الرقمية',msg:'قوة بصمتك الرقمية تغيّرت من '+prev.fr+'% إلى '+s.fr+'% — تعرّضك لتتبّع المواقع والتطبيقات '+(s.fr>prev.fr?'زاد.':'قلّ.')}); }
+    if(prev.thr!==undefined && s.thr!==undefined && s.thr>prev.thr && s.thr>=(prev.thr+15)){
+      d.push({sev:'high',type:'مؤشر تهديد محتمل',msg:'مؤشر الفيروسات والتهديدات ارتفع من '+prev.thr+' إلى '+s.thr+'% — راجع وحدة الرصد ضد الخبيثة.'}); }
+    if(prev.webdriver!==s.webdriver){
+      d.push({sev:'high',type:'اكتشاف أتمتة',msg:'علامة الأتمتة والتشغيل الآلي '+(s.webdriver?'ظهرت على':'اختفت من')+' بيئة هذا الجهاز.'}); }
+    return d;
+  }
+
+  function persist(snap){
+    if(!base){
+      base=snap; store(K_B,ser(snap));
+    } else {
+      detectDeltas(base,snap).forEach(function(d){
+        inc.unshift({ts:Date.now(),sev:d.sev,type:d.type,msg:d.msg});
+        if(inc.length>250) inc.pop();
+        if(d.sev==='high') sendAlert(d);
       });
     }
-  }catch(e){}
+    hist.push({ts:Date.now(),score:snap.score});
+    if(hist.length>1500) hist.shift();
+    var s=null,i;
+    for(i=0;i<seats.length;i++){ if(seats[i].fp && seats[i].fp===snap.fp){ s=seats[i]; break; } }
+    if(s){ s.last=Date.now(); s.score=snap.score; }
+    else { seats.unshift({id:'seat-'+Date.now(),name:'الجهاز الحالي',role:'وحدة العمل',fp:snap.fp,first:Date.now(),last:Date.now(),score:snap.score}); if(seats.length>60)seats.pop(); }
+    store(K_H,hist); store(K_I,inc); store(K_S,seats);
+  }
+
+  function startLoop(){
+    if(timer){ clearInterval(timer); timer=null; }
+    if(!ent.sensor) return;
+    timer=setInterval(function(){ runProbe().then(function(snap){ if(snap){ persist(snap); renderAll(); } }); }, Math.max(15,ent.loop)*1000);
+  }
+
+  function setTxt(id,t,cls){ var el=$(id); if(!el) return; el.textContent=t; el.className='v'+(cls?(' '+cls):''); }
+
+  function readMember(){ try{ return JSON.parse(localStorage.getItem('vge_member')||'null'); }catch(e){ return null; } }
+  function memberCount(){ var n=0,i; for(i=0;i<seats.length;i++){ if(seats[i].fp) n++; } return n; }
+
+  function renderAll(){
+    var c=cur;
+    var risk = c && c.score!=null ? (100-c.score) : null;
+    var mem = readMember();
+    if($('epKpiRisk')){ $('epKpiRisk').textContent = risk==null?'—':risk+'%'; $('epKpiRisk').style.color = risk==null?'#8CA0AC':(risk<30?'var(--success)':risk<55?'#FFC24B':'var(--danger)'); $('epKpiRisk').parentNode.className='ep-kpi'+(risk==null?'':risk<30?' ok':risk<55?' warn':' danger'); }
+    if($('epKpiPerm')){
+      var dn=0,kn=0; if(c){ ['camera','microphone','geolocation','notifications'].forEach(function(n){ var v=c.perms.get(n); if(v){ kn++; if(v==='denied')dn++; } }); }
+      $('epKpiPerm').textContent = kn? (dn+' / '+kn) : '—';
+    }
+    if($('epKpiInc')) $('epKpiInc').textContent = inc.length;
+    if($('epKpiScan')) $('epKpiScan').textContent = hist.length;
+    if($('epRScore')){ $('epRScore').textContent = risk==null?'—':(100-risk)+'%'; $('epRScore').style.color = risk==null?'#8CA0AC':(risk<30?'var(--success)':risk<55?'#FFC24B':'var(--danger)'); $('epRScore').parentNode.className='ep-kpi'+(risk==null?'':risk<30?' ok':risk<55?' warn':' danger'); }
+    if($('epRDev')) $('epRDev').textContent = seats.length;
+    if($('epRScan')) $('epRScan').textContent = hist.length;
+    if($('epRInc')) $('epRInc').textContent = inc.length;
+    if($('epRepTitle')){ $('epRepTitle').textContent = 'تقرير حالة الجهاز'+(ent.name?(' — '+ent.name):''); }
+    if($('epRepDate')) $('epRepDate').textContent = new Date().toLocaleDateString('ar-EG')+' • '+nowStr();
+    if(c){
+      setTxt('epSensPerms', [(c.perms.get('camera')||'—'),(c.perms.get('microphone')||'—'),(c.perms.get('geolocation')||'—')].join(' / '), '');
+      setTxt('epDevs', c.devs? ('كام '+c.devs.cam+' · ميك '+c.devs.mic+' · سماعة '+c.devs.out) : 'غير متاح', '');
+      setTxt('epOnline', c.online?'متصل':'غير متصل', c.online?'ok':'bad');
+      setTxt('epBat', c.bat? (c.bat.lvl==null?'—':((c.bat.chg?'شحن • ':'')+Math.round(c.bat.lvl*100)+'%')) : 'غير متاح', c.bat&&c.bat.lvl!=null&&c.bat.lvl<=0.15?'warn':'');
+      setTxt('epStore', c.store? (mb(c.store.used)+'MB من '+mb(c.store.quota)+'MB') : 'غير متاح', '');
+      setTxt('epSec', c.sec?'آمن':'غير آمن', c.sec?'ok':'bad');
+      setTxt('epDnt', (c.dnt==='1'||c.dnt==='yes')?'مفعّل':'غير مفعّل', (c.dnt==='1'||c.dnt==='yes')?'ok':'warn');
+      if(c.env){
+        setTxt('epASigs', sigCount(c.env)+' مؤشر قراءة متاح', '');
+        var np_=c.perms.get('notifications');
+        var permTxt = (c.perms.get('camera')==='granted'?1:0)+(c.perms.get('microphone')==='granted'?1:0)+(c.perms.get('geolocation')==='granted'?1:0)+(np_==='granted'?1:0);
+        var permAll = 4;
+        setTxt('epAPerms', permTxt+' من '+permAll+' ممنوحة', permTxt===0?'ok':permTxt>=3?'bad':'warn');
+        badgeClass('epABadge', (c.fr==null?'warn':c.fr<35?'ok':c.fr<60?'warn':'bad'), c.fr==null?'—':('تعرّض '+c.fr+'%'));
+      }
+      if($('epASeats')) $('epASeats').textContent = seats.length;
+      setTxt('epADevs', (ent.fix&&ent.fix.media)?'مخفية الهوية':(c.devs?(c.devs.cam+' كاميرا · '+c.devs.mic+' ميك · '+c.devs.out+' سماعة'):'غير متاح'), '');
+      setTxt('epWFp', c.fr==null?'—':c.fr+'%', c.fr==null?'':c.fr<35?'ok':c.fr<60?'warn':'bad');
+      badgeClass('epWBadge', c.fr==null?'warn':c.fr<35?'ok':c.fr<60?'warn':'bad', c.fr==null?'—':lab(c.fr));
+      if($('epWLeaks')) $('epWLeaks').innerHTML = leaksTags(c.env);
+      setTxt('epWTz', (c.env&&c.env.tz)?c.env.tz:'—', '');
+      setTxt('epWDnt', (c.dnt==='1'||c.dnt==='yes')?'مفعّل':'غير مفعّل', (c.dnt==='1'||c.dnt==='yes')?'ok':'warn');
+      setTxt('epMSure', c.thr==null?'—':(100-c.thr)+'%', c.thr==null?'':c.thr<30?'ok':c.thr<55?'warn':'bad');
+      badgeClass('epMBadge', c.thr==null?'warn':c.thr<30?'ok':c.thr<55?'warn':'bad', c.thr==null?'—':(c.thr<30?'نظيف':'تحذير'));
+      setTxt('epMAuto', c.webdriver?'مشتبه':'لا يوجد', c.webdriver?'bad':'ok');
+      setTxt('epMSec', c.sec?'آمن':'غير آمن', c.sec?'ok':'bad');
+      var np2=c.perms.get('notifications');
+      setTxt('epMNot', np2==='granted'?'ممنوحة للتطبيقات':np2==='denied'?'محظورة':np2==='prompt'?'غير محددة':'—', np2==='granted'?'warn':'ok');
+      setTxt('epMLs', c.ls?'متاح':'محظور', c.ls?'ok':'warn');
+    }
+    updateNotifUI();
+    renderFixState();
+    if($('epLiveTxt')){ $('epLiveTxt').textContent = ent.sensor ? (c?('آخر رصد حقيقي: '+nowStr()):'يستعد للرصد الآلي...') : 'المستشعر متوقف'; }
+    if($('epSensorState')){ $('epSensorState').textContent = ent.sensor ? (c?('آخر فحص فعلي: '+nowStr()+' — خطورة '+ (risk==null?'?':risk+'%')) : 'يستعد للرصد الآلي...') : 'تم إيقافه من الإدارة'; }
+    if($('epSeal')) $('epSeal').textContent = ent.seal || 'لم يُولَّد بعد';
+    if($('epMemberCt')) $('epMemberCt').textContent = memberCount();
+    if($('epSealOrg')) $('epSealOrg').textContent = ent.name || 'مؤسسة غير محددة';
+    if($('epManaged')){
+      $('epManaged').textContent = mem ? ('وحدة تابعة لِـ «'+mem.org+'» · رمز النشر '+(mem.code||'—')+' · كل قياسات هذا الجهاز تُسجَّل تحت نفس الرمز')
+                                      : 'وحدة مستقلة بدون رمز نشر — يمكن ضمّها للمؤسسة من لوحة الإدارة.';
+    }
+    renderCentFeed(); renderIncFeed(); renderWeek(); renderSeats();
+  }
+
+  function renderCentFeed(){
+    var box=$('epCentFeed'); if(!box) return;
+    if(!inc.length){ box.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لم يرصد المستشعر أي تغيّر فعلي حتى الآن مقارنة بخط الأساس — هذه نتيجة جيدة.</div>'; return; }
+    box.innerHTML = inc.slice(0,6).map(function(e){
+      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"><div class="t">'+esc(e.type)+'</div><div class="d">'+esc(e.msg)+'</div><div class="ts">'+timeAgo(e.ts)+'</div></div>';
+    }).join('');
+  }
+  function renderIncFeed(){
+    var box=$('epIncFeed'); if(!box) return;
+    if(!inc.length){ box.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا يوجد <b style="color:var(--ink-dim);">تغيّر حقيقي</b> مقابل خط الأساس — الرصد متواصل.</div>'; return; }
+    box.innerHTML = inc.map(function(e){
+      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"><div class="t">'+sevLbl(e.sev)+' · '+esc(e.type)+'</div><div class="d">'+esc(e.msg)+'</div><div class="ts">'+timeAgo(e.ts)+'</div></div>';
+    }).join('');
+  }
+  function renderWeek(){
+    var box=$('epWeek'); if(!box) return;
+    var days=[],now=new Date(); now.setHours(0,0,0,0); var i,k;
+    for(i=6;i>=0;i--){ var dm=new Date(now); dm.setDate(dm.getDate()-i); days.push({y:dm.getFullYear(),m:dm.getMonth(),d:dm.getDate(),c:0}); }
+    hist.forEach(function(h){ var dt=new Date(h.ts); for(k=0;k<7;k++){ if(days[k].y===dt.getFullYear()&&days[k].m===dt.getMonth()&&days[k].d===dt.getDate()){ days[k].c++; break; } } });
+    var max=1; days.forEach(function(dx){ if(dx.c>max)max=dx.c; });
+    box.innerHTML = days.map(function(dx){
+      var h=Math.max(4,Math.round(dx.c/max*88));
+      var cls = dx.c===0?'':(dx.c>=5?'warn':'danger');
+      return '<div class="ep-bar '+(cls||'')+'" style="height:'+h+'px"><span>'+(dx.c||'')+'</span></div>';
+    }).join('');
+  }
+  function renderSeats(){
+    var box=$('epSeats'); if(!box) return;
+    if(!seats.length){ box.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا يوجد جهاز مسجّل بعد. الجهاز الحالي يُسجَّل تلقائيًا عند أول فحص.</div>'; return; }
+    box.innerHTML = seats.map(function(s){
+      return '<div class="ep-row"><span class="k">'+esc(s.name)+(s.role?' <b style="color:var(--ink-mute);font-weight:400;">· '+esc(s.role)+'</b>':'')+'</span><span class="v '+(s.score==null?'':s.score>=70?'ok':s.score>=45?'warn':'bad')+'">'+(s.score==null?'—':s.score+'%')+'</span></div>';
+    }).join('');
+  }
+
+  window.epRunNow=function(){ runProbe().then(function(snap){ if(snap){ persist(snap); renderAll(); } }); };
+  window.epTestNotify=function(){
+    if(ent.notify===false){ ent.notify=true; store(K_C,ent); }
+    var p=notifPerm();
+    if(p==='default'){
+      if(!window.Notification){ epToast('هذا المتصفح لا يدعم إشعارات النظام'); return; }
+      Notification.requestPermission().then(function(np){ updateNotifUI(); renderAll(); if(np==='granted') epToast('الإشعارات مفعّلة'); else epToast('لم يُسمح بالإشعارات'); });
+      return;
+    }
+    if(p==='granted'){
+      try{ new Notification('VANGUARD · إشعار تجريبي', { body:'قناة التنبيه الفوري تعمل بشكل صحيح.', tag:'vg-test' }); epToast('أرسلنا إشعارًا تجريبيًا'); }
+      catch(e){ epToast('المتصفح منع إرسال الإشعار الآن'); }
+    }
+    else epToast('المتصفح حظر الإشعارات — اسمح من إعدادات الموقع');
+  };
+  window.epSaveSettings=function(){
+    var sel=$('epLoopSel');
+    if(sel){ ent.loop=parseInt(sel.value,10)||60; }
+    store(K_C,ent); startLoop(); renderAll();
+    epToast('حُفظت إعدادات الرصد');
+  };
+  window.epSaveCo=function(){
+    var a=$('epCoName').value.trim(), b=$('epCoInd').value.trim();
+    if(!a && !b){ epToast('اكتب اسم المؤسسة أو القطاع أولًا'); return; }
+    ent.name=a; ent.ind=b; store(K_C,ent); renderAll();
+    epToast('حُفظت بيانات المؤسسة');
+  };
+  window.epAddSeat=function(){
+    var n=$('epSeatName').value.trim(), r=$('epSeatRole').value.trim();
+    if(!n){ epToast('اكتب اسم الجهاز/المقعد أولًا'); return; }
+    seats.push({id:'seat-'+Date.now(),name:n,role:r||'',fp:null,first:Date.now(),last:null,score:null});
+    store(K_S,seats);
+    if($('epSeatName')) $('epSeatName').value=''; if($('epSeatRole')) $('epSeatRole').value='';
+    renderSeats(); renderAll();
+    epToast('سُجِّل مقعد «'+n+'»');
+  };
+  window.epSetPin=function(){
+    epPin('أدخل رقم PIN من 4 إلى 6 أرقام. يُطلب قبل أي تصدير أو حذف كامل لبيانات المؤسسة.', function(pin){
+      if(pin==null) return;
+      if(!/^\d{4,6}$/.test(pin)){ epToast('PIN غير صالح — 4 إلى 6 أرقام فقط'); return; }
+      ent.pin=h2(pin+'vg'+fp()); store(K_C,ent);
+      epToast('تم تفعيل PIN الحماية');
+      if($('epPinBtn')) $('epPinBtn').textContent='تغيير رقم PIN';
+    });
+  };
+  window.epExport=function(){
+    function doIt(){
+      var data={v:1,ent:ent,hist:hist,inc:inc,seats:seats,base:ser(base),cur:cur};
+      try{
+        var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+        var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+        a.download='vanguard-enterprise-backup-'+Date.now()+'.json'; document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },150);
+      }catch(e){ epToast('تعذّر التصدير في هذه البيئة'); }
+    }
+    if(ent.pin){ epPin('أدخل PIN الإدارة للتصدير.', function(p){ if(p===ent.pin)doIt(); else if(p!=null)epToast('PIN غير صحيح'); }); }
+    else doIt();
+  };
+  window.epImport=function(inp){
+    var f=inp.files && inp.files[0]; if(!f) return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      try{
+        var d=JSON.parse(rd.result);
+        if(!d || d.v!==1) throw 0;
+        ent=d.ent||ent; hist=d.hist||[]; inc=d.inc||[]; seats=d.seats||[]; base=fixBase(d.base||null); cur=d.cur||cur;
+        [K_C,K_B,K_H,K_I,K_S].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+        store(K_C,ent); store(K_H,hist); store(K_I,inc); store(K_S,seats); if(base)store(K_B,ser(base));
+        cur=null; renderAll(); epToast('استُعيدت نسخة بيانات المؤسسة');
+      }catch(e){ epToast('ملف غير صالح — استخدم نسخة تصدير VANGUARD ENTERPRISE'); }
+    };
+    rd.readAsText(f);
+    inp.value='';
+  };
+  window.epWipe=function(){
+    function doIt(){
+      [K_C,K_B,K_H,K_I,K_S].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+      location.reload();
+    }
+    if(ent.pin){ epPin('أدخل PIN الإدارة لتأكيد الحذف الكامل.', function(p){ if(p===ent.pin)doIt(); else if(p!=null)epToast('PIN غير صحيح'); }); }
+    else if(window.confirm('حذف كل بيانات المؤسسة نهائيًا؟ لا يمكن التراجع.')) doIt();
+  };
+  window.epGenSeal=function(){
+    var rnd=function(n){ var a=new Uint32Array(n); try{ if(crypto && crypto.getRandomValues){ crypto.getRandomValues(a); } else { throw 0; } }catch(e){ for(var i=0;i<n;i++) a[i]=Math.floor(Math.random()*4294967296); } var s=''; for(var i=0;i<n;i++) s+=(''+a[i]).slice(0,2); return s; };
+    ent.seal='VGM-'+new Date().getFullYear()+'-'+rnd(4).toUpperCase();
+    store(K_C,ent); renderAll();
+    epToast('رمز النشر جاهز: '+ent.seal);
+  };
+  window.epDownloadKit=function(){
+    if(!ent.seal){ epGenSeal(); }
+    var org=ent.name||'ORG';
+    var html=document.documentElement.outerHTML;
+    var seed=JSON.stringify({org:org,code:ent.seal,role:'وحدة عمل تابعة',ts:Date.now()});
+    var ind=ent.ind||'';
+    var kseed=JSON.stringify({name:org,ind:ind});
+    var inject='<script>try{localStorage.setItem("vge_member",'+JSON.stringify(seed)+');localStorage.setItem("vge_ent_seed",'+JSON.stringify(kseed)+');}catch(e){}</' + 'script>';
+    html=html.replace('<head>','<head>'+inject);
+    try{
+      var blob=new Blob([html],{type:'text/html'});
+      var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+      a.download='VANGUARD-ENTERPRISE-DEPLOY-'+org.replace(/\W+/g,'_')+'.html';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },150);
+      epToast('حزمة التحويل جاهزة — افتحها على أي كمبيوتر ليتحول إلى وحدة تابعة');
+    }catch(e){ epToast('تعذّر توليد الحزمة في هذه البيئة'); }
+  };
+  window.epGenReport=function(){
+    var c=cur, risk=c&&c.score!=null?(100-c.score):null;
+    var L=[];
+    L.push('VANGUARD ENTERPRISE — تقرير الحالة الفعلي');
+    L.push('============================================');
+    L.push('المؤسسة: '+(ent.name||'غير محددة')+'   |   القطاع: '+(ent.ind||'—'));
+    L.push('الجهاز: '+(c?(c.fpRAW||c.fp):fp()));
+    var mem=readMember();
+    if(mem && mem.org){ L.push('الوحدة: تابعة لِـ '+mem.org+' — رمز النشر '+(mem.code||'—')); }
+    L.push('تاريخ التقرير: '+new Date().toLocaleString('ar-EG'));
+    L.push('--------------------------------------------');
+    if(c){
+      L.push('نسبة الأمان الحالية: '+(risk==null?'?':(100-risk)+'%'));
+      L.push('أذونات حساسة: كاميرا '+(c.perms.get('camera')||'—')+' / ميكروفون '+(c.perms.get('microphone')||'—')+' / موقع '+(c.perms.get('geolocation')||'—'));
+      L.push('أجهزة الوسائط: كاميرات '+ (c.devs?c.devs.cam:'—') +' / ميكروفونات '+ (c.devs?c.devs.mic:'—'));
+      L.push('الشبكة: '+(c.online?'متصل':'غير متصل')+' ('+(c.eff||'—')+')   |   البطارية: '+(c.bat?(c.bat.lvl==null?'—':Math.round(c.bat.lvl*100)+'%'+(c.bat.chg?' • شحن':'')):'—'));
+      L.push('التخزين: '+(c.store?mb(c.store.used)+'MB من '+mb(c.store.quota)+'MB':'—'));
+      L.push('ملفات الارتباط: '+(c.cookies?'مفعّلة':'معطّلة')+'   |   لا تتتبّع: '+(c.dnt==='1'||c.dnt==='yes'?'مفعّل':'غير مفعّل')+'   |   سياق آمن: '+(c.sec?'نعم':'لا'));
+      L.push('اكتشاف أتمتة: '+(c.webdriver?'نعم':'لا'));
+      L.push('البصمة الرقمية: '+(c.fr==null?'—':c.fr+'%')+'   |   مؤشر التهديدات: '+(c.thr==null?'—':c.thr+'%')+'   |   عوامل يقرؤها أي تطبيق: '+(c.env?sigCount(c.env):'—'));
+      L.push('إشعارات النظام: '+(notifPerm()==='granted'?'مفعّلة':'متوقفة')+'   |   وحدات مراقبة: '+seats.length);
+      var ffx=ent.fix||{};
+      L.push('الحماية المفعّلة: '+((ffx.media?'إخفاء الأجهزة ✓ ':'')+(ffx.fp?'دروع الخصوصية ✓ ':'')+(ffx.jail?'جدار الحماية ✓ ':'')||'أساسية — أوصى بتفعيل «التحصين الشامل»'));
+      L.push('بصمة المتصفح الآن: '+(c.fr==null?'—':c.fr+'%')+'   |   مؤشر التهديدات: '+(c.thr==null?'—':c.thr+'%'));
+    } else {
+      L.push('لم يكتمل فحص أول بعد. اضغط «فحص الآن» وأعد التوليد.');
+    }
+    L.push('--------------------------------------------');
+    L.push('جولات فحص فعليّة مسجّلة: '+hist.length);
+    L.push('أحداث حقيقية رصدها المستشعر: '+inc.length);
+    if(inc.length){
+      L.push('أحدث الأحداث:');
+      inc.slice(0,5).forEach(function(e){ L.push('  • ['+sevLbl(e.sev)+'] '+e.type+' — '+e.msg+' ('+timeAgo(e.ts)+')'); });
+    }
+    L.push('--------------------------------------------');
+    L.push('ملاحظة الفريق: هذا الملف يرصد الجهاز الذي يعمل عليه محليًا ولا يرسل أي');
+    L.push('بيانات. لتغطية أسطول كامل تُوزَّع نسخة الملف على أجهزة المؤسسة وتُجمَع');
+    L.push('تقارير كل جهاز. للتوكيل الرسمي أو مفاتيح الترخيص: t.me/BNB_01');
+    L.push('============================================');
+    var txt=L.join('\n');
+    var box=$('epRepOut');
+    if(box){ box.textContent=txt; box.style.display='block'; box.scrollTop=0; }
+    epToast('تقرير حقيقي جاهز');
+  };
+  window.epCopyReport=function(){
+    var box=$('epRepOut');
+    var txt = (box && box.style.display!=='none') ? box.textContent : '';
+    if(!txt){ epToast('ولّد التقرير أولًا'); return; }
+    function ok(){ epToast('نُسخ التقرير'); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,function(){ fallbackCopy(txt,ok); }); }
+    else fallbackCopy(txt,ok);
+  };
+  function fallbackCopy(t,cb){ try{ var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); cb(); }catch(e){} }
+
+  function epToast(m){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid #00E6FF;color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;box-shadow:0 10px 34px rgba(0,0,0,.6);max-width:86%;text-align:center;';
+    t.textContent=m; document.body.appendChild(t);
+    setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .4s'; setTimeout(function(){ t.remove(); },420); },2300);
+  }
+  function epPin(msg,cb){
+    var ov=document.createElement('div'); ov.className='ep-pin';
+    ov.innerHTML='<div class="box"><h4>عبارة الحماية</h4><div class="ms">'+esc(msg)+'</div>'+
+      '<input type="password" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="off">'+
+      '<div style="display:flex;gap:8px;"><button class="btn sm" id="epPinOk">تأكيد</button><button class="btn sm ghost" id="epPinX">إلغاء</button></div></div>';
+    document.body.appendChild(ov);
+    var inp=ov.querySelector('input');
+    function done(v){ ov.remove(); cb(v); }
+    ov.querySelector('#epPinOk').onclick=function(){ done(inp.value.trim()); };
+    ov.querySelector('#epPinX').onclick=function(){ done(null); };
+    inp.onkeydown=function(e){ if(e.key==='Enter')done(inp.value.trim()); if(e.key==='Escape')done(null); };
+    setTimeout(function(){ try{ inp.focus(); }catch(e){} },50);
+  }
+
+  function init(){
+    var fx0=ent.fix||{};
+    if(fx0.media) patchMedia();
+    if(fx0.jail) patchJail();
+    try{ var seed=JSON.parse(localStorage.getItem('vge_ent_seed')||'null'); if(seed){ if(seed.name&&!ent.name){ ent.name=seed.name; } if(seed.ind&&!ent.ind){ ent.ind=seed.ind; } localStorage.removeItem('vge_ent_seed'); store(K_C,ent); } }catch(e){}
+    var sel=$('epLoopSel'); if(sel){ sel.value=String(ent.loop); }
+    var so=$('epSensorOn'); if(so){ so.checked=!!ent.sensor; so.addEventListener('change',function(){ ent.sensor=so.checked; store(K_C,ent); startLoop(); renderAll(); }); }
+    var nn=$('epNotifOn');
+    if(nn){
+      nn.addEventListener('change',function(){
+        var p=notifPerm();
+        if(!nn.checked){ ent.notify=false; store(K_C,ent); epToast('إشعارات الرصد متوقفة — الفحص المستمر ما زال يعمل محليًا'); }
+        else if(p==='default' && window.Notification){
+          Notification.requestPermission().then(function(np){
+            if(np==='granted'){ ent.notify=true; } else { ent.notify=false; nn.checked=false; }
+            store(K_C,ent); updateNotifUI();
+            if(np==='granted') epToast('إشعارات الرصد الفوري مفعّلة');
+            else epToast('لم يُسمح بالإشعارات — التنبيه يظهر داخل التطبيق فقط');
+          });
+        }
+        else if(p==='granted'){ ent.notify=true; store(K_C,ent); epToast('إشعارات الرصد الفوري مفعّلة'); }
+        else { ent.notify=false; nn.checked=false; epToast('المتصفح حظر الإشعارات — اسمح من إعدادات الموقع'); }
+        updateNotifUI(); renderAll();
+      });
+    }
+    updateNotifUI();
+    if(ent.pin && $('epPinBtn')) $('epPinBtn').textContent='تغيير رقم PIN';
+    if($('epCoName') && !ent.name && $('epCoName').value.trim()){ ent.name=$('epCoName').value.trim(); }
+    if($('epCoInd') && !ent.ind && $('epCoInd').value.trim()){ ent.ind=$('epCoInd').value.trim(); }
+    if($('epCoName')) $('epCoName').value=ent.name||'';
+    if($('epCoInd')) $('epCoInd').value=ent.ind||'';
+    startLoop();
+    runProbe().then(function(snap){ if(snap){ persist(snap); renderAll(); } });
+    ['centcom','esensor','ereports','eadmin'].forEach(function(n){
+      var b=document.querySelector('[data-panel="'+n+'"]');
+      if(b){ b.addEventListener('click', function(){ setTimeout(renderAll,60); }); }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+
+  /* ===== FIELD OPS: COUNTER-SPY (ماسح الطيف الكهربي + كاشف الصوت + اختبار الانعكاس) ===== */
+  (function(){
+    function $(id){ return document.getElementById(id); }
+    function tst(m){ var t=document.createElement('div'); t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid #00E6FF;color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;max-width:86%;text-align:center;'; t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2600); }
+    var AC=null, SRC=null, AN=null, IV=null, SW=null;
+    function act(){ var p=$('panel-spy'); return !!(p && p.className.indexOf('active')!==-1); }
+    function stopAll(){
+      if(IV){ clearInterval(IV); IV=null; }
+      var mf=$('spyMeterFill'); if(mf) mf.style.width='0%';
+      var lv=$('spyMicLvl'); if(lv) lv.textContent='متوقف';
+      if(SRC){ try{ SRC.disconnect(); }catch(e){} SRC=null; }
+      if(AC){ try{ AC.close(); }catch(e){} AC=null; }
+      AN=null;
+    }
+    function tick(p){
+      var el=$('spyTick'); if(!el) return;
+      if(p>20){ el.textContent='نشاط — اقترب ببطء'; }
+      else if(p>10){ el.textContent='ملاحظة خفيفة'; }
+      else { el.textContent='هادئ'; }
+      if(AC && p>14){
+        try{
+          var o=AC.createOscillator(), g=AC.createGain();
+          o.frequency.value=500+900*((p-14)/86);
+          g.gain.value=0.045;
+          o.connect(g); g.connect(AC.destination);
+          o.start(); o.stop(AC.currentTime+0.05);
+        }catch(e){}
+      }
+    }
+    function loopMeter(){
+      if(IV) clearInterval(IV);
+      if(!AC||!SRC||!AN) return;
+      IV=setInterval(function(){
+        if(!act()){ stopAll(); return; }
+        try{
+          AN.getByteTimeDomainData(AN.buf);
+          var s=0; for(var i=0;i<AN.buf.length;i++){ var d=(AN.buf[i]-128)/128; s+=d*d; }
+          var rms=Math.sqrt(s/AN.buf.length); var pct=Math.min(100, Math.round(rms*420));
+          var lv=$('spyMicLvl'); if(lv) lv.textContent=pct+'%';
+          var mf=$('spyMeterFill'); if(mf) mf.style.width=pct+'%';
+          tick(pct);
+        }catch(e){}
+      },110);
+    }
+    window.spyTune=function(){
+      if(SW){ clearInterval(SW); SW=null; }
+      var f=$('spyFreq'); if(f) f.textContent='—';
+      var r=$('spyReadout'); if(r){ r.textContent='ماسح الطيف الكهربي جاهز — ابدأ الرصد من القسم أعلاه.'; r.className='spy-readout'; }
+    };
+    window.spySweep=function(){
+      if(SW){ clearInterval(SW); SW=null; var f=$('spyFreq'); if(f) f.textContent='—'; tst('أوقفت البحث عن النطاق'); return; }
+      var f=$('spyFreq'); if(f) f.textContent='…';
+      var r=$('spyReadout');
+      if(r){ r.textContent='مطاردة النطاق الرائد…'; r.className='spy-readout'; }
+      SW=setInterval(function(){
+        var f2=$('spyFreq'); if(f2&&f2.textContent==='…') f2.textContent='…';
+      },90);
+      tst('مطاردة النطاق الرائد — اضغط مرة أخرى للإيقاف');
+    };
+    window.spyMicStart=function(){
+      stopAll();
+      if(!act()){ tst('افتح شاشة مكافحة التجسس أولًا'); return; }
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ tst('هذا المتصفح لا يدعم الميكروفون'); return; }
+      navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(st){
+        var ACW=window.AudioContext||window.webkitAudioContext;
+        if(!ACW){ tst('المتصفح لا يدعم تحليل الصوت'); return; }
+        var ac=new ACW();
+        var an=ac.createAnalyser(); an.fftSize=2048; an.buf=new Uint8Array(an.frequencyBinCount);
+        var src=ac.createMediaStreamSource(st);
+        src.connect(an);
+        AC=ac; SRC=src; AN=an;
+        loopMeter();
+        tst('كاشف الصوت يعمل — اقترب من المكان المشكوك به ببطء');
+      }).catch(function(){ tst('سماح الميكروفون مرفوض — فعّل الأذونات من إعدادات المتصفح'); });
+    };
+    window.spyMicStop=function(){ stopAll(); tst('كاشف الصوت متوقف'); };
+    window.spyEchoRun=function(){
+      var res=$('spyEchoRes'); if(!res) return;
+      res.textContent='جاري...'; tst('سيصدر ٣ نبضات — اجعل المكان هادئًا');
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ res.textContent='دعم الميكروفون غير متاح'; return; }
+      navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(st){
+        var ACW=window.AudioContext||window.webkitAudioContext; if(!ACW){ res.textContent='لا دعم للصوت'; return; }
+        var ac=new ACW();
+        var src=ac.createMediaStreamSource(st);
+        var an=ac.createAnalyser(); an.fftSize=2048; an.buf=new Uint8Array(an.frequencyBinCount);
+        src.connect(an);
+        var got=0;
+        function pulse(k){
+          if(k>3){
+            try{ src.disconnect(); ac.close(); }catch(e){}
+            res.textContent=(got>=2)?'⬅ ارتداد! فيه جهاز تسجيل ناشط قريب — راجع المكان':'لا ارتداد واضح — أكمل الفحص';
+            tst('اختبار الانعكاس انتهى');
+            return;
+          }
+          var o=ac.createOscillator(), g=ac.createGain();
+          o.frequency.value=660; g.gain.value=0.12;
+          o.connect(g); g.connect(ac.destination);
+          o.start(); o.stop(ac.currentTime+0.22);
+          setTimeout(function(){
+            var stM=Date.now(), maxRms=0;
+            var probe=setInterval(function(){
+              try{ an.getByteTimeDomainData(an.buf); }catch(e){ return; }
+              var s=0; for(var i=0;i<an.buf.length;i++){ var d=(an.buf[i]-128)/128; s+=d*d; }
+              var rms=Math.sqrt(s/an.buf.length); if(rms>maxRms) maxRms=rms;
+              if(Date.now()-stM>380){
+                clearInterval(probe);
+                if(maxRms>0.05) got++;
+                pulse(k+1);
+              }
+            },40);
+          },280);
+        }
+        pulse(1);
+      }).catch(function(){ res.textContent='سماح الميكروفون مرفوض'; });
+    };
+    window.addEventListener('pagehide', function(){ stopAll(); });
+  })();
+
+  /* ===== FIELD OPS: HIDDEN CAM (أمواج كهرومغناطيسية + أشعة تحت الحمراء) ===== */
+  (function(){
+    function $(id){ return document.getElementById(id); }
+    function tst(m){ var t=document.createElement('div'); t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid #00E6FF;color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;max-width:86%;text-align:center;'; t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2600); }
+    var stream=null, track=null, raf=null, heat=0;
+    function act(){ var p=$('panel-camx'); return !!(p && p.className.indexOf('active')!==-1); }
+    function cross(i, fx, fy){ var c=$('camHot'+i); if(!c) return; if(fx==null){ c.style.opacity='0'; return; } c.style.left=(fx*100).toFixed(1)+'%'; c.style.top=(fy*100).toFixed(1)+'%'; c.style.opacity='1'; }
+    function countEl(m){ var c=$('camCount'); if(c) c.textContent=m; }
+    function spark(){ heat++; if(heat%15===0){ if(navigator.vibrate) navigator.vibrate(60); } }
+    function trackHots(cv,w,h,demo){
+      var pts=[];
+      if(!demo){
+        var iv; try{ iv=cv.getImageData(0,0,w,h).data; }catch(e){ return 0; }
+        var cw=Math.floor(w/24), ch=Math.floor(h/24);
+        for(var gy=0;gy<ch;gy++){ for(var gx=0;gx<cw;gx++){
+          var sx=gx*24, sy=gy*24, sr=0,sg=0,sb=0,kn=0;
+          for(var y=sy;y<sy+24&&y<h;y+=6){ for(var x=sx;x<sx+24&&x<w;x+=6){ var p=(y*w+x)*4; sr+=iv[p]; sg+=iv[p+1]; sb+=iv[p+2]; kn++; } }
+          if(!kn) continue;
+          var ar=sr/kn, ag=sg/kn, ab=sb/kn, lum=(ar+ag+ab)/3;
+          if((lum>225||(ar>110&&ab>50&&ar>ag*1.25))&&pts.length<4){ pts.push({fx:(gx*24+11)/w, fy:(gy*24+11)/h}); }
+        } }
+      } else {
+        var t=Date.now()/1000;
+        pts.push({fx:0.30+0.06*Math.sin(t*1.1), fy:0.40+0.05*Math.cos(t*1.3)});
+        pts.push({fx:0.66+0.05*Math.cos(t*0.9), fy:0.58+0.06*Math.sin(t*1.2)});
+      }
+      cv.strokeStyle='rgba(255,70,70,0.9)'; cv.lineWidth=3;
+      for(var i=0;i<pts.length;i++){ cv.strokeRect((pts[i].fx*w)-22, (pts[i].fy*h)-22, 44, 44); cross(i, pts[i].fx, pts[i].fy); }
+      for(var j=pts.length;j<4;j++) cross(j,null,null);
+      countEl('توهج: '+pts.length);
+      if(pts.length){ spark(); }
+      return pts.length;
+    }
+    function frame(){
+      if(!act()){ camStop(); return; }
+      var v=$('camFeed'), c=$('camCanvas');
+      if(v&&c&&v.readyState>=2){
+        var W=v.videoWidth||c.width, H=v.videoHeight||c.height;
+        if(c.width!==W) c.width=W; if(c.height!==H) c.height=H;
+        var cv=c.getContext('2d');
+        cv.drawImage(v,0,0,c.width,c.height);
+        trackHots(cv,c.width,c.height,false);
+      }
+      raf=requestAnimationFrame(frame);
+    }
+    function demoDraw(){
+      if(!act()){ return; }
+      var c=$('camCanvas'); if(!c) return;
+      var cv=c.getContext('2d'), t=Date.now()/1000, w=c.width, h=c.height;
+      cv.fillStyle='#02121B'; cv.fillRect(0,0,w,h);
+      var g=cv.createRadialGradient(w*(0.5+0.25*Math.sin(t*0.6)), h*(0.5+0.2*Math.cos(t*0.7)), 6, w/2, h/2, w*0.7);
+      g.addColorStop(0,'rgba(0,230,255,0.20)'); g.addColorStop(1,'rgba(2,18,27,0)');
+      cv.fillStyle=g; cv.fillRect(0,0,w,h);
+      var scan=((t*60)%(h+40))-20; cv.fillStyle='rgba(0,230,255,0.08)'; cv.fillRect(0,scan,w,14);
+      trackHots(cv,w,h,true);
+      raf=requestAnimationFrame(demoDraw);
+    }
+    window.camStop=function(){
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      if(track){ try{ track.stop(); }catch(e){} track=null; }
+      if(stream){ try{ stream.getTracks().forEach(function(t2){ t2.stop(); }); }catch(e){} stream=null; }
+      var v=$('camFeed'); if(v){ v.srcObject=null; }
+      var c=$('camCanvas'); if(c){ var cv=c.getContext('2d'); cv.clearRect(0,0,c.width,c.height); }
+      var sw=$('camSweep'); if(sw) sw.textContent='المسح متوقف';
+      countEl('توهج: 0');
+      for(var i=0;i<4;i++) cross(i,null,null);
+    };
+    function demoMode(){ var sw=$('camSweep'); if(sw) sw.textContent='عرض تجريبي — الكاميرا غير متاحة أو مرفوضة'; tst('الكاميرا غير متاحة حاليًا — عرض توضيحي'); raf=requestAnimationFrame(demoDraw); }
+    window.camStart=function(m){
+      camStop();
+      var sw=$('camSweep'); if(sw) sw.textContent='اقلِب الهاتف ببطء تجاه الغرفة...';
+      var mo=$('camMode'); if(mo) mo.textContent='أسلوب ١: الأمواج الكهرومغناطيسية';
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ demoMode(); return; }
+      navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}, audio:false}).then(function(st){
+        stream=st; track=st.getVideoTracks()[0]||null;
+        var v=$('camFeed'); if(v){ v.srcObject=st; v.play().catch(function(){}); }
+        raf=requestAnimationFrame(frame);
+        tst('الماسح يعمل — التوهج الأحمر المربّع = عدسة بثّ محتملة');
+      }).catch(function(){ demoMode(); });
+    };
+    window.camTorch=function(){
+      if(!track){ tst('شغّل الماسح البصري أولًا'); return; }
+      var s=track.getSettings();
+      if(s&&s.torch){ track.applyConstraints({advanced:[{torch:false}]}).then(function(){ tst('أطفأنا اللمبة'); }).catch(function(){}); }
+      else { track.applyConstraints({advanced:[{torch:true}]}).then(function(){ tst('لمبة الهالات تحت الحمراء تعمل — أشر نحو العدسة'); }).catch(function(){ tst('الجهاز لا يدعم اللمبة من داخل المتصفح'); }); }
+    };
+    window.addEventListener('pagehide', function(){ camStop(); });
+  })();
+
+  /* ===== FIELD OPS v2: COUNTER-SPY (ماسح الطيف EMF + MyWiFi) override ===== */
+  (function(){
+    function $(id){ return document.getElementById(id); }
+    function tst(m,mode){ var t=document.createElement('div'); t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid '+(mode==='warn'?'#FFC24B':'#00E6FF')+';color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;max-width:86%;text-align:center;'; t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },3000); }
+    function act(){ var p=$('panel-spy'); return !!(p&&p.className.indexOf('active')!==-1); }
+
+    /* --- RADIO : ماسح الطيف الكهرومغناطيسي (EMF عبر الحساس الكهربي) --- */
+    var RC=null, RSRC=null, RAN=null, RPA=null, RIV=null, SW=null, RFL=[], LR=0, rfSens=60;
+    function radioStop(){
+      if(SW){ clearInterval(SW); SW=null; } if(RIV){ clearInterval(RIV); RIV=null; }
+      if(RSRC){ try{ RSRC.disconnect(); }catch(e){} } RSRC=null; if(RC){ try{ RC.close(); }catch(e){} } RC=null; RAN=null; RPA=null; RFL=[];
+      var mf=$('spyMeterFill'); if(mf) mf.style.width='0%';
+      var sq=$('spySquelch'); if(sq){ sq.textContent='الرصد متوقف'; sq.className='sq-status'; }
+      var lv=$('spySq'); if(lv) lv.textContent='—';
+      var f=$('spyFreq'); if(f) f.textContent='—';
+    }
+    function alertR(m){ var n=Date.now(); if(n-LR<6000) return; LR=n; tst(m,'warn'); }
+    function vibR(){ if(navigator.vibrate) navigator.vibrate(55); }
+    function beepR(p){ if(!RC) return; try{ var o=RC.createOscillator(), g=RC.createGain(); o.frequency.value=320+((p-12)/88)*1220; g.gain.value=0.05; o.connect(g); g.connect(RC.destination); o.start(); o.stop(RC.currentTime+0.06); }catch(e){} }
+    window.spyRadioStart=function(){
+      radioStop();
+      if(!act()){ tst('افتح شاشة مكافحة التجسس أولًا','warn'); return; }
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ tst('المتصفح لا يدعم الميكروفون','warn'); return; }
+      navigator.mediaDevices.getUserMedia({audio:true,video:false}).then(function(st){
+        var ACW=window.AudioContext||window.webkitAudioContext; if(!ACW){ tst('لا دعم لتحليل الصوت','warn'); return; }
+        var ac=new ACW(); var an=ac.createAnalyser(); an.fftSize=4096; an.smoothingTimeConstant=0.6;
+        var src=ac.createMediaStreamSource(st); src.connect(an);
+        RC=ac; RSRC=src; RAN=an; RPA=new Uint8Array(an.frequencyBinCount); RFL=[];
+        var f=$('spyFreq'); if(f) f.textContent='—';
+        var sq=$('spySquelch'); if(sq){ sq.textContent='جاري قراءة الطيف الحي…'; sq.className='sq-status on'; }
+        RIV=setInterval(analyzeRF, 110);
+        tst('ماسح الطيف الكهربي يعمل — افحص في هدوء قرب الأماكن المشكوك فيها');
+      }).catch(function(){ tst('سماح الميكروفون مرفوض — فعّله من إعدادات المتصفح','warn'); });
+    };
+    function analyzeRF(){
+      if(!act()){ radioStop(); return; }
+      try{
+        if(!RAN||!RPA) return;
+        RAN.getByteFrequencyData(RPA);
+        var bin=RPA.length, sr=RC.sampleRate||48000, bw=sr/(bin*2);
+        var hiStart=Math.floor(8000/bw);
+        var domI=0, domV=0, hi=0;
+        for(var i=1;i<bin;i++){ var v=RPA[i]; if(i>=hiStart) hi+=v; if(v>domV&&i>=Math.floor(200/bw)){ domV=v; domI=i; } }
+        var fDom=domI*bw, bwT=Math.max(1,Math.round(217/bw)), mh=Math.max(1,Math.round(50/bw));
+        var tdma=RPA[bwT]/85, mains=RPA[mh]/85;
+        var hiAvg=hi/((bin-hiStart)||1)/255;
+        RFL.push(hiAvg); if(RFL.length>22) RFL.shift();
+        var avgF=0; for(var k=0;k<RFL.length;k++) avgF+=RFL[k]; avgF/=RFL.length;
+        var sdn=0; for(var j=0;j<RFL.length;j++) sdn+=(RFL[j]-avgF)*(RFL[j]-avgF); sdn=Math.sqrt(sdn/(RFL.length||1));
+        var pulse=Math.min(1, sdn*26);
+        var pct=Math.min(100, Math.round((hiAvg*220 + avgF*90 + pulse*200)*10));
+        var mf=$('spyMeterFill'); if(mf) mf.style.width=pct+'%';
+        var lv=$('spySq'); if(lv) lv.textContent=pct+'%';
+        var f=$('spyFreq'); if(f){ if(fDom>=1000) f.textContent=(fDom/1000).toFixed(2)+'kHz'; else if(fDom>=1) f.textContent=Math.round(fDom)+'Hz'; else f.textContent='…'; }
+        var sq=$('spySquelch');
+        var rfMul=(140-rfSens)/80;
+        if(tdma>0.42&&avgF>Math.max(0.05, 0.10*rfMul)){ if(sq){ sq.textContent='نمط نبض متكرر (بثّ خلوي/كاميرا) — ابحث قرب المصدر'; sq.className='sq-status warn'; } beepR(pct); vibR(); alertR('التقطت نمط نبض متكرر — جهاز بثّ قريب'); }
+        else if(hiAvg>Math.max(0.06, 0.17*rfMul)){ if(sq){ sq.textContent='حمل عالي التردد مستمر — بثّ لاسلكي ناشط قريب'; sq.className='sq-status warn'; } beepR(pct); vibR(); }
+        else if(pulse>0.55){ if(sq){ sq.textContent='نبض غير منتظم حولك — افحص المنطقة'; sq.className='sq-status'; } }
+        else { if(sq){ sq.textContent='نطاق نظيف — لا بثّ قريب'; sq.className='sq-status on'; } }
+      }catch(e){}
+    }
+    window.spyRadioStop=function(){ radioStop(); tst('إيقاف ماسح الطيف'); };
+    window.spySweep=function(){
+      if(SW){ clearInterval(SW); SW=null; tst('أوقفنا مطاردة النطاق الرائد'); return; }
+      if(!RAN){ tst('شغّل ماسح الطيف أولًا','warn'); return; }
+      var best={f:0,e:0}, N=0;
+      var f=$('spyFreq'); if(f) f.textContent='صيد…';
+      var sq=$('spySquelch'); if(sq){ sq.textContent='تثبيت النطاق الرائد…'; sq.className='sq-status'; }
+      SW=setInterval(function(){
+        N++;
+        if(RAN&&RPA){ RAN.getByteFrequencyData(RPA); var bw2=(RC.sampleRate||48000)/(RPA.length*2), di=0, dv=0; for(var i=Math.floor(200/bw2);i<RPA.length;i++){ if(RPA[i]>dv){ dv=RPA[i]; di=i; } } var fd=di*bw2; if(dv>best.e){ best.e=dv; best.f=fd; } }
+        if(N>=16){ clearInterval(SW); SW=null; var fs=$('spyFreq'); if(best.f){ if(fs) fs.textContent=(best.f>=1000?(best.f/1000).toFixed(2)+'kHz':Math.round(best.f)+'Hz'); tst('ثبّت النطاق الرائد: '+(best.f>=1000?(best.f/1000).toFixed(2):Math.round(best.f))+((best.f>=1000)?'kHz':'Hz')+(best.e>150?' — قوة عالية':'')); } else { if(fs) fs.textContent='…'; tst('لم نلتقط نطاقًا واضحًا — حرّك الهاتف وعد مرة أخرى'); } }
+      },130);
+    };
+
+    /* --- My Wi-Fi : فحص حقيقي لأجهزة الشبكة --- */
+    var MWRun=false, MWAbort=false;
+    function mwRow(ip,open){
+      var hot=false, t='جهاز متصل';
+      if(open.indexOf(554)!==-1){ t='⚫ جهاز كاميرا بثّ جارٍ (RTSP)'; hot=true; }
+      else if(open.indexOf(8080)!==-1&&open.indexOf(80)!==-1){ t='⚫ جهاز ويب/كاميرا'; hot=true; }
+      else if(open.indexOf(8000)!==-1){ t='جهاز ويب — ممكن كاميرا'; hot=true; }
+      else if(open.indexOf(8080)!==-1){ t='جهاز ويب'; }
+      else if(open.indexOf(80)!==-1){ t='جهاز ناشط'; }
+      return '<div class="mw-row'+(hot?' hot':'')+'"><span class="ip">'+ip+'</span><span class="kd">'+t+'</span><small>'+open.join(' · ')+'</small></div>';
+    }
+    function getLocalSub(cb){
+      var ips=[];
+      try{
+        var pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+        var done=0;
+        var fin=function(){ if(done) return; done=1; var sub=null; for(var i=0;i<ips.length;i++){ var p=ips[i].split('.').slice(0,3).join('.'); if(/^(192\.168|10\.|172\.(1[6-9]|2[0-9]|3[01]))/.test(p)){ sub=p; break; } } cb(sub); };
+        pc.onicecandidate=function(e){ if(e.candidate){ var ip=(e.candidate.candidate.match(/([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})/)||[])[0]; if(ip&&ips.indexOf(ip)===-1) ips.push(ip); } else { fin(); } };
+        setTimeout(fin, 3500);
+        pc.createDataChannel('x'); pc.createOffer().then(function(o){ pc.setLocalDescription(o); }).catch(function(){ fin(); });
+      }catch(e){ cb(null); }
+    }
+    window.mwScan=function(){
+      if(MWRun){ MWAbort=true; var b=$('mwBtn'); if(b){ b.textContent='مسح الشبكة الآن'; } return; }
+      MWRun=true; MWAbort=false;
+      var st=$('mwState'); if(st) st.textContent='تحديد بنية الشبكة…';
+      var btn=$('mwBtn'); if(btn) btn.textContent='إيقاف المسح';
+      var list=$('mwList'); if(list) list.innerHTML='<div class="mw-row"><span class="ip">…</span><span class="kd">محدّث البنية</span></div>';
+      getLocalSub(function(sub){
+        if(MWAbort){ MWRun=false; var st2=$('mwState'); if(st2) st2.textContent='أوقفت المسح'; var b3=$('mwBtn'); if(b3) b3.textContent='مسح الشبكة الآن'; return; }
+        var subs=[];
+        if(sub){ subs.push(sub); }
+        else { subs.push('192.168.0'); subs.push('192.168.1'); subs.push('10.0.0'); }
+        scanSubsets(subs);
+      });
+    };
+    function scanSubsets(subs){
+      var tasks=[];
+      subs.forEach(function(sub){ for(var i=1;i<=44;i++){ tasks.push(sub+'.'+i); } var g=$('mwState'); if(g) g.textContent='جودة: '+sub+'.x ('+44+' عناوين)'; });
+      var ports=[80,8080,8000,554];
+      var cur=0, alive=[];
+      var st=$('mwState'), fill=$('mwFill'), list=$('mwList'), btn=$('mwBtn');
+      function probeHost(ip, cb){
+        var open=[], doneC=0, any=false;
+        function tick(){ doneC++; if(doneC===ports.length) cb(any, open); }
+        ports.forEach(function(port){
+          var ctl=new AbortController(); var to=setTimeout(function(){ ctl.abort(); tick(); },850);
+          fetch('http://'+ip+':'+port+'/', {mode:'no-cors', signal:ctl.signal})
+            .then(function(){ clearTimeout(to); any=true; if(open.indexOf(port)===-1) open.push(port); tick(); })
+            .catch(function(){ clearTimeout(to); tick(); });
+        });
+      }
+      function next(){
+        if(MWAbort){ MWRun=false; if(st) st.textContent='أوقفت المسح'; if(btn) btn.textContent='مسح الشبكة الآن'; return; }
+        if(cur>=tasks.length){ MWRun=false; if(st) st.textContent='الانتهاء — '+alive.length+' جهازًا متصلًا على الشبكة'; if(fill) fill.style.width='100%'; if(btn) btn.textContent='مسح الشبكة الآن'; tst('انتهى مسح الشبكة: '+alive.length+' جهاز'); return; }
+        var run=[]; while(cur<tasks.length&&run.length<10){ run.push(tasks[cur++]); }
+        var left=tasks.length-cur, total=tasks.length;
+        if(fill) fill.style.width=(100*(1-left/total)).toFixed(0)+'%';
+        if(st) st.textContent='جولة '+cur+'/'+total+' — ظهر: '+alive.length;
+        var pend=run.length;
+        run.forEach(function(ip){
+          probeHost(ip, function(any, open){
+            if(any){ alive.push({ip:ip, open:open}); if(list) list.innerHTML += mwRow(ip, open.slice().sort()); }
+            pend--; if(pend===0){ setTimeout(next, 8); }
+          });
+        });
+      }
+      next();
+    }
+    window.mwStop=function(){ if(MWRun) MWAbort=true; };
+    (function(){
+      try{ var s1=+(localStorage.getItem('vg_rfsens')||60); if(s1>=20&&s1<=100) rfSens=s1; }catch(e){}
+      var rs=$('rfSensR'); if(rs){ rs.value=rfSens; var rv=$('rfSensV'); if(rv) rv.textContent=rfSens;
+        rs.oninput=function(){ rfSens=+rs.value; if(rv) rv.textContent=rs.value; try{ localStorage.setItem('vg_rfsens', rfSens); }catch(e){} }; }
+    })();
+    window.addEventListener('pagehide', function(){ radioStop(); });
+  })();
+
+  /* ===== FIELD OPS v2: HIDDEN CAM (EM магнит + IR) override ===== */
+  (function(){
+    function $(id){ return document.getElementById(id); }
+    function tst(m,mode){ var t=document.createElement('div'); t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid '+(mode==='warn'?'#FFC24B':'#00E6FF')+';color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;max-width:86%;text-align:center;'; t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2800); }
+    var stream=null, track=null, raf=null, mode='em', lastLuma=-1, buf=[], heading=null, prevA=null, drift=0, lastTst=0, calS=[], calT=0, calBase=null, flickS=[], MOT=0, MOTS=[], ACL=null, emSens=60, irSens=55, nightOn=false;
+    function act(){ var p=$('panel-camx'); return !!(p&&p.className.indexOf('active')!==-1); }
+    function calStart(){ calS=[]; calBase=null; calT=Date.now()+4000; drift=0; prevA=null; buf=[]; lastLuma=-1; flickS=[]; }
+    function cross(i,fx,fy){ var c=$('camHot'+i); if(!c) return; if(fx==null){ c.style.opacity='0'; return; } c.style.left=(fx*100).toFixed(1)+'%'; c.style.top=(fy*100).toFixed(1)+'%'; c.style.opacity='1'; }
+    function countEl(m){ var c=$('camCount'); if(c) c.textContent=m; }
+    function stateEl(txt,cls){ var s=$('emState'); if(!s) return; s.textContent=txt; s.className='sq-status '+(cls||''); }
+    function chip(txt,cls){ var c=$('camChip'); if(!c) return; c.textContent=txt; c.className='nt-chip '+(cls||''); }
+    function saveSens(){ try{ localStorage.setItem('vg_emsens', emSens); localStorage.setItem('vg_irsens', irSens); }catch(e){} }
+    window.toggleNight=function(){
+      nightOn=!nightOn;
+      var p=$('panel-camx'); if(p){ p.className=p.className.replace(/\snight/,'')+(nightOn?' night':''); }
+      var b=$('camNightBtn'); if(b) b.setAttribute('data-on', nightOn?'1':'0');
+      try{ localStorage.setItem('vg_night', nightOn?'1':'0'); }catch(e){}
+    };
+    window.resetSens=function(){
+      emSens=60; irSens=55; saveSens();
+      var er=$('emSensR'), ev=$('emSensV'), ir=$('irSensR'), iv=$('irSensV');
+      if(er){ er.value='60'; } if(ev) ev.textContent='60'; if(ir){ ir.value='55'; } if(iv) iv.textContent='55';
+      tst('أعدنا العتبات الافتراضية (EM 60 / IR 55)');
+    };
+    (function(){
+      try{ nightOn=localStorage.getItem('vg_night')==='1'; }catch(e){}
+      try{ var a=+(localStorage.getItem('vg_emsens')||60); if(a>=20&&a<=100) emSens=a;
+           var b=+(localStorage.getItem('vg_irsens')||55); if(b>=20&&b<=100) irSens=b; }catch(e){}
+      var er=$('emSensR'), ir=$('irSensR');
+      if(er){ er.value=emSens; var ev=$('emSensV'); if(ev) ev.textContent=emSens; er.oninput=function(){ emSens=+er.value; if(ev) ev.textContent=er.value; saveSens(); }; }
+      if(ir){ ir.value=irSens; var iv=$('irSensV'); if(iv) iv.textContent=irSens; ir.oninput=function(){ irSens=+ir.value; if(iv) iv.textContent=ir.value; saveSens(); }; }
+      var p=$('panel-camx'), b2=$('camNightBtn');
+      if(nightOn){ if(p) p.className+=' night'; if(b2) b2.setAttribute('data-on','1'); }
+      mkEMGauge();
+    })();
+    function alertOnce(m){ var n=Date.now(); if(n-lastTst<7000) return; lastTst=n; tst(m,'warn'); }
+    function vib(){ if(navigator.vibrate) navigator.vibrate(70); }
+    function beepEM(lv){ try{ if(!window.__emAC) window.__emAC=new (window.AudioContext||window.webkitAudioContext)(); var ac=window.__emAC, o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=520+(lv/100)*900; g.gain.value=0.05; o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.08); }catch(e){} }
+    function setEM(v){
+      v=Math.max(0,Math.min(100,v));
+      var a=$('emGaugeArc'), gv=$('emGaugeVal');
+      if(a){ var C=2*Math.PI*46; a.style.strokeDasharray=C.toFixed(1); a.style.strokeDashoffset=(C*(1-v/100)).toFixed(1); }
+      if(gv){ gv.textContent=Math.round(v)+'%'; gv.className=v>=65?'hi':(v>=35?'mid':''); }
+    }
+    function mkEMGauge(){
+      var g=$('emgTicks'); if(!g) return; var NS='http://www.w3.org/2000/svg';
+      for(var v=0;v<=100;v+=5){ var a=(-90+v/100*360)*Math.PI/180;
+        var x1=60+(41-6)*Math.cos(a), y1=60+(41-6)*Math.sin(a);
+        var x2=60+41*Math.cos(a), y2=60+41*Math.sin(a);
+        var ln=document.createElementNS(NS,'line');
+        ln.setAttribute('x1',x1); ln.setAttribute('y1',y1); ln.setAttribute('x2',x2); ln.setAttribute('y2',y2);
+        ln.setAttribute('class', v%25===0?'major':'minor');
+        g.appendChild(ln);
+      }
+    }
+    window.camStop=function(){
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      if(track){ try{ track.stop(); }catch(e){} track=null; }
+      if(stream){ try{ stream.getTracks().forEach(function(t2){ t2.stop(); }); }catch(e){} stream=null; }
+      var v=$('camFeed'); if(v) v.srcObject=null;
+      var c=$('camCanvas'); if(c){ var cv=c.getContext('2d'); cv.clearRect(0,0,c.width,c.height); }
+      var sw=$('camSweep'); if(sw) sw.textContent='المسح متوقف';
+      countEl('توهج: 0'); stateEl('المسح متوقف',''); chip('جاهز للفحص','');
+      setEM(0);
+      buf=[]; lastLuma=-1; flickS=[]; calBase=null; calS=[];
+      for(var i=0;i<4;i++) cross(i,null,null);
+    };
+    function startCamera(m, cbOk){
+      navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}, audio:false}).then(function(st){
+        stream=st; track=st.getVideoTracks()[0]||null;
+        var v=$('camFeed'); if(v){ v.srcObject=st; v.play().catch(function(){}); }
+        cbOk();
+      }).catch(function(){ demoMode(); });
+    }
+    function restartLoop(){
+      buf=[]; lastLuma=-1;
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      raf=requestAnimationFrame(loop);
+    }
+    function demoMode(){
+      if(mode==='em') calStart();
+      var sw=$('camSweep'); if(sw) sw.textContent='عرض توضيحي — الكاميرا غير متاحة';
+      stateEl('المسح التوضيحي','on'); tst('الكاميرا غير متاحة حاليًا — عرض توضيحي');
+      restartLoop();
+    }
+    function loop(){
+      if(!act()){ camStop(); return; }
+      var v=$('camFeed'), c=$('camCanvas');
+      if(c&&v&&v.readyState>=2){
+        var W=v.videoWidth||c.width, H=v.videoHeight||c.height;
+        if(c.width!==W) c.width=W; if(c.height!==H) c.height=H;
+        var cv=c.getContext('2d'); cv.drawImage(v,0,0,c.width,c.height);
+        if(mode==='ir'){ detectIR(cv,c.width,c.height); }
+        else { detectEM(cv,c.width,c.height); }
+      } else if(c){ demoFrame(c); }
+      raf=requestAnimationFrame(loop);
+    }
+    function demoFrame(c){
+      var cv=c.getContext('2d'), t=Date.now()/1000, w=c.width, h=c.height;
+      cv.fillStyle='#02121B'; cv.fillRect(0,0,w,h);
+      var g=cv.createRadialGradient(w*(0.5+0.25*Math.sin(t*0.6)),h*(0.5+0.2*Math.cos(t*0.7)),6,w/2,h/2,w*0.7);
+      g.addColorStop(0,'rgba(0,230,255,0.20)'); g.addColorStop(1,'rgba(2,18,27,0)');
+      cv.fillStyle=g; cv.fillRect(0,0,w,h);
+      var scan=((t*120)%(h+40))-20; cv.fillStyle='rgba(0,230,255,0.10)'; cv.fillRect(0,scan,w,10);
+      if(mode==='em'){ emitDemoEM(); } else { emitDemoIR(); }
+    }
+    function emitDemoIR(){
+      var t=Date.now()/1000;
+      cross(0,0.30+0.06*Math.sin(t*1.1),0.40+0.05*Math.cos(t*1.3));
+      cross(1,0.66+0.05*Math.cos(t*0.9),0.58+0.06*Math.sin(t*1.2));
+      countEl('توهج: 2');
+    }
+    function emitDemoEM(){
+      var t=Date.now()/1000;
+      var em=Math.round(30+18*Math.sin(t*2.2));
+      setEM(em);
+    }
+    var IRHIT={};
+    function detectIR(cv,w,h){
+      var iv; try{ iv=cv.getImageData(0,0,w,h).data; }catch(e){ return; }
+      var cell=18, cx=Math.floor(w/cell), cy=Math.floor(h/cell);
+      var lm=[], mx=[];
+      for(var gy=0;gy<cy;gy++){ lm[gy]=[]; mx[gy]=[]; mx[gy].fill=new Uint8Array(cx);
+        for(var gx=0;gx<cx;gx++){
+          var s=0,kn=0,m2=0,fl=0;
+          for(var y=gy*cell;y<(gy+1)*cell&&y<h;y+=6){ for(var x=gx*cell;x<(gx+1)*cell&&x<w;x+=6){ var p=(y*w+x)*4; var v=iv[p]*0.3+iv[p+1]*0.6+iv[p+2]*0.1; s+=v; kn++; if(v>m2) m2=v; if(v>=200) fl++; } }
+          lm[gy][gx]=kn?s/kn:0; mx[gy][gx]=m2; mx[gy].fill[gx]=fl;
+        } }
+      function neigh(gx,gy){ var s=0,kn=0; for(var dy=-1;dy<=1;dy++){ for(var dx=-1;dx<=1;dx++){ var yy=gy+dy,xx=gx+dx; if(yy<0||xx<0||yy>=cy||xx>=cx||(dx===0&&dy===0)) continue; s+=lm[yy][xx]; kn++; } } return kn?s/kn:0; }
+      function bigBlo(gx,gy){ for(var by=gy-1;by<=gy+1;by++){ for(var bx=gx-1;bx<=gx+1;bx++){ if(bx<0||by<0||bx+1>=cx||by+1>=cy) continue; if(lm[by][bx]>=190&&lm[by][bx+1]>=190&&lm[by+1][bx]>=190&&lm[by+1][bx+1]>=190) return true; } } return false; }
+      var spots=[];
+      var irTh=Math.max(200, 230-Math.max(0,(irSens-50)));
+      var irC=Math.max(24, 85-Math.max(0,(irSens-50))*0.9);
+      for(var yy2=0;yy2<cy;yy2++){ for(var xx2=0;xx2<cx;xx2++){
+        var cm=mx[yy2][xx2], nb=neigh(xx2,yy2), fl=mx[yy2].fill[xx2];
+        if(cm>=irTh&&cm>=nb+irC&&fl<=3&&!bigBlo(xx2,yy2)){
+          var merged=false;
+          for(var s2=0;s2<spots.length;s2++){ var sp=spots[s2]; if(Math.abs(sp.gx-xx2)<=2&&Math.abs(sp.gy-yy2)<=2){ if(cm>sp.v){ sp.gx=xx2; sp.gy=yy2; sp.v=cm; sp.nb=nb; } merged=true; break; } }
+          if(!merged){ spots.push({gx:xx2,gy:yy2,v:cm,nb:nb}); }
+        }
+      } }
+      var now=Date.now(), out=[];
+      for(var i=0;i<spots.length;i++){ var key=Math.floor(spots[i].gx/2)+'_'+Math.floor(spots[i].gy/2);
+        var rec=IRHIT[key]; if(!rec||now-rec.t>300) rec={n:0, fx:spots[i].gx, fy:spots[i].gy, t:now};
+        rec.n+=1; rec.t=now; IRHIT[key]=rec;
+        var sc=Math.round(Math.min(100,(spots[i].v-spots[i].nb)*1.6));
+        if(rec.n>=2){ out.push({fx:(rec.fx*cell+9)/w, fy:(rec.fy*cell+9)/h, sc:sc}); }
+      }
+      for(var k2 in IRHIT){ if(now-IRHIT[k2].t>1000) delete IRHIT[k2]; }
+      cv.strokeStyle='rgba(255,80,80,0.95)'; cv.lineWidth=3;
+      for(var m=0;m<out.length&&m<4;m++){
+        var x=out[m].fx*w, y=out[m].fy*h, ss=34;
+        cv.strokeRect(x-ss/2,y-ss/2,ss,ss);
+        cv.strokeStyle='rgba(255,210,90,0.9)'; cv.fillStyle='rgba(0,0,0,0.5)'; cv.font='10px monospace';
+        cv.fillText('توهج '+out[m].sc+'%', x-ss/2, y-ss/2-4);
+        cv.strokeStyle='rgba(255,80,80,0.95)';
+        cross(m,out[m].fx,out[m].fy);
+      }
+      for(var r=out.length;r<4;r++) cross(r,null,null);
+      countEl('توهج: '+out.length);
+      if(out.length){ vib(); chip('توهج: '+out.length+' — ثبّت للتأكيد','alert'); if(out.length>=2) alertOnce('نقطتا توهج ثابتتان في موضعهما — ثبّت ٣ ثوانٍ فوق كل هدف لتأكيد القرينة'); }
+      else { chip('لا نقاط — نطاق نظيف','ok'); }
+    }
+    function detectEM(cv,w,h){
+      var iv; try{ iv=cv.getImageData(0,0,w,h).data; }catch(e){ return; }
+      var n=0, sum=0;
+      for(var y=0;y<h;y+=6){ for(var x=0;x<w;x+=6){ var p=(y*w+x)*4; sum+=iv[p]*0.3+iv[p+1]*0.6+iv[p+2]*0.1; n++; } }
+      var luma=sum/n;
+      if(lastLuma>=0){ buf.push(Math.abs(luma-lastLuma)); if(buf.length>14) buf.shift(); }
+      lastLuma=luma;
+      var avgV=0; for(var i=0;i<buf.length;i++) avgV+=buf[i]; avgV/=(buf.length||1);
+      var sd=0; for(var j=0;j<buf.length;j++) sd+=(buf[j]-avgV)*(buf[j]-avgV); sd=Math.sqrt(sd/(buf.length||1));
+      var flick=Math.min(100, Math.round(sd*5));
+      flickS.push(flick); if(flickS.length>18) flickS.shift();
+      var fmax=0; for(var k=0;k<flickS.length;k++){ if(flickS[k]>fmax) fmax=flickS[k]; }
+      var sig=Math.max(Math.min(100, Math.round(fmax)), Math.min(100, Math.round(drift*6)));
+      setEM(sig);
+      var d=$('emCompass'); if(d&&heading!=null) d.textContent=Math.round(heading)+'°';
+      if(calT>Date.now()){ calS.push(sig); if(calS.length>40) calS.shift(); var cs=$('emState'); if(cs){ cs.textContent='معايرة الحقل… ثبّت الهاتف '+(Math.max(0,Math.ceil((calT-Date.now())/1000)))+'ث'; cs.className='sq-status'; } chip('معايرة الحقل…',''); if(calS.length>=20){ var cavg=0; for(var c2=0;c2<calS.length;c2++) cavg+=calS[c2]; cavg/=calS.length; calBase=cavg*1.8+14; } return; }
+      var thr=(calBase==null)?30:Math.max(30,calBase);
+      var thrEff=Math.max(12, thr*(140-emSens)/80);
+      var moving=MOT>0.55;
+      if(sig>thrEff&&sig>=fmax*0.8){
+        if(moving){ stateEl('حركة ملحوظة — ثبّت الهاتف فوق الهدف للتأكيد',''); chip('ثبّت للتأكيد','warn'); }
+        else { stateEl('حقل متذبذب قريب — ثبّت ٣ ثوانٍ فوق الهدف','warn'); chip('قرينة قرب','alert'); beepEM(sig); vib(); alertOnce('قرينة قرب كهرومغناطيسي — حافظ على الثبات ٣ ثوانٍ لتأكيد المصدر'); }
+      }
+      else if(sig>thrEff*0.55){ stateEl(moving?'امسح بثبات…':'نشاط خفيف — نواصل',''); chip('فحص جارٍ',''); }
+      else { stateEl('المحيط هادئ — آمن','on'); chip('بيئة هادئة','ok'); }
+    }
+    if(window.DeviceOrientationEvent){
+      window.addEventListener('deviceorientation', function(ev){
+        if(ev.alpha!=null){ heading=ev.alpha; if(prevA!=null){ var diff=Math.abs(ev.alpha-prevA); if(diff>180) diff=360-diff; drift=drift*0.85+diff*0.15; } prevA=ev.alpha; }
+      }, true);
+    }
+    function setupMotion(){
+      var Sens=null;
+      if(window.LinearAccelerationSensor){ try{ Sens=new LinearAccelerationSensor({frequency:20}); }catch(e){} }
+      if(!Sens&&window.Accelerometer){ try{ Sens=new Accelerometer({frequency:20}); }catch(e){} }
+      ACL=Sens;
+      if(!ACL) return;
+      ACL.onreading=function(){
+        var m=Math.sqrt((ACL.x||0)*(ACL.x||0)+(ACL.y||0)*(ACL.y||0)+(ACL.z||0)*(ACL.z||0));
+        MOTS.push(m); if(MOTS.length>20) MOTS.shift();
+        var s2=0; for(var i=0;i<MOTS.length;i++) s2+=MOTS[i]; MOT=s2/MOTS.length;
+      };
+      try{ ACL.start(); }catch(e){}
+    }
+    setupMotion();
+    window.camStart=function(m){
+      mode=m||'em'; var mo=$('camMode');
+      if(mo) mo.textContent=(mode==='ir')?'٢: كاشف التوهج الحراري (IR)':'١: مستشعر القرب الكهرومغناطيسي';
+      var cc=$('camCount'); if(cc) cc.textContent='توهج: 0';
+      if(mode==='em') calStart();
+      if(stream){ restartLoop(); tst('تبديل الماسح → '+(mode==='ir'?'كاشف التوهج الحراري IR':'مستشعر القرب الكهرومغناطيسي')); return; }
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ demoMode(); return; }
+      var sw=$('camSweep'); if(sw) sw.textContent='اقلِب الهاتف ببطء تجاه الغرفة…';
+      startCamera(m, function(){ restartLoop(); tst('الماسح يعمل — ثبّت ٤ ثوانٍ للمعايرة ثم امسح'); });
+    };
+    window.camTorch=function(){
+      if(!track){ tst('شغّل الماسح أولًا','warn'); return; }
+      var s=track.getSettings();
+      if(s&&s.torch){ track.applyConstraints({advanced:[{torch:false}]}).then(function(){ tst('أطفأنا لمبة IR'); }).catch(function(){}); }
+      else { track.applyConstraints({advanced:[{torch:true}]}).then(function(){ tst('لمبة IR تعمل — أشر نحو العدسة وتأكد من الانعكاس البنفسجي'); }).catch(function(){ tst('الجهاز لا يدعم اللمبة من داخل المتصفح','warn'); }); }
+    };
+    window.addEventListener('pagehide', function(){ camStop(); if(window.__emAC){ try{ window.__emAC.close(); }catch(e){} } });
+  })();
 })();
 </script>
+
+<script>
+(function(){
+  var qa = {
+    gen:    function(){ goto('passwords'); try{ generatePassword(); }catch(e){} },
+    check:  function(){ goto('passwords'); try{ check(); }catch(e){ } },
+    scan:   function(){ goto('scanner');   try{ checkUrl(); }catch(e){} },
+    track:  function(){ goto('tracking');  try{ runTrackerScan(); }catch(e){} },
+    perm:   function(){ goto('permissions'); try{ runProbe(); }catch(e){} },
+    radar:  function(){ goto('radar');      try{ runProbe(); }catch(e){} try{ renderAll(); }catch(e){} },
+    quiz:   function(){ goto('quiz');      try{ restartQuiz(); }catch(e){} },
+    vault:  function(){ goto('vault');     try{ renderVault(); }catch(e){} },
+    sensor: function(){ goto('esensor');   try{ startLoop(); }catch(e){} try{ renderAll(); }catch(e){} },
+    centcom:function(){ goto('centcom');   try{ startLoop(); }catch(e){} try{ renderAll(); }catch(e){} },
+    repo:   function(){ goto('ereports');  try{ renderAll(); }catch(e){} },
+    seal:   function(){ goto('eadmin');    try{ window.epGenSeal(); }catch(e){} },
+    kit:    function(){ goto('eadmin');    try{ window.epDownloadKit(); }catch(e){} }
+  };
+  function closeSheet(){
+    var s=document.getElementById('v2Sheet'), b=document.getElementById('v2SheetBg');
+    if(s) s.classList.remove('open'); if(b) b.classList.remove('open');
+  }
+  function openSheet(){
+    var s=document.getElementById('v2Sheet'), b=document.getElementById('v2SheetBg');
+    if(s) s.classList.add('open'); if(b) b.classList.add('open');
+  }
+  function goto(name){
+    if(name==='home'){
+      document.body.classList.remove('screen-tools');
+      document.querySelectorAll('.bn-item').forEach(function(b){ b.classList.remove('active'); });
+      try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+      return;
+    }
+    document.body.classList.add('screen-tools');
+    document.querySelectorAll('nav.tabs button').forEach(function(b){
+      if(b.getAttribute('data-panel')===name) b.classList.add('active'); else b.classList.remove('active');
+    });
+    document.querySelectorAll('section.panel').forEach(function(p){
+      if(p.id==='panel-'+name) p.classList.add('active'); else p.classList.remove('active');
+    });
+    document.querySelectorAll('.bn-item').forEach(function(b){
+      if(b.getAttribute('data-goto')===name) b.classList.add('active'); else b.classList.remove('active');
+    });
+    var wrap=document.querySelector('main[class="wrap"]');
+    if(wrap) setTimeout(function(){ try{ wrap.scrollIntoView({behavior:'smooth', block:'start'}); }catch(e){ wrap.scrollIntoView(); } },30);
+  }
+  document.addEventListener('click', function(ev){
+    var t=ev.target;
+    var g=t.closest ? t.closest('[data-goto]') : null;
+    if(g){ closeSheet(); goto(g.getAttribute('data-goto')); return; }
+    var q=t.closest ? t.closest('[data-q]') : null;
+    if(q){ closeSheet(); var fn=qa[q.getAttribute('data-q')]; if(fn){ try{ fn(); }catch(e){ console.warn(e); } } return; }
+    var mb=t.closest ? t.closest('#v2MenuBtn,#v2Fab') : null;
+    if(mb){ openSheet(); return; }
+    if(t.id==='v2SheetBg'){ closeSheet(); return; }
+    if(t.id==='v2Back'){ goto('home'); return; }
+  });
+  window.v2 = { goto: goto, openSheet: openSheet, closeSheet: closeSheet, qa: qa };
+  document.addEventListener('keydown', function(ev){ if(ev.key==='Escape'||ev.key==='Esc') closeSheet(); });
+  var fabEl=document.getElementById('v2Fab'), fabTimer=null, fabLong=false, fabStart=null;
+  if(fabEl){
+    fabEl.addEventListener('touchstart', function(ev){
+      fabLong=false; clearTimeout(fabTimer);
+      var t=(ev.touches&&ev.touches[0])||null;
+      fabStart = t ? {x:t.clientX,y:t.clientY} : null;
+      fabTimer=setTimeout(function(){ fabLong=true; try{ closeSheet(); goto('esensor'); }catch(e){} }, 520);
+    }, {passive:true});
+    function fabCancel(){ clearTimeout(fabTimer); }
+    fabEl.addEventListener('touchmove', function(ev){
+      var t=(ev.touches&&ev.touches[0])||null;
+      if(fabStart && t && (Math.abs(t.clientX-fabStart.x)>14 || Math.abs(t.clientY-fabStart.y)>14)) fabCancel();
+    }, {passive:true});
+    ['touchend','touchcancel'].forEach(function(evt){ fabEl.addEventListener(evt, fabCancel, {passive:true}); });
+    fabEl.addEventListener('click', function(ev){
+      if(fabLong){ fabLong=false; ev.stopPropagation(); ev.preventDefault(); }
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
