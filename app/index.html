@@ -1503,9 +1503,6 @@ body.screen-tools #v2Tools{display:block;}
 .brand-hero{position:relative; border-radius:26px; padding:20px 16px;
   background:radial-gradient(ellipse at 50% 18%, rgba(0,230,255,0.12), rgba(0,230,255,0) 72%);
   box-shadow:0 0 46px -12px rgba(0,230,255,0.18);}
-#vg-lic-overlay{display:none !important;}
-#vg-lic-card,.vg-lic-card{display:none !important;}
-.vg-lic-input,#vg-lic-msg{display:none !important;}
 .scan-hero{position:relative; border-radius:26px; padding:12px 12px; margin-top:14px;
   background:radial-gradient(ellipse at 50% 40%, rgba(0,245,176,0.13), rgba(0,245,176,0) 78%);
   box-shadow:0 0 44px -10px rgba(0,245,176,0.20);}
@@ -6328,49 +6325,9 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 
   window.VG_NOTICES = VG_NOTICES;
 
-  // ===================== ENTERPRISE EVALUATION ENTRY =====================
-  // البوابة الحقيقية هي نفسها (VG_LIC). هنا فقط: عند عدم وجود تفعيل حقيقي على هذا الجهاز
-  // يُضاف زر «دخول تجريبي للمؤسسات» داخل بطاقة القفل. الدخول التجريبي لا يزيّف شيئًا:
-  // كل الأدوات والمستشعر حقيقيان ويُشغَّلان محليًا. النسخة المرخّصة لا يظهر فيها الزر أصلاً.
-  (function(){
-    var vge_demo=false, vge_member=null;
-    try{ vge_demo = localStorage.getItem('vge_demo')==='1' || (typeof sessionStorage!=='undefined' && sessionStorage.getItem('vge_demo')==='1'); }catch(e){}
-    try{ vge_member = JSON.parse(localStorage.getItem('vge_member')||'null'); }catch(e){ vge_member=null; }
-    // وحدة مسجّلة من مدير المؤسسة (رمز نشر صادر بضغطة واحدة) — تُعامَل كتفعيل حقيقي.
-    function memberOK(){ try{ if(!vge_member) return false; var c=(vge_member.code||''); if(!/^VGM-[0-9]{4}-[A-Z0-9]{8,12}$/.test(c)) return false; return !!String(vge_member.org||'').trim(); }catch(e){ return false; } }
-    var ORIG_START = VG_LIC.start;
-    VG_LIC.start = function(){
-      if(vge_demo || memberOK()){
-        var _o = document.getElementById('vg-lic-overlay');
-        if(_o && _o.parentNode) _o.parentNode.removeChild(_o);
-        return Promise.resolve(true);
-      }
-      return ORIG_START().then(function(active){
-        if(active) return true;
-        setTimeout(function(){
-          var _o2 = document.getElementById('vg-lic-overlay');
-          if(!_o2) return;
-          if(document.getElementById('vge-eval-btn')) return;
-          var _card = _o2.querySelector('.vg-lic-card') || _o2;
-          var _b = document.createElement('button');
-          _b.id = 'vge-eval-btn';
-          _b.className = 'vg-lic-btn';
-          _b.textContent = 'دخول تجريبي للمؤسسات (تقييم محلي)';
-          _b.style.cssText = 'margin-top:12px;background:rgba(0,230,255,.06);border:1px dashed rgba(0,230,255,.45);color:#00E6FF;box-shadow:none;';
-          _b.onclick = function(){
-            try{ localStorage.setItem('vge_demo','1'); }catch(e){}
-            try{ sessionStorage.setItem('vge_demo','1'); }catch(e){}
-            location.reload();
-          };
-          _card.appendChild(_b);
-        }, 80);
-        return false;
-      });
-    };
-  })();
-
+  // (licensed build — licensing gate only, no evaluation bypass)
   // boot: licensing gate before anything else is usable (overlay covers app)
-  null && VG_LIC.start().then(function(active){ if(!active){ /* overlay is up; interaction blocked */ } });
+  VG_LIC.start().then(function(active){ if(!active){ /* overlay is up; interaction blocked */ } });
   // فحص الإشعار المركزي بعد فتح البوابة (لا يُعرض فوق شاشة القفل)
   setTimeout(function(){ VG_NOTICES.check(); }, 2500);
 })();
