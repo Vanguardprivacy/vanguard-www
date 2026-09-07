@@ -2338,46 +2338,6 @@ body.screen-tools #v2Tools{display:block;}
       <div class="ep-row"><span class="k">التخزين المستخدم</span><span class="v" id="epStore">—</span></div>
       <div class="ep-row"><span class="k">سياق آمن (HTTPS / ملف محلي)</span><span class="v" id="epSec">—</span></div>
       <div class="ep-row"><span class="k">ملفات الارتباط / لا تتتبع</span><span class="v" id="epDnt">—</span></div>
-      <div class="ghost-sec">
-        <button class="ghost-shield" id="ghostShield" onclick="ghostShieldStart()">
-          <span class="gs-badge">
-            <svg viewBox="0 0 30 30">
-              <g class="gs-spikes" stroke="#FF4D6A" stroke-width="1.15" stroke-linecap="round" fill="none">
-                <line x1="15" y1="15" x2="15" y2="2.6"/>
-                <line x1="15" y1="15" x2="15" y2="27.4"/>
-                <line x1="15" y1="15" x2="2.6" y2="15"/>
-                <line x1="15" y1="15" x2="27.4" y2="15"/>
-                <line x1="15" y1="15" x2="6.4" y2="6.4"/>
-                <line x1="15" y1="15" x2="23.6" y2="23.6"/>
-                <line x1="15" y1="15" x2="6.4" y2="23.6"/>
-                <line x1="15" y1="15" x2="23.6" y2="6.4"/>
-              </g>
-              <g class="gs-face">
-                <path d="M15 8 C9.6 8 7 12 7 16.4 C7 20.2 9.4 23 12.2 24.2 L12 27 L18 27 L17.8 24.2 C20.6 23 23 20.2 23 16.4 C23 12 20.4 8 15 8 Z" fill="rgba(255,77,106,0.16)" stroke="#FF4D6A" stroke-width="1.2"/>
-                <path d="M9.2 15.6 L12 13.4 L12 18.4 Z" fill="#FF6B7A"/>
-                <path d="M20.8 15.6 L18 13.4 L18 18.4 Z" fill="#FF6B7A"/>
-                <circle cx="10.6" cy="15.9" r=".7" fill="#fff"/>
-                <circle cx="19.4" cy="15.9" r=".7" fill="#fff"/>
-              </g>
-              <g class="gs-teeth" fill="#FF4D6A">
-                <path d="M11.8 27 L12.4 29.6 L13.2 27 Z"/>
-                <path d="M14.5 27 L15 30 L15.5 27 Z"/>
-                <path d="M17.2 27 L17.8 29.6 L18.6 27 Z"/>
-              </g>
-            </svg>
-          </span>
-          <span class="gs-shield-label">
-            <strong>التحصين والاختفاء</strong>
-            <em>GHOST PROTOCOL · بضغطة واحدة</em>
-          </span>
-        </button>
-        <div class="gs-progress" id="gsProgress">
-          <div class="gs-prog-head"><span class="gs-prog-ic">◉</span>بروتوكول التحصين والاختفاء قيد التشغيل — وجودك الرقمي يُخفى</div>
-          <div class="gs-prog-bar"><div class="gs-prog-fill" id="gsProgFill"></div></div>
-          <div class="gs-prog-meta"><span id="gsProgPct">0%</span><span class="gs-prog-step" id="gsProgStep">PRIME</span></div>
-          <div class="gs-prog-status" id="gsProgStatus">تهيئة قنوات التشفير...</div>
-        </div>
-      </div>
       <div class="ep-sec" id="epSensorState">المستشعر يستعد...</div>
       <div class="ep-sec">INTERVAL · دورية الرصد الآلي</div>
       <div class="toggle-row">
@@ -2442,6 +2402,47 @@ body.screen-tools #v2Tools{display:block;}
         <div class="ep-fixrow">
           <button class="ep-fixbtn" id="epFixMal" onclick="epFix('jail')">🧱 رفع جدار الحماية</button>
           <span class="ep-fixst" id="epFixMalSt">—</span>
+        </div>
+      </div>
+
+      <div class="ghost-sec">
+        <button class="ghost-shield" id="ghostShield" onclick="ghostShieldStart()">
+          <span class="gs-badge">
+            <svg viewBox="0 0 30 30">
+              <g class="gs-spikes" stroke="#FF4D6A" stroke-width="1.15" stroke-linecap="round" fill="none">
+                <line x1="15" y1="15" x2="15" y2="2.6"/>
+                <line x1="15" y1="15" x2="15" y2="27.4"/>
+                <line x1="15" y1="15" x2="2.6" y2="15"/>
+                <line x1="15" y1="15" x2="27.4" y2="15"/>
+                <line x1="15" y1="15" x2="6.4" y2="6.4"/>
+                <line x1="15" y1="15" x2="23.6" y2="23.6"/>
+                <line x1="15" y1="15" x2="6.4" y2="23.6"/>
+                <line x1="15" y1="15" x2="23.6" y2="6.4"/>
+              </g>
+              <g class="gs-face">
+                <path d="M15 8 C9.6 8 7 12 7 16.4 C7 20.2 9.4 23 12.2 24.2 L12 27 L18 27 L17.8 24.2 C20.6 23 23 20.2 23 16.4 C23 12 20.4 8 15 8 Z" fill="rgba(255,77,106,0.16)" stroke="#FF4D6A" stroke-width="1.2"/>
+                <path d="M9.2 15.6 L12 13.4 L12 18.4 Z" fill="#FF6B7A"/>
+                <path d="M20.8 15.6 L18 13.4 L18 18.4 Z" fill="#FF6B7A"/>
+                <circle cx="10.6" cy="15.9" r=".7" fill="#fff"/>
+                <circle cx="19.4" cy="15.9" r=".7" fill="#fff"/>
+              </g>
+              <g class="gs-teeth" fill="#FF4D6A">
+                <path d="M11.8 27 L12.4 29.6 L13.2 27 Z"/>
+                <path d="M14.5 27 L15 30 L15.5 27 Z"/>
+                <path d="M17.2 27 L17.8 29.6 L18.6 27 Z"/>
+              </g>
+            </svg>
+          </span>
+          <span class="gs-shield-label">
+            <strong>التحصين والاختفاء</strong>
+            <em>GHOST PROTOCOL · بضغطة واحدة</em>
+          </span>
+        </button>
+        <div class="gs-progress" id="gsProgress">
+          <div class="gs-prog-head"><span class="gs-prog-ic">◉</span>بروتوكول التحصين والاختفاء قيد التشغيل — وجودك الرقمي يُخفى</div>
+          <div class="gs-prog-bar"><div class="gs-prog-fill" id="gsProgFill"></div></div>
+          <div class="gs-prog-meta"><span id="gsProgPct">0%</span><span class="gs-prog-step" id="gsProgStep">PRIME</span></div>
+          <div class="gs-prog-status" id="gsProgStatus">تهيئة قنوات التشفير...</div>
         </div>
       </div>
 
