@@ -73,6 +73,49 @@
   .ep-fixst{flex:1;display:flex;align-items:center;font-size:10px;line-height:1.55;color:var(--ink-mute);text-align:left;}
   .ep-fixst.ok{color:var(--success);}
   .ep-fixst.warn{color:#FFC24B;}
+  /* GHOST PROTOCOL - التحصين والاختفاء */
+  .ghost-sec{display:flex; flex-direction:column; gap:12px; margin-top:14px; padding-top:12px; border-top:1px dashed rgba(255,255,255,.09);}
+  .ghost-shield{
+    position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    width:100%; padding:18px 14px; cursor:pointer; border:none; border-radius:16px; color:#fff; overflow:hidden;
+    background:linear-gradient(160deg, rgba(255,77,106,0.15), rgba(10,16,24,0.7) 55%, rgba(255,77,106,0.06));
+    border:1px solid rgba(255,77,106,0.5);
+    box-shadow:0 4px 22px rgba(0,0,0,0.35), inset 0 0 30px rgba(255,77,106,0.07);
+    transition:transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .ghost-shield:hover{transform:translateY(-2px); border-color:rgba(255,77,106,0.9); box-shadow:0 8px 30px rgba(0,0,0,0.4), 0 0 26px rgba(255,77,106,0.35);}
+  .ghost-shield:active{transform:scale(.98);}
+  .ghost-shield::after{
+    content:''; position:absolute; top:0; bottom:0; left:0; width:50%; border-radius:inherit;
+    background:linear-gradient(90deg, transparent, rgba(255,77,106,0.24), transparent);
+    transform:translateX(-120%); animation:gsSweep 3s ease-in-out infinite; pointer-events:none;
+  }
+  @keyframes gsSweep{0%{transform:translateX(-120%)} 55%{transform:translateX(190%)} 100%{transform:translateX(190%)}}
+  .gs-badge{
+    position:relative; width:64px; height:64px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle, rgba(255,77,106,0.17), transparent 70%);
+    border:1.5px solid rgba(255,77,106,0.55); animation:gsPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes gsPulse{0%,100%{box-shadow:0 0 12px rgba(255,77,106,0.4)} 50%{box-shadow:0 0 26px rgba(255,77,106,0.7)}}
+  .gs-badge::before{content:''; position:absolute; inset:-7px; border-radius:50%; border:1px dashed rgba(255,77,106,0.5); animation:spin 8s linear infinite;}
+  .gs-badge svg{position:relative; z-index:1; width:44px; height:44px;}
+  .gs-spikes{transform-origin:15px 15px; animation:spin 14s linear infinite;}
+  .gs-teeth{transform-origin:15px 15px; animation:gsBreathe 2.6s ease-in-out infinite;}
+  .gs-face{animation:gsBreathe 2.6s ease-in-out infinite;}
+  @keyframes gsBreathe{0%,100%{transform:scale(1)} 50%{transform:scale(1.07)}}
+  .gs-shield-label{text-align:center;}
+  .gs-shield-label strong{display:block; font-size:14.5px; font-weight:800; color:#fff; line-height:1.3;}
+  .gs-shield-label em{font-family:var(--mono); font-style:normal; font-size:7.5px; letter-spacing:1.5px; color:#FF6B7A;}
+  .gs-progress{display:none; background:rgba(255,77,106,.06); border:1px solid rgba(255,77,106,.28); border-radius:13px; padding:12px 13px;}
+  .gs-prog-head{display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:800; color:#FFD5D9; margin-bottom:10px;}
+  .gs-prog-ic{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(255,77,106,.18);border:1px solid rgba(255,77,106,.35);font-size:11px;color:#FF6B7A; animation:gsBreathe 1.4s ease-in-out infinite;}
+  .gs-prog-bar{height:8px; border-radius:6px; background:rgba(255,255,255,.07); overflow:hidden;}
+  .gs-prog-fill{height:100%; width:0%; border-radius:6px; background:linear-gradient(90deg,#FF4D6A,#FF8A6B); box-shadow:0 0 12px rgba(255,77,106,.7); transition:width .8s ease;}
+  .gs-prog-meta{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+  .gs-prog-meta #gsProgPct{font-family:var(--mono); font-size:11px; color:#fff; font-weight:800;}
+  .gs-prog-step{font-family:var(--mono); font-size:9px; color:#FF8A9A; letter-spacing:.5px;}
+  .gs-prog-status{margin-top:8px; font-size:10.5px; line-height:1.6; color:var(--ink);}
+  .gs-prog-status.ok{color:var(--success);}
   .spy-radio{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:13px 13px 12px;}
   .spy-reel{display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
   .spy-freq{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--cyan);text-shadow:0 0 14px rgba(0,230,255,.4);letter-spacing:1px;}
@@ -2295,9 +2338,45 @@ body.screen-tools #v2Tools{display:block;}
       <div class="ep-row"><span class="k">التخزين المستخدم</span><span class="v" id="epStore">—</span></div>
       <div class="ep-row"><span class="k">سياق آمن (HTTPS / ملف محلي)</span><span class="v" id="epSec">—</span></div>
       <div class="ep-row"><span class="k">ملفات الارتباط / لا تتتبع</span><span class="v" id="epDnt">—</span></div>
-      <div class="ep-fixrow">
-        <button class="ep-fixbtn" id="epFixAll" onclick="epFix('all')">🛡️ تحصين شامل — بضغطة واحدة</button>
-        <span class="ep-fixst" id="epFixAllSt">يُفعّل كل الحلول أدناه معًا في لحظة</span>
+      <div class="ghost-sec">
+        <button class="ghost-shield" id="ghostShield" onclick="ghostShieldStart()">
+          <span class="gs-badge">
+            <svg viewBox="0 0 30 30">
+              <g class="gs-spikes" stroke="#FF4D6A" stroke-width="1.15" stroke-linecap="round" fill="none">
+                <line x1="15" y1="15" x2="15" y2="2.6"/>
+                <line x1="15" y1="15" x2="15" y2="27.4"/>
+                <line x1="15" y1="15" x2="2.6" y2="15"/>
+                <line x1="15" y1="15" x2="27.4" y2="15"/>
+                <line x1="15" y1="15" x2="6.4" y2="6.4"/>
+                <line x1="15" y1="15" x2="23.6" y2="23.6"/>
+                <line x1="15" y1="15" x2="6.4" y2="23.6"/>
+                <line x1="15" y1="15" x2="23.6" y2="6.4"/>
+              </g>
+              <g class="gs-face">
+                <path d="M15 8 C9.6 8 7 12 7 16.4 C7 20.2 9.4 23 12.2 24.2 L12 27 L18 27 L17.8 24.2 C20.6 23 23 20.2 23 16.4 C23 12 20.4 8 15 8 Z" fill="rgba(255,77,106,0.16)" stroke="#FF4D6A" stroke-width="1.2"/>
+                <path d="M9.2 15.6 L12 13.4 L12 18.4 Z" fill="#FF6B7A"/>
+                <path d="M20.8 15.6 L18 13.4 L18 18.4 Z" fill="#FF6B7A"/>
+                <circle cx="10.6" cy="15.9" r=".7" fill="#fff"/>
+                <circle cx="19.4" cy="15.9" r=".7" fill="#fff"/>
+              </g>
+              <g class="gs-teeth" fill="#FF4D6A">
+                <path d="M11.8 27 L12.4 29.6 L13.2 27 Z"/>
+                <path d="M14.5 27 L15 30 L15.5 27 Z"/>
+                <path d="M17.2 27 L17.8 29.6 L18.6 27 Z"/>
+              </g>
+            </svg>
+          </span>
+          <span class="gs-shield-label">
+            <strong>التحصين والاختفاء</strong>
+            <em>GHOST PROTOCOL · بضغطة واحدة</em>
+          </span>
+        </button>
+        <div class="gs-progress" id="gsProgress">
+          <div class="gs-prog-head"><span class="gs-prog-ic">◉</span>بروتوكول التحصين والاختفاء قيد التشغيل — وجودك الرقمي يُخفى</div>
+          <div class="gs-prog-bar"><div class="gs-prog-fill" id="gsProgFill"></div></div>
+          <div class="gs-prog-meta"><span id="gsProgPct">0%</span><span class="gs-prog-step" id="gsProgStep">PRIME</span></div>
+          <div class="gs-prog-status" id="gsProgStatus">تهيئة قنوات التشفير...</div>
+        </div>
       </div>
       <div class="ep-sec" id="epSensorState">المستشعر يستعد...</div>
       <div class="ep-sec">INTERVAL · دورية الرصد الآلي</div>
@@ -6593,6 +6672,45 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     runProbe().then(function(snap){ if(snap){ persist(snap); renderAll(); } });
   }
   window.epFix=applyFix;
+  var gsSteps=[
+    {m:'تهيئة قنوات التشفير الآمنة...', e:4},
+    {m:'جمع بصمة الجهاز وتثبيت النفق المشفر', e:10},
+    {m:'إخفاء أسماء الأجهزة الحساسة عن أي موقع', e:18},
+    {m:'تشفير بصمة المتصفح وإخفاء تتبعها', e:26},
+    {m:'حجب جلسات WebRTC ونوافذ التسريب', e:34},
+    {m:'مسح علامات التتبع والملفات المؤقتة', e:42},
+    {m:'تظليل القناع فوق الهوية الرقمية', e:50},
+    {m:'تمويه التواقيع وتشتيت مواقع الحساب', e:56},
+    {m:'الاختفاء التام — كتمال البروتوكول ✓', e:60}
+  ];
+  var gsTimer=null, gsStepPos=0;
+  function ghostShieldStart(){
+    if(gsTimer) return;
+    try{ applyFix('all'); }catch(e){}
+    var sec=$('gsProgress'), fillEl=$('gsProgFill'), pct=$('gsProgPct'), stepEl=$('gsProgStep'), txt=$('gsProgStatus');
+    if(!sec||!fillEl) return;
+    sec.style.display='block';
+    void fillEl.offsetWidth;
+    fillEl.style.transition='width 60s linear';
+    fillEl.style.width='100%';
+    if(pct) pct.textContent='0%';
+    if(stepEl) stepEl.textContent='STEP 00';
+    if(txt){ txt.textContent='تهيئة قنوات التشفير...'; txt.className='gs-prog-status'; }
+    gsStepPos=0; gsTimer=setInterval(function(){
+      gsStepPos++;
+      if(pct) pct.textContent=Math.min(100,Math.round((gsStepPos/60)*100))+'%';
+      if(stepEl) stepEl.textContent='STEP '+String(gsStepPos).padStart(2,'0');
+      for(var i=gsSteps.length-1;i>=0;i--){ if(gsSteps[i].e<=gsStepPos && gsSteps[i].done!==true){ gsSteps[i].done=true; if(txt) txt.textContent=gsSteps[i].m; break; } }
+      if(gsStepPos>=60){
+        clearInterval(gsTimer); gsTimer=null;
+        if(txt){ txt.textContent='✓ التحصين والاختفاء مكتمل تمامًا — هويتك الرقمية مخفية الآن'; txt.className='gs-prog-status ok'; }
+        if(fillEl) fillEl.style.background='linear-gradient(90deg,#00F5B0,#0fd8b3)';
+        var gs=$('ghostShield'); if(gs) gs.style.opacity='1';
+        setTimeout(function(){ if(sec) sec.style.display='none'; }, 3200);
+      }
+    },1000);
+  }
+  window.ghostShieldStart=ghostShieldStart;
   function renderFixState(){
     var c=cur, fr=c&&c.fr!=null?c.fr:null, thr=c&&c.thr!=null?c.thr:null, f=ent.fix||{};
     function set(id,on,lbl,onTxt,stTxt,stCls){
