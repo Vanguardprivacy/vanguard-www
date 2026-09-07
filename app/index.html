@@ -116,6 +116,22 @@
   .gs-prog-step{font-family:var(--mono); font-size:9px; color:#FF8A9A; letter-spacing:.5px;}
   .gs-prog-status{margin-top:8px; font-size:10.5px; line-height:1.6; color:var(--ink);}
   .gs-prog-status.ok{color:var(--success);}
+  .gs-desc{display:flex; flex-direction:column; gap:7px; padding:0 2px;}
+  .gs-desc-row{display:flex; align-items:flex-start; gap:8px; font-size:10.5px; line-height:1.65; color:var(--ink);}
+  .gs-desc-row .gt{flex-shrink:0; font-family:var(--mono); font-size:8.5px; letter-spacing:1px; font-weight:800; color:#FF6B7A; background:rgba(255,77,106,0.12); border:1px solid rgba(255,77,106,0.3); border-radius:6px; padding:2px 7px; margin-top:1px; transition:color .3s, border-color .3s, background .3s;}
+  .gs-desc-row .gx{color:var(--ink-mute);}
+  .gs-state{margin-top:2px; font-family:var(--mono); font-size:9.5px; letter-spacing:.4px; text-align:center; color:#FF8A9A; border:1px solid rgba(255,77,106,0.3); background:rgba(255,77,106,0.08); border-radius:8px; padding:5px 8px; transition:color .4s, border-color .4s, background .4s;}
+  .ghost-shield.done{border-color:rgba(0,245,176,0.7); background:linear-gradient(160deg, rgba(0,245,176,0.14), rgba(10,16,24,0.7) 55%, rgba(0,245,176,0.06)); box-shadow:0 4px 22px rgba(0,0,0,0.35), 0 0 26px rgba(0,245,176,0.28), inset 0 0 30px rgba(0,245,176,0.07);}
+  .ghost-shield.done .gs-badge{border-color:rgba(0,245,176,0.62); background:radial-gradient(circle, rgba(0,245,176,0.17), transparent 70%); animation:gsPulseGreen 2.6s ease-in-out infinite;}
+  @keyframes gsPulseGreen{0%,100%{box-shadow:0 0 12px rgba(0,245,176,0.4)} 50%{box-shadow:0 0 26px rgba(0,245,176,0.7)}}
+  .ghost-shield.done .gs-badge::before{border-color:rgba(0,245,176,0.5);}
+  .ghost-shield.done .gs-spikes{stroke:#00F5B0;}
+  .ghost-shield.done .f-mask{stroke:#00F5B0; fill:rgba(0,245,176,0.16);}
+  .ghost-shield.done .f-eye{fill:#00F5B0;}
+  .ghost-shield.done .gs-teeth{fill:#00F5B0;}
+  .ghost-shield.done .gs-shield-label em{color:#00F5B0;}
+  .ghost-shield.done ~ .gs-desc .gs-desc-row .gt{color:#00F5B0; border-color:rgba(0,245,176,0.35); background:rgba(0,245,176,0.1);}
+  .ghost-shield.done ~ .gs-state, .ghost-shield.done ~ .gs-state.run{border-color:rgba(0,245,176,0.35); background:rgba(0,245,176,0.1); color:#00F5B0;}
   .spy-radio{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:13px 13px 12px;}
   .spy-reel{display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
   .spy-freq{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--cyan);text-shadow:0 0 14px rgba(0,230,255,.4);letter-spacing:1px;}
@@ -2420,9 +2436,9 @@ body.screen-tools #v2Tools{display:block;}
                 <line x1="15" y1="15" x2="23.6" y2="6.4"/>
               </g>
               <g class="gs-face">
-                <path d="M15 8 C9.6 8 7 12 7 16.4 C7 20.2 9.4 23 12.2 24.2 L12 27 L18 27 L17.8 24.2 C20.6 23 23 20.2 23 16.4 C23 12 20.4 8 15 8 Z" fill="rgba(255,77,106,0.16)" stroke="#FF4D6A" stroke-width="1.2"/>
-                <path d="M9.2 15.6 L12 13.4 L12 18.4 Z" fill="#FF6B7A"/>
-                <path d="M20.8 15.6 L18 13.4 L18 18.4 Z" fill="#FF6B7A"/>
+                <path class="f-mask" d="M15 8 C9.6 8 7 12 7 16.4 C7 20.2 9.4 23 12.2 24.2 L12 27 L18 27 L17.8 24.2 C20.6 23 23 20.2 23 16.4 C23 12 20.4 8 15 8 Z" fill="rgba(255,77,106,0.16)" stroke="#FF4D6A" stroke-width="1.2"/>
+                <path class="f-eye" d="M9.2 15.6 L12 13.4 L12 18.4 Z" fill="#FF6B7A"/>
+                <path class="f-eye" d="M20.8 15.6 L18 13.4 L18 18.4 Z" fill="#FF6B7A"/>
                 <circle cx="10.6" cy="15.9" r=".7" fill="#fff"/>
                 <circle cx="19.4" cy="15.9" r=".7" fill="#fff"/>
               </g>
@@ -2434,15 +2450,20 @@ body.screen-tools #v2Tools{display:block;}
             </svg>
           </span>
           <span class="gs-shield-label">
-            <strong>التحصين والاختفاء</strong>
+            <strong>التأمين_الاختفاء</strong>
             <em>GHOST PROTOCOL · بضغطة واحدة</em>
           </span>
         </button>
+        <div class="gs-desc">
+          <div class="gs-desc-row"><span class="gt">تأمين</span><span class="gx">طبقات حماية محكمة تمنع التطبيقات والمواقع والفيروسات من لمس بياناتك أو مراقبة قراءات جهازك.</span></div>
+          <div class="gs-desc-row"><span class="gt">اختفاء</span><span class="gx">محو بصمتك الرقمية وإخفاء وجود جهازك على الشبكة عن أعين الملاحقة والتتبع.</span></div>
+        </div>
+        <div class="gs-state" id="gsState">! لم يبدأ التأمين — جهازك ما زال عرضة للخطر</div>
         <div class="gs-progress" id="gsProgress">
-          <div class="gs-prog-head"><span class="gs-prog-ic">◉</span>بروتوكول التحصين والاختفاء قيد التشغيل — وجودك الرقمي يُخفى</div>
+          <div class="gs-prog-head"><span class="gs-prog-ic">◉</span>بروتوكول التأمين_الاختفاء — جارٍ مسح جهازك من التطبيقات والفيروسات والمواقع</div>
           <div class="gs-prog-bar"><div class="gs-prog-fill" id="gsProgFill"></div></div>
           <div class="gs-prog-meta"><span id="gsProgPct">0%</span><span class="gs-prog-step" id="gsProgStep">PRIME</span></div>
-          <div class="gs-prog-status" id="gsProgStatus">تهيئة قنوات التشفير...</div>
+          <div class="gs-prog-status" id="gsProgStatus">تهيئة محرك الفحص الأمني...</div>
         </div>
       </div>
 
@@ -6674,15 +6695,15 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
   }
   window.epFix=applyFix;
   var gsSteps=[
-    {m:'تهيئة قنوات التشفير الآمنة...', e:4},
-    {m:'جمع بصمة الجهاز وتثبيت النفق المشفر', e:10},
-    {m:'إخفاء أسماء الأجهزة الحساسة عن أي موقع', e:18},
-    {m:'تشفير بصمة المتصفح وإخفاء تتبعها', e:26},
-    {m:'حجب جلسات WebRTC ونوافذ التسريب', e:34},
-    {m:'مسح علامات التتبع والملفات المؤقتة', e:42},
-    {m:'تظليل القناع فوق الهوية الرقمية', e:50},
-    {m:'تمويه التواقيع وتشتيت مواقع الحساب', e:56},
-    {m:'الاختفاء التام — كتمال البروتوكول ✓', e:60}
+    {m:'تهيئة محرك الفحص الأمني...', e:4},
+    {m:'فحص سياسات التطبيقات المثبتة وحقوقها', e:10},
+    {m:'عزل أي تطبيق يقرأ بياناتك أو يقتنصها', e:17},
+    {m:'فحص مسارات الفيروسات والحمولات الخبيثة', e:24},
+    {m:'تعقيم ملفات الحمولة وإيقاف الالتهابات', e:31},
+    {m:'تنظيف المواقع من علامات التتبع والملفات المسرّبة', e:38},
+    {m:'إغلاق ثغرات الجلسات وتمويه التواقيع', e:45},
+    {m:'تأمين الطبقات وإخفاء الأثر الرقمي', e:52},
+    {m:'اكتمل التأمين والاختفاء ✓', e:60}
   ];
   var gsTimer=null, gsStepPos=0;
   function ghostShieldStart(){
@@ -6696,7 +6717,9 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     fillEl.style.width='100%';
     if(pct) pct.textContent='0%';
     if(stepEl) stepEl.textContent='STEP 00';
-    if(txt){ txt.textContent='تهيئة قنوات التشفير...'; txt.className='gs-prog-status'; }
+    if(txt){ txt.textContent='تهيئة محرك الفحص الأمني...'; txt.className='gs-prog-status'; }
+    var gs0=$('ghostShield'); if(gs0){ gs0.classList.remove('done'); gs0.style.opacity='1'; }
+    var st0=$('gsState'); if(st0){ st0.textContent='جارٍ مسح التطبيقات والفيروسات والمواقع...'; st0.className='gs-state run'; }
     gsStepPos=0; gsTimer=setInterval(function(){
       gsStepPos++;
       if(pct) pct.textContent=Math.min(100,Math.round((gsStepPos/60)*100))+'%';
@@ -6704,9 +6727,10 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
       for(var i=gsSteps.length-1;i>=0;i--){ if(gsSteps[i].e<=gsStepPos && gsSteps[i].done!==true){ gsSteps[i].done=true; if(txt) txt.textContent=gsSteps[i].m; break; } }
       if(gsStepPos>=60){
         clearInterval(gsTimer); gsTimer=null;
-        if(txt){ txt.textContent='✓ التحصين والاختفاء مكتمل تمامًا — هويتك الرقمية مخفية الآن'; txt.className='gs-prog-status ok'; }
+        if(txt){ txt.textContent='✓ اكتمل التأمين والاختفاء — جهازك في أمان الآن'; txt.className='gs-prog-status ok'; }
         if(fillEl) fillEl.style.background='linear-gradient(90deg,#00F5B0,#0fd8b3)';
-        var gs=$('ghostShield'); if(gs) gs.style.opacity='1';
+        var gs=$('ghostShield'); if(gs) gs.classList.add('done');
+        var stEl=$('gsState'); if(stEl){ stEl.textContent='✓ التأمين والاختفاء مكتملان — جهازك في أمان'; stEl.className='gs-state ok'; }
         setTimeout(function(){ if(sec) sec.style.display='none'; }, 3200);
       }
     },1000);
