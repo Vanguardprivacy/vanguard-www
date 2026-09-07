@@ -3,13 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#05070B">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Vanguard Privacy — درعك الرقمي ضد التتبع والاختراق</title>
 <meta name="description" content="منصة أمان رقمية شاملة تعمل محليًا على جهازك: فحص كلمات المرور، حماية التتبع، خزنة تشفير، وبصمة جهاز فريدة. بلا خادم، بلا إعلانات، اشتراك واحد مدى الحياة.">
+<meta property="og:title" content="Vanguard Privacy — درعك الرقمي ضد التتبع والاختراق">
+<meta property="og:description" content="15 أداة حماية احترافية تعمل بالكامل على جهازك. اشتراك واحد مدى الحياة.">
+<meta property="og:image" content="icon-512.png">
 <style>
   :root{
-    --bg:#05070B; --bg2:#0A0F16; --panel:#0D1420; --line:#1C2A3A;
+    --bg:#05070B; --bg2:#0A0F16; --panel:#0D1420; --panel2:#0A0E14; --line:#1C2A3A;
     --cyan:#00E6FF; --blue:#4C8DFF; --ink:#EAF4F7; --dim:#8CA0AC;
     --ok:#00F5B0; --warn:#FFC24B; --err:#FF7B72;
     --grad:linear-gradient(135deg,#00E6FF,#4C8DFF);
@@ -21,85 +25,175 @@
     line-height:1.7; overflow-x:hidden;
   }
   a{color:var(--cyan); text-decoration:none;}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 22px;}
+  ::selection{background:rgba(0,230,255,.25);}
 
   /* ===== NAV ===== */
   nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(5,7,11,.85); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(5,7,11,.8); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
   }
-  .nav-in{display:flex; align-items:center; justify-content:space-between; padding:12px 20px; max-width:1080px; margin:0 auto;}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; padding:12px 20px; max-width:1100px; margin:0 auto;}
   .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; color:var(--ink);}
-  .logo .ico{width:38px;height:38px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:20px;color:#04141A;}
+  .logo .ico{width:38px;height:38px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#04141A;position:relative;}
+  .logo .ico svg{width:24px;height:24px;}
   .nav-links{display:flex; gap:18px; font-size:13.5px; align-items:center;}
   .nav-links a{color:var(--dim); transition:.2s;}
   .nav-links a:hover{color:var(--cyan);}
-  .nav-cta{
-    background:var(--grad); color:#04141A !important; font-weight:700; padding:9px 18px; border-radius:10px; font-size:13px;
-  }
+  .nav-cta{background:var(--grad); color:#04141A !important; font-weight:700; padding:9px 18px; border-radius:10px; font-size:13px; box-shadow:0 4px 20px rgba(0,230,255,.25);}
   @media(max-width:640px){ .nav-links a:not(.nav-cta){display:none;} }
 
   /* ===== HERO ===== */
   .hero{
-    position:relative; padding:130px 0 80px; text-align:center;
+    position:relative; padding:130px 0 90px; overflow:hidden;
     background:
-      radial-gradient(600px 300px at 80% -10%, rgba(0,230,255,.14), transparent 60%),
-      radial-gradient(500px 250px at 10% 10%, rgba(76,141,255,.12), transparent 60%),
+      radial-gradient(700px 380px at 85% -10%, rgba(0,230,255,.16), transparent 60%),
+      radial-gradient(560px 300px at 5% 15%, rgba(76,141,255,.13), transparent 60%),
       linear-gradient(180deg,#060A11 0%,#05070B 60%);
   }
+  .hero::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(0,230,255,.05) 1px, transparent 1px);
+    background-size:32px 32px; mask-image:linear-gradient(180deg,transparent,#000 25%,#000 75%,transparent);
+  }
+  .hero-grid{display:grid; grid-template-columns:1fr 460px; gap:48px; align-items:center;}
+  @media(max-width:940px){ .hero-grid{grid-template-columns:1fr; text-align:center;} .phone-wrap{margin:18px auto 0;} }
   .badge{
     display:inline-flex; align-items:center; gap:8px; background:rgba(0,230,255,.08);
     border:1px solid rgba(0,230,255,.35); color:var(--cyan); border-radius:100px;
-    padding:7px 16px; font-size:12.5px; font-weight:600; margin-bottom:24px;
+    padding:7px 16px; font-size:12.5px; font-weight:600; margin-bottom:22px;
   }
-  .hero h1{
-    font-size: clamp(30px,6vw,56px); line-height:1.25; font-weight:900; letter-spacing:-.5px; margin-bottom:18px;
-  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-size:clamp(30px,5vw,54px); line-height:1.22; font-weight:900; letter-spacing:-.5px; margin-bottom:18px;}
   .hero h1 .grad{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .hero p.lead{font-size:clamp(15px,2.6vw,19px); color:var(--dim); max-width:640px; margin:0 auto 28px;}
-  .hero-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:36px;}
+  .hero p.lead{font-size:clamp(15px,2.4vw,18px); color:var(--dim); max-width:580px; margin:0 0 26px;}
+  .hero-ctas{display:flex; gap:12px; justify-content:flex-start; flex-wrap:wrap; margin-bottom:28px;}
+  @media(max-width:940px){ .hero-ctas{justify-content:center;} }
   .btn{
-    display:inline-flex; align-items:center; gap:10px; border:none; cursor:pointer;
-    border-radius:14px; padding:16px 30px; font-size:15.5px; font-weight:800; transition:.2s;
+    display:inline-flex; align-items:center; gap:9px; border:none; cursor:pointer;
+    border-radius:14px; padding:15px 26px; font-size:15px; font-weight:800; transition:.2s;
   }
-  .btn-primary{background:var(--grad); color:#04141A; box-shadow:0 8px 30px rgba(0,230,255,.25);}
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 36px rgba(0,230,255,.4);}
+  .btn-primary{background:var(--grad); color:#04141A; box-shadow:0 8px 30px rgba(0,230,255,.28);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,230,255,.42);}
   .btn-ghost{background:transparent; border:1.5px solid var(--line); color:var(--ink);}
   .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
   .btn-green{background:#00F5B0; color:#04141A; box-shadow:0 8px 30px rgba(0,245,176,.2);}
+  .hero-trust{display:flex; gap:10px; justify-content:flex-start; flex-wrap:wrap; font-size:12px; color:var(--dim);}
+  @media(max-width:940px){ .hero-trust{justify-content:center;} }
+  .hero-trust span{background:rgba(255,255,255,.02); border:1px solid var(--line); padding:7px 12px; border-radius:100px; display:inline-flex; gap:6px; align-items:center;}
 
-  .hero-trust{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; font-size:12.5px; color:var(--dim);}
-  .hero-trust span{background:rgba(255,255,255,.02); border:1px solid var(--line); padding:8px 14px; border-radius:100px; display:inline-flex; gap:6px; align-items:center;}
+  /* ===== PHONE MOCKUP ===== */
+  .phone-wrap{position:relative; perspective:1200px;}
+  .phone-glow{
+    position:absolute; inset:40px -30px; border-radius:60px; z-index:0;
+    background:radial-gradient(50% 50% at 50% 50%, rgba(0,230,255,.22), transparent 70%);
+    filter:blur(10px); animation:breath 5s ease-in-out infinite;
+  }
+  @keyframes breath{0%,100%{opacity:.7; transform:scale(1)}50%{opacity:1; transform:scale(1.04)}}
+  .phone{
+    position:relative; z-index:1; width:290px; height:600px; margin:0 auto;
+    background:linear-gradient(160deg,#1B2735,#0A0E14 40%); border-radius:46px;
+    border:1px solid rgba(0,230,255,.25); box-shadow:0 40px 90px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.03);
+    transform:rotateY(-10deg) rotateX(3deg); transition:transform .4s;
+  }
+  .phone:hover{transform:rotateY(0deg) rotateX(0deg);}
+  .phone-side{position:absolute; background:linear-gradient(180deg,#1B2735,#0A0E14); border-radius:4px;}
+  .phone .pw{right:-7px; top:90px; width:5px; height:66px;}
+  .phone .pv{right:-7px; top:180px; width:5px; height:88px;}
+  .phone .phd{left:18px; top:150px; width:0; height:0;}
+  .phone-screen{
+    position:absolute; inset:12px; border-radius:36px; overflow:hidden;
+    background:#070A10; border:1px solid rgba(255,255,255,.06);
+  }
+  .phone-notch{position:absolute; top:8px; left:50%; transform:translateX(-50%); width:92px; height:22px; background:#05070B; border-radius:14px; z-index:5; display:flex; align-items:center; justify-content:center; gap:7px;}
+  .phone-notch .cam{width:9px;height:9px;border-radius:50%;background:#0D1420;border:1px solid #1C2A3A;}
+  .phone-status{position:absolute; top:9px; left:0; right:0; height:17px; padding:0 22px; display:flex; justify-content:space-between; align-items:center; font-size:10.5px; color:#9FB3BF; z-index:6; font-weight:600;}
+  .phone-status .sig{display:flex; gap:3px; align-items:center;}
+  .phone-status .bars{display:flex; gap:2px; align-items:flex-end;}
+  .phone-status .bars i{display:block; width:3px; background:#00E6FF; border-radius:1px;}
+  .phone-status .bars i:nth-child(1){height:4px;} .phone-status .bars i:nth-child(2){height:6px;} .phone-status .bars i:nth-child(3){height:8px;}
+
+  /* التطبيق داخل الشاشة */
+  .app{position:absolute; inset:34px 0 0 0; background:linear-gradient(180deg,#080C14 0%,#05070B 100%); overflow:hidden;}
+  .app-scroll{position:absolute; inset:0 0 0 0; overflow:hidden; padding:14px 14px 78px; }
+  .app-navbar{display:flex; align-items:center; gap:8px; margin-bottom:12px;}
+  .app-navbar .ail{width:24px;height:24px;border-radius:7px;background:var(--grad);display:flex;align-items:center;justify-content:center;}
+  .app-navbar .ail svg{width:14px;height:14px;}
+  .app-navbar b{font-size:13px;}
+  .app-navbar .ib{width:24px;height:24px;margin-inline-start:auto;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:12px;}
+  .app-card{background:linear-gradient(150deg,rgba(0,230,255,.09),rgba(0,230,255,.02)); border:1px solid rgba(0,230,255,.28); border-radius:14px; padding:12px; margin-bottom:10px; position:relative; overflow:hidden;}
+  .app-card .ring{display:flex; align-items:center; gap:12px;}
+  .emg-svg{flex-shrink:0;}
+  .emg-label b{display:block; font-size:13px;}
+  .emg-label span{display:block; font-size:10px; color:var(--dim); margin-top:2px;}
+  .emg-status{margin-inline-start:auto; text-align:center; flex-shrink:0;}
+  .emg-status b{display:block; font-size:15px; color:var(--ok); font-weight:800;}
+  .emg-status span{font-size:9.5px; color:var(--dim);}
+  .app-cards2{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px;}
+  .a-card2{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px;}
+  .a-card2 b{display:block; font-size:14px; font-weight:800;}
+  .a-card2 .ok{color:var(--ok);} .a-card2 .warn{color:var(--warn);}
+  .a-card2 span{display:block; font-size:8.5px; color:var(--dim); margin-top:2px; line-height:1.5;}
+  .a-card2 .ic{margin-bottom:6px; width:22px;height:22px;border-radius:7px;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.25);display:flex;align-items:center;justify-content:center;font-size:12px;}
+  .a-card2 .ic.w{background:rgba(255,194,75,.08);border-color:rgba(255,194,75,.3);}
+  .a-card2 .ic.r{background:rgba(255,123,114,.08);border-color:rgba(255,123,114,.3);}
+  .app-scan{border:1px dashed rgba(0,230,255,.4); border-radius:12px; padding:9px 10px; display:flex; align-items:center; gap:8px; margin-bottom:10px;}
+  .app-scan .rad{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(0,230,255,.5);position:relative;flex-shrink:0;}
+  .app-scan .rad::before{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(0,230,255,.3);}
+  .app-scan .rad::after{content:"";position:absolute;left:50%;top:3px;width:2px;height:9px;background:var(--cyan);transform-origin:50% 10px;animation:spin 2s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .app-scan b{display:block; font-size:11px;}
+  .app-scan span{display:block; font-size:9px; color:var(--dim); margin-top:1px;}
+  .app-scan .st{margin-inline-start:auto; flex-shrink:0; font-size:9px; color:var(--ok); font-weight:700; border:1px solid rgba(0,245,176,.4); border-radius:20px; padding:3px 8px;}
+  /* شريط التثبيت السفلي */
+  .app-bnav{
+    position:absolute; left:0; right:0; bottom:0; height:56px; z-index:10;
+    background:rgba(8,12,20,.92); backdrop-filter:blur(10px); border-top:1px solid var(--line);
+    display:flex; align-items:stretch; justify-content:space-around;
+  }
+  .app-bnav .bn{direction:rtl; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:8.5px; color:var(--dim); min-width:52px;}
+  .app-bnav .bn.sel{color:var(--cyan);}
+  .app-bnav .bn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .app-warn{position:absolute; top:120px; right:14px; left:14px; z-index:8; background:rgba(255,123,114,.08); border:1px solid rgba(255,123,114,.35); border-radius:10px; padding:8px 10px; font-size:9px; color:var(--err); animates:floaty 3s ease-in-out infinite;}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .float-tag{position:absolute; z-index:6; background:var(--panel); border:1px solid rgba(0,230,255,.4); border-radius:12px; padding:8px 12px; font-size:11px; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.5); display:flex; align-items:center; gap:6px;}
+  .float-tag.f1{top:70px; right:-48px; color:var(--ok);}
+  .float-tag.f2{bottom:90px; left:-56px; color:var(--cyan);}
+  @media(max-width:940px){ .float-tag.f1{right:-8px;} .float-tag.f2{left:-8px;} }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .float-tag.f1{animation:float 4.5s ease-in-out infinite;}
+  .float-tag.f2{animation:float 5.5s ease-in-out infinite .8s;}
 
   /* ===== SECTIONS ===== */
-  section{padding:70px 0;}
+  section{padding:76px 0;}
   .sec-tag{color:var(--cyan); font-size:13px; font-weight:700; letter-spacing:1px; margin-bottom:8px; text-align:center;}
-  .sec-h{font-size:clamp(24px,4vw,38px); font-weight:900; text-align:center; margin-bottom:14px;}
-  .sec-sub{color:var(--dim); text-align:center; max-width:560px; margin:0 auto 44px; font-size:15px;}
+  .sec-h{font-size:clamp(25px,4vw,40px); font-weight:900; text-align:center; margin-bottom:14px; letter-spacing:-.3px;}
+  .sec-sub{color:var(--dim); text-align:center; max-width:600px; margin:0 auto 46px; font-size:15px;}
 
   /* Feature grid */
-  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
   @media(max-width:820px){ .grid{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:520px){ .grid{grid-template-columns:1fr;} }
   .feat{
     background:linear-gradient(180deg,var(--panel),rgba(13,20,32,.5)); border:1px solid var(--line);
-    border-radius:18px; padding:26px 22px; transition:.25s; position:relative; overflow:hidden;
+    border-radius:18px; padding:24px 20px; transition:.25s; position:relative; overflow:hidden;
   }
-  .feat:hover{border-color:rgba(0,230,255,.5); transform:translateY(-4px);}
-  .feat .fi{width:52px;height:52px;border-radius:14px;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;}
-  .feat h3{font-size:16.5px; margin-bottom:8px;}
-  .feat p{font-size:13.5px; color:var(--dim);}
+  .feat:hover{border-color:rgba(0,230,255,.5); transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.4);}
+  .feat .fi{width:50px;height:50px;border-radius:14px;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.25);display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:14px;}
+  .feat h3{font-size:16px; margin-bottom:7px;}
+  .feat p{font-size:13px; color:var(--dim);}
 
   /* Feature categories */
-  .show{display:flex; gap:24px; flex-wrap:wrap; align-items:center; background:linear-gradient(135deg,rgba(0,230,255,.10),rgba(0,230,255,.02) 55%); border:1px solid rgba(0,230,255,.35); border-radius:22px; padding:30px; margin-bottom:36px;}
-  .show .big-ico{width:82px;height:82px;border-radius:20px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;}
+  .show{display:flex; gap:24px; flex-wrap:wrap; align-items:center; background:linear-gradient(135deg,rgba(0,230,255,.10),rgba(0,230,255,.02) 55%); border:1px solid rgba(0,230,255,.35); border-radius:22px; padding:30px; margin-bottom:34px;}
+  .show .big-ico{width:80px;height:80px;border-radius:20px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;}
   .show .te{flex:1; min-width:230px;}
   .show h3{font-size:21px; font-weight:900; margin-bottom:6px;}
   .show p{color:var(--dim); font-size:14px; margin:0;}
   .show .cnt{flex-shrink:0; text-align:center;}
   .show .cnt b{font-size:34px; font-weight:900; color:var(--ok); line-height:1;}
-  .show .cnt span{display:block; font-size:11.5px; color:var(--dim); margin-top:4px;}
-  .cat{margin-bottom:38px;}
+  .show .cnt span{display:block; font-size:11px; color:var(--dim); margin-top:4px;}
+  .cat{margin-bottom:36px;}
   .cat-head{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
   .cat-head .big{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:rgba(0,230,255,.08);border:1px solid rgba(0,230,255,.25);display:flex;align-items:center;justify-content:center;font-size:19px;}
   .cat-head h3{font-size:18px; font-weight:900;}
@@ -118,34 +212,73 @@
   .trust-item b{display:block; font-size:15px;}
   .trust-item span{font-size:12.5px; color:var(--dim);}
 
-  /* Licensing section */
-  .lico{display:flex; gap:40px; align-items:center;}
-  @media(max-width:820px){ .lico{flex-direction:column;} }
-  .lico .txt{flex:1;}
-  .lico .card{flex:1; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:34px; text-align:center;}
-  .lico .price{font-size:64px; font-weight:900; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1;}
-  .lico .per{color:var(--dim); font-size:15px; margin:6px 0 16px;}
-  .price-line{color:var(--dim); font-size:13px; margin-bottom:20px;}
-  .price-line b{color:var(--ok);}
-  .check-list{list-style:none; text-align:right; margin-bottom:22px;}
+  /* ===== PRICING ===== */
+  .pwrap{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;}
+  @media(max-width:860px){ .pwrap{grid-template-columns:1fr;} }
+  .ptxt h2{font-size:clamp(24px,3.6vw,38px); font-weight:900; margin-bottom:14px;}
+  .ptxt p{color:var(--dim); font-size:15px; max-width:480px;}
+  .price-cards{display:flex; gap:16px; justify-content:center;}
+  @media(max-width:860px){ .price-cards{flex-direction:column; align-items:center;} }
+  .pcard{
+    background:linear-gradient(180deg,var(--panel),rgba(13,20,32,.5)); border:1px solid var(--line);
+    border-radius:22px; padding:30px 26px; width:100%; max-width:360px; position:relative; text-align:center;
+  }
+  .pcard.hot{border-color:rgba(0,230,255,.6); background:linear-gradient(180deg,rgba(0,230,255,.06),rgba(13,20,32,.6)); box-shadow:0 0 50px rgba(0,230,255,.12);}
+  .pcard .rib{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--grad); color:#04141A; font-size:11.5px; font-weight:800; padding:5px 14px; border-radius:100px;
+    letter-spacing:.4px; white-space:nowrap;
+  }
+  .pcard .old{
+    font-size:22px; color:var(--dim); text-decoration:line-through; text-decoration-color:var(--err);
+    text-decoration-thickness:2.5px; display:inline-block; margin-inline-end:10px;
+  }
+  .pcard .now{
+    font-size:58px; font-weight:900; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1;
+  }
+  .pcard .saving{
+    display:inline-block; margin-top:2px; background:rgba(0,245,176,.1); border:1px solid rgba(0,245,176,.35);
+    color:var(--ok); font-size:12px; font-weight:800; border-radius:100px; padding:4px 12px;
+  }
+  .pcard .per{color:var(--dim); font-size:14px; margin:8px 0 18px;}
+  .pcard .per b{color:var(--cyan);}
+  .check-list{list-style:none; text-align:right; margin-bottom:22px; margin-top:6px;}
   .check-list li{display:flex; gap:10px; align-items:center; font-size:14.5px; padding:7px 0; color:var(--ink);}
   .check-list li::before{content:"✔"; color:var(--ok); font-weight:800;}
+  .pcard .btn{width:100%; justify-content:center; margin-top:4px;}
+
+  /* ===== QR ===== */
+  .qrsect{display:grid; grid-template-columns:300px 1fr; gap:40px; align-items:center;}
+  @media(max-width:720px){ .qrsect{grid-template-columns:1fr; text-align:center; justify-items:center;} }
+  .qrbox{background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:22px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,.4);}
+  .qrbox img{width:240px; height:240px; border-radius:14px; display:block; margin:0 auto 12px;}
+  .qrbox b{font-size:14px;}
+  .qrbox span{display:block; font-size:11.5px; color:var(--dim); margin-top:4px;}
+  .qrtxt h3{font-size:clamp(22px,3.5vw,34px); font-weight:900; margin-bottom:10px;}
+  .qrtxt p{color:var(--dim); font-size:15px; max-width:520px;}
 
   /* How it works */
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
   @media(max-width:700px){ .steps{grid-template-columns:1fr;} }
   .step{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:26px; position:relative;}
-  .step .n{position:absolute; top:-16px; right:20px; width:38px;height:38px;border-radius:50%; background:var(--grad); color:#04141A; font-weight:900; font-size:17px; display:flex; align-items:center; justify-content:center;}
+  .step .n{position:absolute; top:-15px; right:20px; width:38px;height:38px;border-radius:50%; background:var(--grad); color:#04141A; font-weight:900; font-size:17px; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,230,255,.3);}
   .step h3{margin-top:10px; font-size:16px;}
   .step p{font-size:13.5px; color:var(--dim);}
 
+  /* FAQ */
+  .faq{max-width:720px; margin:0 auto;}
+  .faq-item{border:1px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden; background:var(--panel);}
+  .faq-q{display:flex; align-items:center; gap:10px; padding:16px 18px; cursor:pointer; font-size:14.5px; font-weight:700;}
+  .faq-q .arr{margin-inline-start:auto; color:var(--cyan); transition:.25s;}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease; font-size:13.5px; color:var(--dim); padding:0 18px; line-height:1.8;}
+  .faq-item.open .faq-a{max-height:300px; padding-bottom:16px;}
+  .faq-item.open .arr{transform:rotate(180deg);}
+
   /* Final CTA */
-  .final-cta{
-    position:relative; text-align:center; padding:70px 0; overflow:hidden;
-    background:radial-gradient(500px 220px at 50% 0%, rgba(0,230,255,.16), transparent 60%);
-  }
+  .final-cta{position:relative; text-align:center; padding:72px 0 70px; overflow:hidden; background:radial-gradient(560px 240px at 50% 0%, rgba(0,230,255,.15), transparent 60%);}
   .final-cta h2{font-size:clamp(26px,5vw,42px); font-weight:900; margin-bottom:14px;}
   .final-cta p{color:var(--dim); max-width:560px; margin:0 auto 30px; font-size:15px;}
+  .final-cta .btn{margin:0 6px 10px;}
 
   footer{border-top:1px solid var(--line); padding:30px 0; color:var(--dim); font-size:12.5px; text-align:center;}
   footer .fm{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:10px; font-size:13px;}
@@ -155,11 +288,17 @@
 
 <nav>
   <div class="nav-in">
-    <div class="logo"><span class="ico">🛡️</span>Vanguard Privacy</div>
+    <div class="logo">
+      <span class="ico">
+        <svg viewBox="0 0 512 512"><path d="M256 72 L408 130 V256 C408 338 344 404 256 440 C168 404 104 338 104 256 V130 Z" fill="none" stroke="#04141A" stroke-width="34" stroke-linejoin="round"/></svg>
+      </span>
+      Vanguard Privacy
+    </div>
     <div class="nav-links">
       <a href="#features">المزايا</a>
-      <a href="#license">الترخيص</a>
+      <a href="#pricing">الأسعار</a>
       <a href="#how">كيف يعمل</a>
+      <a href="#faq">الأسئلة</a>
       <a href="https://t.me/BNB_01" class="nav-cta">اشتـرِ الآن</a>
     </div>
   </div>
@@ -167,22 +306,134 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="badge">🏆 تحذير تتبع 100% محلي — بدون خوادم</span>
-    <h1>درعك الرقمي ضد <span class="grad">التتبع والاختراق</span><br>كله يعمل على جهازك</h1>
-    <p class="lead">
-      Vanguard Privacy ليس مجرد تطبيق — إنه حصن رقمي متكامل: يفحص كلمات مرورك، يُسكت أدوات التتبع،
-      يخزّن أسرارك بتشفير حقيقي، ويربط كل ترخيص ببصمة جهازك. لا بيانات تُرفع، لا إعلانات، لا اشتراكات.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="#license">💰 اشترِ الآن — 27$ مدى الحياة</a>
-      <a class="btn btn-ghost" href="#how">تعرف على المزايا ⇩</a>
-      <a class="btn btn-green" href="app/index.html">📲 ثبّت التطبيق الآن</a>
-    </div>
-    <div class="hero-trust">
-      <span>🚫 بلا إعلانات</span>
-      <span>🔒 تشفير RSA-2048</span>
-      <span>📴 يعمل أوفلاين بالكامل</span>
-      <span>🖥️ أندرويد + آيفون + ويندوز</span>
+    <div class="hero-grid">
+      <div>
+        <span class="badge"><span class="dot"></span> تحذير 100% محلي — بدون خوادم</span>
+        <h1>درعك الرقمي ضد <span class="grad">التتبع والاختراق</span><br>كله يعمل على جهازك</h1>
+        <p class="lead">
+          Vanguard Privacy ليس مجرد تطبيق — إنه حصن رقمي متكامل: يفحص كلمات مرورك، يُسكت أدوات التتبع،
+          يخزّن أسرارك بتشفير حقيقي، ويربط كل ترخيص ببصمة جهازك. لا بيانات تُرفع، لا إعلانات، لا اشتراكات.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#pricing">💰 اشترِ الآن — خصم 45%</a>
+          <a class="btn btn-ghost" href="#features">تعرف على المزايا ⇩</a>
+          <a class="btn btn-green" href="app/index.html">📲 ثبّت التطبيق</a>
+        </div>
+        <div class="hero-trust">
+          <span>🚫 بلا إعلانات</span>
+          <span>🔒 تشفير RSA-2048</span>
+          <span>📴 يعمل أوفلاين بالكامل</span>
+          <span>🖥️ أندرويد + آيفون + ويندوز</span>
+        </div>
+      </div>
+
+      <!-- ===== مجسم التلفون ===== -->
+      <div class="phone-wrap">
+        <div class="phone-glow"></div>
+        <div class="phone">
+          <span class="phone-side pw"></span>
+          <span class="phone-side pv"></span>
+          <div class="phone-screen">
+            <div class="phone-notch"><span class="cam"></span><span class="cam"></span></div>
+            <div class="phone-status">
+              <span>14:52</span>
+              <span class="sig">
+                <span class="bars"><i></i><i></i><i></i></span>
+                <span style="font-size:11px;">📶</span>
+                <span style="font-size:11px;">🔋</span>
+              </span>
+            </div>
+            <div class="app">
+              <div class="app-scroll">
+                <div class="app-navbar">
+                  <span class="ail"><svg viewBox="0 0 512 512"><path d="M256 72 L408 130 V256 C408 338 344 404 256 440 C168 404 104 338 104 256 V130 Z" fill="none" stroke="#04141A" stroke-width="34" stroke-linejoin="round"/></svg></span>
+                  <b>فانغارد</b>
+                  <span class="ib">👤</span>
+                </div>
+                <div class="app-card">
+                  <div class="ring">
+                    <svg class="emg-svg" width="78" height="78" viewBox="0 0 96 96">
+                      <defs>
+                        <linearGradient id="emgr" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0" stop-color="#00E6FF"/><stop offset="1" stop-color="#4C8DFF"/>
+                        </linearGradient>
+                      </defs>
+                      <circle cx="48" cy="48" r="40" fill="none" stroke="#16222E" stroke-width="9"/>
+                      <path d="M48 8 a40 40 0 0 1 0 80" fill="none" stroke="url(#emgr)" stroke-width="9" stroke-linecap="round" opacity=".9"/>
+                      <path d="M48 14 a34 34 0 1 1 -22 11" fill="none" stroke="#FFC24B" stroke-width="2" opacity=".5" stroke-dasharray="2 4"/>
+                      <text x="48" y="44" text-anchor="middle" fill="#F6FCFD" font-size="15" font-weight="700" font-family="monospace">74%</text>
+                      <text x="48" y="58" text-anchor="middle" fill="#8CA0AC" font-size="7" font-family="monospace">EM</text>
+                    </svg>
+                    <div class="emg-label">
+                      <b>الأمان الكلي</b>
+                      <span>مقياس الحماية الفوري<br>لمجال الـ EM في محيطك</span>
+                    </div>
+                    <div class="emg-status">
+                      <b>آمن</b>
+                      <span>الحالة الآن</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="app-cards2">
+                  <div class="a-card2">
+                    <div class="ic">🕵️</div>
+                    <b>رادار الفحص</b>
+                    <span>مسح متقدم للتهديدات<br>وأنشطة خفية</span>
+                  </div>
+                  <div class="a-card2">
+                    <div class="ic">🔑</div>
+                    <b>خزنة كلماتك</b>
+                    <span>تخزين مشفر بالكامل<br>بكلمة مرور رئيسية</span>
+                  </div>
+                </div>
+
+                <div class="app-scan">
+                  <span class="rad"></span>
+                  <div><b>فحص تجريبي</b><span>تحليل محيطك بصمت</span></div>
+                  <span class="st">جارٍ ✓</span>
+                </div>
+
+                <div class="app-cards2">
+                  <div class="a-card2">
+                    <div class="ic">👁️</div>
+                    <b>درع التتبع</b>
+                    <span class="ok">نشط</span><span>أداة التتبع صامتة</span>
+                  </div>
+                  <div class="a-card2">
+                    <div class="ic w">📶</div>
+                    <b>الواي فاي</b>
+                    <span class="warn">تنبيه</span><span>شبكة عامة مكشوفة</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- شريط سفلي مثل التطبيق الحقيقي -->
+              <div class="app-bnav">
+                <div class="bn sel">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>
+                  الرادار
+                </div>
+                <div class="bn">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><circle cx="12" cy="13" r="2.4"/></svg>
+                  الكاميرا
+                </div>
+                <div class="bn">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+                  المركز
+                </div>
+                <div class="bn">
+                  <svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h8"/><circle cx="17" cy="7" r="2"/><circle cx="21" cy="12" r="2"/><circle cx="15" cy="17" r="2"/></svg>
+                  الإعدادات
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-tag f1">⬤ تعمل الآن</div>
+        <div class="float-tag f2">15 أداة حماية</div>
+      </div>
     </div>
   </div>
 </header>
@@ -253,44 +504,100 @@
   </div>
 </div>
 
-<section id="license">
-  <div class="wrap lico">
-    <div class="txt">
-      <div class="sec-tag" style="text-align:right;">الترخيص</div>
-      <h2 style="text-align:right;" class="sec-h">اشتراك واحد. للأبد.</h2>
-      <p style="color:var(--dim); text-align:right; margin-bottom:20px;">
-        عند الشراء تستلم <b>ملف التطبيق + مفتاح ترخيص فريد</b> مرتبط ببصمة جهازك.
-        لا يمكن لأحد آخر استخدام مفتاحك على جهاز مختلف — هذا يضمن لك الحماية، ويحمينا من إعادة البيع غير المرخصة.
-      </p>
-      <ul class="check-list">
-        <li>نسخة كاملة بكل الأدوات الخمس عشرة، محدّثة طوال حياتك</li>
-        <li>لا إعلانات مزعجة نهائيًا</li>
-        <li>لا اشتراكات شهرية ولا رسوم خفية</li>
-        <li>دعم مباشر عبر تيليجرام عند أي سؤال</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="price">27$</div>
-      <div class="per">دفعة واحدة · مدى الحياة</div>
-      <div class="check-list" style="text-align:right;">
-        <li>جميع الأدوات + التحديثات</li>
-        <li>مفتاح مرتبط بجهازك</li>
-        <li>دعم مباشر عبر تيليجرام</li>
+<!-- ===== السعر ===== -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">الأسعار</div>
+    <h2 class="sec-h">اشتراك واحد. للأبد.</h2>
+    <p class="sec-sub">العرض التأسيسي: سعر رسمي 49$ بخفض فوري 45% — اليوم بـ 27$ فقط. بعد انتهاء العرض يعود السعر إلى 49$.</p>
+    <div class="pwrap">
+      <div class="ptxt">
+        <h2>خصم 45% — لفترة محدودة</h2>
+        <p>
+          عند الشراء تستلم <b>ملف التطبيق + مفتاح ترخيص فريد</b> مرتبط ببصمة جهازك.
+          لا يمكن لأحد آخر استخدام مفتاحك على جهاز مختلف — هذا يضمن لك الحماية، ويحمينا من إعادة البيع غير المرخصة.
+        </p>
       </div>
-      <a class="btn btn-primary" style="width:100%; justify-content:center;" href="https://t.me/BNB_01">💬 اشتـرِ عبر تيليجرام</a>
-      <p class="price-line" style="margin-top:14px;">الدفع: تحويل محفظة/حوالة — التفاصيل تُرسل على الخاص أثناء المحادثة</p>
+      <div style="display:flex; justify-content:center;">
+        <div class="pcard hot">
+          <div class="rib">🔥 عرض محدود — خصم 45%</div>
+          <div style="margin-top:8px;">
+            <span class="old">49$</span>
+            <span class="now">27$</span>
+          </div>
+          <div class="saving">وفّرت 22$ — بطلبك اليوم</div>
+          <div class="per">دفعة واحدة · <b>مدى الحياة</b> · كل التحديثات مجانية</div>
+          <ul class="check-list">
+            <li>جميع الأدوات الخمس عشرة + التحديثات</li>
+            <li>مفتاح ترخيص فريد مرتبط بجهازك</li>
+            <li>دعم مباشر عبر تيليجرام</li>
+            <li>يعمل أوفلاين بالكامل — بياناتك تبقى لك</li>
+          </ul>
+          <a class="btn btn-primary" href="https://t.me/BNB_01">💬 اشتـرِ عبر تيليجرام</a>
+          <p style="font-size:11.5px; color:var(--dim); margin-top:12px;">الدفع: تحويل محفظة/حوالة — التفاصيل تُرسل على الخاص أثناء المحادثة · التسليم فوري</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ===== QR ===== -->
+<section id="qrcode-wrap">
+  <div class="wrap qrsect">
+    <div class="qrbox">
+      <img src="vanguard-qr.png" alt="مسح الضوئي للدخول للموقع">
+      <b>امسح وادخل للموقع</b>
+      <span>vanguardprivacy.github.io/vanguard-www</span>
+    </div>
+    <div class="qrtxt">
+      <h3>شارك Vanguard مع من تحب</h3>
+      <p>
+        امسح الكود ببساطة من أي هاتف تدخل مباشرة إلى صفحة الموقع.
+        أرسل هذه الصورة لأي شخص تريد أن يحمي نفسه — الخصوصية حق للجميع، والدرع ينتشر بالكلمة الطيبة والنصيحة.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== كيف يعمل ===== -->
 <section id="how">
   <div class="wrap">
     <div class="sec-tag">كيف يعمل</div>
     <h2 class="sec-h">ثلاث خطوات فقط للانطلاق</h2>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>ثبّت التطبيق</h3><p>حمّل الملف وافتحه، أو أضِفه للشاشة الرئيسية ليظهر كتطبيق كامل.</p></div>
+      <div class="step"><div class="n">1</div><h3>ثبّت التطبيق</h3><p>حمّل الملف وافتحه، أو أضِفه للشاشة الرئيسية ليظهر كتطبيق كامل بأيقونة فانغارد الخاصة.</p></div>
       <div class="step"><div class="n">2</div><h3>أدخل مفتاحك</h3><p>مفتاح فريد يُسلَّم لك بعد الشراء على الخاص، مرتبط ببصمة جهازك.</p></div>
       <div class="step"><div class="n">3</div><h3>ابدأ الحماية</h3><p>جرّب كل الأدوات الآن — فحص، خزنة، تتبع، وشبكة — محليًا وبلا إنترنت.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-tag">الأسئلة الشائعة</div>
+    <h2 class="sec-h">كل ما تريد معرفته</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">هل التطبيق يعمل دون إنترنت؟<span class="arr">▾</span></div>
+        <div class="faq-a">نعم — كل الفحوصات والتشفير والخزائن تعمل محليًا 100% على جهازك. لا توجد خوادم وسيطة ولا تُرفع بياناتك لأي طرف إطلاقًا.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">كيف أستلم التطبيق والمفتاح بعد الشراء؟<span class="arr">▾</span></div>
+        <div class="faq-a">بعد التواصل معنا على تيليجرام والدفع، تستلم فورًا مفتاح ترخيص فريدًا + التعليمات لإضافة التطبيق للشاشة الرئيسية. التسليم مباشر وسريع.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل يمكنني استخدام المفتاح على أكثر من جهاز؟<span class="arr">▾</span></div>
+        <div class="faq-a">المفتاح مرتبط ببصمة جهازك — فهو لجهازك أنت فقط. وهذا يحميك أنت من أي استغلال لمفتاحك، ويحمينا من إعادة البيع غير المرخصة.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل سأدفع مجددًا للحصول على التحديثات؟<span class="arr">▾</span></div>
+        <div class="faq-a">لا. دفعة واحدة مدى الحياة تشمل كل التحديثات والأدوات الجديدة. بلا اشتراكات، بلا رسوم خفية، بلا مفاجآت.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">ما الأجهزة التي يدعمها؟<span class="arr">▾</span></div>
+        <div class="faq-a">يعمل على أي متصفح حديث: أندرويد (Chrome)، آيفون (Safari)، ويندوز وماك. يعمل أيضًا بنسخة سطح المكتب بذات المزايا.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -298,14 +605,14 @@
 <section id="install" class="final-cta">
   <div class="wrap">
     <h2 id="contact">جرّب التطبيق أو اشتري الآن</h2>
-    <p>جرّب التطبيق مجانًا واستعرض الواجهة، وللحصول على المفتاح الكامل تواصل معنا مباشرة على الخاص — التسليم آمن وفوري.</p>
-    <div class="hero-ctas">
+    <p>افتح التطبيق وتصفح الواجهة مباشرة، وللحصول على مفتاح التفعيل الكامل تواصل معنا على الخاص — التسليم آمن وفوري.</p>
+    <div class="hero-ctas" style="justify-content:center;">
       <a class="btn btn-green" href="app/index.html" download>📲 تحميل التطبيق الآن</a>
       <a class="btn btn-primary" href="https://t.me/BNB_01">💬 تيليجرام: @BNB_01</a>
-      <a class="btn btn-ghost" href="#license">💰 الشراء — 27$</a>
+      <a class="btn btn-ghost" href="#pricing">💰 الشراء — 27$</a>
     </div>
     <p style="font-size:13px; color:var(--dim); margin-top:8px;">
-      💡 بعد التحميل: افتح الملف ثم اختر «إضافة إلى الشاشة الرئيسية» من قائمة المتصفح ليصبح تطبيقًا كاملاً بأيقونة خاصة — المفتاح يُسلَّم على الخاص بعد الشراء فقط.
+      💡 بعد الفتح: اختر «إضافة إلى الشاشة الرئيسية» من قائمة المتصفح ليصبح تطبيقًا كاملاً بأيقونة فانغارد — المفتاح يُسلَّم على الخاص بعد الشراء فقط.
     </p>
     <p style="font-size:12.5px; color:var(--dim); margin-top:20px;">
       نحن لا نشارك ملفاتك أو بياناتك مع أي طرف. كل شيء يعمل على جهازك، والنظام مرخّص رقميًا.
@@ -327,6 +634,18 @@
     <p>© 2026 Vanguard Privacy — جميع الحقوق محفوظة. النظام مرخّص رقميًا ومرتبط ببصمة الجهاز.</p>
   </div>
 </footer>
+
+<script>
+  // أسئلة شائعة
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
 
 </body>
 </html>
