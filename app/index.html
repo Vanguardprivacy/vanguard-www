@@ -1425,6 +1425,8 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   transform:translateX(-115%); animation:qSweep 3.4s ease-in-out infinite; pointer-events:none;
 }
 @keyframes qSweep{0%{transform:translateX(-115%)} 55%{transform:translateX(180%)} 100%{transform:translateX(180%)}}
+@keyframes qSweepRev{0%{transform:translateX(180%)} 45%{transform:translateX(-115%)} 100%{transform:translateX(-115%)}}
+@keyframes qSweepScan{0%{transform:translateX(-115%)} 50%{transform:translateX(180%)} 100%{transform:translateX(-115%)}}
 .q-card:hover{
   transform:translateY(-2px); border-color:rgba(0,230,255,0.85);
   box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.32), inset 0 0 26px rgba(0,230,255,0.09);
@@ -1432,6 +1434,9 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 .q-primary{grid-column:1 / -1;}
 .q-primary .q-txt{text-align:center; align-items:center; justify-content:center;}
 .q-primary .q-arrow{width:36px; height:36px; display:flex; align-items:center; justify-content:center;}
+.q-primary::after{width:44%; animation:qSweepScan 3.2s ease-in-out infinite;}
+.q-primary .q-txt strong{font-size:15px;}
+.q-primary .q-txt em{font-size:8.5px;}
 .q-ico{
   width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
   background:linear-gradient(145deg, #06222E, #0A3A4A 66%, #07403A); border:1px solid rgba(0,230,255,0.42);
@@ -1464,7 +1469,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   border-color:rgba(0,245,176,0.55);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(0,245,176,0.2), inset 0 0 22px rgba(0,245,176,0.06);
 }
-.q-card.q-safe::after{background:linear-gradient(90deg, transparent, rgba(0,245,176,0.2), transparent); animation-delay:2.2s;}
+.q-card.q-safe::after{background:linear-gradient(90deg, transparent, rgba(0,245,176,0.2), transparent); animation:qSweepRev 3.4s ease-in-out 2.2s infinite;}
 .q-card.q-safe:hover{border-color:rgba(0,245,176,0.9); box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 24px rgba(0,245,176,0.36), inset 0 0 26px rgba(0,245,176,0.1);}
 .q-card.q-safe .q-ico{
   background:linear-gradient(145deg, #06291F, #0A3A30 66%, #06351F); border-color:rgba(0,245,176,0.55);
