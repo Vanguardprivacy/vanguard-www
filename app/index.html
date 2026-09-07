@@ -52,11 +52,8 @@
 .ep-inc .t{font-weight:700;font-size:12.5px;}
 .ep-inc .d{color:var(--ink-dim);font-size:11px;line-height:1.7;margin-top:3px;}
 .ep-inc .ts{font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-top:4px;}
-.ep-brod{display:flex;flex-direction:column;gap:3px;padding:10px 12px;margin-bottom:8px;border-radius:10px;font-size:12px;border:1px solid rgba(167,139,250,0.28);background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(232,95,209,0.06));}
-.ep-brod .tag{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:8px;letter-spacing:1.5px;color:#A78BFA;border:1px solid rgba(167,139,250,0.35);border-radius:4px;padding:1px 6px;}
-.ep-brod .t{font-weight:800;font-size:12.5px;color:#E8FEFF;}
-.ep-brod .d{color:var(--ink-dim);font-size:11px;line-height:1.7;}
-.ep-brod .ts{font-family:var(--mono);font-size:10px;color:#A78BFA;margin-top:2px;}
+.ep-inc .d a.lnk{color:var(--cyan);font-weight:700;text-decoration:none;border-bottom:1px dashed color-mix(in srgb, var(--cyan) 55%, transparent);}
+.ep-inc .d a.lnk:hover{color:#8FF6FF;border-bottom-style:solid;}
 .ep-bars{display:flex;align-items:flex-end;gap:6px;height:96px;padding:8px 4px 0;}
 .ep-bar{flex:1;background:linear-gradient(180deg,rgba(0,230,255,.7),rgba(0,230,255,.08));border-radius:5px 5px 0 0;min-height:4px;position:relative;transition:height .5s ease;}
 .ep-bar.warn{background:linear-gradient(180deg,#FFC24B,rgba(255,194,75,.08));}
@@ -2508,12 +2505,9 @@ body.screen-tools #v2Tools{display:block;}
       </div>
       <div style="margin-top:12px;">
         <div class="ep-row"><span class="k">إجمالي الإشعارات المسجلة</span><span class="v" id="epNotifCount2">0</span></div>
-        <div class="ep-row"><span class="k">رسائل وإعلانات رسمية</span><span class="v" id="epBroadCount">0</span></div>
         <div class="ep-row"><span class="k">أحدث إشعار</span><span class="v" id="epNotifLast2">—</span></div>
       </div>
-      <p class="ep-sec" style="margin-top:16px;">الرسائل والإعلانات الرسمية</p>
-      <div id="epBroadFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد رسائل رسمية بعد — تظهر هنا أي إعلانات أو تنبيهات تصدرها المؤسسة.</div></div>
-      <p class="ep-sec" style="margin-top:16px;">موجز إشعارات المستشعر المرسلة مؤخرًا</p>
+      <p class="ep-sec" style="margin-top:16px;">أحدث الإشعارات المسجلة</p>
       <div id="epNotifFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات مرسلة بعد — أول تنبيه يظهر هنا فور اكتشاف أي تغيّر حقيقي.</div></div>
     </div>
   </section>
@@ -6525,8 +6519,8 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 
       document.body.insertBefore(bar, document.body.firstChild);
       bar.classList.add('on');
-      // يُسجَّل أيضًا في سجل الرسائل الرسمية بالجرس
-      try{ if(window.vgBroadPush) window.vgBroadPush(notice.id, type, title, text); }catch(e){}
+      // يُسجَّل أيضًا في سجل الرسائل بالجرس
+      try{ if(window.vgBroadPush) window.vgBroadPush(notice.id, type, title, text, href); }catch(e){}
     }
 
     function check(){
@@ -7004,31 +6998,24 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
       else if(p==='default') st.textContent='ستظهر هنا آخر التنبيهات المرسلة من المستشعر.';
       else st.textContent='هذا المتصفح لا يدعم إشعارات النظام — التنبيهات تظهر داخل التطبيق.';
     }
-    var bb=$('epBroadFeed');
-    if(bb){
-      if(!bro.length){ bb.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد رسائل رسمية بعد — تظهر هنا أي إعلانات أو تنبيهات تصدرها المؤسسة.</div>'; }
-      else {
-        bb.innerHTML = bro.slice(0,8).map(function(e){
-          var tag = e.type==='urgent'?'تنبيه رسمي':e.type==='update'?'إعلان تحديث':'إعلان';
-          return '<div class="ep-brod"><span class="tag">'+tag+'</span><div class="t">'+esc(e.title)+'</div>'+(e.text?'<div class="d">'+esc(e.text)+'</div>':'')+'<div class="ts">'+timeAgo(e.ts)+'</div></div>';
-        }).join('');
-      }
-    }
-    var bc=$('epBroadCount'); if(bc) bc.textContent = String(bro.length);
     var cnt=$('epNotifCount2'); if(cnt) cnt.textContent = String(bro.length+inc.length);
     var newest = (bro.length&&inc.length) ? Math.max(bro[0].ts,inc[0].ts) : (bro.length?bro[0].ts:(inc.length?inc[0].ts:0));
     var last=$('epNotifLast2'); if(last) last.textContent = newest ? timeAgo(newest) : '—';
     var box=$('epNotifFeed'); if(!box) return;
-    if(!inc.length){ return; }
-    box.innerHTML = inc.slice(0,12).map(function(e){
-      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"><div class="t">'+sevLbl(e.sev)+' · '+esc(e.type)+'</div><div class="d">'+esc(e.msg)+'</div><div class="ts">'+timeAgo(e.ts)+'</div></div>';
+    var items=[], k;
+    for(k=0;k<bro.length;k++){ var b=bro[k]; items.push({ts:b.ts, sev:(b.type==='urgent'?'high':'mid'), t:(b.type==='urgent'?'حرج':'متوسط')+' · '+esc(b.title||b.text||'رسالة'), d: b.link? ('<a class="lnk" href="'+esc(b.link)+'" target="_blank" rel="noopener">'+esc(b.text||'اضغط هنا')+'</a>') : esc(b.text||'')}); }
+    for(k=0;k<inc.length;k++){ var e=inc[k]; items.push({ts:e.ts, sev:e.sev, t:sevLbl(e.sev)+' · '+esc(e.type), d:esc(e.msg)}); }
+    items.sort(function(a,b){ return b.ts-a.ts; });
+    if(!items.length){ return; }
+    box.innerHTML = items.slice(0,14).map(function(e){
+      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"><div class="t">'+e.t+'</div><div class="d">'+e.d+'</div><div class="ts">'+timeAgo(e.ts)+'</div></div>';
     }).join('');
   }
-  function vgBroadPush(id,type,title,text){
+  function vgBroadPush(id,type,title,text,link){
     if(!id) id='b'+Date.now();
     var tag = type==='urgent'||type==='update' ? type : 'info';
     for(var i=0;i<bro.length;i++){ if(bro[i].id===id) return; }
-    bro.unshift({id:id, type:tag, title:title||'رسالة رسمية', text:text||'', ts:Date.now()});
+    bro.unshift({id:id, type:tag, title:title||'رسالة رسمية', text:text||'', link:link||'', ts:Date.now()});
     store(K_R, bro);
     try{ renderAll(); }catch(e){}
   }
