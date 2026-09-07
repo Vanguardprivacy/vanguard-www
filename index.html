@@ -124,6 +124,7 @@
   .float-tag.f2{bottom:90px; left:-78px; color:var(--cyan);}
   .float-tag.f3{bottom:-14px; left:50%; transform:translateX(-50%); color:var(--dim); font-size:10.5px; background:rgba(8,12,20,.92); border-color:rgba(0,230,255,.25); box-shadow:0 10px 30px rgba(0,0,0,.6);}
   @media(max-width:940px){ .float-tag.f1{right:-8px;} .float-tag.f2{left:-8px;} }
+  .float-tag .lv-dot{width:8px; height:8px; border-radius:50%; background:var(--success,#00F5B0); box-shadow:0 0 9px 1px rgba(0,245,176,0.85); animation:blink 1.8s ease-in-out infinite; flex-shrink:0; display:inline-block;}
 
   /* شريط الميزات القوية */
   .feats-ribbon{overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:linear-gradient(90deg,rgba(0,230,255,.035),rgba(5,7,11,.0) 30%,rgba(5,7,11,.0) 70%,rgba(0,230,255,.035)); padding:14px 0; direction:ltr; position:relative;}
@@ -314,11 +315,11 @@
 
   .brand-hero{display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 0 28px;}
 
-  .logo-stage{position:relative; width:104px; height:104px; margin-bottom:18px; display:flex; align-items:center; justify-content:center;}
+.logo-stage{position:relative; width:104px; height:104px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; animation:float-bob 5s ease-in-out infinite;}
 
   .logo-stage::before{
-    content:''; position:absolute; inset:-22px; border-radius:50%;
-    background:radial-gradient(circle, rgba(0,230,255,0.3), transparent 68%);
+    content:''; position:absolute; inset:-12px; border-radius:50%;
+    background:radial-gradient(circle, rgba(0,230,255,0.22), transparent 64%);
     animation:pulse-glow 3.4s ease-in-out infinite;
   }
 
@@ -351,7 +352,7 @@
 
     .logo-stage{width:62px; height:62px; margin-bottom:10px;}
 
-    .logo-stage::before{inset:-10px;}
+    .logo-stage::before{inset:-8px;}
 
     .wm-en{font-size:18px; letter-spacing:1px;}
 
@@ -449,10 +450,11 @@
 }
 .vg-inline .wide-btn:hover{border-color:rgba(0,230,255,.45); transform:translateY(-1px);}
 .vg-inline .sparkle{text-align:center; margin-top:18px; color:var(--cyan); opacity:0.7; font-size:16px;}
-.vg-inline .brand-hero{position:relative; border-radius:26px; padding:20px 16px;
+.vg-inline .brand-hero{position:relative; border-radius:20px; padding:14px 16px 10px; margin-bottom:6px;
   background:transparent;
+  border:1px solid rgba(0,230,255,.20);
   box-shadow:none;}
-.vg-inline .scan-hero{position:relative; border-radius:26px; padding:12px 12px; margin-top:14px;
+.vg-inline .scan-hero{position:relative; border-radius:26px; padding:12px 12px; margin-top:18px;
   background:radial-gradient(ellipse at 50% 40%, rgba(0,245,176,0.13), rgba(0,245,176,0) 78%);
   box-shadow:0 0 44px -10px rgba(0,245,176,0.20);}
 .pillar-block{position:relative; border-radius:18px; margin-top:10px; padding-left:14px; padding-right:14px;
@@ -851,7 +853,7 @@
 </div>
 </div></div><div class="vg-scan"></div></div></div>            </div>          </div>
         </div>
-        <div class="float-tag f1">🛡️ <span style="font-weight:800;color:#fff;">درع الخداع والتهديدات</span></div>
+        <div class="float-tag f1">🛡️ <span class="lv-dot"></span><span style="font-weight:800;color:#fff;">يعمل الآن</span></div>
         <div class="float-tag f2">🔓 <span style="font-weight:800;color:#fff;">استرجاع الحسابات</span></div>
         <div class="float-tag f3">📡 رادار الفحص الاستخباراتي</div>
       </div>
