@@ -1437,9 +1437,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 }
 .q-primary{grid-column:1 / -1;}
 .q-primary .q-txt{text-align:center; align-items:center; justify-content:center;}
-.q-primary .q-arrow{width:36px; height:36px; display:flex; align-items:center; justify-content:center;}
 .q-primary::after{width:44%; animation:qSweepScan 3.2s ease-in-out infinite;}
-.q-primary .q-arrow svg{width:16px; height:16px;}
 .q-primary .q-txt strong{font-size:15px;}
 .q-primary .q-txt em{font-size:8.5px;}
 .q-ico{
@@ -1448,13 +1446,10 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   box-shadow:0 0 14px rgba(0,230,255,0.32), inset 0 0 12px rgba(0,230,255,0.16); color:var(--cyan);
 }
 .q-ico svg{width:20px; height:20px; display:block;}
-.q-ico svg, .q-arrow svg{stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
+.q-ico svg{stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
 .q-txt{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
 .q-txt strong{font-size:12px; font-weight:800; color:#fff; line-height:1.25;}
 .q-txt em{font-family:var(--mono); font-style:normal; font-size:7.5px; letter-spacing:1.5px; color:var(--cyan); opacity:0.9; line-height:1;}
-.q-arrow{color:rgba(0,230,255,0.6); flex-shrink:0; transition:transform .25s, color .25s;}
-.q-arrow svg{width:13px; height:13px; display:block;}
-.q-card:hover .q-arrow{transform:translateX(-3px); color:var(--cyan);}
 .q-card.q-danger{
   background:linear-gradient(135deg, rgba(255,72,86,0.16), rgba(24,10,14,0.62) 50%, rgba(255,120,100,0.06));
   border-color:rgba(255,72,86,0.55);
@@ -1467,8 +1462,6 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   box-shadow:0 0 14px rgba(255,72,86,0.42), inset 0 0 12px rgba(255,72,86,0.18); color:#FF6B74;
 }
 .q-card.q-danger .q-txt em{color:#FF6B74;}
-.q-card.q-danger .q-arrow{color:rgba(255,72,86,0.7);}
-.q-card.q-danger:hover .q-arrow{color:#FF6B74;}
 .q-card.q-safe{
   background:linear-gradient(135deg, rgba(0,245,176,0.12), rgba(8,18,14,0.62) 50%, rgba(0,120,90,0.08));
   border-color:rgba(0,245,176,0.55);
@@ -1481,10 +1474,9 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   box-shadow:0 0 14px rgba(0,245,176,0.4), inset 0 0 12px rgba(0,245,176,0.16); color:#00F5B0;
 }
 .q-card.q-safe .q-txt em{color:#00F5B0;}
-.q-card.q-safe .q-arrow{color:rgba(0,245,176,0.7);}
-.q-card.q-safe:hover .q-arrow{color:#00F5B0;}
 .q-card.q-mirror{flex-direction:row-reverse;}
 .q-card.q-mirror .q-txt{text-align:left;}
+.q-card.q-danger .q-txt strong, .q-card.q-safe .q-txt strong{font-size:13px;}
 .sparkle{text-align:center; margin-top:18px; color:var(--cyan); opacity:0.7; font-size:16px;}
 
 .bottom-nav{
@@ -1859,17 +1851,15 @@ body.screen-tools #v2Tools{display:block;}
     <button class="q-card q-primary" data-goto="radar">
       <span class="q-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.4"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><path d="M12 12 19 5"/></svg></span>
       <span class="q-txt"><strong>رادار الفحص الذكي</strong><em>SMART SCAN</em></span>
-      <span class="q-arrow"><svg viewBox="0 0 24 24"><rect x="2.5" y="9" width="13" height="8" rx="2"/><circle cx="9" cy="13" r="2.4"/><path d="M15.5 11l5.5-3.4v10.8L15.5 15"/></svg></span>
+      <span class="q-ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="9" width="13" height="8" rx="2"/><circle cx="9" cy="13" r="2.4"/><path d="M15.5 11l5.5-3.4v10.8L15.5 15"/></svg></span>
     </button>
     <button class="q-card q-danger" data-goto="deception">
       <span class="q-ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.6-7 10-4-1.4-7-5.5-7-10V6z"/><path d="M9.7 12a2.3 2.3 0 0 0 4.6 0 2.3 2.3 0 0 0-4.6 0z"/></svg></span>
       <span class="q-txt"><strong>درع الخداع والتهديدات</strong><em>DECEPTION SHIELD</em></span>
-      <span class="q-arrow"><svg viewBox="0 0 24 24"><path d="M9 6 4 11l5 5"/><path d="M4 11h12a3.5 3.5 0 0 1 0 7"/></svg></span>
     </button>
     <button class="q-card q-safe q-mirror" data-goto="recovery">
       <span class="q-ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>
       <span class="q-txt"><strong>استرجاع الحسابات</strong><em>ACCOUNT RECOVERY</em></span>
-      <span class="q-arrow"><svg viewBox="0 0 24 24"><path d="M9 6 4 11l5 5"/><path d="M4 11h12a3.5 3.5 0 0 1 0 7"/></svg></span>
     </button>
   </div>
 
