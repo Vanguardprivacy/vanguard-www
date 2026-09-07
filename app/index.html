@@ -52,8 +52,8 @@
 .ep-inc .t{font-weight:700;font-size:12.5px;}
 .ep-inc .d{color:var(--ink-dim);font-size:11px;line-height:1.7;margin-top:3px;}
 .ep-inc .ts{font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-top:4px;}
-.ep-inc .d a.lnk{color:var(--cyan);font-weight:700;text-decoration:none;border-bottom:1px dashed color-mix(in srgb, var(--cyan) 55%, transparent);}
-.ep-inc .d a.lnk:hover{color:#8FF6FF;border-bottom-style:solid;}
+.ep-inc[data-link]{cursor:pointer;}
+.ep-inc[data-link]:hover{background:rgba(0,230,255,.06);}
 .ep-bars{display:flex;align-items:flex-end;gap:6px;height:96px;padding:8px 4px 0;}
 .ep-bar{flex:1;background:linear-gradient(180deg,rgba(0,230,255,.7),rgba(0,230,255,.08));border-radius:5px 5px 0 0;min-height:4px;position:relative;transition:height .5s ease;}
 .ep-bar.warn{background:linear-gradient(180deg,#FFC24B,rgba(255,194,75,.08));}
@@ -1287,6 +1287,8 @@
   #vg-notice-bar .vg-notice-title{font-weight:700; margin-bottom:2px;}
   #vg-notice-bar .vg-notice-body p{margin:0; color:var(--ink-dim); font-size:12.5px;}
   #vg-notice-bar a{color:var(--cyan); text-decoration:underline;}
+  #vg-notice-bar.has-link{cursor:pointer;}
+  #vg-notice-bar.has-link .vg-notice-body{text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px;}
   #vg-notice-bar .vg-notice-x{
     flex:0 0 auto; width:32px; height:32px; border-radius:50%; padding:0;
     display:flex; align-items:center; justify-content:center;
@@ -6506,13 +6508,22 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 
       bar.querySelector('.vg-notice-title').textContent = title;
       var p = bar.querySelector('.vg-notice-body p');
-      if(href){ p.innerHTML = ''; var a=document.createElement('a'); a.href=href; a.target='_blank'; a.rel='noopener'; a.textContent=text; p.appendChild(a); }
-      else { p.textContent = text; }
+      p.textContent = text;
 
-      bar.querySelector('.vg-notice-x').addEventListener('click', function(){
+      bar.querySelector('.vg-notice-x').addEventListener('click', function(ev){
+        ev.stopPropagation();
         bar.classList.remove('on');
         try{ localStorage.setItem('vg_notice_dismissed_'+notice.id, '1'); }catch(e){}
       });
+
+      // الضغط على رسالة البانر نفسها يفتح الرابط مباشرة إن وُجد
+      if(href){
+        bar.classList.add('has-link');
+        bar.addEventListener('click', function(ev){
+          if(ev.target.closest('.vg-notice-x')) return;
+          try{ window.open(href, '_blank', 'noopener'); }catch(e){}
+        });
+      }
 
       // dismiss only once per notice id / version
       try{ if(notice.id && localStorage.getItem('vg_notice_dismissed_'+notice.id)) return; }catch(e){}
@@ -7003,12 +7014,14 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     var last=$('epNotifLast2'); if(last) last.textContent = newest ? timeAgo(newest) : '—';
     var box=$('epNotifFeed'); if(!box) return;
     var items=[], k;
-    for(k=0;k<bro.length;k++){ var b=bro[k]; items.push({ts:b.ts, sev:(b.type==='urgent'?'high':'mid'), t:(b.type==='urgent'?'حرج':'متوسط')+' · '+esc(b.title||b.text||'رسالة'), d: b.link? ('<a class="lnk" href="'+esc(b.link)+'" target="_blank" rel="noopener">'+esc(b.text||'اضغط هنا')+'</a>') : esc(b.text||'')}); }
+    for(k=0;k<bro.length;k++){ var b=bro[k]; items.push({ts:b.ts, sev:(b.type==='urgent'?'high':'mid'), t:(b.type==='urgent'?'حرج':'عالي الأهمية')+' · '+esc(b.title||b.text||'رسالة'), d:esc(b.text||''), link:b.link||''}); }
     for(k=0;k<inc.length;k++){ var e=inc[k]; items.push({ts:e.ts, sev:e.sev, t:sevLbl(e.sev)+' · '+esc(e.type), d:esc(e.msg)}); }
     items.sort(function(a,b){ return b.ts-a.ts; });
     if(!items.length){ return; }
+    if(!box._vlnk){ box._vlnk=true; box.addEventListener('click', function(ev){ var row=ev.target.closest('.ep-inc'); if(!row) return; var l=row.getAttribute('data-link'); if(l){ ev.preventDefault(); try{ window.open(l,'_blank','noopener'); }catch(e){} } }); }
     box.innerHTML = items.slice(0,14).map(function(e){
-      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"><div class="t">'+e.t+'</div><div class="d">'+e.d+'</div><div class="ts">'+timeAgo(e.ts)+'</div></div>';
+      var lk=e.link? (' data-link="'+esc(e.link)+'"') : '';
+      return '<div class="ep-inc '+(e.sev==='high'?'high':'mid')+'"'+lk+'><div class="t">'+e.t+'</div>'+(e.d?'<div class="d">'+e.d+'</div>':'')+'<div class="ts">'+timeAgo(e.ts)+'</div></div>';
     }).join('');
   }
   function vgBroadPush(id,type,title,text,link){
