@@ -452,7 +452,7 @@
 .vg-inline .sparkle{text-align:center; margin-top:18px; color:var(--cyan); opacity:0.7; font-size:16px;}
 .vg-inline .brand-hero{position:relative; border-radius:20px; padding:14px 16px 10px; margin-bottom:6px;
   background:transparent;
-  border:1px solid rgba(0,230,255,.20);
+  border:none;
   box-shadow:none;}
 .vg-inline .scan-hero{position:relative; border-radius:26px; padding:12px 12px; margin-top:18px;
   background:radial-gradient(ellipse at 50% 40%, rgba(0,245,176,0.13), rgba(0,245,176,0) 78%);
@@ -502,7 +502,7 @@
 }
 
 .vg-screen{position:absolute; inset:0; overflow:hidden; border-radius:34px; background:#04070B;}
-  .vg-scroll{position:absolute; top:0; left:0; right:0; animation:vgscroll 40s ease-in-out infinite alternate; will-change:transform;}
+  .vg-scroll{position:absolute; top:0; left:0; right:0; animation:vgscroll 22s ease-in-out infinite alternate; will-change:transform;}
   @keyframes vgscroll{0%,16%{transform:translateY(0);} 38%,92%{transform:translateY(calc(var(--vg-shift,0px) * -1));} 100%{transform:translateY(calc(var(--vg-shift,0px) * -1));}}
   .vg-scan{
     position:absolute; left:10px; right:10px; top:0; height:2px; z-index:12; pointer-events:none;
@@ -1132,6 +1132,7 @@
       var fullH = Math.max(inline.scrollHeight, sh); // ارتفاع محتوى التطبيق بعرض التصميم
       var scaledH = fullH * scale;
       var shift = Math.max(0, scaledH - sh);
+      if (shift < 60 && scaledH > sh) shift = 60;
       screen.style.setProperty('--vg-scale', scale.toFixed(3));
       screen.style.setProperty('--vg-shift', Math.round(shift) + 'px');
       screen.style.setProperty('--vg-scan-d', Math.round(sh) + 'px');
