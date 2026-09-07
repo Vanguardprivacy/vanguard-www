@@ -92,7 +92,7 @@
   }
   @keyframes breath{0%,100%{opacity:.7; transform:scale(1)}50%{opacity:1; transform:scale(1.04)}}
   .phone{
-    position:relative; z-index:1; width:290px; height:600px; margin:0 auto;
+    position:relative; z-index:1; width:272px; height:566px; margin:0 auto;
     background:linear-gradient(160deg,#1B2735,#0A0E14 40%); border-radius:46px;
     border:1px solid rgba(0,230,255,.25); box-shadow:0 40px 90px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.03);
     transform:rotateY(-10deg) rotateX(3deg); transition:transform .4s;
@@ -132,10 +132,22 @@
   }
   @keyframes sweep{0%,60%{left:-70%}100%{left:180%}}
   .float-tag{position:absolute; z-index:6; background:var(--panel); border:1px solid rgba(0,230,255,.4); border-radius:12px; padding:8px 12px; font-size:11px; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.5); display:flex; align-items:center; gap:6px;}
-  .float-tag.f1{top:70px; right:-48px; color:var(--ok);}
-  .float-tag.f2{bottom:90px; left:-56px; color:var(--cyan);}
+  .float-tag.f1{top:70px; right:-70px; color:var(--ok);}
+  .float-tag.f2{bottom:90px; left:-78px; color:var(--cyan);}
   .float-tag.f3{bottom:-14px; left:50%; transform:translateX(-50%); color:var(--dim); font-size:10.5px; background:rgba(8,12,20,.92); border-color:rgba(0,230,255,.25); box-shadow:0 10px 30px rgba(0,0,0,.6);}
   @media(max-width:940px){ .float-tag.f1{right:-8px;} .float-tag.f2{left:-8px;} }
+
+  /* شريط الميزات القوية */
+  .feats-ribbon{overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:linear-gradient(90deg,rgba(0,230,255,.035),rgba(5,7,11,.0) 30%,rgba(5,7,11,.0) 70%,rgba(0,230,255,.035)); padding:14px 0; direction:ltr; position:relative;}
+  .feats-ribbon::before,.feats-ribbon::after{content:""; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none;}
+  .feats-ribbon::before{left:0; background:linear-gradient(90deg,#05070B,transparent);}
+  .feats-ribbon::after{right:0; background:linear-gradient(-90deg,#05070B,transparent);}
+  .ribbon-track{display:inline-flex; gap:44px; white-space:nowrap; animation:ribbon 32s linear infinite; will-change:transform;}
+  .ribbon-track span{display:inline-flex; align-items:center; gap:9px; font-size:13.5px; font-weight:700; color:var(--dim);}
+  .ribbon-track span b{color:var(--cyan); font-weight:700;}
+  .ribbon-track span em{font-style:normal; color:var(--ink-dim);}
+  .ribbon-track span i{font-style:normal; font-size:15px;}
+  @keyframes ribbon{to{transform:translateX(-50%);}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   @keyframes floatc{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-10px)}}
   .float-tag.f1{animation:float 4.5s ease-in-out infinite;}
@@ -333,7 +345,7 @@
 
     .hero-copy h1{font-size:18px;}
 
-.vg-inline .phone{position:relative; z-index:1; max-width:420px; margin:0 auto; padding:22px 18px 60px;}
+.vg-inline .phone{position:relative; z-index:1; width:420px; max-width:420px; margin:0 auto; padding:22px 18px 60px;}
 .vg-inline .topbar{display:flex; align-items:center; justify-content:space-between;}
 .vg-inline .icon-btn{
   width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
@@ -461,37 +473,27 @@
   .vg-inline 50%{ box-shadow:0 0 22px color-mix(in srgb, var(--pc) 65%, transparent); }
 }
 
-.vg-screen{position:absolute; inset:0; overflow:hidden; border-radius:34px;}
-.vg-scroll{position:absolute; inset:0; animation:vgscroll 42s ease-in-out infinite alternate; will-change:transform;}
-@keyframes vgscroll{from{transform:translateY(0);} to{transform:translateY(-34%);}}
-.vg-inline{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; :root{
-  --obsidian-950:#020304;--obsidian-900:#050709;--obsidian-800:#0A0E14;
-  --glass:rgba(16,22,30,0.42);--glass-hi:rgba(22,30,40,0.55);
-  --cyan:#00E6FF;--cyan-soft:rgba(0,230,255,0.45);--cyan-faint:rgba(0,230,255,0.12);
-  --blue:#4C8DFF;--ink:#EAF4F7;--ink-dim:#8CA0AC;--ink-mute:#546670;
-  --line:rgba(0,230,255,0.16);--line-strong:rgba(0,230,255,0.4);
-  --success:#00F5B0;--success-bg:rgba(0,245,176,0.08);
-  --warn:#FFC24B;--warn-bg:rgba(255,194,75,0.09);
-  --danger:#FF4D6A;--danger-bg:rgba(255,77,106,0.09);
-  --r-lg:18px;--r-md:12px;--r-sm:8px;
-  --font-ar:'Cairo','Segoe UI',Tahoma,sans-serif;
-  --mono:'JetBrains Mono','Courier New',monospace;
-  --font-en:'Inter','Segoe UI',sans-serif;}
-.vg-inline .phone{padding:6px 10px 30px;}
-.vg-inline .scan-hero{gap:12px;}
-.vg-inline .fp-ring{width:118px; height:118px;}
-.vg-inline .fp-ring svg{width:110px; height:110px;}
-.vg-inline .scan-card{min-width:130px; padding:10px 11px;}
-.vg-inline .sc-tx{font-size:12px;}
-.vg-inline .pillar-info{flex:0 0 76px;}
-.vg-inline .pillar-info h3{font-size:11.5px;}
-.vg-inline .p-num{font-size:8.5px;}
-.vg-inline .pl-item{font-size:10px; padding:7px 9px;}
-.vg-inline .brand-hero{padding:8px 0 14px;}
-.vg-inline .logo-stage{width:118px; height:118px;}
-.vg-inline .wm-en{font-size:22px;}
-.vg-inline .hero-copy h1{font-size:19px;}
-@media (prefers-reduced-motion: reduce){.vg-scroll{animation:none;} .vg-inline *{animation:none !important;}}
+.vg-screen{position:absolute; inset:0; overflow:hidden; border-radius:34px; background:#04070B;}
+  .vg-scroll{position:absolute; top:0; left:0; right:0; animation:vgscroll 40s ease-in-out infinite alternate; will-change:transform;}
+  @keyframes vgscroll{0%,16%{transform:translateY(0);} 38%,92%{transform:translateY(calc(var(--vg-shift,0px) * -1));} 100%{transform:translateY(calc(var(--vg-shift,0px) * -1));}}
+  .vg-inline{
+    position:absolute; top:0; left:50%; width:420px; margin-left:-210px;
+    transform-origin:top center; transform:scale(var(--vg-scale,0.55));
+    pointer-events:none;
+    --obsidian-950:#020304;--obsidian-900:#050709;--obsidian-800:#0A0E14;
+    --glass:rgba(16,22,30,0.42);--glass-hi:rgba(22,30,40,0.55);
+    --cyan:#00E6FF;--cyan-soft:rgba(0,230,255,0.45);--cyan-faint:rgba(0,230,255,0.12);
+    --blue:#4C8DFF;--ink:#EAF4F7;--ink-dim:#8CA0AC;--ink-mute:#546670;
+    --line:rgba(0,230,255,0.16);--line-strong:rgba(0,230,255,0.4);
+    --success:#00F5B0;--success-bg:rgba(0,245,176,0.08);
+    --warn:#FFC24B;--warn-bg:rgba(255,194,75,0.09);
+    --danger:#FF4D6A;--danger-bg:rgba(255,77,106,0.09);
+    --r-lg:18px;--r-md:12px;--r-sm:8px;
+    --font-ar:'Cairo','Segoe UI',Tahoma,sans-serif;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --font-en:'Inter','Segoe UI',sans-serif;
+  }
+  @media (prefers-reduced-motion: reduce){.vg-scroll{animation:none;} .vg-inline *{animation:none !important;}}
 
 /* === END VG INLINE === */
 </style>
@@ -823,13 +825,20 @@
             <div class="phone-shine"></div>
           </div>
         </div>
-        <div class="float-tag f1">⬤ تعمل الآن</div>
-        <div class="float-tag f2">15 أداة حماية</div>
-        <div class="float-tag f3">لقطة حية من التطبيق</div>
+        <div class="float-tag f1">🛡️ <span style="font-weight:800;color:#fff;">يعمل الآن</span></div>
+        <div class="float-tag f2">🔐 <span style="font-weight:800;color:#fff;">خزنة AES-256</span></div>
+        <div class="float-tag f3">📡 رادار الفحص الاستخباراتي</div>
       </div>
     </div>
   </div>
 </header>
+
+<div class="feats-ribbon">
+  <div class="ribbon-track">
+    <span><i>🔗</i><b>ماسح الروابط</b><em>·</em></span><span><i>🌐</i><b>ماسح المواقع</b><em>·</em></span><span><i>🕵️</i><b>رادار الفحص الاستخباراتي</b><em>·</em></span><span><i>👁️</i><b>درع التتبع والبصمة</b><em>·</em></span><span><i>🔐</i><b>مركز كلمات السر</b><em>·</em></span><span><i>🗄️</i><b>خزنة الملفات</b><em>·</em></span><span><i>📡</i><b>كاشف التسريبات</b><em>·</em></span><span><i>⚙️</i><b>رادار الأذونات</b><em>·</em></span><span><i>📶</i><b>مدرّب الواي فاي</b><em>·</em></span><span><i>👨‍👩‍👧</i><b>فحص الأمان العائلي</b><em>·</em></span><span><i>🗺️</i><b>مركز القيادة</b><em>·</em></span><span><i>📟</i><b>المستشعر الدائم</b><em>·</em></span><span><i>📜</i><b>تقارير المؤسسة</b><em>·</em></span><span><i>⚖️</i><b>التقييم الأمني</b><em>·</em></span>
+    <span><i>🔗</i><b>ماسح الروابط</b><em>·</em></span><span><i>🌐</i><b>ماسح المواقع</b><em>·</em></span><span><i>🕵️</i><b>رادار الفحص الاستخباراتي</b><em>·</em></span><span><i>👁️</i><b>درع التتبع والبصمة</b><em>·</em></span><span><i>🔐</i><b>مركز كلمات السر</b><em>·</em></span><span><i>🗄️</i><b>خزنة الملفات</b><em>·</em></span><span><i>📡</i><b>كاشف التسريبات</b><em>·</em></span><span><i>⚙️</i><b>رادار الأذونات</b><em>·</em></span><span><i>📶</i><b>مدرّب الواي فاي</b><em>·</em></span><span><i>👨‍👩‍👧</i><b>فحص الأمان العائلي</b><em>·</em></span><span><i>🗺️</i><b>مركز القيادة</b><em>·</em></span><span><i>📟</i><b>المستشعر الدائم</b><em>·</em></span><span><i>📜</i><b>تقارير المؤسسة</b><em>·</em></span><span><i>⚖️</i><b>التقييم الأمني</b><em>·</em></span>
+  </div>
+</div>
 
 <section id="features">
   <div class="wrap">
@@ -1029,15 +1038,38 @@
 </footer>
 
 <script>
-  // أسئلة شائعة
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+  // مجسم حي: قياس متناسب مضبوط حسب حجم الشاشة الفعلي
+  (function(){
+    var screen = document.querySelector('.vg-screen');
+    if(!screen) return;
+    var inline = document.querySelector('.vg-inline');
+    var scroll = document.querySelector('.vg-scroll');
+    var DESIGN_W = 420;
+    function fit(){
+      var sw = screen.clientWidth;
+      var sh = screen.clientHeight;
+      if(!sw || !sh) return;
+      var scale = Math.min(0.68, sw / DESIGN_W);
+      var fullH = Math.max(inline.scrollHeight, sh); // ارتفاع محتوى التطبيق بعرض التصميم
+      var scaledH = fullH * scale;
+      var shift = Math.max(0, scaledH - sh);
+      screen.style.setProperty('--vg-scale', scale.toFixed(3));
+      screen.style.setProperty('--vg-shift', Math.round(shift) + 'px');
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    setTimeout(fit, 300);
+    // أسئلة شائعة
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
     });
-  });
+  })();
 </script>
 
 </body>
