@@ -1414,16 +1414,18 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 .q-card{
   position:relative; display:flex; align-items:center; gap:12px; text-align:right; direction:rtl;
   background:linear-gradient(135deg, rgba(0,230,255,0.12), rgba(10,16,24,0.62) 50%, rgba(0,245,176,0.07));
-  border:1px solid rgba(0,230,255,0.3); border-radius:16px; padding:13px 14px;
+  border:1px solid rgba(0,230,255,0.13); border-radius:16px; padding:13px 14px;
   backdrop-filter:blur(12px); cursor:pointer; color:var(--ink);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), inset 0 0 22px rgba(0,230,255,0.05);
   transition:transform .25s, border-color .25s, box-shadow .25s;
 }
 .q-card:hover{
-  transform:translateY(-2px); border-color:rgba(0,230,255,0.65);
+  transform:translateY(-2px); border-color:rgba(0,230,255,0.4);
   box-shadow:0 6px 26px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.28), inset 0 0 26px rgba(0,230,255,0.08);
 }
 .q-primary{grid-column:1 / -1;}
+.q-primary .q-txt{text-align:center; align-items:center; justify-content:center;}
+.q-primary .q-arrow{width:42px; height:42px; display:flex; align-items:center; justify-content:center;}
 .q-primary::after{
   content:''; position:absolute; top:0; bottom:0; left:0; width:55%; border-radius:inherit;
   background:linear-gradient(90deg, transparent, rgba(0,230,255,0.14), transparent);
@@ -1432,7 +1434,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 @keyframes qSweep{0%{transform:translateX(-110%)} 55%{transform:translateX(185%)} 100%{transform:translateX(185%)}}
 .q-ico{
   width:42px; height:42px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(145deg, #06222E, #0A3A4A 66%, #07403A); border:1px solid rgba(0,230,255,0.42);
+  background:linear-gradient(145deg, #06222E, #0A3A4A 66%, #07403A); border:1px solid rgba(0,230,255,0.26);
   box-shadow:0 0 14px rgba(0,230,255,0.32), inset 0 0 12px rgba(0,230,255,0.16); color:var(--cyan);
 }
 .q-ico svg{width:23px; height:23px; display:block;}
