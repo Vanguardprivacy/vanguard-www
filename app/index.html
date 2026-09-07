@@ -2508,11 +2508,11 @@ body.screen-tools #v2Tools{display:block;}
       </div>
       <div style="margin-top:12px;">
         <div class="ep-row"><span class="k">إجمالي الإشعارات المسجلة</span><span class="v" id="epNotifCount2">0</span></div>
-        <div class="ep-row"><span class="k">من صفحة التحكم</span><span class="v" id="epBroadCount">0</span></div>
+        <div class="ep-row"><span class="k">رسائل وإعلانات رسمية</span><span class="v" id="epBroadCount">0</span></div>
         <div class="ep-row"><span class="k">أحدث إشعار</span><span class="v" id="epNotifLast2">—</span></div>
       </div>
-      <p class="ep-sec" style="margin-top:16px;">إشعارات من صفحة التحكم</p>
-      <div id="epBroadFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات واردة من صفحة التحكم بعد — أول رسالة تنشرها إلى عملائك تظهر هنا.</div></div>
+      <p class="ep-sec" style="margin-top:16px;">الرسائل والإعلانات الرسمية</p>
+      <div id="epBroadFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد رسائل رسمية بعد — تظهر هنا أي إعلانات أو تنبيهات تصدرها المؤسسة.</div></div>
       <p class="ep-sec" style="margin-top:16px;">موجز إشعارات المستشعر المرسلة مؤخرًا</p>
       <div id="epNotifFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات مرسلة بعد — أول تنبيه يظهر هنا فور اكتشاف أي تغيّر حقيقي.</div></div>
     </div>
@@ -6525,7 +6525,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 
       document.body.insertBefore(bar, document.body.firstChild);
       bar.classList.add('on');
-      // يُسجَّل أيضًا في مركز الإشعارات (الجرس) كرسالة واردة من صفحة التحكم
+      // يُسجَّل أيضًا في سجل الرسائل الرسمية بالجرس
       try{ if(window.vgBroadPush) window.vgBroadPush(notice.id, type, title, text); }catch(e){}
     }
 
@@ -7006,11 +7006,11 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     }
     var bb=$('epBroadFeed');
     if(bb){
-      if(!bro.length){ bb.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات واردة من صفحة التحكم بعد — أول رسالة تنشرها إلى عملائك تظهر هنا.</div>'; }
+      if(!bro.length){ bb.innerHTML='<div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد رسائل رسمية بعد — تظهر هنا أي إعلانات أو تنبيهات تصدرها المؤسسة.</div>'; }
       else {
         bb.innerHTML = bro.slice(0,8).map(function(e){
-          var tag = e.type==='urgent'?'URGENT':e.type==='update'?'UPDATE':'INFO';
-          return '<div class="ep-brod"><span class="tag">'+tag+' · من صفحة التحكم</span><div class="t">'+esc(e.title)+'</div>'+(e.text?'<div class="d">'+esc(e.text)+'</div>':'')+'<div class="ts">'+timeAgo(e.ts)+'</div></div>';
+          var tag = e.type==='urgent'?'تنبيه رسمي':e.type==='update'?'إعلان تحديث':'إعلان';
+          return '<div class="ep-brod"><span class="tag">'+tag+'</span><div class="t">'+esc(e.title)+'</div>'+(e.text?'<div class="d">'+esc(e.text)+'</div>':'')+'<div class="ts">'+timeAgo(e.ts)+'</div></div>';
         }).join('');
       }
     }
@@ -7028,7 +7028,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     if(!id) id='b'+Date.now();
     var tag = type==='urgent'||type==='update' ? type : 'info';
     for(var i=0;i<bro.length;i++){ if(bro[i].id===id) return; }
-    bro.unshift({id:id, type:tag, title:title||'رسالة من المؤسسة', text:text||'', ts:Date.now()});
+    bro.unshift({id:id, type:tag, title:title||'رسالة رسمية', text:text||'', ts:Date.now()});
     store(K_R, bro);
     try{ renderAll(); }catch(e){}
   }
