@@ -1415,16 +1415,16 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   position:relative; display:flex; align-items:center; gap:10px; text-align:right; direction:rtl;
   background:linear-gradient(135deg, rgba(0,230,255,0.12), rgba(10,16,24,0.62) 50%, rgba(0,245,176,0.07));
   border:1px solid rgba(0,230,255,0.45); border-radius:13px; padding:9px 12px;
-  backdrop-filter:blur(12px); cursor:pointer; color:var(--ink);
+  backdrop-filter:blur(12px); overflow:hidden; cursor:pointer; color:var(--ink);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), inset 0 0 22px rgba(0,230,255,0.05);
   transition:transform .25s, border-color .25s, box-shadow .25s;
 }
 .q-card::after{
   content:''; position:absolute; top:0; bottom:0; left:0; width:55%; border-radius:inherit;
   background:linear-gradient(90deg, transparent, rgba(0,230,255,0.16), transparent);
-  transform:translateX(-110%); animation:qSweep 3.4s ease-in-out infinite; pointer-events:none;
+  transform:translateX(-115%); animation:qSweep 3.4s ease-in-out infinite; pointer-events:none;
 }
-@keyframes qSweep{0%{transform:translateX(-110%)} 55%{transform:translateX(185%)} 100%{transform:translateX(185%)}}
+@keyframes qSweep{0%{transform:translateX(-115%)} 55%{transform:translateX(180%)} 100%{transform:translateX(180%)}}
 .q-card:hover{
   transform:translateY(-2px); border-color:rgba(0,230,255,0.85);
   box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.32), inset 0 0 26px rgba(0,230,255,0.09);
@@ -1450,7 +1450,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   border-color:rgba(255,72,86,0.55);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(255,72,86,0.22), inset 0 0 22px rgba(255,72,86,0.06);
 }
-.q-card.q-danger::after{background:linear-gradient(90deg, transparent, rgba(255,72,86,0.22), transparent);}
+.q-card.q-danger::after{background:linear-gradient(90deg, transparent, rgba(255,72,86,0.22), transparent); animation-delay:1.1s;}
 .q-card.q-danger:hover{border-color:rgba(255,72,86,0.9); box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 24px rgba(255,72,86,0.38), inset 0 0 26px rgba(255,72,86,0.1);}
 .q-card.q-danger .q-ico{
   background:linear-gradient(145deg, #3A0A10, #52141A 66%, #3A1208); border-color:rgba(255,72,86,0.55);
@@ -1464,7 +1464,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
   border-color:rgba(0,245,176,0.55);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(0,245,176,0.2), inset 0 0 22px rgba(0,245,176,0.06);
 }
-.q-card.q-safe::after{background:linear-gradient(90deg, transparent, rgba(0,245,176,0.2), transparent);}
+.q-card.q-safe::after{background:linear-gradient(90deg, transparent, rgba(0,245,176,0.2), transparent); animation-delay:2.2s;}
 .q-card.q-safe:hover{border-color:rgba(0,245,176,0.9); box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 24px rgba(0,245,176,0.36), inset 0 0 26px rgba(0,245,176,0.1);}
 .q-card.q-safe .q-ico{
   background:linear-gradient(145deg, #06291F, #0A3A30 66%, #06351F); border-color:rgba(0,245,176,0.55);
