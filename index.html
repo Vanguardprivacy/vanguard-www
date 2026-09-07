@@ -650,62 +650,7 @@
     </div>
   </div>
 
-  <div class="scan-hero">
-    <div class="fp-ring">
-      <svg width="132" height="132" viewBox="0 0 104 108" fill="none">
-        <defs>
-          <linearGradient id="v2FpGrad" x1="14" y1="8" x2="92" y2="96" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#8FFFD8"/>
-            <stop offset="1" stop-color="#00F5B0"/>
-          </linearGradient>
-          <radialGradient id="v2FpGlow" cx="0.5" cy="0.45" r="0.6">
-            <stop offset="0" stop-color="#00F5B0" stop-opacity="0.5"/>
-            <stop offset="1" stop-color="#00F5B0" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="v2Laser" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#00F5B0" stop-opacity="0"/>
-            <stop offset="0.5" stop-color="#B7FFE6" stop-opacity="0.95"/>
-            <stop offset="1" stop-color="#00F5B0" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <circle cx="52" cy="50" r="47" fill="url(#v2FpGlow)"/>
-        <g class="orbit-ring">
-          <ellipse cx="52" cy="54" rx="50" ry="16" stroke="#00F5B0" stroke-width="1" stroke-dasharray="4 8" opacity="0.3" fill="none"/>
-          <ellipse cx="52" cy="54" rx="50" ry="16" stroke="#00F5B0" stroke-width="1.7" stroke-dasharray="1 196" stroke-linecap="round" opacity="0.5" fill="none"/>
-        </g>
-        <g class="fp-scanr">
-          <circle cx="52" cy="48" r="46" stroke="#00F5B0" stroke-width="1.1" stroke-dasharray="145 144" stroke-linecap="round" opacity="0.45" fill="none"/>
-        </g>
-        <g class="fp-a" style="transform-origin:52px 54px" fill="none" stroke-linecap="round">
-          <path d="M3 66 A48 44 0 0 1 101 66" stroke="url(#v2FpGrad)" stroke-width="1.3" stroke-dasharray="56 5 124 7"/>
-          <path d="M13 66 A38 35 0 0 1 91 66" stroke="#8FFFD8" stroke-width="1.6" stroke-dasharray="42 4 96 6"/>
-          <path d="M22 66 A29 27 0 0 1 82 66" stroke="url(#v2FpGrad)" stroke-width="1.9" stroke-dasharray="32 4 68 6"/>
-          <path d="M31 66 A20 19 0 0 1 73 66" stroke="#00F5B0" stroke-width="2.1" stroke-dasharray="23 4 44 5"/>
-          <path d="M41 66 A11 12 0 0 1 63 66" stroke="#B7FFE6" stroke-width="1.8" stroke-dasharray="13 4 24 4"/>
-        </g>
-        <g stroke="#00F5B0" fill="none" stroke-linecap="round" opacity="0.85">
-          <path d="M14 88 C30 84 44 74 50 64" stroke-width="1.2" stroke-dasharray="16 4 14 4"/>
-          <path d="M21 96 C36 90 46 80 50 68" stroke-width="1.3" stroke-dasharray="14 4 16 4"/>
-          <path d="M90 88 C74 84 60 74 54 64" stroke-width="1.2" stroke-dasharray="16 4 14 4"/>
-          <path d="M83 96 C68 90 58 80 54 68" stroke-width="1.3" stroke-dasharray="14 4 16 4"/>
-        </g>
-        <circle cx="52" cy="94" r="4" stroke="#B7FFE6" stroke-width="1.7" fill="none"/>
-        <path d="M52 91 V98" stroke="#B7FFE6" stroke-width="1.7" stroke-linecap="round"/>
-        <rect class="fp-laser" x="51.2" y="12" width="1.6" height="92" rx="0.8" fill="url(#v2Laser)"/>
-      </svg>
-    </div>
-
-    <div class="scan-srvs">
-      <button type="button" class="scan-card" data-goto="scanner">
-        <span class="sc-ic">🔗</span>
-        <span class="sc-tx">فحص الروابط<span class="sc-en">LINK CHECK</span></span>
-      </button>
-      <button type="button" class="scan-card" data-goto="scanner">
-        <span class="sc-ic">🌐</span>
-        <span class="sc-tx">فحص المواقع<span class="sc-en">SITE CHECK</span></span>
-      </button>
-    </div>
-  </div>
+  
 
   <!-- PILLARS -->
   <div class="pillars">
@@ -727,9 +672,10 @@
         </div>
         <div class="pillar-list">
           <div class="pl-item" data-goto="quiz"><span class="pl-icon">📊</span><span>التقييم الأمني</span></div>
-          <div class="pl-item" data-goto="recovery"><span class="pl-icon">🔓</span><span>استرجاع الحسابات</span></div>
+
+
           <div class="pl-item" data-goto="passwords"><span class="pl-icon">🔑</span><span>مركز كلمات السر</span></div>
-          <div class="pl-item" data-goto="vault"><span class="pl-icon">🔒</span><span>خزنة كلمات السر</span></div>
+          <div class="pl-item" data-goto="recovery"><span class="pl-icon">🔓</span><span>استرجاع الحسابات</span></div>
         </div>
       </div>
     </div>
@@ -754,9 +700,10 @@
         </div>
         <div class="pillar-list">
           <div class="pl-item" data-goto="scanner"><span class="pl-icon">🔍</span><span>ماسح الروابط والمواقع</span></div>
-          <div class="pl-item" data-goto="deception"><span class="pl-icon">🧿</span><span>درع الخداع والتهديدات</span></div>
+
+
           <div class="pl-item" data-goto="deception"><span class="pl-icon">🎭</span><span>درع الخداع والابتزاز</span></div>
-          <div class="pl-item" data-goto="leak"><span class="pl-icon">📊</span><span>كاشف التسريبات</span></div>
+          <div class="pl-item" data-goto="deception"><span class="pl-icon">🧿</span><span>درع الخداع والتهديدات</span></div>
         </div>
       </div>
     </div>
