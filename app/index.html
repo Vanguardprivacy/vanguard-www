@@ -1410,41 +1410,69 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 .pl-icon{width:18px; height:18px; border-radius:5px; display:flex; align-items:center; justify-content:center;
   background:rgba(0,230,255,0.16); font-size:9px; flex-shrink:0; color:var(--cyan);}
 
-.bottom-actions{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:26px;}
+.bottom-actions{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px;}
 .q-card{
-  position:relative; display:flex; align-items:center; gap:12px; text-align:right; direction:rtl;
+  position:relative; display:flex; align-items:center; gap:10px; text-align:right; direction:rtl;
   background:linear-gradient(135deg, rgba(0,230,255,0.12), rgba(10,16,24,0.62) 50%, rgba(0,245,176,0.07));
-  border:1px solid rgba(0,230,255,0.13); border-radius:16px; padding:13px 14px;
+  border:1px solid rgba(0,230,255,0.45); border-radius:13px; padding:9px 12px;
   backdrop-filter:blur(12px); cursor:pointer; color:var(--ink);
   box-shadow:0 4px 18px rgba(0,0,0,0.35), inset 0 0 22px rgba(0,230,255,0.05);
   transition:transform .25s, border-color .25s, box-shadow .25s;
 }
-.q-card:hover{
-  transform:translateY(-2px); border-color:rgba(0,230,255,0.4);
-  box-shadow:0 6px 26px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.28), inset 0 0 26px rgba(0,230,255,0.08);
-}
-.q-primary{grid-column:1 / -1;}
-.q-primary .q-txt{text-align:center; align-items:center; justify-content:center;}
-.q-primary .q-arrow{width:42px; height:42px; display:flex; align-items:center; justify-content:center;}
-.q-primary::after{
+.q-card::after{
   content:''; position:absolute; top:0; bottom:0; left:0; width:55%; border-radius:inherit;
-  background:linear-gradient(90deg, transparent, rgba(0,230,255,0.14), transparent);
+  background:linear-gradient(90deg, transparent, rgba(0,230,255,0.16), transparent);
   transform:translateX(-110%); animation:qSweep 3.4s ease-in-out infinite; pointer-events:none;
 }
 @keyframes qSweep{0%{transform:translateX(-110%)} 55%{transform:translateX(185%)} 100%{transform:translateX(185%)}}
+.q-card:hover{
+  transform:translateY(-2px); border-color:rgba(0,230,255,0.85);
+  box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.32), inset 0 0 26px rgba(0,230,255,0.09);
+}
+.q-primary{grid-column:1 / -1;}
+.q-primary .q-txt{text-align:center; align-items:center; justify-content:center;}
+.q-primary .q-arrow{width:36px; height:36px; display:flex; align-items:center; justify-content:center;}
 .q-ico{
-  width:42px; height:42px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(145deg, #06222E, #0A3A4A 66%, #07403A); border:1px solid rgba(0,230,255,0.26);
+  width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(145deg, #06222E, #0A3A4A 66%, #07403A); border:1px solid rgba(0,230,255,0.42);
   box-shadow:0 0 14px rgba(0,230,255,0.32), inset 0 0 12px rgba(0,230,255,0.16); color:var(--cyan);
 }
-.q-ico svg{width:23px; height:23px; display:block;}
+.q-ico svg{width:20px; height:20px; display:block;}
 .q-ico svg, .q-arrow svg{stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
 .q-txt{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
-.q-txt strong{font-size:12.5px; font-weight:800; color:#fff; line-height:1.25;}
-.q-txt em{font-family:var(--mono); font-style:normal; font-size:8px; letter-spacing:1.6px; color:var(--cyan); opacity:0.8; line-height:1;}
-.q-arrow{color:rgba(0,230,255,0.55); flex-shrink:0; transition:transform .25s, color .25s;}
-.q-arrow svg{width:15px; height:15px; display:block;}
+.q-txt strong{font-size:12px; font-weight:800; color:#fff; line-height:1.25;}
+.q-txt em{font-family:var(--mono); font-style:normal; font-size:7.5px; letter-spacing:1.5px; color:var(--cyan); opacity:0.9; line-height:1;}
+.q-arrow{color:rgba(0,230,255,0.6); flex-shrink:0; transition:transform .25s, color .25s;}
+.q-arrow svg{width:13px; height:13px; display:block;}
 .q-card:hover .q-arrow{transform:translateX(-3px); color:var(--cyan);}
+.q-card.q-danger{
+  background:linear-gradient(135deg, rgba(255,72,86,0.16), rgba(24,10,14,0.62) 50%, rgba(255,120,100,0.06));
+  border-color:rgba(255,72,86,0.55);
+  box-shadow:0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(255,72,86,0.22), inset 0 0 22px rgba(255,72,86,0.06);
+}
+.q-card.q-danger::after{background:linear-gradient(90deg, transparent, rgba(255,72,86,0.22), transparent);}
+.q-card.q-danger:hover{border-color:rgba(255,72,86,0.9); box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 24px rgba(255,72,86,0.38), inset 0 0 26px rgba(255,72,86,0.1);}
+.q-card.q-danger .q-ico{
+  background:linear-gradient(145deg, #3A0A10, #52141A 66%, #3A1208); border-color:rgba(255,72,86,0.55);
+  box-shadow:0 0 14px rgba(255,72,86,0.42), inset 0 0 12px rgba(255,72,86,0.18); color:#FF6B74;
+}
+.q-card.q-danger .q-txt em{color:#FF6B74;}
+.q-card.q-danger .q-arrow{color:rgba(255,72,86,0.7);}
+.q-card.q-danger:hover .q-arrow{color:#FF6B74;}
+.q-card.q-safe{
+  background:linear-gradient(135deg, rgba(0,245,176,0.12), rgba(8,18,14,0.62) 50%, rgba(0,120,90,0.08));
+  border-color:rgba(0,245,176,0.55);
+  box-shadow:0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(0,245,176,0.2), inset 0 0 22px rgba(0,245,176,0.06);
+}
+.q-card.q-safe::after{background:linear-gradient(90deg, transparent, rgba(0,245,176,0.2), transparent);}
+.q-card.q-safe:hover{border-color:rgba(0,245,176,0.9); box-shadow:0 6px 24px rgba(0,0,0,0.4), 0 0 24px rgba(0,245,176,0.36), inset 0 0 26px rgba(0,245,176,0.1);}
+.q-card.q-safe .q-ico{
+  background:linear-gradient(145deg, #06291F, #0A3A30 66%, #06351F); border-color:rgba(0,245,176,0.55);
+  box-shadow:0 0 14px rgba(0,245,176,0.4), inset 0 0 12px rgba(0,245,176,0.16); color:#00F5B0;
+}
+.q-card.q-safe .q-txt em{color:#00F5B0;}
+.q-card.q-safe .q-arrow{color:rgba(0,245,176,0.7);}
+.q-card.q-safe:hover .q-arrow{color:#00F5B0;}
 .sparkle{text-align:center; margin-top:18px; color:var(--cyan); opacity:0.7; font-size:16px;}
 
 .bottom-nav{
@@ -1821,12 +1849,12 @@ body.screen-tools #v2Tools{display:block;}
       <span class="q-txt"><strong>رادار الفحص الذكي</strong><em>SMART SCAN</em></span>
       <span class="q-arrow"><svg viewBox="0 0 24 24"><path d="M9 6 4 11l5 5"/><path d="M4 11h12a3.5 3.5 0 0 1 0 7"/></svg></span>
     </button>
-    <button class="q-card" data-goto="deception">
+    <button class="q-card q-danger" data-goto="deception">
       <span class="q-ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.6-7 10-4-1.4-7-5.5-7-10V6z"/><path d="M9.7 12a2.3 2.3 0 0 0 4.6 0 2.3 2.3 0 0 0-4.6 0z"/></svg></span>
       <span class="q-txt"><strong>درع الخداع والتهديدات</strong><em>DECEPTION SHIELD</em></span>
       <span class="q-arrow"><svg viewBox="0 0 24 24"><path d="M9 6 4 11l5 5"/><path d="M4 11h12a3.5 3.5 0 0 1 0 7"/></svg></span>
     </button>
-    <button class="q-card" data-goto="recovery">
+    <button class="q-card q-safe" data-goto="recovery">
       <span class="q-ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>
       <span class="q-txt"><strong>استرجاع الحسابات</strong><em>ACCOUNT RECOVERY</em></span>
       <span class="q-arrow"><svg viewBox="0 0 24 24"><path d="M9 6 4 11l5 5"/><path d="M4 11h12a3.5 3.5 0 0 1 0 7"/></svg></span>
