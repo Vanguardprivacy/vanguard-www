@@ -1410,7 +1410,8 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 .pl-icon{width:18px; height:18px; border-radius:5px; display:flex; align-items:center; justify-content:center;
   background:rgba(0,230,255,0.16); font-size:9px; flex-shrink:0; color:var(--cyan);}
 
-.bottom-actions{display:flex; gap:10px; margin-top:24px;}
+.bottom-actions{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:24px;}
+.bottom-actions .wide-btn:first-child{grid-column:1 / -1;}
 .wide-btn{
   flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
   background:var(--glass); border:1px solid var(--line); border-radius:14px; padding:14px 10px;
@@ -1529,7 +1530,13 @@ body.screen-tools #v2Tools{display:block;}
   <div class="topbar">
     <button class="icon-btn" id="v2MenuBtn">☰</button>
     <div class="topbar-right">
-      <button class="icon-btn" data-goto="ereports">🔔</button>
+      <button class="icon-btn" data-goto="ereports">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 9.2a6 6 0 1 0-12 0c0 4.6-1.7 6-2.3 6.8h16.6c-.6-.8-2.3-2.2-2.3-6.8"/>
+          <path d="M10.2 19a1.9 1.9 0 0 0 3.6 0"/>
+          <circle cx="18.6" cy="4.6" r="2.4" fill="#00F5B0" stroke="none"/>
+        </svg>
+      </button>
       <button class="icon-btn shield-active" data-goto="esensor">🛡️</button>
     </div>
   </div>
@@ -1694,7 +1701,7 @@ body.screen-tools #v2Tools{display:block;}
         </div>
         <div class="pillar-list">
           <div class="pl-item" data-goto="scanner"><span class="pl-icon">🔍</span><span>ماسح الروابط والمواقع</span></div>
-          <div class="pl-item" data-goto="deception"><span class="pl-icon">🎭</span><span>درع الخداع والابتزاز</span></div>
+          <div class="pl-item" data-goto="deception"><span class="pl-icon">🎭</span><span>درع الخداع والتهديدات</span></div>
           <div class="pl-item" data-goto="leak"><span class="pl-icon">📊</span><span>كاشف التسريبات</span></div>
         </div>
       </div>
@@ -1783,8 +1790,9 @@ body.screen-tools #v2Tools{display:block;}
 
   <!-- BOTTOM ACTIONS -->
   <div class="bottom-actions">
-    <button class="wide-btn" data-goto="checklist">📋 القائمة الشاملة</button>
     <button class="wide-btn" data-goto="radar">📡 رادار الفحص الذكي</button>
+    <button class="wide-btn" data-goto="deception">🎭 درع الخداع والتهديدات</button>
+    <button class="wide-btn" data-goto="recovery">💬 استرجاع الحسابات</button>
   </div>
 
   <div class="sparkle">✦</div>
@@ -2123,7 +2131,7 @@ body.screen-tools #v2Tools{display:block;}
             <div class="tabs-pillar"><span class="tpillar-en">PILLAR II</span><span class="tpillar-lbl">أمان التصفح ومكافحة الاحتيال</span><span class="tpillar-en">ANTI-FRAUD</span></div>
             <nav class="tabs">
               <button data-panel="scanner">ماسح الروابط والمواقع</button>
-              <button data-panel="deception">درع الخداع والابتزاز</button>
+              <button data-panel="deception">درع الخداع والتهديدات</button>
               <button data-panel="recovery">استرجاع الحسابات</button>
             </nav>
           </div>
@@ -2856,7 +2864,7 @@ body.screen-tools #v2Tools{display:block;}
   <section class="panel" id="panel-deception">
     <div class="card">
       <div class="eyebrow">درع_الخداع_البشري.وعي_واستجابة</div>
-      <h2 class="section-title">درع الخداع البشري والابتزاز (Human Deception &amp; Extortion Shield)</h2>
+      <h2 class="section-title">درع الخداع البشري والتهديدات (Human Deception &amp; Threats Shield)</h2>
       <p class="section-sub">وجّه وعيك ضد حيل الهندسة الاجتماعية، واحصل على خطة استجابة فورية إذا تعرضت لتهديد أو ابتزاز.</p>
 
       <div class="mode-tabs">
