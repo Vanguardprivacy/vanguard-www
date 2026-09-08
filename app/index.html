@@ -2502,7 +2502,6 @@ body.screen-tools #v2Tools{display:block;}
       <p class="section-sub">سجل كل تنبيه أرسله فانغارد — أي تغيّر فعلي في الأذونات أو الأجهزة أو الشبكة أو مؤشرات التهديد يظهر هنا فورًا.</p>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 4px;">
         <span class="ep-live"><span class="d"></span><span id="epNotifState2">—</span></span>
-        <button class="btn small ghost" onclick="epTestNotify()">تجربة إشعار</button>
       </div>
       <div style="margin-top:12px;">
         <div class="ep-row"><span class="k">إجمالي الإشعارات المسجلة</span><span class="v" id="epNotifCount2">0</span></div>
@@ -6577,7 +6576,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
   function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
   var K_C='vge_ent_v1', K_B='vge_base_v1', K_H='vge_hist_v1', K_I='vge_inc_v1', K_S='vge_seats_v1', K_R='vge_broad_v1';
   var ent=load(K_C,{name:'',ind:'',pin:'',loop:60,sensor:true});
-  var hist=load(K_H,[]), inc=load(K_I,[]), seats=load(K_S,[]), bro=load(K_R,[]), base=fixBase(load(K_B,null));
+  var hist=load(K_H,[]), inc=load(K_I,[]).filter(function(i){return i&&i.sev==='high';}), seats=load(K_S,[]), bro=load(K_R,[]), base=fixBase(load(K_B,null));
   var cur=null, busy=false, timer=null;
   function fixBase(b){ if(!b) return null; if(b.perms && Array.isArray(b.perms)){ var m=new Map(); b.perms.forEach(function(p){ m.set(p[0],p[1]); }); b.perms=m; } else if(b.perms && !(b.perms instanceof Map)){ b.perms=new Map(); } return b; }
   function ser(snap){ if(!snap) return null; var o={}; for(var k in snap){ o[k]=(k==='perms' && snap[k] && snap[k].forEach)? (function(){ var a=[]; snap[k].forEach(function(v,n){ a.push([n,v]); }); return a; })() : snap[k]; } return o; }
@@ -6896,10 +6895,12 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     if(!base){
       base=snap; store(K_B,ser(snap));
     } else {
+      // لا يُنبَّه إلا عند تغيُّر حرج حقيقي — الأحداث المنخفضة الأهمية تُتجاهل بصمت
       detectDeltas(base,snap).forEach(function(d){
+        if(d.sev!=='high') return;
         inc.unshift({ts:Date.now(),sev:d.sev,type:d.type,msg:d.msg});
         if(inc.length>250) inc.pop();
-        if(d.sev==='high') sendAlert(d);
+        sendAlert(d);
       });
     }
     hist.push({ts:Date.now(),score:snap.score});
