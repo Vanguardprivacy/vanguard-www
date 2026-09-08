@@ -224,84 +224,7 @@
 .ep-pin input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--ink);font-family:var(--mono);font-size:16px;letter-spacing:8px;text-align:center;outline:none;margin-bottom:12px;}
 .ep-pin input:focus{border-color:var(--cyan);}
 .vg-lic-card{border:1px solid rgba(0,230,255,.28);box-shadow:0 0 0 1px rgba(0,230,255,.12),0 34px 90px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04);border-radius:22px;padding:30px;background:linear-gradient(165deg,rgba(13,22,32,.98),rgba(4,8,14,.99));}
-/* ===== HCD PRO: HIDDEN CAMERA DETECTION ENGINE (dedicated local module) ===== */
-.hcd-caps{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px;}
-.hcd-cap{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;border-radius:100px;padding:5px 11px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--ink-dim);}
-.hcd-cap b{color:#00E6FF;}
-.hcd-cap.ok{border-color:rgba(0,245,176,.35);color:var(--success);} .hcd-cap.ok b{color:var(--success);}
-.hcd-cap.no{border-color:rgba(255,77,106,.3);color:var(--danger);opacity:.85;} .hcd-cap.no b{color:var(--danger);}
-.hcd-cap.warn{border-color:rgba(255,194,75,.35);color:#FFC24B;} .hcd-cap.warn b{color:#FFC24B;}
-.hcd-cta{margin:4px 0 10px;}
-.hcd-sweep{width:100%;padding:14px;border:none;border-radius:15px;cursor:pointer;font-size:14px;font-weight:800;color:#03141A;
-  background:linear-gradient(135deg,#00E6FF,#4C8DFF);box-shadow:0 6px 22px rgba(0,230,255,.22);font-family:inherit;letter-spacing:.2px;}
-.hcd-sweep.run{background:linear-gradient(135deg,#FFC24B,#FF8A5C);color:#2A1600;box-shadow:0 6px 22px rgba(255,194,75,.25);} 
-.hcd-sweep.sweep{background:linear-gradient(135deg,#4C8DFF,#8B5BFF);color:#F4F7FF;}
-.hcd-sweep:active{transform:translateY(1px);}
-.hcd-phase{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--cyan);font-family:var(--mono);}
-.hcd-phase::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:epBlink 1.6s ease-in-out infinite;flex:0 0 auto;}
-.hcd-phase.idle::before{animation:none;opacity:.35;}
-.hcd-bar{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;}
-.hcd-bar-fill{height:100%;width:0;background:linear-gradient(90deg,#00E6FF,#00F5B0);transition:width .4s ease;border-radius:6px;}
-.hcd-status{font-size:12px;line-height:1.7;color:var(--ink-dim);margin-top:6px;min-height:20px;}
-.hcd-status.ok{color:var(--success);} .hcd-status.warn{color:#FFC24B;} .hcd-status.bad{color:var(--danger);}
-.hcd-bars{margin:6px 0 2px;display:flex;flex-direction:column;gap:6px;}
-.hcd-row{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--ink-dim);}
-.hcd-row span{flex:0 0 74px;font-weight:700;}
-.hcd-row .i{flex:1;height:10px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;}
-.hcd-row .i i{display:block;height:100%;width:0;background:linear-gradient(90deg,#00E6FF,#00F5B0);transition:width .35s ease;border-radius:6px;}
-.hcd-row b{flex:0 0 30px;text-align:left;font-family:var(--mono);font-size:12px;color:#EAF4F7;}
-.hcd-susp{display:flex;flex-direction:column;gap:6px;margin:6px 0 10px;padding:12px;border:1px solid rgba(0,230,255,.22);border-radius:14px;background:linear-gradient(150deg,rgba(0,230,255,.06),transparent 60%);}
-.hcd-susp-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;}
-.hcd-susp-num{font-family:var(--mono);font-size:34px;font-weight:800;color:#00E6FF;line-height:1;}
-.hcd-susp-num small{display:block;font-size:10px;color:var(--ink-mute);font-weight:700;margin-top:4px;font-family:var(--font-ar);}
-.hcd-lvl{font-size:12px;font-weight:800;padding:6px 12px;border-radius:100px;border:1px solid rgba(0,245,176,.4);color:var(--success);}
-.hcd-lvl.warn{border-color:rgba(255,194,75,.45);color:#FFC24B;}
-.hcd-lvl.bad{border-color:rgba(255,77,106,.5);color:var(--danger);}
-.hcd-lvl.crit{border-color:#FF5C5C;color:#FF7A7A;animation:bellPing 1.6s ease-out infinite;}
-.hcd-evi{margin:4px 0 10px;display:flex;flex-direction:column;gap:7px;}
-.hcd-evi .ep-inc{display:flex;align-items:flex-start;gap:9px;}
-.hcd-evi .ep-inc .t{font-size:12px;}
-.hcd-evi .sc{font-family:var(--mono);font-size:11px;font-weight:700;margin-left:auto;flex:0 0 auto;color:var(--cyan);}
-.hcd-evi .st{font-size:10px;border-radius:6px;padding:2px 7px;background:rgba(0,230,255,.1);color:#00E6FF;flex:0 0 auto;}
-.hcd-evi .st.hot{background:rgba(255,194,75,.14);color:#FFC24B;}
-.hcd-evi .st.min{background:rgba(0,245,176,.12);color:var(--success);}
-.hcd-evi .st.no{background:rgba(255,77,106,.14);color:var(--danger);}
-.hcd-btag{font-size:10px;font-weight:800;border-radius:6px;padding:2px 8px;flex:0 0 auto;background:rgba(255,255,255,.06);color:var(--ink-dim);}
-.hcd-btag.b{background:rgba(0,230,255,.14);color:#00E6FF;}
-.hcd-btag.r{background:rgba(255,77,106,.14);color:#FF7A7A;}
-.hcd-btag.w{background:rgba(255,194,75,.14);color:#FFC24B;}
-.hcd-btag.g{background:rgba(0,245,176,.14);color:var(--success);}
-.hcd-zones{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px;}
-@media(max-width:420px){.hcd-zones{grid-template-columns:repeat(2,1fr);}}
-.hcd-zone{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:10px;padding:8px 6px;font-size:11px;color:var(--ink-dim);cursor:pointer;text-align:center;transition:all .2s;}
-.hcd-zone small{display:block;font-family:var(--mono);font-size:9px;color:var(--ink-mute);margin-top:3px;}
-.hcd-zone.tap{border-color:rgba(0,230,255,.5);color:#DBF7FF;}
-.hcd-zone.hot{border-color:#FFC24B;color:#FFD996;background:rgba(255,194,75,.08);}
-.hcd-zone.hot small{color:rgba(255,216,150,.7);}
-.hcd-mode{display:flex;gap:6px;margin-top:10px;}
-.hcd-mode button{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink-dim);border-radius:9px;padding:7px;font-size:11px;font-weight:700;cursor:pointer;}
-.hcd-mode button.on{border-color:#00E6FF;color:#00E6FF;background:rgba(0,230,255,.08);}
-.hcd-cfg{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
-.hcd-cfg .ctl-row{margin-top:0;}
-.hcd-cfg select,.hcd-cfg option{background:#0B1219;color:#EAF4F7;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit;}
-.hcd-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
-.hcd-foot .btn{flex:1;min-width:120px;}
-.hcd-guide{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
-.hcd-guide .g{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink-dim);line-height:1.6;}
-.hcd-guide .n{flex:0 0 18px;height:18px;border-radius:50%;background:rgba(0,230,255,.12);color:#00E6FF;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;}
-.hcd-hist{display:flex;flex-direction:column;gap:6px;margin-top:8px;max-height:230px;overflow-y:auto;}
-.hcd-hist .h{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:11px;color:var(--ink-dim);background:rgba(255,255,255,.02);}
-.hcd-hist .h b{font-family:var(--mono);color:#EAF4F7;}
-.hcd-hist .h .lv{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;}
-.hcd-hist .h .lv.warn{background:rgba(255,194,75,.14);color:#FFC24B;}
-.hcd-hist .h .lv.crit{background:rgba(255,77,106,.15);color:#FF7A7A;}
-.hcd-hist .h .lv.ok{background:rgba(0,245,176,.12);color:var(--success);}
-.hcd-hud{position:absolute;top:8px;left:8px;right:8px;pointer-events:none;display:flex;justify-content:space-between;gap:6px;z-index:5;}
-.hud-chip{background:rgba(5,10,16,.72);border:1px solid rgba(0,230,255,.3);color:#DBF7FF;font-size:10px;font-weight:700;border-radius:8px;padding:4px 9px;backdrop-filter:blur(6px);}
-.hud-chip.warn{border-color:rgba(255,194,75,.45);color:#FFD996;}
-.hud-chip.bad{border-color:rgba(255,77,106,.5);color:#FF9E9E;}
-.hcd-togg{width:100%;}
-.hcd-empty{color:var(--ink-mute);font-size:12px;line-height:1.7;border:1px dashed var(--line);border-radius:12px;padding:14px;text-align:center;}</style>
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -2804,78 +2727,66 @@ body.screen-tools #v2Tools{display:block;}
   <!-- ================= ENTERPRISE: HIDDEN CAMERA (كشف الكاميرات الخفية) ================= -->
   <section class="panel" id="panel-camx">
     <div class="card">
-      <div class="eyebrow">HiddenCam.Pro · محرك كشف الكاميرات الخفية</div>
-      <h2 class="section-title">محرك كشف الكاميرات الخفية</h2>
-      <p class="section-sub">تجميع القرائن البصرية وتحت-الحمراء والمغناطيسية واللاسلكية وتداخلها الإقليمي — كل المعالجة محليًا على جهازك، بدون إنترنت وبدون ادعاءات زائفة. القرينة تبقى «قرينة اشتباه» حتى توفر أدلة مباشرة كافية للتأكيد.</p>
-
-      <div class="hcd-caps" id="hcdCaps" aria-live="polite"></div>
-
-      <div class="hcd-cta">
-        <button class="hcd-sweep" id="hcdSweepBtn" onclick="hcdSweep()">✦ فحص الكاميرات الذكي</button>
-        <div class="hcd-phase idle" id="hcdPhase">جاهز للفحص</div>
-        <div class="hcd-bar"><div class="hcd-bar-fill" id="hcdBar" style="width:0%"></div></div>
-        <div class="hcd-status" id="hcdStatus">مستعد — اضغط «فحص الكاميرات الذكي» لبدء دورة كاملة (٣ مراحل: تهيئة → مسح بصري/حراري → دمج وتقرير).</div>
-      </div>
+      <div class="eyebrow">FieldOps.HiddenCam</div>
+      <h2 class="section-title">كشف الكاميرات الخفية</h2>
+      <p class="section-sub">منظومة فحص ميداني خاصة بفانغارد: مستشعر القرب الكهرومغناطيسي المعاير، والماسح البصري لنقاط التوهج تحت الحمراء مع تأكيد زمني.</p>
 
       <div class="cam-stage" id="camStage">
         <video id="camFeed" autoplay playsinline muted></video>
         <canvas id="camCanvas" width="320" height="240"></canvas>
-        <div class="hcd-hud" id="hcdHud"></div>
         <div class="cam-sweep" id="camSweep">المسح متوقف</div>
         <div class="cam-cross" id="camHot0" style="opacity:0;"></div>
         <div class="cam-cross" id="camHot1" style="opacity:0;"></div>
         <div class="cam-cross" id="camHot2" style="opacity:0;"></div>
         <div class="cam-cross" id="camHot3" style="opacity:0;"></div>
       </div>
-
+      <div class="cam-verd">
+        <span id="camMode">١: مستشعر القرب الكهرومغناطيسي</span>
+        <span id="camCount">توهج: 0</span>
+      </div>
       <div class="ctl-toolbar">
-        <button class="btn sm ghost nt-btn" onclick="hcdNight()" id="hcdNightBtn">🌙 وضع الفحص الليلي</button>
-        <button class="btn sm ghost nt-btn" onclick="hcdTorchReflect()">💡 فحص انعكاس الشعلة</button>
-        <span class="nt-chip" id="hcdChip">جَرِب — جاهز</span>
+        <button class="btn sm ghost nt-btn" id="camNightBtn" data-on="0" onclick="toggleNight()">🌙 وضع الفحص الليلي</button>
+        <span class="nt-chip" id="camChip">جاهز للفحص</span>
       </div>
-
-      <div class="hcd-susp">
-        <div class="hcd-susp-head">
-          <div class="hcd-susp-num"><span id="hcdSusp0">0</span><small>مؤشر الاشتباه العام</small></div>
-          <div class="hcd-lvl" id="hcdLevel">بيئة هادئة</div>
-        </div>
-        <div class="hcd-bars">
-          <div class="hcd-row"><span>بصري</span><div class="i"><i id="hcdB0"></i></div><b id="hcdV0">0</b></div>
-          <div class="hcd-row"><span>تحت أحمر</span><div class="i"><i id="hcdB1"></i></div><b id="hcdV1">0</b></div>
-          <div class="hcd-row"><span>شبكة</span><div class="i"><i id="hcdB2"></i></div><b id="hcdV2">0</b></div>
-          <div class="hcd-row"><span>لاسلكي</span><div class="i"><i id="hcdB3"></i></div><b id="hcdV3">0</b></div>
-          <div class="hcd-row"><span>مغناطيسي</span><div class="i"><i id="hcdB4"></i></div><b id="hcdV4">0</b></div>
-        </div>
-      </div>
-
-      <p class="ep-sec"><span class="dot"></span>القرائن الحية · كل عنصر قابل للنقرة للتفاصيل</p>
-      <div class="hcd-evi" id="hcdEvi"><div class="hcd-empty">لم تُسجَّل قرائن بعد — نفّذ «فحص الكاميرات الذكي» وسيُبنى هنا سجل أدلة حقيقي من أجهزة الاستشعار فقط.</div></div>
-
-      <p class="ep-sec"><span class="dot"></span>نقاط الاشتباه الإقليمية · دَق مساحة أثناء المسح</p>
-      <div class="hcd-mode" id="hcdModeBar">
-        <button class="on" data-m="room" onclick="hcdZoneMode('room')">🚪 غرفة</button>
-        <button class="" data-m="car" onclick="hcdZoneMode('car')">🚗 سيارة</button>
-      </div>
-      <div class="hcd-zones" id="hcdZones"></div>
-      <div class="hcd-guide" id="hcdGuide" style="display:none;"></div>
-
       <details class="proctl">
-        <summary>⚙ إعدادات المحرك — DetectionConfig (أوزان قابلة للتعديل)</summary>
-        <div class="hcd-cfg" id="hcdCfg"></div>
-        <button class="btn small ghost proreset" onclick="hcdCfgReset()">استعادة الأوزان الافتراضية</button>
+        <summary>⚙ إعدادات الحساسية — وحدة الفحص الميداني</summary>
+        <div class="ctl-row"><label>حساسية القرب (EM)</label><input type="range" id="emSensR" min="20" max="100" value="60"><span class="ctl-val" id="emSensV">60</span></div>
+        <div class="ctl-row"><label>دقة نقاط التوهج (IR)</label><input type="range" id="irSensR" min="20" max="100" value="55"><span class="ctl-val" id="irSensV">55</span></div>
+        <button class="btn small ghost proreset" onclick="resetSens()">استعادة العتبات الافتراضية</button>
       </details>
-
-      <div class="ep-sec" style="margin-top:14px;"><span class="dot"></span>التقرير والسجل</div>
-      <div class="hcd-foot">
-        <button class="btn sm" onclick="hcdReport()">🗒 نسخ تقرير أمني</button>
-        <button class="btn sm ghost" onclick="hcdToggleHist()">🕘 السجل</button>
-        <button class="btn small ghost" onclick="hcdClearHist()">مسح السجل</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn sm" style="flex:1;background:none;border:1px solid #00E6FF;color:#00E6FF;" onclick="camStart('em')">📶 مستشعر القرب (EMF)</button>
+        <button class="btn sm ghost" style="flex:1;" onclick="camStart('ir')">🌡️ كاشف التوهج (IR)</button>
+        <button class="btn small ghost" style="flex:1;" onclick="camTorch()">🔦 لمبة IR</button>
       </div>
-      <div id="hcdHistWrap" style="display:none;">
-        <div class="hcd-hist" id="hcdHist"></div>
+      <button class="btn small ghost" style="width:100%;margin-top:8px;" onclick="camStop()">إيقاف الماسح</button>
+
+      <p class="ep-sec"><span class="dot"></span>EM · مستشعر القرب الكهرومغناطيسي المعاير</p>
+      <div class="em-box">
+        <div class="ep-row"><span class="k">مؤشر القرب الكهرومغناطيسي</span><span class="v" style="color:#00E6FF;">مغلق</span></div>
+        <div class="em-gauge" id="emGaugeWrap">
+          <svg viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="emGrad" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0" stop-color="#00E6FF"/>
+                <stop offset="0.55" stop-color="#FFC24B"/>
+                <stop offset="1" stop-color="#FF5C5C"/>
+              </linearGradient>
+            </defs>
+            <path class="emg-base" d="M60 14 A46 46 0 1 1 59.999 14"/>
+            <path class="emg-arc" id="emGaugeArc" d="M60 14 A46 46 0 1 1 59.999 14" stroke="url(#emGrad)"/>
+            <g id="emgTicks"></g>
+          </svg>
+          <div class="emg-num"><span id="emGaugeVal">0%</span><small>قرب EM</small></div>
+        </div>
+        <div class="ep-row"><span class="k">بوصلة المغناطيسية الحية</span><span class="v" id="emCompass">—</span></div>
+        <div class="sq-status" id="emState">المسح متوقف</div>
+        <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:10px;">الماسح يعاير نفسه في أول ٤ ثوانٍ (ثبّت الهاتف في مكان بعيد عن الأجهزة)، ثم قرّب ببطء من أي جسم مشكوك فيه. الإشارة تجمع: انحراف بوصلة المغناطيسية + نبض تذبذب الصورة. نظام الحارس الحركي يهمّل القياسات وقت الحركة السريعة ويرفض الإنذار إلا وأنت ثابت فوق الهدف — دي ضد «الإنذار الكاذب العرضي».</p>
       </div>
 
-      <p style="color:var(--ink-mute);font-size:10.5px;line-height:1.7;margin-top:12px;">الحدود بلا خداع: الصفحة لا تستطيع مسح شبكة الواي-فاي ولا الجِهات اللاسلكية المحيطة إلا من داخل تطبيق نظام أصلي — تُعرض هذه الوحدات كـ«غير متاحة في إصدار المتصفح» بصدق ولا تُولَّد بيانات وهمية على الإطلاق. فحص المغناطيسية تقريبي يعتمد بوصلة الجهاز إن توفرت.</p>
+      <p class="ep-sec"><span class="dot"></span>IR · الماسح البصري لنقاط التوهج</p>
+      <p style="color:var(--ink-mute);font-size:11px;line-height:1.7;margin-top:6px;">الكاشف يعلّم فقط على <b>نقطة توهج صغيرة أشد إضاءة من محيطها بشكل غير طبيعي</b> ويستمر في نفس الموضع أكثر من لحظة (ربط الزمني) — مش أي سطوع. عدسات الكاميرات الليلية بتعكس توهج أبيض/بنفسجي. نقطة ظهرت: ثبّت ٣ ثوانٍ فوقها؛ لسه ثابتة = قرينة، شغّل لمبة IR للتأكيد النهائي.</p>
+      <p style="color:var(--ink-mute);font-size:11.5px;line-height:1.8;margin-top:12px;border-top:1px dashed rgba(255,255,255,.09);padding-top:10px;"><b style="color:var(--cyan);">أماكن الاختباء الشائعة:</b> أجهزة الإنذار، شواحن الهاتف، المصابيح والساعات، إطارات الصور، المكيفات، وموزعات الدخان. عند الشك: افصل التيار، وانقل بمعية، ثم افحص باللمبة.</p>
     </div>
   </section>
 
@@ -8005,711 +7916,233 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     window.addEventListener('pagehide', function(){ radioStop(); });
   })();
 
-  
-/* ===== HCD PRO: HIDDEN CAMERA DETECTION ENGINE (dedicated local module) ===== */
-/* ===== builds on the HIP on-device spec: modular engines -> evidence -> fusion -> suspicion -> guided inspection -> local report ===== */
-(function(){
-  function $(id){ return document.getElementById(id); }
-  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function nowStr(){ try{ return new Date().toLocaleString('ar-EG'); }catch(e){ return new Date().toLocaleString(); } }
-  function seq(){ return Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36); }
-  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
-  function round(v){ return Math.round(v); }
-
-  function toast(m, mode){
-    var t=document.createElement('div');
-    t.style.cssText='position:fixed;bottom:86px;left:50%;transform:translateX(-50%);max-width:86vw;z-index:300;background:#0D1420;border:1px solid '+(mode==='warn'?'#FFC24B':(mode==='bad'?'#FF5C5C':'#00E6FF'))+';color:#EAF4F7;font-size:12.5px;border-radius:12px;padding:11px 16px;box-shadow:0 10px 34px rgba(0,0,0,.5);text-align:center;';
-    t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },3000);
-  }
-  function vib(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms||60); }catch(e){} }
-
-  /* ---------- DetectionConfig (weights per spec §12; fusion knobs §38; battery §58) ---------- */
-  var CFG_DEFAULT={ bright:15, compact:15, circ:15, contrast:10, edge:10, temporal:20, move:15,
-    irBase:200, irClus:3, magDev:14, indepBonus:9, temporalBonus:4, spatialBonus:6, trapPen:18, micro:14, mode:'normal' };
-  var cfg=(function(){
-    try{ var o=JSON.parse(localStorage.getItem('vge_hcd_cfg')||'null'); if(o){ for(var k in CFG_DEFAULT){ if(o[k]===undefined) o[k]=CFG_DEFAULT[k]; } return o; } }catch(e){}
-    var c={}; for(var k2 in CFG_DEFAULT) c[k2]=CFG_DEFAULT[k2]; return c;
-  })();
-  function saveCfg(){ try{ localStorage.setItem('vge_hcd_cfg', JSON.stringify(cfg)); }catch(e){} }
-  function cfgReset(){ for(var k in CFG_DEFAULT) cfg[k]=CFG_DEFAULT[k]; saveCfg(); renderCfg(); renderCapsUI(); toast('استُعيدت إعدادات المحرك الافتراضية'); }
-
-  /* ---------- state ---------- */
-  var stream=null, track=null, raf=null, running=false, sweepOn=false, nightOn=false, torchOn=false;
-  var loopFrame=0, cands=[], prevGrid=null, blobPrev=[], irPts=[], irHist={}, irCap='UNKNOWN';
-  var head=null, headPrev=null, hdDrift=0, magRaw=null, magSens=null, magOn=false;
-  if(window.DeviceOrientationEvent && ('ondeviceorientation' in window)){
-    window.addEventListener('deviceorientation', function(e){
-      if(e && e.alpha!=null){ hdDrift=0; head=e.alpha; }
-    });
-  }
-  var base={ bright:null, noise:null, mag:null, magSd:null };
-  var calT=0, calS=[], curZone=null, zSnap={}, hunt=false, huntIv=null, mode='room';
-  var EVI=[], SUSP={opt:0,ir:0,net:0,bt:0,mg:0,tot:0,lvl:'low'};
-  var aud=null, phrases=['اسحب الهاتف ببطء تجاه المنطقة','غيّر زاوية العرض','اقترب من الهدف قليلًا','خفّف إضاءة الغرفة'];
-  var hist=(function(){ try{ return JSON.parse(localStorage.getItem('vge_hcd_hist')||'[]'); }catch(e){ return []; } })();
-  function saveHist(){ try{ localStorage.setItem('vge_hcd_hist', JSON.stringify(hist.slice(0,24))); }catch(e){} }
-  var ZONES={ room:['الغرفة كاملة','السقف','كاشف الدخان','التلفاز','الساعة','المرآة','البرايز','الشواحن','اللمبة','الفتحات','الديكور','الأثاث'],
-              car:['لوحة القيادة','الكونسول الوسطي','منطقة المرآة الخلفية','يسار أمامي','يمين أمامي','المقاعد','المنطقة الخلفية','الأبواب','منطقة السقف','الصندوق'] };
-  function zoneList(){ return ZONES[mode]||ZONES.room; }
-
-  /* ---------- tiny helpers for elements ---------- */
-  function setTxt(id,v){ var e=$(id); if(e) e.textContent=v; }
-  function cross(i,fx,fy){ var c=$('camHot'+i); if(!c) return; if(fx==null){ c.style.opacity='0'; return; } c.style.left=(fx*100).toFixed(1)+'%'; c.style.top=(fy*100).toFixed(1)+'%'; c.style.opacity='1'; }
-  function chip(t,cls){ var c=$('hcdChip'); if(!c) return; c.textContent=t; c.className='nt-chip'+(cls?(' '+cls):''); }
-  function status(m,cls){ var s=$('hcdStatus'); if(s){ s.textContent=m; s.className='hcd-status'+(cls?(' '+cls):''); } }
-
-  /* ---------- CAPABILITY SYSTEM (§55) - honest, never simulated ---------- */
-  function checkCaps(){
-    var c={cam:false,front:false,torch:false,mag:false,magProxy:false,ir:irCap,wifi:false,bt:false,net:false};
-    c.wifi=false; c.bt=false; c.net=false;
-    c.magProxy = !!(window.DeviceOrientationEvent && ('ondeviceorientation' in window));
-    if(window.Magnetometer){ try{ var M=new Magnetometer({frequency:15}); M.addEventListener('reading',function(){ var x=M.x||0,y=M.y||0,z=M.z||0; magRaw=Math.sqrt(x*x+y*y+z*z); magOn=true; }); M.start(); c.mag=true; magSens=M; }catch(e){ c.mag=false; } }
-    else if(c.magProxy) c.mag=true;
-    if(navigator.mediaDevices && navigator.mediaDevices.enumerateDevices){
-      navigator.mediaDevices.enumerateDevices().then(function(ds){
-        for(var i=0;i<ds.length;i++){ if(ds[i].kind==='videoinput'){ c.cam=true; var l=(ds[i].label||'').toLowerCase(); if(l.indexOf('front')>-1||l.indexOf('rront')>-1||/امام/.test(ds[i].label)) c.front=true; } }
-        c.torch=!!(track && typeof track.applyConstraints==='function');
-        renderCapsUI(c);
-      }).catch(function(){ renderCapsUI(c); });
-    } else renderCapsUI(c);
-    return c;
-  }
-  function renderCapsUI(c){
-    var box=$('hcdCaps'); if(!box) return;
-    var chips=[];
-    chipAdd(chips, 'كاميرا', c.cam, c.cam?'متاحة':'غير متاحة');
-    chipAdd(chips, 'شعلة/فلاش', c.torch, c.torch?'متاحة':'غير متاحة');
-    chipAdd(chips, 'إبرة مغناطيس', c.mag, c.mag?((c.magProxy||!magOn)?'تقريبية':'متاحة'):'غير متاحة');
-    chipAdd(chips, 'رؤية تحت أحمر', c.ir!=='UNKNOWN', (c.ir==='UNKNOWN'?'غير معلومة (تُقيَّم أثناء المسح)':c.ir==='HIGH'?'عالية':c.ir==='MEDIUM'?'متوسطة':c.ir==='LOW'?'منخفضة':'متوقف'));
-    chipAdd(chips, 'مسح واي-فاي', false, 'غير متاحة (إصدار متصفح)');
-    chipAdd(chips, 'مسح لاسلكي', c.bt, c.bt?'متاح':'غير متاح (إصدار متصفح)');
-    box.innerHTML=chips.join('');
-  }
-  function chipAdd(a,name,ok,val){ a.push('<span class="hcd-cap '+(ok?'ok':'no')+'">'+esc(name)+' <b>'+esc(val)+'</b></span>'); }
-
-  function setTorch(on){
-    if(!track || typeof track.applyConstraints!=='function') return false;
-    try{
-      var cs=null; if(track.getCapabilities) cs=track.getCapabilities();
-      if(cs && cs.torch===undefined && on) return false;
-      track.applyConstraints({advanced:[{torch:!!on}]});
-
-      torchOn=!!on; return true;
-    }catch(e){ return false; }
-  }
-
-  /* ---------- camera start/stop (§5 web adapter) ---------- */
-  function startCamera(cb,err){
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ if(err) err(); return; }
-    navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}, audio:false}).then(function(st){
-      stream=st; track=st.getVideoTracks()[0]||null;
-      var v=$('camFeed'); if(v){ v.srcObject=st; v.play().catch(function(){}); }
-      if(cb) cb();
-    }).catch(function(){ if(err) err(); });
-  }
-  function stopAll(){
-    running=false; sweepOn=false; huntOff();
-    if(raf){ cancelAnimationFrame(raf); raf=null; }
-    if(track){ try{ setTorch(false); }catch(e){} try{ track.stop(); }catch(e){} track=null; }
-    if(stream){ try{ stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){} stream=null; }
-    var v=$('camFeed'); if(v) v.srcObject=null;
-    var c=$('camCanvas'); if(c){ var cv=c.getContext('2d'); cv.clearRect(0,0,c.width,c.height); }
-    setTxt('camSweep','المسح متوقف'); chip('متوقف',''); cross(0,null,null);cross(1,null,null);cross(2,null,null);cross(3,null,null);
-    var b=$('hcdSweepBtn'); if(b){ b.textContent='✦ فحص الكاميرات الذكي'; b.className='hcd-sweep'; }
-    var ph=$('hcdPhase'); if(ph){ ph.textContent='جاهز للفحص'; ph.className='hcd-phase idle'; }
-    var bar=$('hcdBar'); if(bar) bar.style.width='0%';
-    status('متوقف — اضغط «فحص الكاميرات الذكي» لإعادة الدورة.','');
-  }
-
-  /* ---------- SWEEP CONTROLLER (§44) ---------- */
-  var STEPS=[
-    {k:'cap', label:'١ · فحص القدرات', dur:900},
-    {k:'base', label:'٢ · خط الأساس البيئي', dur:2600},
-    {k:'opt', label:'٣ · المسح البصري — أهداف عاكسة', dur:5000},
-    {k:'ir', label:'٤ · المسح تحت-الأحمر — خفّض الإضاءة', dur:5000},
-    {k:'net', label:'٥ · تحليل الشبكة (محلي فقط)', dur:700},
-    {k:'bt', label:'٦ · الجِهات اللاسلكية (محلي فقط)', dur:700},
-    {k:'mag', label:'٧ · تحليل المجال المغناطيسي', dur:2600},
-    {k:'fuse', label:'٨ · دمج الأدلة وتقييم الاشتباه', dur:1500},
-    {k:'spatial', label:'٩ · دَق المناطق — اضغط النقاط المشتبهة', dur:4200},
-    {k:'report', label:'١٠ · التقرير', dur:1200}
-  ];
-  var stepIdx=0, stepStart=0, sweepT0=0;
-  function hcdSweep(){
-    if(running){ hcdStop(); return; }
-    sweepOn=true; running=true; sweepT0=Date.now(); EVI=[];
-    SUSP={opt:0,ir:0,net:0,bt:0,mg:0,tot:0,lvl:'low'}; zSnap={}; cands=[];
-    var b=$('hcdSweepBtn'); if(b){ b.textContent='⏹ إيقاف الفحص'; b.className='hcd-sweep sweep'; }
-    startCamera(function(){ stepIdx=0; nextStep(); }, function(){
-      status('الكاميرا غير متاحة أو رُفض الإذن — نقوم بتحليل القدرات ولا نخلق بيانات وهمية.','warn');
-      toast('الكاميرا مرفوضة — راجِع أذونات الموقع ثم أعد المحاولة','warn');
-      stopAll();
-    });
-  }
-  function hcdStop(){ stopAll(); }
-  function nextStep(){
-    if(!running){ return; }
-    if(stepIdx>=STEPS.length){ finishSweep(); return; }
-    var st=STEPS[stepIdx]; stepStart=Date.now();
-    var ph=$('hcdPhase'); if(ph){ ph.textContent=st.label; ph.className='hcd-phase'; }
-    var bar=$('hcdBar'); if(bar) bar.style.width=(Math.round(stepIdx/STEPS.length*100))+'%';
-    runStep(st.k);
-    stepIdx++;
-    setTimeout(nextStep, st.dur);
-  }
-  function stepTick(){
-    if(!sweepOn) return;
-    var st=STEPS[stepIdx-1]; if(!st) return;
-    var p=clamp((Date.now()-stepStart)/st.dur,0,1);
-    var bar=$('hcdBar'); if(bar) bar.style.width=(Math.round(((stepIdx-1)+p*0.9)/STEPS.length*100))+'%';
-  }
-  function runStep(k){
-    if(k==='cap'){
-      var c=checkCaps(); renderCapsUI(c);
-      status('التحقق من مستشعرات الجهاز: كاميرا، شعلة، مغناطيس — لا نُحاكي أي مستشعر غير متاح.','');
-      chip('فحص القدرات…','');
+  /* ===== FIELD OPS v2: HIDDEN CAM (EM магнит + IR) override ===== */
+  (function(){
+    function $(id){ return document.getElementById(id); }
+    function tst(m,mode){ var t=document.createElement('div'); t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0D1420;border:1px solid '+(mode==='warn'?'#FFC24B':'#00E6FF')+';color:#EAF4F7;padding:12px 18px;border-radius:12px;font-size:12.5px;z-index:998;max-width:86%;text-align:center;'; t.textContent=m; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2800); }
+    var stream=null, track=null, raf=null, mode='em', lastLuma=-1, buf=[], heading=null, prevA=null, drift=0, lastTst=0, calS=[], calT=0, calBase=null, flickS=[], MOT=0, MOTS=[], ACL=null, emSens=60, irSens=55, nightOn=false;
+    function act(){ var p=$('panel-camx'); return !!(p&&p.className.indexOf('active')!==-1); }
+    function calStart(){ calS=[]; calBase=null; calT=Date.now()+4000; drift=0; prevA=null; buf=[]; lastLuma=-1; flickS=[]; }
+    function cross(i,fx,fy){ var c=$('camHot'+i); if(!c) return; if(fx==null){ c.style.opacity='0'; return; } c.style.left=(fx*100).toFixed(1)+'%'; c.style.top=(fy*100).toFixed(1)+'%'; c.style.opacity='1'; }
+    function countEl(m){ var c=$('camCount'); if(c) c.textContent=m; }
+    function stateEl(txt,cls){ var s=$('emState'); if(!s) return; s.textContent=txt; s.className='sq-status '+(cls||''); }
+    function chip(txt,cls){ var c=$('camChip'); if(!c) return; c.textContent=txt; c.className='nt-chip '+(cls||''); }
+    function saveSens(){ try{ localStorage.setItem('vg_emsens', emSens); localStorage.setItem('vg_irsens', irSens); }catch(e){} }
+    window.toggleNight=function(){
+      nightOn=!nightOn;
+      var p=$('panel-camx'); if(p){ p.className=p.className.replace(/\snight/,'')+(nightOn?' night':''); }
+      var b=$('camNightBtn'); if(b) b.setAttribute('data-on', nightOn?'1':'0');
+      try{ localStorage.setItem('vg_night', nightOn?'1':'0'); }catch(e){}
+    };
+    window.resetSens=function(){
+      emSens=60; irSens=55; saveSens();
+      var er=$('emSensR'), ev=$('emSensV'), ir=$('irSensR'), iv=$('irSensV');
+      if(er){ er.value='60'; } if(ev) ev.textContent='60'; if(ir){ ir.value='55'; } if(iv) iv.textContent='55';
+      tst('أعدنا العتبات الافتراضية (EM 60 / IR 55)');
+    };
+    (function(){
+      try{ nightOn=localStorage.getItem('vg_night')==='1'; }catch(e){}
+      try{ var a=+(localStorage.getItem('vg_emsens')||60); if(a>=20&&a<=100) emSens=a;
+           var b=+(localStorage.getItem('vg_irsens')||55); if(b>=20&&b<=100) irSens=b; }catch(e){}
+      var er=$('emSensR'), ir=$('irSensR');
+      if(er){ er.value=emSens; var ev=$('emSensV'); if(ev) ev.textContent=emSens; er.oninput=function(){ emSens=+er.value; if(ev) ev.textContent=er.value; saveSens(); }; }
+      if(ir){ ir.value=irSens; var iv=$('irSensV'); if(iv) iv.textContent=irSens; ir.oninput=function(){ irSens=+ir.value; if(iv) iv.textContent=ir.value; saveSens(); }; }
+      var p=$('panel-camx'), b2=$('camNightBtn');
+      if(nightOn){ if(p) p.className+=' night'; if(b2) b2.setAttribute('data-on','1'); }
+      mkEMGauge();
+    })();
+    function alertOnce(m){ var n=Date.now(); if(n-lastTst<7000) return; lastTst=n; tst(m,'warn'); }
+    function vib(){ if(navigator.vibrate) navigator.vibrate(70); }
+    function beepEM(lv){ try{ if(!window.__emAC) window.__emAC=new (window.AudioContext||window.webkitAudioContext)(); var ac=window.__emAC, o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=520+(lv/100)*900; g.gain.value=0.05; o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.08); }catch(e){} }
+    function setEM(v){
+      v=Math.max(0,Math.min(100,v));
+      var a=$('emGaugeArc'), gv=$('emGaugeVal');
+      if(a){ var C=2*Math.PI*46; a.style.strokeDasharray=C.toFixed(1); a.style.strokeDashoffset=(C*(1-v/100)).toFixed(1); }
+      if(gv){ gv.textContent=Math.round(v)+'%'; gv.className=v>=65?'hi':(v>=35?'mid':''); }
     }
-    else if(k==='base'){
-      status('ثبّت الهاتف ثوانٍ — نلتقط خط الأساس: سطوع الغرفة، وتقلّب الرؤية، والمجال المغناطيسي.','');
-      calT=Date.now()+2400; calS=[]; base.bright=null; base.mag=null;
-      setTorch(false);
+    function mkEMGauge(){
+      var g=$('emgTicks'); if(!g) return; var NS='http://www.w3.org/2000/svg';
+      for(var v=0;v<=100;v+=5){ var a=(-90+v/100*360)*Math.PI/180;
+        var x1=60+(41-6)*Math.cos(a), y1=60+(41-6)*Math.sin(a);
+        var x2=60+41*Math.cos(a), y2=60+41*Math.sin(a);
+        var ln=document.createElementNS(NS,'line');
+        ln.setAttribute('x1',x1); ln.setAttribute('y1',y1); ln.setAttribute('x2',x2); ln.setAttribute('y2',y2);
+        ln.setAttribute('class', v%25===0?'major':'minor');
+        g.appendChild(ln);
+      }
     }
-    else if(k==='opt'){ status('حرّك الهاتف ببطء باتجاه الغرفة — نبحث عن هياكل بصرية صغيرة دائرية زجاجية مستقرة.',''); }
-    else if(k==='ir'){ status('أطفئ أو خفّف الإضاءة — نبحث عن مصادر ضوء تحت-أحمر ثابتة ونميّز التجمّعات.','warn'); }
-    else if(k==='net'){
-      status('مسح الشبكة غير متاح داخل المتصفح (يتطلب إذن نظام أصلي) — لا ننشئ قوائم أجهزة وهمية.','');
-      addEvi('NETWORK',0,0,{available:false, note:'غير متاح في نسخة المتصفح'});
+    window.camStop=function(){
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      if(track){ try{ track.stop(); }catch(e){} track=null; }
+      if(stream){ try{ stream.getTracks().forEach(function(t2){ t2.stop(); }); }catch(e){} stream=null; }
+      var v=$('camFeed'); if(v) v.srcObject=null;
+      var c=$('camCanvas'); if(c){ var cv=c.getContext('2d'); cv.clearRect(0,0,c.width,c.height); }
+      var sw=$('camSweep'); if(sw) sw.textContent='المسح متوقف';
+      countEl('توهج: 0'); stateEl('المسح متوقف',''); chip('جاهز للفحص','');
+      setEM(0);
+      buf=[]; lastLuma=-1; flickS=[]; calBase=null; calS=[];
+      for(var i=0;i<4;i++) cross(i,null,null);
+    };
+    function startCamera(m, cbOk){
+      navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}, audio:false}).then(function(st){
+        stream=st; track=st.getVideoTracks()[0]||null;
+        var v=$('camFeed'); if(v){ v.srcObject=st; v.play().catch(function(){}); }
+        cbOk();
+      }).catch(function(){ demoMode(); });
     }
-    else if(k==='bt'){
-      status('مسح البلوتوث أيضًا يتطلب نظامًا أصليًا — الوحدة تُسجَّل كغير متاحة بصدق.','');
-      addEvi('BLUETOOTH',0,0,{available:false, note:'غير متاح في نسخة المتصفح'});
+    function restartLoop(){
+      buf=[]; lastLuma=-1;
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      raf=requestAnimationFrame(loop);
     }
-    else if(k==='mag'){ status('نرصد تقلّبات المجال المغناطيسي المحيط ونقارنها بخط الأساس — القرينة مغناطيسية وليست تأكيد كاميرا.',''); }
-    else if(k==='fuse'){ fuseAll(); status('نجمع الأدلة المستقلة: كل دليل يُوزَّن، والتكرار المتكرر لنفس الدليل لا يُضاعِف التأكيد.',''); }
-    else if(k==='spatial'){
-      status('دَق أو اضغط المناطق المشتبهة على الشبكة أدناه أثناء تجولك — تُخزَّن أدلة موضعية لكل منطقة.','');
-      renderZones(true);
+    function demoMode(){
+      if(mode==='em') calStart();
+      var sw=$('camSweep'); if(sw) sw.textContent='عرض توضيحي — الكاميرا غير متاحة';
+      stateEl('المسح التوضيحي','on'); tst('الكاميرا غير متاحة حاليًا — عرض توضيحي');
+      restartLoop();
     }
-    else if(k==='report'){ finishSweep(); }
-  }
-  function finishSweep(){
-    if(!sweepOn) return;
-    if(stepIdx>=STEPS.length){ /* natural */}
-    fuseAll(); sweepOn=false;
-    var b=$('hcdSweepBtn'); if(b) b.textContent='⏹ إيقاف المراقبة';
-    chip('اكتمل الفحص — مراقبة حية مستمرة','ok');
-    var lvl=SUSP.lvl;
-    status(lvl==='low'?'اكتمل الفحص — محيط هادئ (نواصل مراقبة حية).':(lvl==='elevated'?'اكتمل الفحص — عدة قرائن طفيفة؛ دَق المناطق.':(lvl==='high'?'منطقة تحتاج فحصًا — توجد قرائن متداخلة هنا.':'⚠ منطقة أولوية فحص عالية — قرائن قوية متداخلة، راجع نقاط الاشتباه أدناه وإرشادات التفتيش.')), lvl==='low'?'ok':(lvl==='elevated'?'warn':'bad'));
-    var bar=$('hcdBar'); if(bar) bar.style.width='100%';
-    hist.unshift({ts:Date.now(), tot:SUSP.tot, lvl:SUSP.lvl, evi:EVI.map(function(e){return {t:e.type,s:e.score};}), dur:round((Date.now()-sweepT0)/1000)});
-    if(hist.length>24) hist.pop();
-    saveHist();
-  }
-
-  /* ---------- EVIDENCE + FUSION (§36-40) ---------- */
-  function addEvi(type,score,conf,meta){ EVI.push({type:type,score:clamp(round(score),0,100),conf:clamp(round(conf),0,100),ts:Date.now(),zone:curZone,meta:meta||{}}); if(EVI.length>40) EVI.shift(); }
-  function fuseAll(){
-    var w=TOTAL_WEIGHT();
-    var opt=LAST('OPTICAL'), ir=LAST('IR'), net=LAST('NETWORK'), bt=LAST('BLUETOOTH'), mg=LAST('MAGNETIC');
-    SUSP.opt=opt; SUSP.ir=ir; SUSP.net=net; SUSP.bt=bt; SUSP.mg=mg;
-    /* independent evidence sources (≥50) matter more than repeats (§37) */
-    var arr=[opt,ir,net,bt,mg].filter(function(v){ return v>=50; }).sort(function(a,b){ return b-a; });
-    var tot=0;
-    for(var i=0;i<arr.length;i++){ var mult=(i===0?0.55:(i===1?0.28:(i===2?0.13:0.04))); tot+=arr[i]*mult; }
-    tot+=arr.length*cfg.indepBonus;
-    var sustained=0; for(var ei=0;ei<EVI.length;ei++){ if(EVI[ei].conf>=70&&EVI[ei].score>=50) sustained++; }
-    tot+=Math.min(12, sustained)*cfg.temporalBonus;
-    var hotz=hotZones(); if(hotz.length) tot+=cfg.spatialBonus*hotz.length;
-    /* false-positive reduction (§41) */
-    tot-=fpPenalty();
-    if(SUSP.opt>0 && opt===0) tot-=cfg.trapPen*0.4;
-    tot=clamp(Math.round(tot),0,100);
-    SUSP.tot=tot;
-    SUSP.lvl = tot<25?'low' : tot<50?'elevated' : tot<75?'high' : 'crit';
-    renderSusp();
-    if(hotz.length){ renderGuide(hotz); } else hideGuide();
-  }
-  function TOTAL_WEIGHT(){ var s=cfg.bright+cfg.compact+cfg.circ+cfg.contrast+cfg.edge+cfg.temporal+cfg.move; return s||100; }
-  function LAST(type){ var v=0,i; for(i=EVI.length-1;i>=0;i--){ if(EVI[i].type===type){ v=EVI[i].score; break; } } return v; }
-  function fpPenalty(){
-    var p=0;
-    for(var i=0;i<EVI.length;i++){ var e=EVI[i];
-      if(e.type==='OPTICAL'){ if(e.meta && (e.meta.big||e.meta.lowCirc)) p+=cfg.micro*0.6; if(e.meta && e.meta.edgeZone) p+=cfg.micro; }
-      if(e.type==='IR' && e.meta && e.meta.transient) p+=cfg.micro*0.7;
-      if(e.type==='MAGNETIC' && e.meta && e.meta.proxy) p+=2;
+    function loop(){
+      if(!act()){ camStop(); return; }
+      var v=$('camFeed'), c=$('camCanvas');
+      if(c&&v&&v.readyState>=2){
+        var W=v.videoWidth||c.width, H=v.videoHeight||c.height;
+        if(c.width!==W) c.width=W; if(c.height!==H) c.height=H;
+        var cv=c.getContext('2d'); cv.drawImage(v,0,0,c.width,c.height);
+        if(mode==='ir'){ detectIR(cv,c.width,c.height); }
+        else { detectEM(cv,c.width,c.height); }
+      } else if(c){ demoFrame(c); }
+      raf=requestAnimationFrame(loop);
     }
-    return Math.min(40, p);
-  }
-  function setSuspNow(id,val){ var v=clamp(round(val),0,100); return v; }
-
-  function renderSusp(){
-    setTxt('hcdSusp0', String(SUSP.tot));
-    var l=$('hcdLevel'); if(l){ l.textContent= LVL(SUSP.lvl); l.className='hcd-lvl'+(SUSP.lvl==='high'?' warn':(SUSP.lvl==='crit'?' crit':(SUSP.lvl==='elevated'?'':' '))); }
-    bar('hcdB0','hcdV0',SUSP.opt); bar('hcdB1','hcdV1',SUSP.ir); bar('hcdB2','hcdV2',SUSP.net); bar('hcdB3','hcdV3',SUSP.bt); bar('hcdB4','hcdV4',SUSP.mg);
-  }
-  function bar(bk,vk,val){ var bc=$(bk); if(bc) bc.style.width=clamp(val,0,100)+'%'; var v=$(vk); if(v) v.textContent=round(val); }
-  function LVL(l){ return l==='crit'?'أولوية تفتيش حرجة':l==='high'?'انتباه عالٍ — فحص مستهدف':l==='elevated'?'مؤشرات مرفوعة':'بيئة هادئة'; }
-
-  function renderEvi(){
-    var box=$('hcdEvi'); if(!box) return;
-    if(!EVI.length){ box.innerHTML='<div class="hcd-empty">لم تُسجَّل قرائن بعد — نفّذ «فحص الكاميرات الذكي» وسيُبنى هنا سجل أدلة حقيقي من أجهزة الاستشعار فقط.</div>'; return; }
-    var rows=EVI.slice(-10).reverse().map(function(e){
-      var btag='r'; if(e.type==='OPTICAL') btag='b'; else if(e.type==='IR') btag='w'; else if(e.type==='MAGNETIC') btag='g'; else btag='r';
-      var nm={OPTICAL:'بصري',IR:'تحت أحمر',NETWORK:'شبكة',BLUETOOTH:'لاسلكي',MAGNETIC:'مغناطيسي'}[e.type]||e.type;
-      var line='<div class="ep-inc '+(e.score>=50?'high':e.score>=25?'mid':'')+'">'+
-        '<span class="hcd-btag '+btag+'">'+nm+'</span>'+
-        '<span class="t">'+ (e.score===0?(e.meta&&e.meta.available===false?'قدرة غير متاحة هنا':nm):nm) +'</span>'+
-        '<span class="sc">'+e.score+'</span>'+
-        '<span class="st '+(e.score>=50?'hot':e.score>=25?'':'min')+'">'+(e.score===0?'—':e.score>=50?'قرينة اشتباه':e.score>=25?'مؤشر':'طفيف')+'</span>'+
-        '</div>';
-      return line;
-    });
-    box.innerHTML=rows.join('');
-  }
-  window.hcdEvUpdate=renderEvi;
-
-  /* ---------- ZONES / SPATIAL (§33-35, §50) ---------- */
-  function renderZones(active){
-    var box=$('hcdZones'); if(!box) return;
-    var zs=zoneList();
-    box.innerHTML=zs.map(function(z,i){
-      var s=zSnap[z];
-      var cls='hcd-zone'+(s?' tap':'');
-      if(s&&s.tot>=50) cls='hcd-zone hot';
-      return '<button class="'+cls+'" onclick="hcdTapZone('+i+')">'+esc(z)+'<small>'+ (s?(s.tot+'% · '+timeAgo(s.ts)):'اضغط عند الفحص')+'</small></button>';
-    }).join('');
-  }
-  function timeAgo(t){ try{ var d=Math.max(1,Math.round((Date.now()-t)/60000)); if(d<60) return d+'د'; return Math.round(d/60)+'س'; }catch(e){ return ''; } }
-  function hcdTapZone(i){
-    var zs=zoneList(); var z=zs[i]; if(!z) return;
-    if(!running && !sweepOn){ renderZones(true); toast('شغّل «فحص الكاميرات الذكي» أولًا لتسجيل قرائن لكل منطقة','warn'); return; }
-    var s={ts:Date.now(), opt:SUSP.opt, ir:SUSP.ir, mg:SUSP.mg, net:SUSP.net, bt:SUSP.bt,
-           tot:Math.max(SUSP.tot, Math.round((SUSP.opt*0.4+SUSP.ir*0.3+SUSP.mg*0.15+(SUSP.net+SUSP.bt)*0.15)*0.6))};
-    zSnap[z]=s; curZone=z;
-    renderZones(true);
-    if(s.tot>=50){ vib(120); toast('قرائن متداخلة في «'+z+'» — افحصها بعناية','warn'); } else { toast('سُجّلت قرائن منطقة «'+z+'»'); }
-  }
-  function hotZones(){ var out=[],k; for(k in zSnap){ if(zSnap[k].tot>=50) out.push({z:k,tot:zSnap[k].tot}); } return out.sort(function(a,b){ return b.tot-a.tot; }); }
-  function renderGuide(hz){
-    var g=$('hcdGuide'); if(!g) return;
-    var txt=hz.length?('<b style="color:#FFC24B;">'+hz.length+' نقطة اشتباه:</b> '+esc(hz.slice(0,3).map(function(h){ return h.z+' ('+h.tot+'%)'; }).join('، '))):'منطقة أولوية عالية — تتداخل عدة مؤشرات هنا.';
-    g.style.display='block';
-    g.innerHTML='<div style="color:var(--ink-dim);font-size:11.5px;margin-bottom:8px;">'+txt+'</div>'+
-      '<div class="hcd-guide">'+[
-        'اقترب من الهدف منظبطًا',
-        'غيّر زاوية الكاميرا',
-        'خفّف إضاءة الغرفة',
-        'افحص الأسطح العاكسة',
-        'اآت الأجهزة المجاورة، مثلما تعلم']
-        .map(function(s2,i){ return '<div class="g"><span class="n">'+(i+1)+'</span><span>'+esc(s2)+'</span></div>'; }).join('')+'</div>';
-  }
-  function hideGuide(){ var g=$('hcdGuide'); if(g) g.style.display='none'; }
-  window.hcdTapZone=hcdTapZone;
-  function hcdZoneMode(m){
-    mode=m; var btns=$('hcdModeBar'); if(btns){ var bs=btns.querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].className=bs[i].getAttribute('data-m')===m?'on':''; }
-    zSnap={}; renderZones(true);
-  }
-  window.hcdZoneMode=hcdZoneMode;
-
-  /* ---------- OPTICS ENGINE (spec §6-12, §17-18) ---------- */
-  var lastLuma=-1, lumaBuf=[], blobCands=[];
-  function analyzeOptics(cv,w,h,now){
-    var ip=null; try{ ip=cv.getImageData(0,0,w,h); }catch(e){ return []; }
-    var G=28, cw=Math.max(8,Math.floor(w/G)), ch=Math.max(8,Math.floor(h/G));
-    if(cw>52) cw=52; if(ch>52) ch=52;
-    var lum=[],mx=[],avgL=0,kn=0;
-    for(var y=0;y<ch;y++){ lum[y]=[]; mx[y]=[];
-      for(var x=0;x<cw;x++){
-        var s=0,n2=0,mm=0;
-        var x0=x*G, y0=y*G, step=4;
-        for(var yy=y0;yy<y0+G&&yy<h;yy+=step){ for(var xx=x0;xx<x0+G&&xx<w;xx+=step){ var p=(yy*w+xx)*4; var v=ip.data[p]*0.3+ip.data[p+1]*0.6+ip.data[p+2]*0.1; s+=v; n2++; if(v>mm) mm=v; } }
-        var a=s/(n2||1); lum[y][x]=a; mx[y][x]=mm; avgL+=a; kn++;
-      } }
-    if(!kn) return [];
-    avgL/=kn;
-    if(base.bright===null) base.bright=avgL;
-    else base.bright=base.bright*0.92+avgL*0.08;
-    /* flicker / temporal noise baseline */
-    if(lastLuma>=0){ lumaBuf.push(Math.abs(avgL-lastLuma)); if(lumaBuf.length>12) lumaBuf.shift(); }
-    lastLuma=avgL;
-    var mn=0; for(var q=0;q<lumaBuf.length;q++) mn+=lumaBuf[q]; mn/=lumaBuf.length||1;
-    if(base.noise===null) base.noise=mn; else base.noise=base.noise*0.9+mn*0.1;
-    /* local contrast */
-    function neighMean(x,y){ var s=0,n=0; for(var dy=-1;dy<=1;dy++){ for(var dx=-1;dx<=1;dx++){ var yy=y+dy,xx=x+dx; if(yy<0||xx<0||yy>=ch||xx>=cw||(dy===0&&dx===0)) continue; s+=lum[yy][xx]; n++; } } return n?s/n:0; }
-    /* movement: coarse translation estimate between grids */
-    var gx=0,gy=0;
-    if(prevGrid){ var best=1e9; for(var oy=-2;oy<=2;oy++){ for(var ox=-2;ox<=2;ox++){ var d=0; for(var yy=2;yy<ch-2;yy+=2){ for(var xx=2;xx<cw-2;xx+=2){ var y2=yy+oy,x2=xx+ox; if(y2<0||x2<0||y2>=ch||x2>=cw) continue; var diff=lum[yy][xx]-prevGrid[y2][x2]; d+=diff*diff; } } if(d<best){ best=d; gx=ox; gy=oy; } } } }
-    prevGrid=lum;
-    /* threshold -> mask -> blob label */
-    var th=Math.max(150, base.bright+24);
-    var thr=th+Math.max(10,(cfg.irBase-150)*0.2);
-    var mask=[]; for(var y3=0;y3<ch;y3++){ mask[y3]=[]; for(var x3=0;x3<cw;x3++){ var nc=neighMean(x3,y3); mask[y3][x3]=(mx[y3][x3]>thr && lum[y3][x3]>nc+13 && mx[y3][x3]>nc+30)?1:0; } }
-    var blobMap=[]; var blobs=[]; var bId=1;
-    for(var yy4=0;yy4<ch;yy4++){ blobMap[yy4]=[]; for(var xx4=0;xx4<cw;xx4++) blobMap[yy4][xx4]=0; }
-    var stack=[];
-    for(var y5=0;y5<ch;y5++){ for(var x5=0;x5<cw;x5++){
-      if(mask[y5][x5] && !blobMap[y5][x5]){
-        blobMap[y5][x5]=bId; var B={id:bId,cells:0,minx:x5,maxx:x5,miny:y5,maxy:y5,sumBr:0,maxBr:0}; blobs.push(B); stack.push([x5,y5]);
-        while(stack.length){ var c=stack.pop(); B.cells++; if(c[0]<B.minx)B.minx=c[0]; if(c[0]>B.maxx)B.maxx=c[0]; if(c[1]<B.miny)B.miny=c[1]; if(c[1]>B.maxy)B.maxy=c[1]; var bv=mx[c[1]][c[0]]; B.sumBr+=bv; if(bv>B.maxBr)B.maxBr=bv;
-          for(var dy2=-1;dy2<=1;dy2++){ for(var dx2=-1;dx2<=1;dx2++){ if(dy2===0&&dx2===0) continue; var yy=c[1]+dy2,xx=c[0]+dx2; if(yy<0||xx<0||yy>=ch||xx>=cw) continue; if(mask[yy][xx]&&!blobMap[yy][xx]){ blobMap[yy][xx]=bId; stack.push([xx,yy]); } } } }
+    function demoFrame(c){
+      var cv=c.getContext('2d'), t=Date.now()/1000, w=c.width, h=c.height;
+      cv.fillStyle='#02121B'; cv.fillRect(0,0,w,h);
+      var g=cv.createRadialGradient(w*(0.5+0.25*Math.sin(t*0.6)),h*(0.5+0.2*Math.cos(t*0.7)),6,w/2,h/2,w*0.7);
+      g.addColorStop(0,'rgba(0,230,255,0.20)'); g.addColorStop(1,'rgba(2,18,27,0)');
+      cv.fillStyle=g; cv.fillRect(0,0,w,h);
+      var scan=((t*120)%(h+40))-20; cv.fillStyle='rgba(0,230,255,0.10)'; cv.fillRect(0,scan,w,10);
+      if(mode==='em'){ emitDemoEM(); } else { emitDemoIR(); }
+    }
+    function emitDemoIR(){
+      var t=Date.now()/1000;
+      cross(0,0.30+0.06*Math.sin(t*1.1),0.40+0.05*Math.cos(t*1.3));
+      cross(1,0.66+0.05*Math.cos(t*0.9),0.58+0.06*Math.sin(t*1.2));
+      countEl('توهج: 2');
+    }
+    function emitDemoEM(){
+      var t=Date.now()/1000;
+      var em=Math.round(30+18*Math.sin(t*2.2));
+      setEM(em);
+    }
+    var IRHIT={};
+    function detectIR(cv,w,h){
+      var iv; try{ iv=cv.getImageData(0,0,w,h).data; }catch(e){ return; }
+      var cell=18, cx=Math.floor(w/cell), cy=Math.floor(h/cell);
+      var lm=[], mx=[];
+      for(var gy=0;gy<cy;gy++){ lm[gy]=[]; mx[gy]=[]; mx[gy].fill=new Uint8Array(cx);
+        for(var gx=0;gx<cx;gx++){
+          var s=0,kn=0,m2=0,fl=0;
+          for(var y=gy*cell;y<(gy+1)*cell&&y<h;y+=6){ for(var x=gx*cell;x<(gx+1)*cell&&x<w;x+=6){ var p=(y*w+x)*4; var v=iv[p]*0.3+iv[p+1]*0.6+iv[p+2]*0.1; s+=v; kn++; if(v>m2) m2=v; if(v>=200) fl++; } }
+          lm[gy][gx]=kn?s/kn:0; mx[gy][gx]=m2; mx[gy].fill[gx]=fl;
+        } }
+      function neigh(gx,gy){ var s=0,kn=0; for(var dy=-1;dy<=1;dy++){ for(var dx=-1;dx<=1;dx++){ var yy=gy+dy,xx=gx+dx; if(yy<0||xx<0||yy>=cy||xx>=cx||(dx===0&&dy===0)) continue; s+=lm[yy][xx]; kn++; } } return kn?s/kn:0; }
+      function bigBlo(gx,gy){ for(var by=gy-1;by<=gy+1;by++){ for(var bx=gx-1;bx<=gx+1;bx++){ if(bx<0||by<0||bx+1>=cx||by+1>=cy) continue; if(lm[by][bx]>=190&&lm[by][bx+1]>=190&&lm[by+1][bx]>=190&&lm[by+1][bx+1]>=190) return true; } } return false; }
+      var spots=[];
+      var irTh=Math.max(200, 230-Math.max(0,(irSens-50)));
+      var irC=Math.max(24, 85-Math.max(0,(irSens-50))*0.9);
+      for(var yy2=0;yy2<cy;yy2++){ for(var xx2=0;xx2<cx;xx2++){
+        var cm=mx[yy2][xx2], nb=neigh(xx2,yy2), fl=mx[yy2].fill[xx2];
+        if(cm>=irTh&&cm>=nb+irC&&fl<=3&&!bigBlo(xx2,yy2)){
+          var merged=false;
+          for(var s2=0;s2<spots.length;s2++){ var sp=spots[s2]; if(Math.abs(sp.gx-xx2)<=2&&Math.abs(sp.gy-yy2)<=2){ if(cm>sp.v){ sp.gx=xx2; sp.gy=yy2; sp.v=cm; sp.nb=nb; } merged=true; break; } }
+          if(!merged){ spots.push({gx:xx2,gy:yy2,v:cm,nb:nb}); }
         }
-        bId++;
       } }
-    var out=[];
-    for(var bi=0;bi<blobs.length;bi++){
-      var B=blobs[bi]; if(B.cells<2||B.cells>40) continue;
-      var bw=B.maxx-B.minx+1, bh=B.maxy-B.miny+1;
-      var P=2*(bw+bh)||1; var circ=4*Math.PI*B.cells/(P*P);
-      var perim=0; for(var yy6=B.miny;yy6<=B.maxy;yy6++){ for(var xx6=B.minx;xx6<=B.maxx;xx6++){ if(blobMap[yy6][xx6]===B.id){ var edges=4; if(xx6>B.minx&&blobMap[yy6][xx6-1]===B.id)edges--; if(xx6<B.maxx&&blobMap[yy6][xx6+1]===B.id)edges--; if(yy6>B.miny&&blobMap[yy6-1][xx6]===B.id)edges--; if(yy6<B.maxy&&blobMap[yy6+1][xx6]===B.id)edges--; perim+=edges; } } }
-      var edge=clamp(perim/Math.max(1,B.cells)/2,0,1);
-      var bright=clamp((B.maxBr-60)/195,0,1);
-      var contrast=clamp((B.maxBr-neighMean(Math.round((B.minx+B.maxx)/2),Math.round((B.miny+B.maxy)/2))-20)/150,0,1);
-      var compact=clamp(1-Math.abs(8-B.cells)/12,0,1);
-      var fc=clamp(circ,0.1,1);
-      var w=TOTAL_WEIGHT();
-      var subScore=Math.round(1000*(cfg.bright*bright+cfg.compact*compact+cfg.circ*fc+cfg.contrast*contrast+cfg.edge*edge)/w)/10;
-      /* temporal + movement */
-      var midx=(B.minx+B.maxx)/2, midy=(B.miny+B.maxy)/2;
-      var match=-1,bd2=99;
-      for(var pi=0;pi<blobCands.length;pi++){ var pc=blobCands[pi]; var d2=Math.abs(pc.x-midx)+Math.abs(pc.y-midy); if(d2<bd2&&d2<=3.2){ bd2=d2; match=pi; } }
-      var temporal=0.5, move=0.5, frames=1, posVar=0, brightVarAbs=0;
-      if(match>=0){ var pc=blobCands[match];
-        pc.frames++;
-        pc.prevX=pc.x; pc.prevY=pc.y; pc.x=pc.x*0.6+midx*0.4; pc.y=pc.y*0.6+midy*0.4;
-        pc.posVar=pc.posVar*0.8+(Math.abs(pc.prevX-pc.x)+Math.abs(pc.prevY-pc.y))*0.2;
-        pc.brightVar=pc.brightVar*0.85+Math.abs(pc.maxBr-B.maxBr)*0.15;
-        frames=pc.frames;
-        temporal=clamp(frames/9,0.05,1);
-        brightVarAbs=pc.brightVar;
-        var relX=(midx-pc.prevX)-gx, relY=(midy-pc.prevY)-gy;
-        var coherent=Math.sqrt(relX*relX+relY*relY);
-        move=coherent<1.8?0.85:(coherent<3?0.6:0.35);
-      } else {
-        blobCands.push({x:midx,y:midy,maxBr:B.maxBr,frames:1,posVar:0,brightVar:0,prevX:midx,prevY:midy});
+      var now=Date.now(), out=[];
+      for(var i=0;i<spots.length;i++){ var key=Math.floor(spots[i].gx/2)+'_'+Math.floor(spots[i].gy/2);
+        var rec=IRHIT[key]; if(!rec||now-rec.t>300) rec={n:0, fx:spots[i].gx, fy:spots[i].gy, t:now};
+        rec.n+=1; rec.t=now; IRHIT[key]=rec;
+        var sc=Math.round(Math.min(100,(spots[i].v-spots[i].nb)*1.6));
+        if(rec.n>=2){ out.push({fx:(rec.fx*cell+9)/w, fy:(rec.fy*cell+9)/h, sc:sc}); }
       }
-      var tv=Math.min(1, frames/9);
-      var score=Math.round(subScore*0.8+temporal*10+move*10);
-      var big=(B.cells>=26), lowCirc=fc<0.32, edgeZone=(B.minx<=1||B.miny<=1||B.maxx>=cw-2||B.maxy>=ch-2);
-      if(score>=42||bright>=0.7){
-        out.push({x:midx/cw,y:midy/ch,score:score,bright:Math.round(bright*100),circ:Math.round(fc*100),
-                  frames:frames,big:big,lowCirc:lowCirc,edgeZone:edgeZone,posVar:posVar,brightVar:brightVarAbs,temporal:tv,move:move});
+      for(var k2 in IRHIT){ if(now-IRHIT[k2].t>1000) delete IRHIT[k2]; }
+      cv.strokeStyle='rgba(255,80,80,0.95)'; cv.lineWidth=3;
+      for(var m=0;m<out.length&&m<4;m++){
+        var x=out[m].fx*w, y=out[m].fy*h, ss=34;
+        cv.strokeRect(x-ss/2,y-ss/2,ss,ss);
+        cv.strokeStyle='rgba(255,210,90,0.9)'; cv.fillStyle='rgba(0,0,0,0.5)'; cv.font='10px monospace';
+        cv.fillText('توهج '+out[m].sc+'%', x-ss/2, y-ss/2-4);
+        cv.strokeStyle='rgba(255,80,80,0.95)';
+        cross(m,out[m].fx,out[m].fy);
       }
+      for(var r=out.length;r<4;r++) cross(r,null,null);
+      countEl('توهج: '+out.length);
+      if(out.length){ vib(); chip('توهج: '+out.length+' — ثبّت للتأكيد','alert'); if(out.length>=2) alertOnce('نقطتا توهج ثابتتان في موضعهما — ثبّت ٣ ثوانٍ فوق كل هدف لتأكيد القرينة'); }
+      else { chip('لا نقاط — نطاق نظيف','ok'); }
     }
-    if(blobCands.length>30) blobCands=blobCands.slice(-30);
-    var best=0; for(var oi=0;oi<out.length;oi++){ if(out[oi].score>best) best=out[oi].score; }
-    for(var oi2=0;oi2<out.length&&oi2<4;oi2++){ cross(oi2,out[oi2].x,out[oi2].y); }
-    for(var oiz=out.length;oiz<4;oiz++) cross(oiz,null,null);
-    var cand=null; for(var oi3=0;oi3<out.length;oi3++){ if(out[oi3].score>58){ cand=out[oi3]; break; } }
-    if(cand){
-      addEvi('OPTICAL', cand.score, Math.round(cand.temporal*100), {big:cand.big,lowCirc:cand.lowCirc,edgeZone:cand.edgeZone,frames:cand.frames,pos:[Math.round(cand.x*100)+'%',Math.round(cand.y*100)+'%']});
-    }
-    SUSP.opt=best;
-    if(best>=58){ if(cands.length<3){ vib(60); chip('هدف بصري محتمل ضعيف-مستقر — قوة '+best,'warn'); } }
-    else if(best>=42){ chip('فحص بصري مستمر',''); }
-    else { chip((sweepOn?'المسح البصري جارٍ…':'منطقة نظيفة بصريًا'),'ok'); }
-    return out;
-  }
-
-  /* ---------- IR ENGINE (spec §13-16) ---------- */
-  var IRRC={};
-  function analyzeIR(cv,w,h,now){
-    var ip=null; try{ ip=cv.getImageData(0,0,w,h); }catch(e){ return []; }
-    var cell=18, cw=Math.max(10,Math.floor(w/cell)), ch=Math.max(10,Math.floor(h/cell));
-    if(cw>60) cw=60; if(ch>60) ch=60;
-    var lm=[]; var mx=[];
-    for(var gy=0;gy<ch;gy++){ lm[gy]=[]; mx[gy]=[];
-      for(var gx=0;gx<cw;gx++){
-        var s=0,k=0,m2=0,fl=0;
-        for(var y=gy*cell;y<(gy+1)*cell&&y<h;y+=6){ for(var x=gx*cell;x<(gx+1)*cell&&x<w;x+=6){ var p=(y*w+x)*4; var v=ip.data[p]*0.3+ip.data[p+1]*0.6+ip.data[p+2]*0.1; s+=v; k++; if(v>m2)m2=v; if(v>=200)fl++; } }
-        lm[gy][gx]=k?s/k:0; mx[gy][gx]=m2;
-      } }
-    function neigh(gx,gy){ var s=0,k=0; for(var dy=-1;dy<=1;dy++){ for(var dx=-1;dx<=1;dx++){ var yy=gy+dy,xx=gx+dx; if(yy<0||xx<0||yy>=ch||xx>=cw||(dy===0&&dx===0)) continue; s+=lm[yy][xx]; k++; } } return k?s/k:0; }
-    function bigBlo(gx,gy){ for(var by=gy-1;by<=gy+1;by++){ for(var bx=gx-1;bx<=gx+1;bx++){ if(bx<0||by<0||bx+1>=cw||by+1>=ch) continue; if(lm[by][bx]>=185&&lm[by][bx+1]>=185&&lm[by+1][bx]>=185&&lm[by+1][bx+1]>=185) return true; } } return false; }
-    var spots=[];
-    var irTh=Math.max(185, cfg.irBase-15+ (cfg.irBase-150)*0.1);
-    var irC=Math.max(20, 90-Math.max(0,(cfg.irBase-150))*0.2);
-    for(var yy2=0;yy2<ch;yy2++){ for(var xx2=0;xx2<cw;xx2++){
-      var cm=mx[yy2][xx2], nb=neigh(xx2,yy2), fl=(function(){var f=0; for(var y=yy2*cell;y<(yy2+1)*cell&&y<h;y+=4){ for(var x=xx2*cell;x<(xx2+1)*cell&&x<w;x+=4){ var p=(y*w+x)*4; var v=ip.data[p]*0.3+ip.data[p+1]*0.6+ip.data[p+2]*0.1; if(v>=200)f++; } } return f; })();
-      if(cm>=irTh && cm>=nb+irC && fl<=4 && !bigBlo(xx2,yy2)){
-        var mg=false;
-        for(var s2=0;s2<spots.length;s2++){ var sp=spots[s2]; if(Math.abs(sp.gx-xx2)<=2&&Math.abs(sp.gy-yy2)<=2){ if(cm>sp.v){ sp.gx=xx2; sp.gy=yy2; sp.v=cm; sp.nb=nb; } mg=true; break; } }
-        if(!mg) spots.push({gx:xx2,gy:yy2,v:cm,nb:nb});
+    function detectEM(cv,w,h){
+      var iv; try{ iv=cv.getImageData(0,0,w,h).data; }catch(e){ return; }
+      var n=0, sum=0;
+      for(var y=0;y<h;y+=6){ for(var x=0;x<w;x+=6){ var p=(y*w+x)*4; sum+=iv[p]*0.3+iv[p+1]*0.6+iv[p+2]*0.1; n++; } }
+      var luma=sum/n;
+      if(lastLuma>=0){ buf.push(Math.abs(luma-lastLuma)); if(buf.length>14) buf.shift(); }
+      lastLuma=luma;
+      var avgV=0; for(var i=0;i<buf.length;i++) avgV+=buf[i]; avgV/=(buf.length||1);
+      var sd=0; for(var j=0;j<buf.length;j++) sd+=(buf[j]-avgV)*(buf[j]-avgV); sd=Math.sqrt(sd/(buf.length||1));
+      var flick=Math.min(100, Math.round(sd*5));
+      flickS.push(flick); if(flickS.length>18) flickS.shift();
+      var fmax=0; for(var k=0;k<flickS.length;k++){ if(flickS[k]>fmax) fmax=flickS[k]; }
+      var sig=Math.max(Math.min(100, Math.round(fmax)), Math.min(100, Math.round(drift*6)));
+      setEM(sig);
+      var d=$('emCompass'); if(d&&heading!=null) d.textContent=Math.round(heading)+'°';
+      if(calT>Date.now()){ calS.push(sig); if(calS.length>40) calS.shift(); var cs=$('emState'); if(cs){ cs.textContent='معايرة الحقل… ثبّت الهاتف '+(Math.max(0,Math.ceil((calT-Date.now())/1000)))+'ث'; cs.className='sq-status'; } chip('معايرة الحقل…',''); if(calS.length>=20){ var cavg=0; for(var c2=0;c2<calS.length;c2++) cavg+=calS[c2]; cavg/=calS.length; calBase=cavg*1.8+14; } return; }
+      var thr=(calBase==null)?30:Math.max(30,calBase);
+      var thrEff=Math.max(12, thr*(140-emSens)/80);
+      var moving=MOT>0.55;
+      if(sig>thrEff&&sig>=fmax*0.8){
+        if(moving){ stateEl('حركة ملحوظة — ثبّت الهاتف فوق الهدف للتأكيد',''); chip('ثبّت للتأكيد','warn'); }
+        else { stateEl('حقل متذبذب قريب — ثبّت ٣ ثوانٍ فوق الهدف','warn'); chip('قرينة قرب','alert'); beepEM(sig); vib(); alertOnce('قرينة قرب كهرومغناطيسي — حافظ على الثبات ٣ ثوانٍ لتأكيد المصدر'); }
       }
-    } }
-    var out=[];
-    for(var i=0;i<spots.length;i++){
-      var key=Math.floor(spots[i].gx/2)+'_'+Math.floor(spots[i].gy/2);
-      var rec=IRRC[key]; if(!rec||now-rec.t>260) rec={n:0,fx:spots[i].gx,fy:spots[i].gy,t:now};
-      rec.n+=1; rec.t=now; IRRC[key]=rec;
-      var sc=Math.round(Math.min(100,(spots[i].v-spots[i].nb)*1.7));
-      if(rec.n>=2) out.push({fx:(rec.fx*cell+9)/w, fy:(rec.fy*cell+9)/h, sc:sc});
+      else if(sig>thrEff*0.55){ stateEl(moving?'امسح بثبات…':'نشاط خفيف — نواصل',''); chip('فحص جارٍ',''); }
+      else { stateEl('المحيط هادئ — آمن','on'); chip('بيئة هادئة','ok'); }
     }
-    for(var k2 in IRRC){ if(now-IRRC[k2].t>1100) delete IRRC[k2]; }
-    /* clusters (§16) */
-    var nbClust=0;
-    if(out.length>=2){
-      for(var a=0;a<out.length;a++){ for(var b=a+1;b<out.length;b++){ var dx=Math.abs(out[a].fx-out[b].fx)*w, dy=Math.abs(out[a].fy-out[b].fy)*h; if(dx<Math.max(40,w*0.18)&&dy<Math.max(40,h*0.18)) nbClust++; } }
+    if(window.DeviceOrientationEvent){
+      window.addEventListener('deviceorientation', function(ev){
+        if(ev.alpha!=null){ heading=ev.alpha; if(prevA!=null){ var diff=Math.abs(ev.alpha-prevA); if(diff>180) diff=360-diff; drift=drift*0.85+diff*0.15; } prevA=ev.alpha; }
+      }, true);
     }
-    /* IR capability estimate (§13): stable sources density */
-    var stable=out.filter(function(o){ return o.sc>=45; }).length;
-    if(sweepOn&&stepIdx-1===3){
-      irSample(stable);
+    function setupMotion(){
+      var Sens=null;
+      if(window.LinearAccelerationSensor){ try{ Sens=new LinearAccelerationSensor({frequency:20}); }catch(e){} }
+      if(!Sens&&window.Accelerometer){ try{ Sens=new Accelerometer({frequency:20}); }catch(e){} }
+      ACL=Sens;
+      if(!ACL) return;
+      ACL.onreading=function(){
+        var m=Math.sqrt((ACL.x||0)*(ACL.x||0)+(ACL.y||0)*(ACL.y||0)+(ACL.z||0)*(ACL.z||0));
+        MOTS.push(m); if(MOTS.length>20) MOTS.shift();
+        var s2=0; for(var i=0;i<MOTS.length;i++) s2+=MOTS[i]; MOT=s2/MOTS.length;
+      };
+      try{ ACL.start(); }catch(e){}
     }
-    var best=0; for(var o4=0;o4<out.length;o4++){ if(out[o4].sc>best) best=out[o4].sc; }
-    for(var i5=0;i5<out.length&&i5<4;i5++){ cross(i5,out[i5].fx,out[i5].fy); }
-    for(var i6=out.length;i6<4;i6++) cross(i6,null,null);
-    if(best>=45){
-      var transient=best>=45&&out.length===1&&nbClust===0;
-      addEvi('IR', best, Math.round(clamp(out.filter(function(o){return o.sc>=45;}).length/2*50+30,30,100)), {transient:transient, clusters:nbClust});
-      if(out.length>=2&&nbClust>0){ vib(90); chip('تجمّع IR مستقر ('+out.length+' نقاط) — افحص الأجهزة المجاورة','warn'); }
-      else chip('مصدر IR مرئي — قوة '+best,'warn');
-    }
-    else if(best>=28){ chip('نطاق IR هادئ نسبيًا',''); }
-    else { chip('لا مصادر IR ثابتة','ok'); }
-    SUSP.ir=best;
-    return out;
-  }
-  var irSamps=[];
-  function irSample(n){ irSamps.push(n); if(irSamps.length>4){ var s=0; for(var i=0;i<irSamps.length;i++) s+=irSamps[i]; var av=s/irSamps.length; irCap=av>=2?'HIGH':av>=1?'MEDIUM':'LOW'; irSamps=[]; var c=checkCaps(); renderCapsUI(c); } }
-
-  /* ---------- MAGNETIC ENGINE (spec §31-32, web-proxy honest) ---------- */
-  function magTick(now){
-    var m=null;
-    if(magOn&&magRaw!=null) m=magRaw;
-    else if(head!=null) m=head;
-    if(m==null) return;
-    magSamples.push({v:m,t:now}); if(magSamples.length>80) magSamples.shift();
-    if(calT>now) return;
-    if(base.mag===null){
-      if(magSamples.length>=20){
-        var s=0; for(var i=0;i<magSamples.length;i++) s+=magSamples[i].v;
-        base.mag=s/magSamples.length;
-        var sd=0; for(var j=0;j<magSamples.length;j++) sd+=(magSamples[j].v-base.mag)*(magSamples[j].v-base.mag);
-        base.magSd=Math.sqrt(sd/magSamples.length)||1;
-      }
-      return;
-    }
-    var dev=Math.abs(m-base.mag);
-    var score=Math.min(100, Math.round(dev/base.magSd*cfg.magDev));
-    SUSP.mg=score;
-    if(score>=40 && Date.now()%800<300){
-      addEvi('MAGNETIC', score, 60, {proxy:!magOn, dev:Math.round(dev*100)/100});
-      if(sweepOn&&stepIdx-1===6) vib(80);
-    }
-  }
-
-  /* ---------- central loop (§57 performance; §58 battery modes) ---------- */
-  function loop(){
-    if(!running){ if(raf){ cancelAnimationFrame(raf); raf=null; } return; }
-    raf=requestAnimationFrame(loop);
-    frameCnt++;
-    var now=Date.now();
-    magTick(now);
-    stepTick();
-    var v=$('camFeed'), c=$('camCanvas');
-    if(c&&v&&v.readyState>=2){
-      var W=v.videoWidth||c.width, H=v.videoHeight||c.height;
-      if(c.width!==W) c.width=W; if(c.height!==H) c.height=H;
-      var cv=c.getContext('2d'); cv.drawImage(v,0,0,W,H);
-      var every = cfg.mode==='deep'?1: cfg.mode==='hunt'?3:4;
-      if(frameCnt%every===0){ analyzeOptics(cv,W,H,now); }
-      if(cfg.mode!=='hunt' && frameCnt%every===0){ analyzeIR(cv,W,H,now); }
-    }
-    if(frameCnt%(every*5)===0){ fuseAll(); renderEvi(); renderSusp(); }
-  }
-
-  /* ---------- torch reflection mode (§17-18) ---------- */
-  var torchRecording=false, torchOffPix=null;
-  function hcdTorchReflect(){
-    if(!running){ toast('شغّل المسح أولًا (كاميرا بديلة)','warn'); return; }
-    if(!track){ toast('الكاميرا غير متاحة في هذا السياق','warn'); return; }
-    if(torchRecording){ toast('تسجيل جارٍ — انتظر لحظة','warn'); return; }
-    var v=$('camFeed'), c=$('camCanvas'); if(!v||!c||v.readyState<2){ toast('انتظر الكاميرا','warn'); return; }
-    var W=v.videoWidth||c.width, H=v.videoHeight||c.height;
-    var cv=c.getContext('2d');
-    cv.drawImage(v,0,0,W,H);
-    try{ torchOffPix=cv.getImageData(0,0,W,H); }catch(e){ toast('الوصول للبكسلات مقيد هنا','warn'); return; }
-    var ok=setTorch(true);
-    if(!ok){ toast('الشعلة غير متاحة على هذا المتصفح/الجهاز — لا نخلق انعكاسات وهمية','warn'); return; }
-    torchRecording=true;
-    setTimeout(function(){
-      if(!running){ setTorch(false); torchRecording=false; return; }
-      cv.drawImage(v,0,0,W,H);
-      var onPix=null; try{ onPix=cv.getImageData(0,0,W,H); }catch(e){}
-      setTorch(false); torchRecording=false;
-      if(!onPix){ toast('لم نتمكن من قراءة الإطار — حاول مجددًا','warn'); return; }
-      /* difference analysis (§18) */
-      var dw=Math.max(12,Math.floor(W/32)), dh=Math.max(12,Math.floor(H/32));
-      var newNice=[];
-      for(var y=0;y<dh;y++){ for(var x=0;x<dw;x++){
-        var sOff=0,sOn=0,k=0;
-        for(var yy=y*Math.floor(H/dh); yy<(y+1)*Math.floor(H/dh)&&yy<H; yy+=3){ for(var xx=x*Math.floor(W/dw); xx<(x+1)*Math.floor(W/dw)&&xx<W; xx+=3){ var p=(yy*W+xx)*4; sOff+=torchOffPix.data[p]*0.3+torchOffPix.data[p+1]*0.6+torchOffPix.data[p+2]*0.1; sOn+=onPix.data[p]*0.3+onPix.data[p+1]*0.6+onPix.data[p+2]*0.1; k++; } }
-        var d=(sOn-sOff)/(k||1);
-        if(d>18) newNice.push({x:(x+0.5)/dw, y:(y+0.5)/dh, d:d});
-      } }
-      var merged=[];
-      for(var i=0;i<newNice.length;i++){ var mm=false; for(var j=0;j<merged.length;j++){ if(Math.abs(merged[j].x-newNice[i].x)<0.18&&Math.abs(merged[j].y-newNice[i].y)<0.18){ merged[j].d=Math.max(merged[j].d,newNice[i].d); mm=true; break; } } if(!mm) merged.push(newNice[i]); }
-      if(merged.length){
-        var best=0; for(var q2=0;q2<merged.length;q2++){ if(merged[q2].d>best) best=merged[q2].d; }
-        var scB=Math.min(100, Math.round(18+best*0.9));
-        addEvi('OPTICAL', scB, 70, {torchDiff:true, spots:merged.length});
-        for(var z=0;z<merged.length&&z<4;z++) cross(z,merged[z].x,merged[z].y);
-        chip('انعكاسات جديدة ظهرت مع الشعلة: '+merged.length+' نقطة','warn');
-        vib(100);
-        toast('اكتشاف انعكاسات بنمط العدسات مع الشعلة — ثبّت ونظر عن كثب','warn');
-        fuseAll();
-      } else {
-        for(var z2=0;z2<4;z2++) cross(z2,null,null);
-        chip('لا انعكاسات جديدة ظهرت مع الشعلة — منطقة نظيفة','ok');
-      }
-      renderEvi(); renderSusp();
-    }, 780);
-  }
-
-  /* ---------- hunt / audio+haptic guidance (§43, §49, §29-30) ---------- */
-  function beepIdx(idx){
-    try{
-      if(!aud) aud=new (window.AudioContext||window.webkitAudioContext)();
-      var t=aud.currentTime;
-      var tempo=Math.max(280, 900-idx*6);
-      var si=Math.floor(Date.now()/tempo)%2===0;
-      if(si){
-        var o=aud.createOscillator(), g=aud.createGain();
-        o.type='square'; o.frequency.value=520+idx*3.2;
-        g.gain.value=0.035+idx/1000;
-        o.connect(g); g.connect(aud.destination);
-        o.start(t); o.stop(t+0.05);
-      }
-    }catch(e){}
-  }
-  function huntOff(){ hunt=false; if(huntIv){ clearInterval(huntIv); huntIv=null; } if(aud){} }
-  function hcdHunt(){
-    if(hunt){ huntOff(); toast('أوقفنا رحلة التقارب'); return; }
-    if(!running){ toast('شغّل المسح أولًا لتغذية الإشارة','warn'); return; }
-    hunt=true;
-    toast('وضع التقارب: تُوجَّه بالصوت والاهتزاز — اقترب ببطء');
-    huntIv=setInterval(function(){
-      if(!running||!hunt){ huntOff(); return; }
-      var idx=Math.max(SUSP.mg, SUSP.opt*0.4, SUSP.ir*0.4);
-      beepIdx(Math.round(idx));
-      var lv=idx<20?'NONE':idx<45?'LOW':idx<65?'MEDIUM':idx<85?'STRONG':'VERY_STRONG';
-      var levels={NONE:[],LOW:60,MEDIUM:[30,40,30,40],STRONG:[40,20,40,20,40],VERY_STRONG:[50,15,50,15,50,15]};
-      var p=levels[lv];
-      if(p){ vib(p); }
-      setTxt('camSweep','توجيه تقاربي — مؤشر '+Math.round(idx)+'/100');
-    }, 450);
-  }
-  window.hcdHunt=hcdHunt; window.hcdStopHunt=huntOff;
-
-  /* ---------- night / simple helpers ---------- */
-  window.hcdNight=function(){
-    nightOn=!nightOn;
-    var p=$('panel-camx'); if(p){ p.className=p.className.replace(/\snight/,'')+(nightOn?' night':''); }
-    var b=$('hcdNightBtn'); if(b) b.setAttribute('data-on', nightOn?'1':'0');
-    try{ localStorage.setItem('vge_hcd_night', nightOn?'1':'0'); }catch(e){}
-  };
-
-  /* ---------- CONFIG UI ---------- */
-  var CFGROWS=[['bright','السطوع %'],['compact','التراص %'],['circ','الاستدارة %'],['contrast','التباين %'],['edge','الحدود %'],['temporal','الثبات الزمني %'],['move','الاستجابة للحركة %'],['irBase','عتبة IR'],['irClus','دقة التجمّع IR'],['magDev','حساسية مغناطيسية'],['indepBonus','مكافأة استقلال الأدلة'],['temporalBonus','مكافأة ثبات زمني'],['spatialBonus','مكافأة محلية'],['trapPen','خصم غلط-إيجابي'],['micro','خصم توّهج صغير']];
-  function renderCfg(){
-    var box=$('hcdCfg'); if(!box) return;
-    var rows=[];
-    rows.push('<div class="ctl-row"><label>نمط البطارية (معالجة)</label><select onchange="hcdCfgMode(this.value)">'+
-      '<option value="normal"'+(cfg.mode==='normal'?' selected':'')+'>متوازن</option>'+
-      '<option value="deep"'+(cfg.mode==='deep'?' selected':'')+'>مسح عميق</option>'+
-      '<option value="hunt"'+(cfg.mode==='hunt'?' selected':'')+'>تقارب (HUNT)</option></select></div>');
-    for(var i=0;i<CFGROWS.length;i++){
-      var k=CFGROWS[i][0]; var isW=k==='bright'||k==='compact'||k==='circ'||k==='contrast'||k==='edge'||k==='temporal'||k==='move';
-      var mx=isW?40:100;
-      rows.push('<div class="ctl-row"><label>'+CFGROWS[i][1]+'</label><input type="range" min="0" max="'+mx+'" value="'+cfg[k]+'" oninput="hcdCfgSlide(\''+k+'\',this.value)"><span class="ctl-val" id="vgcc_'+k+'">'+cfg[k]+'</span></div>');
-    }
-    box.innerHTML=rows.join('');
-  }
-  window.hcdCfgSlide=function(k,v){ cfg[k]=clamp(+v||0,0,100); saveCfg(); var s=$('vgcc_'+k); if(s) s.textContent=cfg[k]; };
-  window.hcdCfgMode=function(m){ cfg.mode=m; saveCfg(); toast('نمط المعالجة: '+({normal:'متوازن',deep:'مسح عميق',hunt:'تقارب'})[m]); };
-  window.hcdCfgReset=cfgReset;
-
-  /* ---------- history (§54) ---------- */
-  function renderHist(){
-    var box=$('hcdHist'); if(!box) return;
-    if(!hist.length){ box.innerHTML='<div class="hcd-empty">لا يوجد سجل بعد — التقرير يُحفظ محليًا فقط.</div>'; return; }
-    box.innerHTML=hist.map(function(h){
-      var lv=h.lvl==='crit'?'crit':(h.lvl==='high'?'warn':(h.lvl==='elevated'?'warn':'ok'));
-      var lvlT={crit:'حرجة',high:'انتباه',elevated:'مرفوع',low:'هادئ'}[h.lvl]||'';
-      return '<div class="h"><span>'+nowStrISO(h.ts)+' <b>'+h.tot+'</b> <span class="lv '+lv+'">'+lvlT+'</span></span><span style="font-size:10px;color:var(--ink-mute);">'+h.dur+'ث · '+h.evi.length+' أدلة</span></div>';
-    }).join('');
-  }
-  function nowStrISO(t){ try{ var d=new Date(t); return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes()+' '+d.getDate()+'/'+(d.getMonth()+1); }catch(e){ return ''; } }
-  window.hcdToggleHist=function(){ var w=$('hcdHistWrap'); if(!w) return; var show=w.style.display==='none'; w.style.display=show?'block':'none'; if(show) renderHist(); };
-  window.hcdClearHist=function(){ hist=[]; saveHist(); renderHist(); toast('حُذف سجل الفحص المحلي'); };
-
-  /* ---------- REPORT (§52) ---------- */
-  function typeName(t){ return {OPTICAL:'البصرية',IR:'تحت-الحمراء',NETWORK:'الشبكية',BLUETOOTH:'اللاسلكية',MAGNETIC:'المغناطيسية'}[t]||t; }
-  window.hcdReport=function(){
-    var lines=[];
-    lines.push('تقرير أمان الكاميرات الخفية');
-    lines.push('التاريخ/الوقت: '+nowStr());
-    lines.push('البيئة: '+ (mode==='car'?'سيارة':'غرفة') +' · '+ (sweepOn||running?'فحص جارٍ/مراقبة':'آخر دورة'));
-    lines.push('مؤشر الاشتباه العام: '+SUSP.tot+'/100 — '+LVL(SUSP.lvl));
-    lines.push('');
-    lines.push('الأدلة:');
-    lines.push('  بصرية: '+SUSP.opt+'/100');
-    lines.push('  تحت-حمراء: '+SUSP.ir+'/100');
-    lines.push('  شبكية: '+SUSP.net+'/100 ('+(SUSP.net===0?'غير متاحة في المتصفح — لا بيانات وهمية':'')+')');
-    lines.push('  لاسلكية: '+SUSP.bt+'/100 ('+(SUSP.bt===0?'غير متاحة في المتصفح — لا بيانات وهمية':'')+')');
-    lines.push('  مغناطيسية: '+SUSP.mg+'/100 (تقريبية حسب بوصلة الجهاز)');
-    lines.push('');
-    var hz=hotZones();
-    lines.push('نقاط الاشتباه: '+(hz.length? hz.map(function(h){ return '«'+h.z+'» '+h.tot+'%'; }).join('، ') : 'لا يوجد'));
-    var nOpt=EVI.filter(function(e){ return e.type==='OPTICAL'&&e.score>0; }).length;
-    var nIr=EVI.filter(function(e){ return e.type==='IR'&&e.score>0; }).length;
-    lines.push('أهداف مرشّحة: '+(nOpt?('انعكاس عدسي مستقر ×'+nOpt+' '):'')+(nIr?('مصادر IR ×'+nIr):'')+(nOpt||nIr?'':'لا يوجد حاليًا'));
-    lines.push('');
-    lines.push('التوصيات:');
-    lines.push('1. اقترب من أي نقطة اشتباه وغيّر زاوية الكاميرا.');
-    lines.push('2. خفّض الإضاءة وافحص الأسطح العاكسة والفتحات.');
-    lines.push('3. افحص أجهزة التلفاز/الشواحن/البرايز/كاشفات الدخان عن قرب.');
-    lines.push('4. أعد الفحص بعد كشف مصدر جديد أو تغيير موقع.');
-    lines.push('');
-    lines.push('ملاحظة منصة: إصدار المتصفح لا يصل لواجهات النظام لمسح الواي-فاي/البلوتوث — الوحدات تُبلّغ بصدق كغير متاحة، دون أي توليد بيانات وهمية. التقرير أُنشئ محليًا بالكامل.');
-    var txt=lines.join('\n');
-    return copyText(txt, lines);
-  };
-  function copyText(txt, lines){
-    var done=false;
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(function(){ toast('نُسخ التقرير إلى الحافظة'); }).catch(function(){ dl(txt); });
-    } else dl(txt);
-    return txt;
-  }
-  function dl(txt){
-    try{
-      var b=new Blob([txt], {type:'text/plain;charset=utf-8'});
-      var u=URL.createObjectURL(b); var a=document.createElement('a');
-      a.href=u; a.download='hcd-report-'+seq()+'.txt'; document.body.appendChild(a); a.click();
-      setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); },400);
-      toast('حُمّل التقرير كملف نصي');
-    }catch(e){ toast('التقرير جاهز — انسخه من السجل'); }
-  }
-
-  /* ---------- boot ---------- */
-  renderCapsUI(checkCaps());
-  renderCfg();
-  renderZones(false);
-  if(!window.__hcdPH){ window.__hcdPH=1; window.addEventListener('pagehide', hcdStop); }
-  /* night restore */
-  var p=$('panel-camx');
-  if(p) p.className=(' ' + p.className).replace(/\snight/g,'').trim();
-  window.hcdSweep=hcdSweep; window.hcdStop=hcdStop; window.hcdTorchReflect=hcdTorchReflect;
-  /* legacy aliases (any stray callers from old panel keep working) */
-  window.camStart=function(){ hcdSweep(); };
-  window.camStop=hcdStop;
-  window.camTorch=hcdTorchReflect;
-  window.toggleNight=window.hcdNight;
-  window.resetSens=cfgReset;
+    setupMotion();
+    window.camStart=function(m){
+      mode=m||'em'; var mo=$('camMode');
+      if(mo) mo.textContent=(mode==='ir')?'٢: كاشف التوهج الحراري (IR)':'١: مستشعر القرب الكهرومغناطيسي';
+      var cc=$('camCount'); if(cc) cc.textContent='توهج: 0';
+      if(mode==='em') calStart();
+      if(stream){ restartLoop(); tst('تبديل الماسح → '+(mode==='ir'?'كاشف التوهج الحراري IR':'مستشعر القرب الكهرومغناطيسي')); return; }
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ demoMode(); return; }
+      var sw=$('camSweep'); if(sw) sw.textContent='اقلِب الهاتف ببطء تجاه الغرفة…';
+      startCamera(m, function(){ restartLoop(); tst('الماسح يعمل — ثبّت ٤ ثوانٍ للمعايرة ثم امسح'); });
+    };
+    window.camTorch=function(){
+      if(!track){ tst('شغّل الماسح أولًا','warn'); return; }
+      var s=track.getSettings();
+      if(s&&s.torch){ track.applyConstraints({advanced:[{torch:false}]}).then(function(){ tst('أطفأنا لمبة IR'); }).catch(function(){}); }
+      else { track.applyConstraints({advanced:[{torch:true}]}).then(function(){ tst('لمبة IR تعمل — أشر نحو العدسة وتأكد من الانعكاس البنفسجي'); }).catch(function(){ tst('الجهاز لا يدعم اللمبة من داخل المتصفح','warn'); }); }
+    };
+    window.addEventListener('pagehide', function(){ camStop(); if(window.__emAC){ try{ window.__emAC.close(); }catch(e){} } });
+  })();
 })();
-})();
-
 </script>
 
 <script>
