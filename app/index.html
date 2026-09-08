@@ -1362,6 +1362,8 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 .phone{position:relative; z-index:1; max-width:420px; margin:0 auto; padding:22px 18px 60px;}
 
 .topbar{display:flex; align-items:center; justify-content:space-between;}
+#v2MenuBtn{position:relative;}
+#v2MenuBtn::before{content:''; position:absolute; inset:-6px; border-radius:12px; border:1.5px dashed rgba(0,230,255,.55); animation:v2BackHalo 10s linear infinite; pointer-events:none;}
 .icon-btn{
   width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
   background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(10px); font-size:16px;
@@ -1414,9 +1416,7 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 @keyframes fpScanR{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 .fp-laser{animation:fpLaser 3.6s ease-in-out infinite;}
 @keyframes fpLaser{ 0%,100%{transform:translateX(-26px);} 50%{transform:translateX(26px);} }
-.scan-srvs{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-.scan-srvs .scan-card{min-width:0;}
-.scan-srvs .scan-home{grid-column:1 / -1;}
+.scan-srvs{display:flex; flex-direction:column; gap:12px;}
 .scan-card{position:relative; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:16px; cursor:pointer; min-width:182px;
   background:linear-gradient(135deg, rgba(0,230,255,0.08), rgba(76,141,255,0.04));
   border:1px solid rgba(0,245,176,0.4); color:var(--ink); font-family:var(--font-ar);
@@ -1636,7 +1636,9 @@ body.screen-tools #v2Tools{display:block;}
 }
 .v2q:hover{border-color:rgba(0,230,255,.5); transform:translateY(-1px);}
 .v2q .qic{width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center;
-  background:rgba(0,230,255,.14); font-size:15px; flex-shrink:0;}
+  background:rgba(0,230,255,.14); font-size:15px; flex-shrink:0; color:var(--cyan);}
+.v2q .qic svg{width:17px; height:17px; display:block;}
+.v2q.v2q-home{grid-column:1 / -1; background:linear-gradient(135deg,rgba(0,230,255,.16),rgba(0,245,176,.08)); border-color:rgba(0,230,255,.4);}
 .v2q small{display:block; font-weight:500; color:var(--ink-dim); font-size:9.5px; margin-top:2px;}
 </style>
 
@@ -1783,20 +1785,12 @@ body.screen-tools #v2Tools{display:block;}
 
     <div class="scan-srvs">
       <button type="button" class="scan-card" data-goto="scanner">
-        <span class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13.5a5 5 0 0 0 7.3-.4l2-2a5 5 0 0 0-7.1-7.1l-1 1"/><path d="M14 10.5a5 5 0 0 0-7.3.4l-2 2a5 5 0 0 0 7.1 7.1l1-1"/></svg></span>
+        <span class="sc-ic">🔗</span>
         <span class="sc-tx">فحص الروابط<span class="sc-en">LINK CHECK</span></span>
       </button>
       <button type="button" class="scan-card" data-goto="scanner">
-        <span class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.6 2.6 3.9 5.4 3.9 8.5s-1.3 5.9-3.9 8.5c-2.6-2.6-3.9-5.4-3.9-8.5s1.3-5.9 3.9-8.5z"/></svg></span>
+        <span class="sc-ic">🌐</span>
         <span class="sc-tx">فحص المواقع<span class="sc-en">SITE CHECK</span></span>
-      </button>
-      <button type="button" class="scan-card" data-goto="leak">
-        <span class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.2c0 4.4-3 8.4-7 9.8-4-1.4-7-5.4-7-9.8V6z"/><path d="M12 8.5v4.7"/><circle cx="12" cy="15.8" r="0.7" fill="currentColor" stroke="none"/></svg></span>
-        <span class="sc-tx">كاشف التسريبات<span class="sc-en">LEAK FINDER</span></span>
-      </button>
-      <button type="button" class="scan-card scan-home" data-goto="home">
-        <span class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 3.8 20.5 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-6h4v6"/></svg></span>
-        <span class="sc-tx">الصفحة الرئيسية<span class="sc-en">MAIN PAGE</span></span>
       </button>
     </div>
   </div>
@@ -1977,19 +1971,24 @@ body.screen-tools #v2Tools{display:block;}
   <h3>تشغيل الضغطة الواحدة</h3>
   <div class="qs-sub">أدواتك اليومية بضغطة واحدة — كلها تعمل فعلًا على جهازك</div>
   <div class="v2qs">
-    <button class="v2q" data-q="gen"><span class="qic">🎲</span><span>مولّد كلمة سر<small>كلمة سر فائقة القوة فورًا</small></span></button>
-    <button class="v2q" data-q="check"><span class="qic">⚖️</span><span>فحص قوة كلمة سر<small>قياس فعلي لقوتها</small></span></button>
-    <button class="v2q" data-q="scan"><span class="qic">🔍</span><span>ماسح الروابط<small>فحص رابط أو موقع</small></span></button>
-    <button class="v2q" data-q="track"><span class="qic">🚫</span><span>درع التتبع<small>كشف تتبعك وبصمتك</small></span></button>
-    <button class="v2q" data-q="perm"><span class="qic">🛡️</span><span>رادار الأذونات<small>فحص الكاميرا والميكروفون</small></span></button>
-    <button class="v2q" data-q="radar"><span class="qic">📡</span><span>ماسح الرادار<small>الماسح الأمني الشامل للجهاز</small></span></button>
-    <button class="v2q" data-q="quiz"><span class="qic">📊</span><span>التقييم الأمني<small>ابدأ الاختبار من جديد</small></span></button>
-    <button class="v2q" data-q="vault"><span class="qic">🔒</span><span>خزنة الأسرار<small>افتح الخزنة المشفَّرة</small></span></button>
-    <button class="v2q" data-q="sensor"><span class="qic">📟</span><span>المستشعر الفوري<small>تشغيل الرصد الحي الآن</small></span></button>
-    <button class="v2q" data-q="centcom"><span class="qic">🗺️</span><span>مركز القيادة<small>الوضع العام للجهاز</small></span></button>
-    <button class="v2q" data-q="repo"><span class="qic">📜</span><span>تقرير الجهاز<small>توليد التقرير الحقيقي</small></span></button>
-    <button class="v2q" data-q="seal"><span class="qic">🏷️</span><span>توليد رمز النشر<small>تحويل أجهزة الشركة</small></span></button>
-    <button class="v2q" data-q="kit"><span class="qic">📦</span><span>حزمة التحويل<small>تنزيل ملف الدمج للوحدات</small></span></button>
+    <button class="v2q" data-q="gen"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/><circle cx="7.3" cy="7.3" r="1.05" fill="currentColor" stroke="none"/><circle cx="16.7" cy="7.3" r="1.05" fill="currentColor" stroke="none"/><circle cx="7.3" cy="16.7" r="1.05" fill="currentColor" stroke="none"/><circle cx="16.7" cy="16.7" r="1.05" fill="currentColor" stroke="none"/></svg></span><span>مولّد كلمة سر<small>كلمة سر فائقة القوة فورًا</small></span></button>
+    <button class="v2q" data-q="check"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.6-7 10-4-1.4-7-5.5-7-10V6z"/><path d="M8.8 12l2.2 2.2 4.2-4.2"/></svg></span><span>فحص قوة كلمة سر<small>قياس فعلي لقوتها</small></span></button>
+    <button class="v2q" data-q="scan"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8 21 21"/></svg></span><span>ماسح الروابط<small>فحص رابط أو موقع</small></span></button>
+    <button class="v2q" data-q="track"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12C6 8.8 8.8 6.8 12 6.8s6 2 8.5 5.2C18 15.2 15.2 17.2 12 17.2s-6-2-8.5-5.2z"/><circle cx="12" cy="12" r="2.6"/><path d="M5 5l14 14"/></svg></span><span>درع التتبع<small>كشف تتبعك وبصمتك</small></span></button>
+    <button class="v2q" data-q="perm"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.2c0 4.4-3 8.4-7 9.8-4-1.4-7-5.4-7-9.8V6z"/><path d="M9.5 10.3V8.8a2.5 2.5 0 0 1 5 0v1.5"/><rect x="9" y="10.3" width="6" height="4.6" rx="1.1"/></svg></span><span>رادار الأذونات<small>فحص الكاميرا والميكروفون</small></span></button>
+    <button class="v2q" data-q="radar"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8.3"/><circle cx="12" cy="13" r="8.3" stroke-dasharray="10 31" stroke-width="2.1"/><path d="M12 13 19.8 5.7"/></svg></span><span>ماسح الرادار<small>الماسح الأمني الشامل للجهاز</small></span></button>
+    <button class="v2q" data-q="quiz"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h14"/><rect x="6.8" y="10" width="3" height="6.5" rx="0.8"/><rect x="10.5" y="6.5" width="3" height="10" rx="0.8"/><rect x="14.2" y="13.5" width="3" height="3" rx="0.8"/></svg></span><span>التقييم الأمني<small>ابدأ الاختبار من جديد</small></span></button>
+    <button class="v2q" data-q="vault"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.2" r="1.6"/></svg></span><span>خزنة الأسرار<small>افتح الخزنة المشفَّرة</small></span></button>
+    <button class="v2q" data-q="sensor"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12h3.5l2.2-5.5 3.6 11 2.2-5.5h5.5"/></svg></span><span>المستشعر الفوري<small>تشغيل الرصد الحي الآن</small></span></button>
+    <button class="v2q" data-q="centcom"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="8" height="8" rx="1.8"/><rect x="12.5" y="3.5" width="8" height="8" rx="1.8"/><rect x="3.5" y="12.5" width="8" height="8" rx="1.8"/><rect x="12.5" y="12.5" width="8" height="8" rx="1.8"/></svg></span><span>مركز القيادة<small>الوضع العام للجهاز</small></span></button>
+    <button class="v2q" data-q="repo"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6"/><path d="M9 15.5h6"/></svg></span><span>تقرير الجهاز<small>توليد التقرير الحقيقي</small></span></button>
+    <button class="v2q" data-q="seal"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4z"/><path d="M13 4h7v7h-7z"/><path d="M4 13h7v7H4z"/><path d="M13 13h7v7h-7z"/><path d="M7 7h.01"/><path d="M16.5 7h.01"/><path d="M7 16.5h.01"/><path d="M16.5 16.5h.01"/></svg></span><span>توليد رمز النشر<small>تحويل أجهزة الشركة</small></span></button>
+    <button class="v2q" data-q="kit"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 21v-8"/></svg></span><span>حزمة التحويل<small>تنزيل ملف الدمج للوحدات</small></span></button>
+    <button class="v2q" data-goto="recovery"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 1 2.6 6.2"/><path d="M3.5 12V6.8"/><path d="M3.5 12h5.2"/></svg></span><span>استرجاع الحسابات<small>خطوات رسمية لاستعادة حسابك</small></span></button>
+    <button class="v2q" data-goto="leak"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5"/><path d="M10 3.5v6L5.5 17a2 2 0 0 0 1.7 3h9.6a2 2 0 0 0 1.7-3L14 9.5v-6"/><path d="M7.5 15h9"/></svg></span><span>كاشف التسريبات<small>كشف بياناتك المسرّبة</small></span></button>
+    <button class="v2q" data-goto="spy"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12C6 8.8 8.8 6.8 12 6.8s6 2 8.5 5.2C18 15.2 15.2 17.2 12 17.2s-6-2-8.5-5.2z"/><circle cx="12" cy="12" r="2.6"/></svg></span><span>مكافحة التجسس<small>مسح أجهزة التنصت المجاورة</small></span></button>
+    <button class="v2q" data-goto="camx"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3.1l1.6-2.2h6.6l1.6 2.2H20a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 20 16.5H4A1.5 1.5 0 0 1 2.5 15V10A1.5 1.5 0 0 1 4 8.5z"/><circle cx="12" cy="12.5" r="3.1"/></svg></span><span>كاميرات المراقبة<small>كشف الكاميرات المخفية</small></span></button>
+    <button class="v2q v2q-home" data-goto="home"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 3.8 20.5 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-6h4v6"/></svg></span><span>الصفحة الرئيسية<small>العودة إلى الواجهة الرئيسية</small></span></button>
   </div>
 </section>
 
