@@ -8694,6 +8694,13 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     // realtime: ensure identity panel renders whenever opened (goto() toggles panel, our render is id-based)
     poll();
   },600);
+
+  /* ---------- PWA / offline (شق دائم: التطبيق يعمل بلا إنترنت بعد أول زيارة) ---------- */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){ /* الإنترانت لا تلزم */ });
+    });
+  }
 })();
 </script>
 <script>
