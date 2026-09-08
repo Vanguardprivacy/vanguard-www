@@ -1363,9 +1363,20 @@ button{font-family:inherit; cursor:pointer; background:none; border:none; color:
 
 .topbar{display:flex; align-items:center; justify-content:space-between;}
 #v2MenuBtn{position:relative;}
-#v2MenuBtn::before,#v2MenuBtn::after{content:''; position:absolute; left:50%; top:50%; width:42px; height:42px; margin-left:-21px; margin-top:-21px; border-radius:14px; border:2px solid rgba(0,230,255,.85); pointer-events:none; animation:v2MenuPing 2s ease-out infinite;}
-#v2MenuBtn::after{animation-delay:1s;}
-@keyframes v2MenuPing{0%{transform:scale(.55); opacity:.95;} 100%{transform:scale(1.55); opacity:0;}}
+#v2MenuBtn::before,#v2MenuBtn::after,
+.v2-back::before,.v2-back::after{
+  content:''; position:absolute; left:50%; top:50%; width:152%; height:152%;
+  margin-left:-76%; margin-top:-76%; border-radius:50%; pointer-events:none;
+}
+#v2MenuBtn::before,.v2-back::before{
+  background:radial-gradient(circle, rgba(0,230,255,.20), rgba(0,230,255,0) 68%);
+}
+#v2MenuBtn::after,.v2-back::after{
+  background:conic-gradient(from 0deg, rgba(0,230,255,.85), rgba(0,230,255,0) 72deg);
+  -webkit-mask:radial-gradient(closest-side, transparent calc(100% - 4px), #000 100%);
+  mask:radial-gradient(closest-side, transparent calc(100% - 4px), #000 100%);
+  animation:v2BackHalo 2.6s linear infinite;
+}
 .icon-btn{
   width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
   background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(10px); font-size:16px;
@@ -1612,7 +1623,6 @@ body.screen-tools #v2Tools{display:block;}
   transition:border-color .2s, box-shadow .3s;
 }
 .v2-back:hover{border-color:rgba(0,230,255,.6); box-shadow:0 0 16px rgba(0,230,255,.18);}
-.v2-back::before{content:''; position:absolute; inset:-6px; border-radius:17px; border:1.5px dashed rgba(0,230,255,.5); animation:v2BackHalo 10s linear infinite; pointer-events:none;}
 @keyframes v2BackHalo{ to{ transform:rotate(360deg); } }
 .v2-tb-brand{display:flex; align-items:center; gap:7px; font-family:var(--font-en); font-weight:800; font-size:12px; letter-spacing:1px; color:#fff;}
 .v2-tb-brand .c1{color:var(--cyan);}
