@@ -1673,6 +1673,70 @@ body.screen-tools #v2Tools{display:block;}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
+<style>
+/* ============ TEMP EMAIL IDENTITY (هوية بريدية مؤقتة) ============ */
+.em-hero{display:flex; flex-direction:column; gap:10px; margin-bottom:18px;}
+.em-note{font-size:11.5px; color:var(--ink-mute); line-height:1.7;}
+.em-note b{color:var(--cyan); font-weight:700;}
+.em-grid{display:flex; flex-direction:column; gap:12px;}
+.em-card{border:1px solid var(--line); border-radius:16px; padding:14px; background:rgba(255,255,255,.02);}
+.em-card.active-card{border-color:rgba(0,230,255,.3); background:linear-gradient(135deg,rgba(0,230,255,.05),rgba(255,255,255,0));}
+.em-card.expired-card{opacity:.72;}
+.em-top{display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;}
+.em-purpose{font-size:13.5px; font-weight:800; color:#F6FCFD; display:flex; align-items:center; gap:7px;}
+.em-chip{font-size:9.5px; font-family:var(--mono); padding:3px 9px; border-radius:20px; border:1px solid;}
+.em-chip.ok{color:#00F5B0; border-color:rgba(0,245,176,.45); background:rgba(0,245,176,.08);}
+.em-chip.warn{color:#FFC24B; border-color:rgba(255,194,75,.45); background:rgba(255,194,75,.08);}
+.em-chip.bad{color:#FF5D7E; border-color:rgba(255,93,126,.45); background:rgba(255,93,126,.08);}
+.em-addr{font-family:var(--mono); font-size:13px; color:var(--cyan); direction:ltr; text-align:left; word-break:break-all; margin-bottom:10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.em-meta{display:flex; gap:14px; flex-wrap:wrap; font-size:11.5px; color:var(--ink-dim); margin-bottom:12px;}
+.em-meta span{display:flex; align-items:center; gap:5px;}
+.em-timer{font-family:var(--mono); color:#F6FCFD;}
+.em-actions{display:flex; gap:8px; flex-wrap:wrap;}
+.em-actions .btn{flex:1; min-width:105px; margin:0;}
+.em-actions.dense .btn{min-width:92px;}
+.em-btn-danger{color:#FF5D7E !important; border-color:rgba(255,93,126,.4) !important;}
+.em-box{border:1px solid var(--line); border-radius:12px; padding:12px; margin-top:12px; background:rgba(0,0,0,.18);}
+.em-box .em-box-title{font-size:12px; font-weight:800; color:var(--ink); margin-bottom:8px; display:flex; align-items:center; gap:7px;}
+.em-otp-code{font-family:var(--mono); font-size:22px; font-weight:800; color:#00E6FF; letter-spacing:3px; direction:ltr; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.em-link-row{display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--line); font-size:12px; flex-wrap:wrap;}
+.em-link-row:last-child{border-bottom:none;}
+.em-ldom{direction:ltr; color:var(--cyan); font-family:var(--mono); font-size:11px; word-break:break-all;}
+.em-guard{border-color:rgba(255,194,75,.4); background:rgba(255,194,75,.06);}
+.em-guard .em-box-title{color:#FFC24B;}
+.em-guard-row{font-size:11.5px; color:var(--ink); line-height:1.6; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.04); display:flex; gap:8px; align-items:flex-start;}
+.em-guard-row:last-child{border-bottom:none;}
+.em-msg-row{display:flex; gap:10px; align-items:center; padding:11px 12px; border:1px solid var(--line); border-radius:12px; margin-bottom:8px; cursor:pointer; background:rgba(255,255,255,.02); transition:border-color .2s, background .2s;}
+.em-msg-row:hover{border-color:rgba(0,230,255,.4); background:rgba(0,230,255,.04);}
+.em-msg-row.unread{border-color:rgba(0,230,255,.5); background:rgba(0,230,255,.07);}
+.em-msg-b{flex:1; min-width:0;}
+.em-msg-s{font-size:12.5px; font-weight:800; color:#F6FCFD;}
+.em-msg-t{font-size:12px; color:var(--ink); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.em-msg-time{font-size:10px; color:var(--ink-mute); margin-top:3px;}
+.em-msg-badge{font-size:9px; font-family:var(--mono); color:#04141A; background:#00E6FF; border-radius:20px; padding:2px 7px; flex-shrink:0;}
+.em-body{font-size:12.5px; color:var(--ink); line-height:1.85; word-break:break-word; direction:auto; white-space:pre-wrap;}
+.em-html-safe{font-size:12.5px; color:var(--ink); line-height:1.85; word-break:break-word; pointer-events:none; user-select:text;}
+.em-html-safe img{display:none;}
+.em-html-safe a{pointer-events:none; color:#5EDFFF; text-decoration:underline;}
+.em-events{display:flex; flex-direction:column; gap:6px; font-size:11px; color:var(--ink-dim);}
+.em-event{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.em-et{color:var(--ink-mute); font-family:var(--mono);}
+.em-empty{text-align:center; color:var(--ink-mute); padding:26px 6px; font-size:12.5px; line-height:1.8;}
+.em-sec-title{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin:16px 0 10px; font-size:12px; font-weight:800; color:var(--ink);}
+.em-overlay{position:fixed; inset:0; background:rgba(2,5,8,.78); backdrop-filter:blur(4px); z-index:120; display:flex; align-items:center; justify-content:center; padding:18px;}
+.em-modal{max-width:460px; width:100%; background:rgba(10,15,21,.98); border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.6);}
+.em-modal h3{font-size:15px; font-weight:800; color:#F6FCFD; margin-bottom:4px;}
+.em-modal .em-sub{font-size:11.5px; color:var(--ink-dim); margin-bottom:10px; line-height:1.7;}
+.em-purpose-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0;}
+@media(max-width:420px){ .em-purpose-grid{grid-template-columns:1fr 1fr;} }
+.em-purpose-btn{border:1px solid var(--line); border-radius:12px; padding:11px 10px; text-align:center; cursor:pointer; font-size:11.5px; color:var(--ink); background:rgba(255,255,255,.02); transition:border-color .2s;}
+.em-purpose-btn.sel{border-color:rgba(0,230,255,.6); background:rgba(0,230,255,.09); color:#F6FCFD;}
+.em-purpose-btn .em-pi{font-size:20px; display:block; margin-bottom:4px;}
+.em-dur-row{display:flex; gap:8px; margin:8px 0 14px;}
+.em-dur-btn{flex:1; border:1px solid var(--line); border-radius:10px; padding:9px 4px; text-align:center; font-size:11.5px; color:var(--ink); cursor:pointer; background:rgba(255,255,255,.02);}
+.em-dur-btn.sel{border-color:rgba(0,245,176,.55); color:#00F5B0; background:rgba(0,245,176,.08);}
+.em-hint{font-size:11px; color:var(--ink-mute); line-height:1.7;}
+</style>
 <body>
 
 <div class="mesh-bg"></div>
@@ -1832,6 +1896,7 @@ body.screen-tools #v2Tools{display:block;}
           <div class="pl-item" data-goto="passwords"><span class="pl-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.8"/><path d="M10.7 12.3 20 3"/><path d="M15 8.5l2.5 2.5"/><path d="M18 5.5l2 2"/></svg></span><span>مركز كلمات السر</span></div>
           <div class="pl-item" data-goto="vault"><span class="pl-icon"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.2" r="1.6"/></svg></span><span>خزنة كلمات السر</span></div>
           <div class="pl-item" data-goto="media"><span class="pl-icon"><svg viewBox="0 0 24 24"><path d="M7 3.5h7L18.5 8v12.5h-11A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M14 3.5V8h4.5"/><rect x="9.4" y="12" width="5.2" height="4.2" rx="1.1"/><path d="M10.7 12v-.9a1.3 1.3 0 0 1 2.6 0v.9"/></svg></span><span>خزنة الملفات</span></div>
+          <div class="pl-item" data-goto="email"><span class="pl-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.4"/><path d="M3.5 7.2 12 13.5 20.5 7.2"/><path d="M3.5 16 9 11.5"/><path d="M20.5 16 15 11.5"/></svg></span><span>الهوية البريدية المؤقتة</span></div>
         </div>
       </div>
     </div>
@@ -2002,6 +2067,7 @@ body.screen-tools #v2Tools{display:block;}
     <button class="v2q" data-goto="leak"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5"/><path d="M10 3.5v6L5.5 17a2 2 0 0 0 1.7 3h9.6a2 2 0 0 0 1.7-3L14 9.5v-6"/><path d="M7.5 15h9"/></svg></span><span>كاشف التسريبات<small>كشف بياناتك المسرّبة</small></span></button>
     <button class="v2q" data-goto="spy"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12C6 8.8 8.8 6.8 12 6.8s6 2 8.5 5.2C18 15.2 15.2 17.2 12 17.2s-6-2-8.5-5.2z"/><circle cx="12" cy="12" r="2.6"/></svg></span><span>مكافحة التجسس<small>مسح أجهزة التنصت المجاورة</small></span></button>
     <button class="v2q" data-goto="camx"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3.1l1.6-2.2h6.6l1.6 2.2H20a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 20 16.5H4A1.5 1.5 0 0 1 2.5 15V10A1.5 1.5 0 0 1 4 8.5z"/><circle cx="12" cy="12.5" r="3.1"/></svg></span><span>كاميرات المراقبة<small>كشف الكاميرات المخفية</small></span></button>
+    <button class="v2q" data-goto="email"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.4"/><path d="M3.5 7.2 12 13.5 20.5 7.2"/><path d="M3.5 16.5 9 12"/><path d="M20.5 16.5 15 12"/></svg></span><span>بريد مؤقت<small>هوية بريدية مؤقتة آمنة</small></span></button>
     <button class="v2q v2q-home" data-goto="home"><span class="qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 3.8 20.5 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-6h4v6"/></svg></span><span>الصفحة الرئيسية<small>العودة إلى الواجهة الرئيسية</small></span></button>
   </div>
 </section>
@@ -3293,6 +3359,23 @@ body.screen-tools #v2Tools{display:block;}
       <div class="mv-stage" id="mvStage">
         <!-- Dynamic: lock screen / unlocked -->
       </div>
+    </div>
+  </section>
+
+  <!-- ================= TEMP EMAIL IDENTITY ================= -->
+  <section class="panel" id="panel-email">
+    <div class="card">
+      <div class="eyebrow">هوية_بريدية_مؤقتة.حماية_البريد</div>
+      <h2 class="section-title">الهوية البريدية المؤقتة (Temporary Email Identity)</h2>
+      <p class="section-sub">لا تشارك بريدك الحقيقي مع المواقع غير الموثوقة: أنشئ هوية بريدية مؤقتة، استقبل رسائلها داخل هذا التطبيق، ودمّرها متى شئت. ملاحظة: الموقع الذي تسجّل فيه قد يظل قادرًا على معرفة IP أو بصمة المتصفح — الهوية تخصّ بريدك فقط.</p>
+
+      <div class="em-hero">
+        <button class="btn" onclick="EM.openCreate()" id="emCreateBtn">+ إنشاء هوية جديدة</button>
+        <div class="em-note" id="emAdaptNote">يُولَّد العنوان وتُستقبل الرسائل عبر مزوّد بريد مؤقت مجاني حقيقي — يعمل فورًا بدون اشتراك، وخلفيته قابلة للاستبدال بمزوّد آخر لاحقًا.</div>
+      </div>
+
+      <div id="emList"><div class="em-empty">جارٍ التحضير…</div></div>
+      <div id="emInbox" style="display:none;"></div>
     </div>
   </section>
 
@@ -8016,5 +8099,476 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
 })();
 </script>
 
+<script>
+/* ================= TEMP EMAIL IDENTITY ENGINE ================= */
+(function(){
+  'use strict';
+  if(window.VGE_MAIL) return; window.VGE_MAIL=1;
+  var K='vge_email_v1', K_LOG='vge_email_log_v1', P_OWNER='vge_email_owner';
+  function load(k,d){ try{ var x=JSON.parse(localStorage.getItem(k)); return x==null?d:x; }catch(e){ return d; } }
+  function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(a){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[a]; }); }
+  function bl(s){ return String(s||'').replace(/<\/?[^>]+(>|$)/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim(); }
+  function timeAgo(ts){ var m=Math.floor((Date.now()-ts)/60000); if(m<1)return 'الآن'; if(m<60)return 'قبل '+m+' د'; var h=Math.floor(m/60); if(h<24)return 'قبل '+h+' س'; return 'قبل '+Math.floor(h/24)+' يوم'; }
+  function fmtClock(ms){ ms=Math.max(0,ms); var h=Math.floor(ms/3600000), m=Math.floor(ms/60000)%60, s=Math.floor(ms/1000)%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s; }
+  function uid(){ return 'em-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9); }
+  function hash(s){ var h=0,i; for(i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return (h>>>0).toString(16); }
+  function copyText(t){
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText){ return navigator.clipboard.writeText(t).catch(function(){ return fallbackCopy(t); }); } }catch(e){}
+    return Promise.resolve(fallbackCopy(t));
+  }
+  function fallbackCopy(t){
+    try{ var ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0;'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); return true; }catch(e){ return false; }
+  }
+  function notifFn(msg){
+    try{ if(document.hidden && window.Notification && Notification.permission==='granted') new Notification('VANGUARD · بريد مؤقت', {body:msg, tag:'vg-mbox'}); }catch(e){}
+  }
+  function owner(){ try{ var o=localStorage.getItem(P_OWNER); if(!o){ o='d-'+hash(navigator.userAgent+screen.width+'x'+screen.height); localStorage.setItem(P_OWNER,o); } return o; }catch(e){ return 'local'; } }
+  function assertOwner(id){
+    var a=get(id);
+    if(!a) return {err:'الهوية غير موجودة.'};
+    if(a.owner !== owner()) return {err:'غير مصرح: الهوية تخص جهازًا مختلفًا.'};
+    return {ok:true, id:a};
+  }
+  function get(id){ for(var i=0;i<idents.length;i++){ if(idents[i].id===id) return idents[i]; } return null; }
+  function save(){ store(K,idents); }
+  function ev(a,type){ a.events.unshift({ts:Date.now(),type:type}); if(a.events.length>40)a.events.length=40; }
+  function uTot(){ var c=0,i; for(i=0;i<idents.length;i++){ for(var j=0;j<idents[i].msgs.length;j++){ if(!idents[i].msgs[j].readAt) c++; } } return c; }
+
+  var PURPOSES=[
+    {id:'game', icon:'🎮', lbl:'ألعاب', dom:['steam','steampowered','epicgames','nintendo','xbox','playstation','ubisoft','riotgames','battle.net','ea.com','origin','gameforge','garena','cdkeys','fxgaming','wargaming.net']},
+    {id:'shop', icon:'🛒', lbl:'متجر', dom:['amazon','ebay','etsy','shopify','shein','noon','walmart','target','bestbuy','alibaba','aliexpress','zalando','allegro','cart','checkout','alibaba.com']},
+    {id:'news', icon:'📰', lbl:'أخبار', dom:['news','newspaper','press','journal','times','post','gulf','ahram','alarabiya','cnn','bbc','radio','substack','bulletin']},
+    {id:'trial', icon:'🧪', lbl:'تجربة خدمة', dom:['trial','demo','sandbox','beta','test']},
+    {id:'app', icon:'📱', lbl:'تطبيق', dom:['app','store','play.google','apps.apple']},
+    {id:'untrusted', icon:'⚠️', lbl:'تسجيل في موقع غير موثوق', dom:[]}
+  ];
+  var DUR=[{lbl:'10 دقائق', ms:600000},{lbl:'1 ساعة', ms:3600000},{lbl:'24 ساعة', ms:86400000}];
+  var PROMPT_KW=/تحقق|رمز|كود|تفعيل|تأكيد|دخول|كلمة.?المرور|otp|one[ -]?time|2fa|verification|verify|confirm|activate|activation|login|sign[ -]?in|password reset|captcha|pin/i;
+  var PROMO_KW=/unsubscribe|[Mm]arketing|newsletter|promotion|promo|discount|sale|advertis|bulk|campaign|تخفيض|عرض.?مميز|ترويج|اشتراك|خصم|كوبون|حملة/i;
+  var URL_RE=/https?:\/\/[^\s"'<>\]\)\\]+/g;
+
+  /* ---------- mail adapters (real, free) ---------- */
+  function normAddr(a){ var p=String(a).split('@'); return {addr:a, login:p[0], domain:((p[1]||'').split('.')[0] ? p[1] : '').toLowerCase()}; }
+  var A1={ name:'1secmail', base:'https://www.1secmail.com/api/v1/',
+    create:function(){ return fetch(this.base+'?action=genRandomMailbox&count=1').then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ if(!Array.isArray(j)||!j[0]) throw 0; return normAddr(j[0]); }); },
+    index:function(n){ return fetch(this.base+'?action=getMessages&login='+encodeURIComponent(n.login)+'&domain='+encodeURIComponent(n.domain)).then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ return Array.isArray(j)?j:[]; }); },
+    read:function(n,i){ return fetch(this.base+'?action=readMessage&login='+encodeURIComponent(n.login)+'&domain='+encodeURIComponent(n.domain)+'&id='+encodeURIComponent(i)).then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ return j||{}; }); }
+  };
+  var A2={ name:'guerrillamail', base:'https://api.guerrillamail.com/ajax.php?f=',
+    create:function(){ return fetch(this.base+'get_email_address').then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ if(!j||!j.email_addr) throw 0; return normAddr(j.email_addr); }); },
+    index:function(n){ return fetch(this.base+'get_email_list&email='+encodeURIComponent(n.addr)).then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ return (j&&j.list)||[]; }); },
+    read:function(n,i){ return fetch(this.base+'fetch_email&email='+encodeURIComponent(n.addr)+'&seq='+encodeURIComponent(i)).then(function(r){return r.ok?r.json():Promise.reject(r.status);}).then(function(j){ return j||{}; }); }
+  };
+  var ADAPTERS=[A1,A2], activeIdx=null;
+  function makeAddress(){
+    var order = (activeIdx!=null)? [activeIdx] : [0,1];
+    var chain=Promise.reject(0);
+    order.forEach(function(i){
+      chain=chain.catch(function(){ return ADAPTERS[i].create().then(function(n){ activeIdx=i; return n; }); });
+    });
+    return chain;
+  }
+
+  /* ---------- extraction ---------- */
+  function senderDomain(from){
+    var m=(from||'').match(/<([^<>@]+)@([^>]+)>/i)||(from||'').match(/([^\s@,]+)@([^\s,>]+)/);
+    if(m) return (m[2]||'').toLowerCase().replace(/[>)]$/,'');
+    return (from||'').toLowerCase();
+  }
+  function baseMatch(pur, from, dom){
+    var f=String(from||'').toLowerCase(), d=String(dom||'').toLowerCase(), k, i;
+    for(i=0;i<pur.dom.length;i++){ k=pur.dom[i].toLowerCase(); if(f.indexOf(k)>-1 || d.indexOf(k)>-1) return true; }
+    return false;
+  }
+  function extractOtp(m){
+    var t=bl(m.subject)+' | '+bl(m.textBody||m.body||'');
+    if(!PROMPT_KW.test(t)) return null;
+    var m1 = t.match(/(?:code|otp|pin|password|رمز|كود|تحقق|تفعيل|تأكيد|captcha)[^\d]{0,26}?([A-Za-z0-9]{4,8})/i);
+    if(!m1) m1 = t.match(/([A-Za-z0-9]{4,8})[^\d]{0,20}?(?:رمز|كود|تحقق|code|otp|pin|verification|one[ -]?time)/i);
+    if(m1){
+      var v=m1[1];
+      if(/^\d{4,8}$/.test(v)) return v;
+      if(/[A-Za-z]/.test(v)&&/[0-9]/.test(v)&&v.length>=5) return v;
+    }
+    var d=t.match(/(^|[^\d])(\d{6})([^\d]|$)/);
+    return d?d[2]:null;
+  }
+  function extractLinks(m){
+    var t=String(m.htmlBody||'')+' '+String(m.textBody||m.body||'');
+    var seen={}, out=[], u, host, mm; URL_RE.lastIndex=0;
+    while((mm=URL_RE.exec(t)) && out.length<8){
+      u=mm[0].replace(/[),.;!?:"']+$/,'');
+      try{ host=(new URL(u)).hostname; }catch(e){ continue; }
+      if(/1secmail\.com|guerrillamail\.com|telegr\.ph/i.test(host)) continue;
+      if(!seen[u]){ seen[u]=1; out.push({url:u, host:host}); }
+    }
+    return out;
+  }
+  var SAFE_TAGS={P:1,BR:1,B:1,STRONG:1,I:1,EM:1,U:1,S:1,SMALL:1,SPAN:1,DIV:1,UL:1,OL:1,LI:1,TABLE:1,TBODY:1,THEAD:1,TR:1,TD:1,TH:1,H1:1,H2:1,H3:1,H4:1,H5:1,BLOCKQUOTE:1,PRE:1,CODE:1,HR:1,STRIKE:1,A:1,IMG:1};
+  function sanitize(html){
+    try{
+      var doc=new DOMParser().parseFromString(String(html||''),'text/html');
+      (function walk(node){
+        var kids=Array.prototype.slice.call(node.childNodes);
+        kids.forEach(function(n){
+          if(n.nodeType!==1) return;
+          var tag=n.tagName.toLowerCase();
+          if(tag==='script'||tag==='style'||tag==='iframe'||tag==='object'||tag==='embed'||tag==='link'||tag==='meta'||tag==='base'||tag==='form'||tag==='input'||tag==='button'||tag==='select'||tag==='textarea'||tag==='svg'||tag==='math'||tag==='video'||tag==='audio'||tag==='source'){ n.parentNode.removeChild(n); return; }
+          if(tag==='img' || tag==='iframe'){ n.parentNode.replaceChild(doc.createTextNode('[صورة/تضمين مُحجوب]'), n); return; }
+          if(!SAFE_TAGS[tag.toUpperCase()]){ while(n.firstChild) n.parentNode.insertBefore(n.firstChild,n); n.parentNode.removeChild(n); return; }
+          var attrs=Array.prototype.slice.call(n.attributes);
+          attrs.forEach(function(a){ n.removeAttribute(a.name); });
+          if(tag==='a'){ var h=n.getAttribute('href'); n.setAttribute('title','رابط خارجي — يُفتح يدويًا'); if(!(h&&h.indexOf('http')===0)) n.setAttribute('data-inert','1'); }
+          if(n.firstChild) walk(n);
+        });
+      })(doc.body||doc);
+      return doc.body?doc.body.innerHTML:'';
+    }catch(e){ return bl(html); }
+  }
+
+  /* ---------- guardian (rule-based) ---------- */
+  function guardianRun(a, m){
+    if(a.status!=='ACTIVE') return;
+    var g=a.guardian;
+    var dom=senderDomain(m.from);
+    if(!g.baseline) g.baseline=true;
+    var pur=getP(a.purposeId);
+    var seen = (g.senders||[]).indexOf(dom)>-1;
+    var kind = baseMatch(pur, m.from, dom) ? 'ok':'unknown';
+    var alerts=[];
+    if(kind==='unknown' && !seen){
+      g.senders.push(dom); if(g.senders.length>80) g.senders.shift();
+      alerts.push({type:'unexpected_sender', sev:'mid', ts:Date.now(), reason:'هذه الهوية بدأت تستقبل رسائل من «'+dom+'» — جهة غير مرتبطة بالغرض «'+pur.lbl+'» الذي أنشأتها لأجله.'});
+    } else if(kind==='unknown' && seen){
+      // known-but-off-purpose: first time logged above; nothing new
+    } else if(!seen){
+      g.senders.push(dom); if(g.senders.length>80) g.senders.shift();
+    }
+    var text=bl(m.subject)+' '+bl(m.textBody||m.body||'');
+    if(PROMO_KW.test(text)){
+      g.promo=(g.promo||0)+1;
+      if(g.promo>=3){ alerts.push({type:'promo', sev:'low', ts:Date.now(), reason:'لاحظنا زيادة في الرسائل الترويجية على هذه الهوية.'}); g.promo=0; }
+    }
+    var win=60*60*1000, c=0, i;
+    for(i=0;i<a.msgs.length;i++){ if(Date.now()-a.msgs[i].receivedAt<win) c++; }
+    if(c>=5){ alerts.push({type:'freq', sev:'mid', ts:Date.now(), reason:'وتيرة الرسائل على هذه الهوية مرتفعة (أكثر من 5 خلال ساعة).'}); }
+    alerts.forEach(function(al){
+      g.alerts.unshift(al); if(g.alerts.length>20)g.alerts.length=20;
+      ev(a,'guardian_'+al.type);
+    });
+  }
+
+  /* ---------- engine state ---------- */
+  var idents=load(K,[]), logs=load(K_LOG,[]);
+  var viewState=null; /* {view:'list'} | {view:'inbox',id} | {view:'msg',id,mid} */
+  var lastPoll=0, creating=false;
+  function getP(id){ var p=null,i; for(i=0;i<PURPOSES.length;i++) if(PURPOSES[i].id===id) p=PURPOSES[i]; return p||PURPOSES[5]; }
+  function revalidate(){
+    var now=Date.now(), dirty=false, i;
+    for(i=0;i<idents.length;i++){
+      var a=idents[i];
+      if(a.status==='CREATING') continue;
+      if(a.status==='ACTIVE' && now>=a.expiresAt){
+        a.status='EXPIRED'; a.msgs.length=0; a.destroyedAt=a.expiresAt;
+        ev(a,'expired'); logs.unshift({ts:now, kind:'expired', id:hash(a.addr)});
+        dirty=true;
+      }
+    }
+    var cut=now-86400000, keep=[];
+    for(i=0;i<idents.length;i++){ var a=idents[i]; if((a.status==='EXPIRED'||a.status==='DESTROYED') && now-a.destroyedAt>cut) continue; keep.push(a); }
+    if(keep.length!==idents.length){ idents=keep; dirty=true; }
+    if(dirty){ save(); }
+  }
+  function sweepLogs(){ var cut=Date.now()-30*86400000, k=[]; var i; for(i=0;i<logs.length;i++){ if(logs[i].ts>cut) k.push(logs[i]); } if(k.length!==logs.length){ logs=k; store(K_LOG,logs); } }
+
+  /* ---------- create ---------- */
+  function doCreate(purposeId, durMs){
+    if(creating) return;
+    var active=idents.filter(function(a){return a.status==='ACTIVE';}).length;
+    if(active>=6){ EM.toast('وصلت للحد الأقصى (6 هويات نشطة) — دمّر واحدة أولًا قبل إنشاء جديدة.'); return; }
+    creating=true;
+    makeAddress().then(function(n){
+      var a={ id:uid(), owner:owner(), addr:n.addr, login:n.login, domain:n.domain,
+        provider:(activeIdx!=null?ADAPTERS[activeIdx].name:ADAPTERS[0].name),
+        purposeId:purposeId, status:'ACTIVE', createdAt:Date.now(), expiresAt:Date.now()+durMs, destroyedAt:null,
+        forwarding:false, msgs:[], events:[], guardian:{baseline:true, senders:[n.domain], promo:0, alerts:[]} };
+      ev(a,'created'); a.guardian.senders=[];
+      idents.unshift(a); save();
+      viewState=null; creating=false;
+      EM.closeModal();
+      EM.render();
+      EM.toast('تم إنشاء الهوية: '+n.addr);
+    },function(){
+      creating=false; EM.closeModal();
+      EM.toast('تعذّر الوصول إلى مزوّد البريد المؤقت الآن. تحقق من اتصالك وحاول مجددًا.');
+    });
+  }
+
+  /* ---------- polling / real-time ---------- */
+  function poll(){
+    var now=Date.now();
+    if(now-lastPoll<18000) return; lastPoll=now;
+    idents.forEach(function(a){
+      if(a.status!=='ACTIVE') return;
+      if(!a._nextPoll) a._nextPoll=0;
+      if(now<a._nextPoll) return; a._nextPoll=now+20000;
+      pollOne(a);
+    });
+  }
+  function pollOne(a){
+    var ad=null, i;
+    for(i=0;i<ADAPTERS.length;i++){ if(ADAPTERS[i].name===a.provider) ad=ADAPTERS[i]; }
+    if(!ad) ad=ADAPTERS[0];
+    var did=false;
+    ad.index({login:a.login,domain:a.domain,addr:a.addr}).then(function(list){
+      if(!Array.isArray(list)||!list.length) return;
+      var have={},i;
+      for(i=0;i<a.msgs.length;i++){ have[a.msgs[i].key]=1; }
+      var news=list.filter(function(r){
+        var key=(ad.name||'x')+':'+((r.id!=null)?r.id:'')+':'+(r.date||'')+':'+(r.subject||'');
+        return !have[key];
+      });
+      if(!news.length) return;
+      news.slice(0,6).forEach(function(r,idx){
+        var key=(ad.name||'x')+':'+((r.id!=null)?r.id:'')+':'+(r.date||'')+':'+(r.subject||'');
+        ad.read({login:a.login,domain:a.domain,addr:a.addr}, r.id).then(function(m){
+          var textBody=m.textBody||m.body||'';
+          var msg={ key:key, extId:(m.id!=null?m.id:r.id), from:m.from||r.from||'', senderDomain:senderDomain(m.from||r.from),
+            subject:m.subject||r.subject||'(بلا عنوان)', receivedAt:((m.date||r.date)?Date.now():Date.now()),
+            textBody:textBody, htmlBody:m.htmlBody||'', readAt:null,
+            otp:null, links:[] };
+          msg.otp=extractOtp(msg); msg.links=extractLinks(msg);
+          for(i=0;i<a.msgs.length;i++){ if(a.msgs[i].key===key) return; }
+          a.msgs.unshift(msg); if(a.msgs.length>60) a.msgs.length=60;
+          ev(a,'received'); if(msg.otp) ev(a,'otp'); if(msg.links.length) ev(a,'link');
+          guardianRun(a,msg);
+          save();
+          notifFn('رسالة جديدة وصلت إلى '+a.addr+(msg.otp?' — رمز التحقق: '+msg.otp:''));
+          EM.render();
+        },function(){});
+      });
+    },function(){});
+  }
+
+  /* ---------- render ---------- */
+  function el(id){ return document.getElementById(id); }
+  function render(){
+    var list=el('emList'), box=el('emInbox');
+    if(!list) return;
+    if(viewState && viewState.view==='inbox'){ renderInbox(viewState.id); return; }
+    if(viewState && viewState.view==='msg'){ renderMsg(viewState.id, viewState.mid); return; }
+    list.style.display=''; box.style.display='none';
+    var h='', i;
+    var n=uTot();
+    h+='<div class="em-sec-title"><span>هويتك النشطة '+(idents.filter(function(x){return x.status==='ACTIVE';}).length>0?'· '+n+' رسالة غير مقروءة':'—')+'</span><span style="font-size:10px;font-family:var(--mono);color:var(--ink-mute);">'+identInfo()+'</span></div>';
+    if(!idents.length){ h+='<div class="em-empty">لا توجد هويات بعد.<br>اضغط «+ إنشاء هوية جديدة» لبدء حماية بريدك الحقيقي.</div>'; list.innerHTML=h; return; }
+    h+='<div class="em-grid">';
+    idents.forEach(function(a){
+      var pur=getP(a.purposeId), un=a.msgs.filter(function(m){return !m.readAt;}).length;
+      var st, chip;
+      if(a.status==='ACTIVE'){ st='نشطة'; chip='ok'; }
+      else if(a.status==='EXPIRED'){ st='منتهية'; chip='bad'; }
+      else { st='مدمّرة'; chip='bad'; }
+      h+='<div class="em-card '+((a.status==='ACTIVE')?'active-card':'expired-card')+'">';
+      h+='<div class="em-top"><span class="em-purpose">'+pur.icon+' '+esc(pur.lbl)+'</span><span class="em-chip '+chip+'">'+st+'</span>'
+        +(a.status==='ACTIVE' ? '<span class="em-chip warn">⏱️ <span class="em-timer" data-exp="'+a.expiresAt+'">'+fmtClock(a.expiresAt-Date.now())+'</span></span>' : '')
+        +'</div>';
+      h+='<div class="em-addr">'+esc(a.addr)+' <button class="btn small ghost" onclick="EM.copyAddr(\''+a.id+'\',this)">نسخ</button></div>';
+      h+='<div class="em-meta"><span>📩 '+a.msgs.length+' رسالة</span><span>'
+        +((a.status==='ACTIVE')?'تنتهي في '+fmtClock(a.expiresAt-Date.now()):(a.status==='EXPIRED'?'انتهت':''))
+        +'</span></div>';
+      if(a.guardian && a.guardian.alerts && a.guardian.alerts.length){
+        h+='<div class="em-box em-guard" style="margin-top:0;"><div class="em-box-title">🛡️ تنبيهات حارس الهوية</div>';
+        a.guardian.alerts.slice(0,2).forEach(function(al){
+          h+='<div class="em-guard-row"><span>'+(al.sev==='high'?'🔴':'⚠️')+'</span><span style="flex:1;">'+esc(al.reason)+'</span><button class="btn small ghost" onclick="EM.ack(\''+a.id+'\','+a.guardian.alerts.indexOf(al)+',this)">تم</button></div>';
+        });
+        h+='</div>';
+      }
+      h+='<div class="em-actions'+(a.status==='ACTIVE'?'':' dense')+'">';
+      if(a.status==='ACTIVE'){ h+='<button class="btn small" onclick="EM.openInbox(\''+a.id+'\')">📬 فتح البريد'+(un?(' · '+un):'')+'</button>'; }
+      h+='<button class="btn small ghost" onclick="EM.copyAddr(\''+a.id+'\',this)">نسخ البريد</button>';
+      if(a.status==='ACTIVE'){ h+='<button class="btn small ghost" onclick="EM.openExtend(\''+a.id+'\')">⏱️ تمديد</button>'; }
+      h+='<button class="btn small ghost em-btn-danger" onclick="EM.askDestroy(\''+a.id+'\')">🗑️ تدمير</button>';
+      h+='</div>';
+      if(a.events && a.events.length){
+        h+='<div class="em-box" style="margin-top:10px;"><div class="em-box-title">📜 سجل الهوية</div><div class="em-events">';
+        a.events.slice(0,4).forEach(function(e){ h+='<div class="em-event"><span class="em-et">'+timeAgo(e.ts)+'</span><span>'+evLbl(e.type)+'</span></div>'; });
+        h+='</div></div>';
+      }
+      h+='</div>';
+    });
+    h+='</div>';
+    list.innerHTML=h;
+  }
+  function identInfo(){ return 'الوضع: '+idents.length+' هوية · مزوّد: '+(activeIdx!=null?ADAPTERS[activeIdx].name:'تلقائي'); }
+  function evLbl(t){ return ({created:'🟢 تم إنشاء الهوية', received:'📩 وصلت رسالة جديدة', otp:'🔐 تم اكتشاف رمز تحقق', link:'🔗 تم اكتشاف رابط تفعيل', expired:'⏱️ انتهت مدة الهوية', destroyed:'🗑️ تم تدمير الهوية', extended:'⏱️ تم تمديد الهوية', guardian_unexpected_sender:'⚠️ تم اكتشاف مرسل جديد', guardian_promo:'⚠️ زيادة رسائل ترويجية', guardian_freq:'⚠️ وتيرة رسائل مرتفعة'})[t]||t; }
+
+  function renderInbox(id){
+    var a=get(id);
+    if(!a){ viewState=null; render(); return; }
+    if(a.status!=='ACTIVE'){ viewState=null; EM.toast('الهوية منتهية أو غير متاحة — لا يمكن فتح البريد.'); render(); return; }
+    var list=el('emList'), box=el('emInbox');
+    list.style.display='none'; box.style.display='';
+    var pur=getP(a.purposeId);
+    var h='<div class="em-top" style="margin-bottom:14px;"><button class="btn small ghost" onclick="EM.backList()">↩ الهويات</button>'
+      +'<span class="em-purpose">'+pur.icon+' '+esc(pur.lbl)+'</span>'
+      +(a.status==='ACTIVE'?'<span class="em-chip ok">⏱️ <span class="em-timer" data-exp="'+a.expiresAt+'">'+fmtClock(a.expiresAt-Date.now())+'</span></span>':'')
+      +'</div>';
+    h+='<div class="em-addr">'+esc(a.addr)+' <button class="btn small ghost" onclick="EM.copyAddr(\''+a.id+'\',this)">نسخ</button></div>';
+    if(!a.msgs.length){ h+='<div class="em-empty">لا توجد رسائل حتى الآن. سجّل بهذا البريد في الموقع الخارجي وانتظر وصول الرسالة — ستظهر هنا لحظيًا.</div>'; }
+    else {
+      a.msgs.forEach(function(m, mi){
+        var un=!m.readAt, otp=m.otp?' 🔐':(m.links&&m.links.length?' 🔗':'');
+        h+='<div class="em-msg-row'+(un?' unread':'')+'" onclick="EM.openMsg(\''+a.id+'\','+mi+')">'
+          +'<div class="em-msg-b"><div class="em-msg-s">'+esc(m.from||'مرسل')+'</div>'
+          +'<div class="em-msg-t">'+esc(m.subject)+otp+'</div>'
+          +'<div class="em-msg-time">'+timeAgo(m.receivedAt)+'</div></div>'
+          +(un?'<span class="em-msg-badge">جديد</span>':'')
+          +'</div>';
+      });
+    }
+    if(a.events&&a.events.length){
+      h+='<div class="em-box"><div class="em-box-title">📜 سجل الهوية</div><div class="em-events">';
+      a.events.slice(0,8).forEach(function(e){ h+='<div class="em-event"><span class="em-et">'+timeAgo(e.ts)+'</span><span>'+evLbl(e.type)+'</span></div>'; });
+      h+='</div></div>';
+    }
+    box.innerHTML=h;
+  }
+  function renderMsg(id,mi){
+    var a=get(id);
+    if(!a){ viewState=null; render(); return; }
+    var m=a.msgs[mi];
+    if(!m){ viewState={view:'inbox',id:id}; renderInbox(id); return; }
+    if(!m.readAt){ m.readAt=Date.now(); ev(a,'read'); save(); }
+    var list=el('emList'), box=el('emInbox');
+    list.style.display='none'; box.style.display='';
+    var h='<div class="em-top" style="margin-bottom:14px;"><button class="btn small ghost" onclick="EM.openInbox(\''+id+'\')">↩ البريد</button><span class="em-purpose">✉️ الرسالة</span></div>';
+    h+='<div class="em-box"><div class="em-msg-s">'+esc(m.from||'مرسل غير معروف')+'</div>';
+    h+='<div class="em-msg-t" style="white-space:normal;margin:4px 0 2px;">'+esc(m.subject)+'</div>';
+    h+='<div class="em-msg-time">'+timeAgo(m.receivedAt)+'</div></div>';
+    if(m.otp){
+      h+='<div class="em-box"><div class="em-box-title">🔐 رمز التحقق</div><div class="em-otp-code">'+esc(m.otp)+' <button class="btn small ghost" onclick="EM.copyText(\''+m.otp+'\',this)">نسخ الرمز</button></div></div>';
+    }
+    if(m.links&&m.links.length){
+      h+='<div class="em-box"><div class="em-box-title">🔗 رابط التفعيل</div>';
+      m.links.forEach(function(l){
+        h+='<div class="em-link-row"><span class="em-ldom">'+esc(l.host)+'</span><span style="flex:1;color:var(--ink-mute);font-size:10.5px;">رابط خارجي — يُفتح يدويًا ولا يتحكم في التطبيق</span><button class="btn small ghost" onclick="EM.visit(\''+l.url.replace(/'/g,"\\'")+'\',this)">فتح</button></div>';
+      });
+      h+='</div>';
+    }
+    if(m.htmlBody){ h+='<div class="em-box"><div class="em-box-title">عرض الرسالة (نسخة آمنة)</div><div class="em-html-safe" id="emSafeHTML"></div></div>'; }
+    if(m.textBody){ h+='<div class="em-box"><div class="em-box-title">نص الرسالة</div><div class="em-body" dir="auto">'+esc(m.textBody)+'</div></div>'; }
+    box.innerHTML=h;
+    if(m.htmlBody){ var se=el('emSafeHTML'); if(se){ se.innerHTML=sanitize(m.htmlBody); } }
+    viewState={view:'msg',id:id,mid:mi};
+  }
+
+  /* ---------- actions ---------- */
+  function openModal(html){
+    closeModal();
+    var ov=document.createElement('div'); ov.className='em-overlay'; ov.id='emOv';
+    ov.onclick=function(e){ if(e.target===ov) closeModal(); };
+    ov.innerHTML='<div class="em-modal">'+html+'</div>';
+    document.body.appendChild(ov);
+  }
+  function closeModal(){ var o=el('emOv'); if(o) o.remove(); }
+
+  /* ---------- public API ---------- */
+  var EM={};
+  EM.openCreate=function(){
+    var selP=PURPOSES[5].id, selD=1;
+    openModal(
+      '<h3>🛡️ إنشاء هوية مؤقتة</h3>'+
+      '<div class="em-sub">اختر غرض الهوية — يسجَّل كمرجع أساسي لحارس الهوية.</div>'+
+      '<div class="em-purpose-grid">'+PURPOSES.map(function(p){ return '<div class="em-purpose-btn'+(p.id===selP?' sel':'')+'" data-p="'+p.id+'" onclick="EM.selPOD(this,1)"><span class="em-pi">'+p.icon+'</span>'+esc(p.lbl)+'</div>'; }).join('')+'</div>'+
+      '<div class="em-sub">مدة الهوية:</div>'+
+      '<div class="em-dur-row">'+DUR.map(function(d,i){ return '<div class="em-dur-btn'+(i===selD?' sel':'')+'" data-d="'+i+'" onclick="EM.selPOD(this,2)">'+d.lbl+'</div>'; }).join('')+'</div>'+
+      '<div style="display:flex;gap:8px;"><button class="btn" style="flex:1;" onclick="EM.createGo()">إنشاء الهوية</button><button class="btn small ghost" onclick="EM.closeModal()">إلغاء</button></div>'
+    );
+    EM._p=selP; EM._d=1;
+  };
+  EM.selPOD=function(n,k){ var box=n.parentNode, i, b;
+    var all=(k===1)?box.querySelectorAll('.em-purpose-btn'):box.querySelectorAll('.em-dur-btn');
+    for(i=0;i<all.length;i++) all[i].classList.remove('sel'); n.classList.add('sel');
+    if(k===1) EM._p=n.getAttribute('data-p'); else { EM._d=parseInt(n.getAttribute('data-d'),10); }
+  };
+  EM.createGo=function(){
+    var pur=EM._p||PURPOSES[5].id, d=DUR[EM._d||1];
+    doCreate(pur,d.ms);
+  };
+  EM.openInbox=function(id){ viewState={view:'inbox',id:id}; render(); };
+  EM.backList=function(){ viewState=null; render(); };
+  EM.openMsg=function(id,mi){ viewState={view:'msg',id:id,mid:mi}; render(); };
+  EM.copyAddr=function(id,btn){ var r=assertOwner(id); if(r.err){ EM.toast(r.err); return; } copyText(r.id.addr).then(function(){ EM.blink(btn); }); };
+  EM.copyText=function(t,btn){ copyText(t).then(function(){ EM.blink(btn); }); };
+  EM.blink=function(btn){ try{ if(!btn) return; var o=btn.textContent; btn.textContent='✓ تم النسخ'; btn.disabled=true; setTimeout(function(){ btn.textContent=o; btn.disabled=false; },1300); }catch(e){} };
+  EM.visit=function(url,btn){
+    var host=''; try{ host=new URL(url).hostname; }catch(e){ EM.toast('رابط غير صالح.'); return; }
+    if(!confirm('هذا رابط خارجي:\n'+host+'\n\nيُفتح في متصفح خارجي ولن يتحكم في التطبيق. متابعة؟')) return;
+    try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; }
+  };
+  EM.openExtend=function(id){
+    var r=assertOwner(id); if(r.err){ EM.toast(r.err); return; }
+    if(r.id.status!=='ACTIVE'){ EM.toast('لا يمكن تمديد هوية منتهية.'); return; }
+    EM._ext=id;
+    openModal(
+      '<h3>⏱️ تمديد العمر</h3><div class="em-sub">أضف مدة جديدة إلى الهوية:</div>'+
+      '<div class="em-dur-row">'+DUR.map(function(d,i){ return '<div class="em-dur-btn" data-d="'+i+'" onclick="EM.selExt(this)">'+d.lbl+'</div>'; }).join('')+'</div>'+
+      '<div style="display:flex;gap:8px;"><button class="btn" style="flex:1;" onclick="EM.extendGo()">تمديد</button><button class="btn small ghost" onclick="EM.closeModal()">إلغاء</button></div>'
+    );
+  };
+  EM.selExt=function(n){ var all=n.parentNode.querySelectorAll('.em-dur-btn'),i; for(i=0;i<all.length;i++) all[i].classList.remove('sel'); n.classList.add('sel'); EM._ed=parseInt(n.getAttribute('data-d'),10); };
+  EM.extendGo=function(){
+    var id=EM._ext, r=assertOwner(id);
+    if(r.err||r.id.status!=='ACTIVE'){ EM.closeModal(); EM.toast('لا يمكن التمديد.'); return; }
+    var d=DUR[(EM._ed!=null)?EM._ed:1];
+    r.id.expiresAt=Date.now()+d.ms; ev(r.id,'extended'); save(); EM.closeModal(); render();
+    EM.toast('تم تمديد الهوية +'+d.lbl);
+  };
+  EM.askDestroy=function(id){
+    var r=assertOwner(id); if(r.err){ EM.toast(r.err); return; }
+    if(!confirm('هل أنت متأكد؟\n\nسيتم حذف البريد المؤقت وجميع الرسائل المرتبطة به نهائيًا ولا يمكن استرجاعها.')) return;
+    r.id.status='DESTROYED'; r.id.destroyedAt=Date.now(); r.id.msgs.length=0;
+    ev(r.id,'destroyed'); logs.unshift({ts:Date.now(),kind:'destroyed',id:hash(r.id.addr)}); if(logs.length>200)logs.length=200;
+    store(K_LOG,logs); save();
+    if(viewState&&viewState.id===id){ viewState=null; }
+    render(); EM.toast('تم تدمير الهوية.');
+  };
+  EM.ack=function(id,idx,btn){ var r=assertOwner(id); if(r.err) return; if(r.id.guardian&&r.id.guardian.alerts&&r.id.guardian.alerts[idx]){ r.id.guardian.alerts.splice(idx,1); save(); render(); } };
+  EM.closeModal=function(){ closeModal(); };
+  EM.toast=function(t){
+    var ok=false,i=0;
+    // dedupe stacked toasts
+    var ts=document.querySelectorAll('.em-toast');
+    for(i=0;i<ts.length;i++){ ts[i].remove(); }
+    var d=document.createElement('div');
+    d.className='em-toast'; d.textContent=t;
+    d.style.cssText='position:fixed;bottom:86px;left:50%;transform:translateX(-50%);max-width:86vw;z-index:200;background:#0B1219;border:1px solid rgba(0,230,255,.5);color:#EAF4F7;font-size:12.5px;border-radius:12px;padding:11px 16px;box-shadow:0 10px 34px rgba(0,0,0,.5);';
+    document.body.appendChild(d);
+    setTimeout(function(){ d.remove(); },3600);
+  };
+  EM.render=function(){ render(); };
+  window.EM=EM;
+
+  /* ---------- timers ---------- */
+  function tick(){
+    revalidate();
+    var t=document.querySelectorAll('.em-timer'), i;
+    for(i=0;i<t.length;i++){ var e=parseInt(t[i].getAttribute('data-exp'),10); if(!isNaN(e)) t[i].textContent=fmtClock(e-Date.now()); }
+  }
+  setInterval(tick,1000);
+  setInterval(function(){ poll(); },20000);
+  setInterval(sweepLogs,1800000);
+  setInterval(function(){ revalidate(); var now=Date.now(); if(document.visibilityState==='visible' && now-lastPoll>30000){ lastPoll=0; poll(); } },30000);
+
+  /* ---------- boot ---------- */
+  setTimeout(function(){
+    revalidate(); sweepLogs(); EM.render();
+    // realtime: ensure identity panel renders whenever opened (goto() toggles panel, our render is id-based)
+    poll();
+  },600);
+})();
+</script>
 </body>
 </html>
