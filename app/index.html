@@ -2635,7 +2635,7 @@ body.screen-tools #v2Tools{display:block;}
       <div class="ep-settings-card">
         <div class="es-head"><span class="es-title">⚙ إعدادات الرصد والتنبيه الفوري</span></div>
         <div class="toggle-row" style="border-top:1px solid var(--line);">
-          <span>🔔 إشعار فوري عند اكتشاف تغيّر أو تهديد</span>
+          <span>🔔 إشعارات آليّة للمستشعر — إشعار واحد كل 3 ساعات</span>
           <label class="switch"><input type="checkbox" id="epNotifOn"><span class="slider-toggle"></span></label>
         </div>
         <div id="epNotifState" style="font-size:11px;color:var(--ink-mute);line-height:1.7;margin-top:6px;">—</div>
@@ -2661,7 +2661,7 @@ body.screen-tools #v2Tools{display:block;}
     <div class="card">
       <div class="eyebrow">Notifications_Center.مركز_الإشعارات</div>
       <h2 class="section-title">الإشعارات المرسلة</h2>
-      <p class="section-sub">سجل كل تنبيه أرسله فانغارد — أي تغيّر فعلي في الأذونات أو الأجهزة أو الشبكة أو مؤشرات التهديد يظهر هنا فورًا.</p>
+      <p class="section-sub">سجل إشعارات فانغارد — تقرير المستشعر الآلي يصل إشعارًا واحدًا كل 3 ساعات كحدّ أقصى، ورسائل الإدارة الصادرة من لوحة التحكم تصل إليك فورًا في أي وقت.</p>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 4px;">
         <span class="ep-live"><span class="d"></span><span id="epNotifState2">—</span></span>
       </div>
@@ -2670,7 +2670,7 @@ body.screen-tools #v2Tools{display:block;}
         <div class="ep-row"><span class="k">أحدث إشعار</span><span class="v" id="epNotifLast2">—</span></div>
       </div>
       <p class="ep-sec" style="margin-top:16px;">أحدث الإشعارات المسجلة</p>
-      <div id="epNotifFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات مرسلة بعد — أول تنبيه يظهر هنا فور اكتشاف أي تغيّر حقيقي.</div></div>
+      <div id="epNotifFeed"><div style="color:var(--ink-mute);font-size:12px;line-height:1.7;">لا توجد إشعارات بعد — تقرير المستشعر يصل إشعارًا واحدًا كل 3 ساعات، ورسائل الإدارة تظهر هنا فور إرسالها.</div></div>
     </div>
   </section>
 
@@ -7104,7 +7104,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     var p=notifPerm(), want=ent.notify!==false;
     nf.checked = want && p!=='denied';
     if(st){
-      if(p==='granted') st.textContent='✓ المتصفح يسمح بالإشعارات — التنبيهات تصلك فور اكتشاف أي تغيّر أو تهديد.';
+      if(p==='granted') st.textContent='✓ المتصفح يسمح بالإشعارات — تقرير المستشعر الآلي يصل إشعارًا واحدًا كل 3 ساعات، ورسائل الإدارة تصل فورًا.';
       else if(p==='denied') st.textContent='⚠ المتصفح حظر إشعارات هذا الموقع. أعِد السماح من: إعدادات الموقع ← الإشعارات.';
       else if(p==='default') st.textContent='فعّل المفتاح وسيطلب المتصفح السماح بالإشعارات الفورية.';
       else st.textContent='هذا المتصفح لا يدعم إشعارات النظام — ستظهر التنبيهات داخل التطبيق فقط.';
@@ -7117,6 +7117,16 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
         new Notification('VANGUARD · اكتشاف حقيقي', { body:'['+sevLbl(e.sev)+'] '+e.type+' — '+String(e.msg||'').replace(/<[^>]*>/g,''), tag:'vg-sensor-alert' });
       }
     }catch(err){}
+  }
+  // الإشعارات الآلية للمستشعر: حدّ أقصى إشعار واحد كل 3 ساعات.
+  // رسائل صفحة التحكم (البث الإداري) غير مشمولة بهذا الحدّ وتصل فورًا.
+  var AUTO_ALERT_GAP = 3*60*60*1000;
+  function autoAlertReady(){
+    try{ return (Date.now() - (parseInt(localStorage.getItem('vge_auto_alert_ts')||'0',10)||0)) >= AUTO_ALERT_GAP; }
+    catch(e){ return true; }
+  }
+  function stampAutoAlert(){
+    try{ localStorage.setItem('vge_auto_alert_ts', String(Date.now())); }catch(e){}
   }
 
   function detectDeltas(prev,s){
@@ -7152,6 +7162,8 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
       // لا يُنبَّه إلا عند تغيُّر حرج حقيقي — الأحداث المنخفضة الأهمية تُتجاهل بصمت
       detectDeltas(base,snap).forEach(function(d){
         if(d.sev!=='high') return;
+        if(!autoAlertReady()) return;
+        stampAutoAlert();
         inc.unshift({ts:Date.now(),sev:d.sev,type:d.type,msg:d.msg});
         if(inc.length>250) inc.pop();
         sendAlert(d);
@@ -7258,7 +7270,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     var st=$('epNotifState2');
     var p=null; try{ p=notifPerm(); }catch(e){}
     if(st){
-      if(p==='granted') st.textContent='✓ قناة الإشعارات تعمل — كل اكتشاف حقيقي يُرسل هنا وفورًا.';
+      if(p==='granted') st.textContent='✓ قناة الإشعارات تعمل — تقرير المستشعر يصل كل 3 ساعات، ورسائل الإدارة فورية.';
       else if(p==='denied') st.textContent='المتصفح حظر إشعارات هذا الموقع — أعِد السماح من إعدادات الموقع.';
       else if(p==='default') st.textContent='ستظهر هنا آخر التنبيهات المرسلة من المستشعر.';
       else st.textContent='هذا المتصفح لا يدعم إشعارات النظام — التنبيهات تظهر داخل التطبيق.';
