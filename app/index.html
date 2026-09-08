@@ -1736,6 +1736,17 @@ body.screen-tools #v2Tools{display:block;}
 .em-dur-btn{flex:1; border:1px solid var(--line); border-radius:10px; padding:9px 4px; text-align:center; font-size:11.5px; color:var(--ink); cursor:pointer; background:rgba(255,255,255,.02);}
 .em-dur-btn.sel{border-color:rgba(0,245,176,.55); color:#00F5B0; background:rgba(0,245,176,.08);}
 .em-hint{font-size:11px; color:var(--ink-mute); line-height:1.7;}
+.qr-view{position:relative; border:1px dashed rgba(0,230,255,.35); border-radius:16px; background:rgba(0,230,255,.04); padding:14px; margin:14px 0 6px; text-align:center;}
+.qr-view video{width:100%; max-height:300px; border-radius:12px; background:#04141A; display:none;}
+.qr-cam-open video{display:block!important; margin-bottom:8px;}
+.qr-corners{position:relative;}
+.qr-corners::before,.qr-corners::after{content:''; position:absolute; width:26px; height:26px; border:2px solid rgba(0,230,255,.85); z-index:2; pointer-events:none;}
+.qr-corners::before{top:14px; right:14px; border-left:none; border-bottom:none; border-radius:0 6px 0 0;}
+.qr-corners::after{bottom:14px; left:14px; border-right:none; border-top:none; border-radius:0 0 0 6px;}
+.qr-mid{color:var(--ink-mute); font-size:12px; padding:14px 4px; line-height:1.9;}
+.qr-actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:10px 0;}
+.qr-line{font-family:var(--mono); font-size:12px; color:#00E6FF; background:rgba(0,230,255,.07); border:1px solid rgba(0,230,255,.22); border-radius:10px; padding:9px 11px; word-break:break-all; direction:ltr; text-align:left; margin:8px 0;}
+.qr-host{font-size:12px; color:var(--ink-dim); margin:6px 0 12px; direction:ltr; text-align:left;}
 </style>
 <body>
 
@@ -1756,7 +1767,16 @@ body.screen-tools #v2Tools{display:block;}
           <circle class="n-dot" cx="18.6" cy="4.6" r="2.4" fill="#00F5B0" stroke="none"/>
         </svg>
       </button>
-      <button class="icon-btn shield-active" data-goto="esensor">🛡️</button>
+      <button class="icon-btn shield-active" data-goto="qr" title="ماسح أمان QR">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7 3v5c0 4.6-3 8.7-7 10-4-1.3-7-5.4-7-10V6z"/>
+          <path d="M8.2 9.8h2.2v2.2H8.2z" fill="currentColor" stroke="none"/>
+          <path d="M8.2 13.4h2.2v2.2H8.2z" stroke-opacity=".85"/>
+          <path d="M13.4 13.4h2.2v2.2h-2.2z" fill="currentColor" stroke="none"/>
+          <path d="M13.4 9.8h2.2v2.2h-2.2z" stroke-opacity=".7"/>
+          <path d="M8.2 17.4h4.4" stroke-opacity=".8"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -2978,6 +2998,48 @@ body.screen-tools #v2Tools{display:block;}
     </div>
   </section>
 
+  <!-- ================= QR SECURITY SCANNER PANEL ================= -->
+  <section class="panel" id="panel-qr">
+    <div class="card">
+      <div class="eyebrow">ماسح_QR_الأمني.فحص_قبل_الفتح</div>
+      <h2 class="section-title">ماسح أمان QR (QR Security Scanner)</h2>
+      <p class="section-sub">امسح أي رمز QR — سيظهر لك محتواه كرابط أولًا ويُفحص تلقائيًا قبل أن يتيح لك فتحه بأمان.</p>
+
+      <div class="qr-view" id="qrView">
+        <div class="qr-corners">
+          <video id="qrVideo" autoplay playsinline muted></video>
+          <div class="qr-mid" id="qrStatus">فعّل الكاميرا لمسح الرمز مباشرة، أو ارفع صورة QR من جهازك.</div>
+        </div>
+      </div>
+
+      <div class="qr-actions">
+        <button class="btn" id="qrCamBtn" onclick="QR.start()">📷 تشغيل الكاميرا</button>
+        <button class="btn" id="qrStopBtn" onclick="QR.stop()" style="display:none;">إيقاف الكاميرا</button>
+        <label class="btn ghost">🖼 رفع صورة QR<input type="file" id="qrFile" accept="image/*" style="display:none;" onchange="QR.onPick(event)"></label>
+      </div>
+
+      <label class="field-label">أو الصق الرابط / محتوى الرمز يدويًا</label>
+      <div class="pw-input-row">
+        <input type="text" id="qrManual" placeholder="https://example.com أو أي نص مضمّن في الرمز" onkeydown="if(event.key==='Enter')QR.process(this.value)">
+        <button class="btn" onclick="QR.process(document.getElementById('qrManual').value)">افحص</button>
+      </div>
+
+      <div id="qrResult" style="display:none;">
+        <div class="eyebrow" style="margin-top:14px;">نتيجة_الفحص_الأمني</div>
+        <div class="qr-line" id="qrRawLink"></div>
+        <div class="qr-host" id="qrHostLine"></div>
+        <span class="risk-badge" id="qrBadge"></span>
+        <div class="flag-list" id="qrFlagList"></div>
+        <div class="qr-actions" id="qrOpenRow" style="justify-content:flex-start;">
+          <button class="btn" id="qrOpenBtn" onclick="QR.open()">فتح الرابط بأمان</button>
+          <button class="btn ghost small" onclick="QR.reset()">مسح مجدد</button>
+        </div>
+      </div>
+
+      <div class="note">لا يُفتح أي رابط قادم من رمز QR إلا بعد عرضه عليك وفحصه ومضيِّك قدامه بنفسك — وروابط الخطر المرتفع تُمنع من الفتح نهائيًا.</div>
+    </div>
+  </section>
+
   <!-- ================= APP PERMISSION X-RAY PANEL ================= -->
   <section class="panel" id="panel-permissions">
     <div class="card">
@@ -3880,15 +3942,10 @@ const suspiciousTlds = ['.tk','.ml','.ga','.cf','.gq','.xyz','.top','.club'];
 const brands = ['facebook','instagram','whatsapp','paypal','google','apple','microsoft','bank','netflix','amazon','twitter'];
 const officialDomains = {facebook:'facebook.com', instagram:'instagram.com', whatsapp:'whatsapp.com', paypal:'paypal.com', google:'google.com', apple:'apple.com', microsoft:'microsoft.com', netflix:'netflix.com', amazon:'amazon.com', twitter:'twitter.com'};
 
-function checkUrl(){
-  const raw = document.getElementById('urlInput').value.trim();
-  if(!raw) return;
+function scanThisUrl(raw){
   let url;
   try{ url = new URL(raw.match(/^https?:\/\//) ? raw : 'http://'+raw); }
-  catch(e){
-    showUrlResult(['تعذّر قراءة هذا الرابط، تأكد إنه منسوخ بالكامل وصحيح.'], 'high');
-    return;
-  }
+  catch(e){ return { error:'تعذّر قراءة هذا الرابط، تأكد إنه منسوخ بالكامل وصحيح.', flags:[], level:'high', url:null, host:'' }; }
   const host = url.hostname.toLowerCase();
   const flags = [];
 
@@ -3911,7 +3968,15 @@ function checkUrl(){
 
   const warnCount = flags.filter(f=>f.level==='warn').length;
   const level = warnCount >= 3 ? 'high' : warnCount >= 1 ? 'mid' : 'low';
-  showUrlResult(flags, level);
+  return { flags:flags, level:level, url:url, host:host };
+}
+
+function checkUrl(){
+  const raw = document.getElementById('urlInput').value.trim();
+  if(!raw) return;
+  const r = scanThisUrl(raw);
+  if(r.error){ showUrlResult([r.error], 'high'); return; }
+  showUrlResult(r.flags, r.level);
 }
 
 function showUrlResult(flags, level){
@@ -8086,6 +8151,7 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     document.querySelectorAll('section.panel').forEach(function(p){
       if(p.id==='panel-'+name) p.classList.add('active'); else p.classList.remove('active');
     });
+    if(window.QR) window.QR.away();
     document.querySelectorAll('.bn-item').forEach(function(b){
       if(b.getAttribute('data-goto')===name) b.classList.add('active'); else b.classList.remove('active');
     });
@@ -8595,6 +8661,144 @@ if(typeof seTotal !== 'undefined' && seTotal > 0 && document.getElementById('seS
     // realtime: ensure identity panel renders whenever opened (goto() toggles panel, our render is id-based)
     poll();
   },600);
+})();
+</script>
+<script>
+/* ============ QR SECURITY SCANNER ============ */
+var QR = (function(){
+  var stream=null, running=false, raf=0, det=null, last='', _raw='', _url=null;
+  var qes=function(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(a){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[a]; }); };
+  function st(t){ var e=document.getElementById('qrStatus'); if(e) e.textContent=t; }
+  function detector(){ if(!('BarcodeDetector' in window)) return null; if(det) return det; try{ det=new BarcodeDetector({formats:['qr_code']}); }catch(e){ det=null; } return det; }
+  function start(){
+    stop();
+    var d=detector();
+    if(!d){ st('متصفحك لا يدعم كاشف الـQR مباشرة — ارفع صورة أو الصق المحتوى يدويًا.'); return; }
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ st('الكاميرا غير متاحة — ارفع صورة QR أو الصق الرابط.'); return; }
+    navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}, audio:false}).then(function(s){
+      stream=s; running=true;
+      var v=document.getElementById('qrVideo');
+      v.srcObject=s; v.play().catch(function(){});
+      document.getElementById('qrView').classList.add('qr-cam-open');
+      document.getElementById('qrCamBtn').style.display='none';
+      document.getElementById('qrStopBtn').style.display='';
+      st('وجّه الكاميرا نحو رمز QR…');
+      tick();
+    }).catch(function(){ st('تعذّر تشغيل الكاميرا (رفض الإذن أو عدم دعم) — ارفع صورة QR بدل ذلك.'); });
+  }
+  function tick(){
+    if(!running) return;
+    var d=detector();
+    if(!d){ stop(); st('كاشف الـQR غير متاح.'); return; }
+    var v=document.getElementById('qrVideo');
+    d.detect(v).then(function(codes){
+      if(!running) return;
+      if(codes && codes.length){
+        var txt=(codes[0].rawValue||'').trim();
+        if(txt && txt!==last){ last=txt; stop(); process(txt); }
+        else if(txt){ stop(); st('تم قراءة رمز ظهر في النتيجة أدناه — اضغط «مسح مجدد» لمسح غيره.'); }
+        return;
+      }
+      raf=requestAnimationFrame(tick);
+    }).catch(function(){ raf=requestAnimationFrame(tick); });
+  }
+  function stop(){
+    running=false;
+    if(raf){ cancelAnimationFrame(raf); raf=0; }
+    var v=document.getElementById('qrVideo');
+    if(v && v.srcObject){ try{ v.srcObject.getTracks().forEach(function(t){ t.stop(); }); }catch(e){} v.srcObject=null; }
+    stream=null;
+    var vw=document.getElementById('qrView'); if(vw) vw.classList.remove('qr-cam-open');
+    var b=document.getElementById('qrCamBtn'), s=document.getElementById('qrStopBtn');
+    if(b) b.style.display=''; if(s) s.style.display='none';
+  }
+  function onPick(ev){
+    var f=(ev.target && ev.target.files && ev.target.files[0]);
+    ev.target.value='';
+    if(!f) return;
+    var d=detector();
+    if(!d){ st('متصفحك لا يدعم كاشف الـQR في الصور — الصق المحتوى يدويًا.'); return; }
+    st('جارٍ قراءة الصورة…');
+    var fr=new FileReader();
+    fr.onload=function(){
+      function loadImg(bit){ scanImage(bit); }
+      try{
+        createImageBitmap(f).then(loadImg, function(){ var im=new Image(); im.onload=function(){ loadImg(im); }; im.onerror=function(){ st('فشل تحميل الصورة.'); }; im.src=URL.createObjectURL(f); });
+      }catch(e){ var im=new Image(); im.onload=function(){ loadImg(im); }; im.onerror=function(){ st('فشل تحميل الصورة.'); }; im.src=URL.createObjectURL(f); }
+    };
+    fr.onerror=function(){ st('فشل قراءة الملف.'); };
+    fr.readAsArrayBuffer(f);
+  }
+  function scanImage(img){
+    var d=detector();
+    d.detect(img).then(function(codes){
+      if(img.close) try{ img.close(); }catch(e){}
+      if(codes && codes.length){ var txt=(codes[0].rawValue||'').trim(); if(txt){ st('تم فك شفرة الرمز من الصورة.'); process(txt); return; } }
+      st('لم أتعرّف على رمز QR واضح في الصورة — جرّب صورة أوضح أو الصق المحتوى.');
+    }).catch(function(){ if(img.close) try{ img.close(); }catch(e){} st('فشل فك شفرة الصورة.'); });
+  }
+  function process(txt){
+    if(!txt){ st('الحقل فارغ — امسح رمزًا أو ألصق محتواه.'); return; }
+    txt=String(txt).trim();
+    _raw=txt;
+    var href=null;
+    var m=txt.match(/https?:\/\/[^\s"'<>]+/i);
+    if(m){ href=m[0].replace(/[),.;]+$/,''); }
+    else if(txt.indexOf(' ')===-1 && txt.indexOf('.')!==-1 && !/^(tel|mailto|sms|geo|wifi|vcard|mecard|otpauth|bitcoin):/i.test(txt)){ href=txt.indexOf('://')===-1 ? 'http://'+txt : txt; }
+    var ll=document.getElementById('qrRawLink');
+    ll.textContent=href||txt;
+    var sc = href ? scanThisUrl(href) : null;
+    var hl=document.getElementById('qrHostLine');
+    var badge=document.getElementById('qrBadge'), list=document.getElementById('qrFlagList');
+    var row=document.getElementById('qrOpenRow'), ob=document.getElementById('qrOpenBtn');
+    list.innerHTML='';
+    if(!href && (m || !/^[a-z0-9]+:\/\//i.test(txt))){
+      _url=null;
+      hl.textContent='الرمز لا يحتوي رابطًا — هذا نص أو بيانات فقط، لا حاجة لفتحه.';
+      badge.className='risk-badge risk-low'; badge.textContent='نص بدون رابط';
+      row.style.display='none';
+      document.getElementById('qrResult').style.display='block';
+      st('تم قراءة الرمز.');
+      return;
+    }
+    if(!sc || sc.error){
+      _url=null;
+      hl.textContent=(sc&&sc.host)||'';
+      badge.className='risk-badge risk-high'; badge.textContent='رابط غير صالح';
+      list.innerHTML='<div class="flag-item warn">تعذّر تحليل هذا الرابط، لا تفتحه إلا بعد التأكد اليدوي.</div>';
+      row.style.display='none';
+      document.getElementById('qrResult').style.display='block';
+      st('تم قراءة الرمز.');
+      return;
+    }
+    _url=sc.url;
+    hl.textContent='النطاق: '+sc.host;
+    var labels={low:['risk-low','خطر منخفض'], mid:['risk-mid','خطر متوسط — كن حذرًا'], high:['risk-high','خطر مرتفع — لا تفتح هذا الرابط']};
+    badge.className='risk-badge '+labels[sc.level][0]; badge.textContent=labels[sc.level][1];
+    sc.flags.forEach(function(f){ var it=document.createElement('div'); it.className='flag-item '+(f.level==='warn'?'warn':'info'); it.textContent=f.t; list.appendChild(it); });
+    row.style.display = (sc.level==='high') ? 'none' : 'flex';
+    document.getElementById('qrResult').style.display='block';
+    st('تم فحص الرابط من الرمز.');
+    var mn=document.getElementById('qrManual'); if(mn && mn.value!==txt) mn.value=href||txt;
+  }
+  function open(){
+    if(!_url){ st('لا يوجد رابط صالح للفتح.'); return; }
+    var r=scanThisUrl(_url.toString());
+    if(r.error){ st('رابط غير صالح.'); return; }
+    if(r.level==='high'){ st('خطر مرتفع — تم منع فتح هذا الرابط.'); return; }
+    if(!confirm('هذا رابط خارجي:\n'+r.host+'\n\nيُفتح في متصفح خارجي ولن يتحكم في التطبيق. متابعة؟')) return;
+    try{ window.open(_url.toString(), '_blank', 'noopener'); }catch(e){ try{ location.href=_url.toString(); }catch(e2){} }
+  }
+  function reset(){
+    _raw=''; _url=null; last='';
+    var r=document.getElementById('qrResult'); if(r) r.style.display='none';
+    var mn=document.getElementById('qrManual'); if(mn) mn.value='';
+    st('جهّز رمزًا جديدًا للمسح…');
+  }
+  return {
+    start:start, stop:stop, onPick:onPick, process:process, open:open, reset:reset,
+    away:function(){ if(running) stop(); }
+  };
 })();
 </script>
 </body>
